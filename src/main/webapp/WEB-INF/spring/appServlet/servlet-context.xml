@@ -89,7 +89,5 @@
 	<context:component-scan base-package="kr.or.companion" />
 	<context:component-scan base-package="kr.or.chat" />
 	<context:component-scan base-package="kr.or.ticket" />
-	<context:component-scan base-package="kr.or.package" />
-
 
 </beans:beans>
