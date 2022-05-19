@@ -11,7 +11,7 @@
 	<h1>index.jsp</h1>
 	
 
-	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 <script type="text/javascript"></script>
 </html>
