@@ -6,6 +6,13 @@
 	</settings>
 	<typeAliases>
 		<typeAlias type="kr.or.member.model.vo.Member" alias="m"/>
+		<typeAlias type="kr.or.package.model.vo.Package" alias="p"/>
+		<typeAlias type="kr.or.air.model.vo.Air" alias="air"/>
+		<typeAlias type="kr.or.hostel.model.vo.Hostel" alias="h"/>
+		<typeAlias type="kr.or.companion.model.vo.Companion" alias="co"/>
+		<typeAlias type="kr.or.chat.model.vo.Chat" alias="ch"/>
+		<typeAlias type="kr.or.ticket.model.vo.Ticket" alias="t"/>
+		
 		
 	</typeAliases>
 </configuration>
