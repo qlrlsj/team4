@@ -11,7 +11,7 @@
 <body>
 	<table border="1">
 		<tr>
-			<th>항공권번호<th>
+			<th>항공권번호</th>
 			<th>결재번호</th>
 			<th>편명</th>
 			<th>회원번호</th>

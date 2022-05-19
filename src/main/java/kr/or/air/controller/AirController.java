@@ -26,9 +26,7 @@ public class AirController {
 	public String selectAllAir(HttpSession session, Model model) {
 		ArrayList<Air> airlist = service.selectAllAir();
 		System.out.println(airlist);
-		if(airlist != null) {
-			model.addAttribute("air",airlist);
-		}
+		model.addAttribute("air",airlist);
 		return "air/airMain";
 	}
 	

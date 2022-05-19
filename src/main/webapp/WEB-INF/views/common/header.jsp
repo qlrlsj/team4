@@ -85,7 +85,7 @@
 		<div class="container-fluid">
 			<div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample08">
 				<ul class="navbar-nav">
-					<li class="nav-item"><a class="nav-link active"	href="#">항공편</a></li>
+					<li class="nav-item"><a class="nav-link active"	href="/selectAllAir.kt">항공편</a></li>
 					<li class="nav-item"><a class="nav-link active" href="/hostelMain.kt">숙소</a></li>
 					<li class="nav-item"><a class="nav-link active" href="/ticketMain.kt">티켓</a></li>
 					<li class="nav-item"><a class="nav-link active" href="#">패키지</a></li>
