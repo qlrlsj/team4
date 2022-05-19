@@ -1,5 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="member">
+		<!-- select id="DAO에서 보내준 메소드명과 동일하다" -->
+	<!-- parameterType="패키지 경로를 전부 적어주어야 구분이 가능하다 mapper로 들어온 값을 의미한다" (Mybatis에서는 파라미터타입을 한개만 가능하다) -->
+	<!-- resultType="mapper에서 나가는 값을 의미한다" -->
+	<!-- <select id="selectOneMember" parameterType="kr.or.member.model.vo.Member" resultType="kr.or.member.model.vo.Member"></select> -->
+	
+	<select id="selectOneMember" parameterType="m" resultType="m"> <!-- 위와 동일하나, mybatis-config.xml에서 별칭을 지정했다 m으로 사용하기로 -->
+		select
+			member_no as memberNo, <!-- 쿼리를 이렇게 치는 이유 실제 테이블 컬럼명과 VO 변수명을 동일하게 맞춰주면 Mybatis에서는 자동으로 Member 객체로 묶어준다 -->
+			member_id as memberId,
+			member_pw as memberPw,
+			member_name as memberName,
+			member_level as memberLevel,
+			member_grade as memberGrade,
+			member_phone as memberPhone,
+			member_email as memberEmail,
+			enroll_date as enrollDate,
+			member_point as memberPoint,
+			member_intro as memberIntro
+		from member where member_id=#{memberId} <!-- #을쓰고 {}를 사용하면 파라미터를 사용하겠다는걸로 Mybatis가 인지한다 -->
+		<if test="memberPw != null"> <!-- 동적쿼리 : 비밀번호가 null이 아닐때에는(비밀번호를 조회해야 될 때에는 아래 쿼리도 실행한다 -->
+		and member_pw=#{memberPw} 
+		</if>
+	</select>
 	
 </mapper>
