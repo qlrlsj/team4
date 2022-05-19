@@ -87,5 +87,6 @@
 	<context:component-scan base-package="kr.or.member" />
 	<context:component-scan base-package="kr.or.air" />
 	<context:component-scan base-package="kr.or.companion" />
+	<context:component-scan base-package="kr.or.ticket" />
 
 </beans:beans>
