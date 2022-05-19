@@ -1,5 +1,11 @@
 package kr.or.air.model.dao;
 
-public class AirDao {
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
+@Repository
+public class AirDao {
+	@Autowired
+	private SqlSessionTemplate sqlsession;
 }
