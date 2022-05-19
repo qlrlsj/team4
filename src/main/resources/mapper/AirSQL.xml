@@ -15,6 +15,6 @@
 		member_name as memberName,
 		phone,
 		reserve_state as reserveState
-	from air_reserve;
+	from air_reserve
 	</select>
 </mapper>

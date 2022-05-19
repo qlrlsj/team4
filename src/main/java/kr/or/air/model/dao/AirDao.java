@@ -16,6 +16,7 @@ public class AirDao {
 
 	public ArrayList<Air> selectAllAir() {
 		List list = sqlSession.selectList("air.selectAllAir");
+		System.out.println(list);
 		return (ArrayList<Air>)list;
 	}
 }
