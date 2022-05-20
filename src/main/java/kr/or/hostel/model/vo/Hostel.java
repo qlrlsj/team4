@@ -1,5 +1,7 @@
 package kr.or.hostel.model.vo;
 
+import java.sql.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,17 +10,20 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class Hostel {
+	private int hostelCode;
 	private int memberNo;
-	private String memberId;
-	private String memberPw;
-	private String memberName;
-	private int memberLevel;
-	private int memberGrade;
-	private String memberPhone;
-	private String memberEmail;
-	private String enrollDate;
-	private int memberPoint;
-	private String memberIntro;
+	private String hostelName;
+	private String HostelAddress;
+	private Date bookStart;
+	private Date bookEnd;
+	private String CheckinOut;
+	private String hostelIntro;
+	private String hostelUsage;
+	private int roolType;
+	private int hostelScore;
+	private String hostelComfort;
+	private String hostelService;
+	
 	
 	
 	
