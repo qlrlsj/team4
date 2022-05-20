@@ -15,4 +15,11 @@ public class TicketController {
 	public String TicketMain() {
 		return "ticket/ticketMain";
 	}
+	
+	@RequestMapping(value="/insertTicketPage.kt")
+	public String insertTicketPage() {
+		return "ticket/insertTicketPage";
+	}
+	
+	
 }
