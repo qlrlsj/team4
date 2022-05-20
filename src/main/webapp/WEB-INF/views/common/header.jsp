@@ -5,9 +5,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<!-- 부트스트랩 -->
 <link href="resources/css/bootstrap.css" rel="stylesheet">
 <link href="resources/css/bootstrap2.css" rel="stylesheet">
-
+<!--기본 CSS-->
+<link rel="stylesheet" href="resources/css/index.css">
 <script src="resources/js/jquery-3.6.0.js"></script>
 <!-- <script src="resources/js/bootstrap.js"></script> -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
@@ -39,7 +41,7 @@
 					<c:when test="${empty sessionScope.m }">
 						<ul class="nav col-12 col-lg-auto ms-lg-auto mb-2 justify-content-center mb-md-0 me-lg-5">
 							<li><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">로그인</button></li>
-							<li><a href="#" class="nav-link px-2 link-dark">회원가입</a></li>
+							<li><a href="/joinFrm.kt" class="nav-link px-2 link-dark">회원가입</a></li>
 						</ul>
 						<div class="modal fade" id="exampleModal" tabindex="-1"
 							aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -73,11 +75,20 @@
 							<li><a href="#" class="nav-link px-2 link-dark">문의하기</a></li>
 						</ul>
 		
-						<div class="dropdown text-end">
-							<a href="#" class="d-block link-dark text-decoration-none" >
-								<span class="material-symbols-outlined" style="font-size:40px;">account_circle_full</span>
-							</a>
-						</div>
+							<div class="dropdown">
+								<button class="btn btn-primary dropdown-toggle" type="button"
+									id="dropdownMenuButton2" data-bs-toggle="dropdown"
+									aria-expanded="false">내정보</button>
+								<ul class="dropdown-menu dropdown-menu-dark"
+									aria-labelledby="dropdownMenuButton2">
+									<li><a class="dropdown-item active" href="#">포인트</a></li>
+									<li><a class="dropdown-item" href="#">쿠폰</a></li>
+									<li><a class="dropdown-item" href="#">파트너 등록하기</a></li>
+									<li><hr class="dropdown-divider"></li>
+									<li><a class="dropdown-item" href="/logout.kt">로그아웃 </a></li>
+								</ul>
+							</div>
+
 					</c:otherwise>
 				</c:choose>
 			</div>

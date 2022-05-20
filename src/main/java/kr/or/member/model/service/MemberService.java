@@ -21,4 +21,8 @@ public class MemberService {
 		Member member = dao.selectOneMember(m);
 		return member;
 	}
+
+	public int insertMember(Member m) {
+		return dao.insertMember(m);
+	}
 }

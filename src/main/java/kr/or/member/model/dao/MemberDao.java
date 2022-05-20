@@ -20,4 +20,9 @@ public class MemberDao {
 		return member;
 	}
 
+	public int insertMember(Member m) {
+		int result = sqlSession.insert("member.insertMember",m); // 전달해줄것 m존재하니까 적어준다.
+		return result;
+	}
+
 }
