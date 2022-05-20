@@ -19,11 +19,50 @@
 	
 	<div class="div-content">
 		
-		<div class="p-3 mb-2 bg-secondary">
+		<div class="p-3 mb-5 bg-secondary">
 			<form>
 				<fieldset>
-					<input type="text" class="form-control">
-					<input type="text" class="form-control">
+					<div class="row">
+						<!--출발지선택 -->
+						<div class="col">
+							<input type="text" class="form-control" placeholder="출발지선택" onclick="searchStartPlace();" data-bs-toggle="modal" data-bs-target="#selectStartModal">						
+						</div>
+						<div class="modal fade" id="selectStartModal" tabindex="-1"
+							aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalLabel">출발지 선택</h5>
+										<button type="button" class="btn-close"
+											data-bs-dismiss="modal" aria-label="Close"></button>
+									</div>
+									<div class="modal-body">
+										
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-primary">선택</button>
+										<button type="button" class="btn btn-danger" data-bs-dismiss="modal">닫기</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--도착지선택 -->
+						<div class="col">
+							<input type="text" class="form-control" placeholder="도착지선택">						
+						</div>
+						<!--가는날짜선택 -->
+						<div class="col">
+							<input type="text" class="form-control" placeholder="가는 날 선택">						
+						</div>
+						<!--오는날짜선택 -->
+						<div class="col">
+							<input type="text" class="form-control" placeholder="오는 날 선택">						
+						</div>
+						<!--인원수선택 -->
+						<div class="col">
+							<input type="text" class="form-control" placeholder="인원수">						
+						</div>
+					</div>
 				</fieldset>
 			</form>
 		</div>
@@ -52,4 +91,37 @@
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
+<script>
+	function searchStartPlace(){
+		$.ajax({
+			url:"/allAirSchedule.kt",
+			page: 0,
+			perPage: 0,
+			totalCount: 0,
+			currentCount: 0,
+			matchCount: 0,
+			data:{
+		      	항공사: string,
+		      	편명: string,
+		     	출발공항: string,
+		      	도착공항: string,
+		      	출발시간: string,
+		      	도착시간: string,
+		      	운항요일: string,
+		     	시작일자: string,
+		      	종료일자: string,
+		      	기종: string
+				}
+			success: function(list){
+				$("[name=receiver]").empty();
+				for(let i=0;i<list.length;i++){
+					const option = $("<option>");
+					option.append(list[i]);
+					$("[name=receiver]").append(option);
+				}
+				$("#sendDm-modal").css("display","flex");
+			}
+		});
+	}
+</script>
 </html>
