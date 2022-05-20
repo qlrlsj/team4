@@ -16,7 +16,7 @@ public class Companion {
 	private String companionTitle;
 	private String companionContent;
 	private String companionField;
-	private Date trableDate;
+	private String trableDate;
 	private String companionTheme;
 	private String companionProgress;
 	private String companionDate;

@@ -5,13 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>hostel insert</title>
-	<!-- datepicker 는 jquery 1.7.1 이상 bootstrap 2.0.4 이상 버전이 필요함 -->
-<!-- jQuery가 먼저 로드 된 후 datepicker가 로드 되어야함.-->
-<script src="/resources/js/jquery-3.6.0.js"></script>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" >
-<link rel="stylesheet" href="resources/css/plugin/datepicker/bootstrap-datepicker.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.ko.min.js" integrity="sha512-L4qpL1ZotXZLLe8Oo0ZyHrj/SweV7CieswUODAAPN/tnqN3PA1P+4qPu5vIryNor6HQ5o22NujIcAZIfyVXwbQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-</head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<h1>숙소등록하기</h1>
@@ -28,8 +21,8 @@
 	<h3>내용</h3>
 	<div class="hostel-content from-group">
 		제목 : <input type="text" placeholder="검색용제목" name="hostelName"><br>
-		예약 가능 기간(시작일) : <input type="text" name="bookStart" class="datepicker form-control" style="width:30%;"><br> <!-- 오늘보다 이전날짜는 비활성화-->
-		예약 가능 기간(종료일) : <input type="date" name="bookEnd" class=""><br>
+		예약 가능 기간(시작일) : <input type="text" name="bookStart" class="datepicker form-control"  id = "datepicker1" style="width:30%;"><br> <!-- 오늘보다 이전날짜는 비활성화-->
+		예약 가능 기간(종료일) : <input type="text" name="bookEnd" class="datepicker form-control" id = "datepicker2"  style="width:30%;"><br>
 		체크인 체크아웃시간 : <input type="text" name="checkinOut" placeholder="(ex 15:00/12:00)"><br>
 		숙소소개<br>
 		<textarea class="form-control" name="hostelIntro" rows="10" style="width: 50%;"></textarea><br>
@@ -59,30 +52,50 @@
 	</div>
 
 
+	<!-- datepicker 는 jquery 1.7.1 이상 bootstrap 2.0.4 이상 버전이 필요함 -->
+<!-- jQuery가 먼저 로드 된 후 datepicker가 로드 되어야함.-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link href='bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css' rel='stylesheet' type='text/css'>
+<script src='bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js' type='text/javascript'></script>
+<!-- 한국어 적용  -->
+<!-- <script src="/js/bootstrap-datepicker.kr.js" charset="UTF-8"></script> -->
+
+
 
 
 	
 	<script>
-	$('.datepicker').datepicker({
-	});
-			
+	$(document).ready(function(){
+// 		 날짜선택옵션
+		  $('#datepicker1').datepicker({
+		   minDate : 0
+		  });
+		  $('#datepicker2').datepicker({
+			  minDate : 0
+			  });
+
+		});
+	
+	 $('#datepicker1').on("change",function(){
+		 
+	 });
+
 
 
 	$("#hostelType").on("change",function(){ // 숙소 타입에 따라 옵션창 바꿔주기 
 		const hostelType = $(this).val(); 
+// 		console.log(new Date());
 		console.log(hostelType);
+		$(".select-option").hide();	// 다 숨기고 선택한 옵션에 해당하는거만 보여주기 
 		if(hostelType==1){
-			$(".select-option").hide();	// 다 숨기고 선택한 옵션에 해당하는거만 보여주기 
 			$("#select-option1").show();
-		
 		}else if(hostelType==2){
-			$(".select-option").hide();
 			$("#select-option2").show();
 		}else if(hostelType==3){
-			$(".select-option").hide();
 			$("#select-option3").show();
 		}else if(hostelType==4){
-			$(".select-option").hide();
 			$("#select-option4").show();
 		}
 
