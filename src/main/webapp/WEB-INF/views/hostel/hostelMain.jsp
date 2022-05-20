@@ -9,8 +9,8 @@
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<h1>hostel Main</h1>
-	
+	<a href="/insertHostelForm.kt">숙소 등록하기 </a>
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 
-	<%@ include file="/WEB-INF/views/common/footer.jsp" %>
 </body>
 </html>
