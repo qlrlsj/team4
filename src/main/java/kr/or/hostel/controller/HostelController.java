@@ -26,5 +26,10 @@ public String hostelMain() {
 	return "hostel/hostelMain";
 }
 
+@RequestMapping(value = "/insertHostelForm.kt")
+public String insertHostelForm() {
+	
+	return "hostel/insertHostelForm";
+}
 
 }

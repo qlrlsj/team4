@@ -6,11 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <!-- 부트스트랩 -->
-<link href="resources/css/bootstrap.css" rel="stylesheet">
-<link href="resources/css/bootstrap2.css" rel="stylesheet">
+<link href="/resources/css/bootstrap.css" rel="stylesheet">
+<link href="/resources/css/bootstrap2.css" rel="stylesheet">
 <!--기본 CSS-->
-<link rel="stylesheet" href="resources/css/index.css">
-<script src="resources/js/jquery-3.6.0.js"></script>
+<link rel="stylesheet" href="/resources/css/index.css">
+<script src="/resources/js/jquery-3.6.0.js"></script>
 <!-- <script src="resources/js/bootstrap.js"></script> -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
@@ -102,7 +102,7 @@
 					<li class="nav-item"><a class="nav-link active" href="/hostelMain.kt">숙소</a></li>
 					<li class="nav-item"><a class="nav-link active" href="/ticketMain.kt">티켓</a></li>
 					<li class="nav-item"><a class="nav-link active" href="#">패키지</a></li>
-					<li class="nav-item"><a class="nav-link active" href="/companionMain.kt">동행자 모집</a></li>
+					<li class="nav-item"><a class="nav-link active" href="/companionMain.kt?reqPage=1">동행자 모집</a></li>
 				</ul>
 			</div>
 		</div>

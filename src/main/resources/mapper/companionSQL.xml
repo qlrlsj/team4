@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="companion">
-
+  <select id="selectCompanionList" parameterType="map" resultType="co">
+	select * from
+	(select rownum as rnum, c.* from
+	(select 
+				companion_no as companionNo,
+                member_id as memberId,
+				companion_title as companionTitle,
+                companion_field as companionField,
+                companion_theme as companionTheme,
+                companion_date as companionDate,
+                companion_progress as companionProgress
+	from companion order by companion_no desc)c)
+	where rnum between #{start} and #{end};
+  </select>
+  <select id="selectTotalCount" resultType="int">
+  	select count(*) from board
+  </select>
 </mapper>
