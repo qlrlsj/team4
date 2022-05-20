@@ -23,9 +23,7 @@ public class CompanionService {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("start",start);
 		map.put("end",end);
-		ArrayList<Companion> list = dao.selectCompanionList(map);		
-		//pageNavi작성 시작
-		//전체 페이지 수 계산이 필요하다. -> 전체 게시물의 수를 db에서 조회해와야 계산할 수 있다.
+		ArrayList<Companion> list = dao.selectCompanionList(map);	
 		//전체 게시물 수
 		int totalCount = dao.selectCompanionCount();
 		//구해온 전체 게시물 수를 통해 전체 페이지 수 계산
@@ -66,6 +64,10 @@ public class CompanionService {
 		}
 		CompanionPageData cpd = new CompanionPageData(list, pageNavi);
 		return cpd;
+	}
+
+	public Companion selectOneCompanion(int companionNo) {
+		return dao.selectOneCompanion(companionNo);
 	}
 	
 }

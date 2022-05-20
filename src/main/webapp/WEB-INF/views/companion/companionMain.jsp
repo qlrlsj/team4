@@ -71,25 +71,25 @@
 	     </select>
 	     <button class="col">검색</button>
 	</div>
-	<button>동행자 모집 +</button>
 	<c:if test="${not empty sessionScope.m }">
-		<a href="/boardWriteFrm.kh">게시글 작성</a>
+		<button>동행자 모집 +</button>		
 	</c:if>
 	<table class="table table-striped table-hover">
 			<tr>
-			<th>글번호</th><th>제목</th><th>여행 테마</th><th>작성일</th><th>작성자</th><th>모집 여부</th>
-			<c:forEach items="${list }" var="b" varStatus="i">
+			<th>글번호</th><th>제목</th><th>지역</th><th>여행 테마</th><th>작성일</th><th>작성자</th><th>모집 여부</th>
+			<c:forEach items="${list }" var="co" varStatus="i">
 			<tr>
 				<td>${(reqPage-1)*10 + i.count }</td>
-				<td><a href="/boardView.kh?boardNo=${b.boardNo }">${b.boardTitle }</a></td>
-				<td>${b.boardWriter }</td>
-				<td>${b.boardDate }</td>
-				<td></td>
-				<td></td>
+				<td><a href="/companionView.kt?companionNo=${co.companionNo }">${co.companionTitle }</a></td>
+				<td>${co.companionField }</td>
+				<td>${co.companionTheme }</td>
+				<td>${co.companionDate }</td>
+				<td>${co.memberId }</td>
+				<td>${co.companionProgress }</td>
 			</tr>
 			</c:forEach>
 			<tr>
-				<th colspan="4">${pageNavi }</th>
+				<th colspan="7">${pageNavi }</th>
 			</tr>
 	</table>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>

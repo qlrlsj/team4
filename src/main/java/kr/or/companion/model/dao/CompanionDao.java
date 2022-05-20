@@ -24,4 +24,9 @@ public class CompanionDao {
 		int totalCount = sqlSession.selectOne("companion.selectTotalCount");
 		return totalCount;
 	}
+
+	public Companion selectOneCompanion(int companionNo) {
+		Companion com = sqlSession.selectOne("companion.selectOneCompanion",companionNo);
+		return com;
+	}
 }

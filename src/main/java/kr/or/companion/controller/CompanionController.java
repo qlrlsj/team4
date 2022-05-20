@@ -24,4 +24,11 @@ public class CompanionController {
 		model.addAttribute("reqPage", reqPage);
 		return "companion/companionMain";
 	}
+	
+	@RequestMapping (value="/companionView.kt")
+	public String companionView(int companionNo, Model model) {
+		Companion com = service.selectOneCompanion(companionNo);
+		model.addAttribute("com",com);
+		return "companion/companionView";
+	}
 }
