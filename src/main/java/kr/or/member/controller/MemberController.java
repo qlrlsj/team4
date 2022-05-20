@@ -26,6 +26,25 @@ public class MemberController {
 		}
 		return "redirect:/";
 	}
+
+	@RequestMapping(value="/logout.kt")
+	public String logout(HttpSession session) { //HttpSession속성의 session값 불러옴
+		session.invalidate();					//session파기
+		return "redirect:/";					//원래 화면으로 복귀
+	}
+	
+	
+	@RequestMapping(value="/joinFrm.kt")
+	public String joinFrm() {
+		return "member/joinFrm";
+	}
+	
+	@RequestMapping(value="/join.kt")
+	public String join(Member m) {
+		int result = service.insertMember(m); //insert문은 어차피 결과를 1,0으로 return하기에 int로 변수를 만들어 놓는다.
+		return "redirect:/";
+	}
+	
 }
 
 
