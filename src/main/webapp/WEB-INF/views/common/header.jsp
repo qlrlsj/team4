@@ -102,7 +102,7 @@
 					<li class="nav-item"><a class="nav-link active" href="/hostelMain.kt">숙소</a></li>
 					<li class="nav-item"><a class="nav-link active" href="/ticketMain.kt">티켓</a></li>
 					<li class="nav-item"><a class="nav-link active" href="#">패키지</a></li>
-					<li class="nav-item"><a class="nav-link active" href="/companionMain.kt">동행자 모집</a></li>
+					<li class="nav-item"><a class="nav-link active" href="/companionMain.kt?reqPage=1">동행자 모집</a></li>
 				</ul>
 			</div>
 		</div>
