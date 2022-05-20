@@ -12,10 +12,11 @@ import lombok.NoArgsConstructor;
 public class Companion {
 	private int companionNo;
 	private int memberNo;
+	private String memberId;
 	private String companionTitle;
 	private String companionContent;
 	private String companionField;
-	private Date trableDate;
+	private String trableDate;
 	private String companionTheme;
 	private String companionProgress;
 	private String companionDate;
