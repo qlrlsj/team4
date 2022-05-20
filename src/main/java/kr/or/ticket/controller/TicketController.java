@@ -27,5 +27,4 @@ public class TicketController {
 		return "ticket/insertTicketPage";
 	}
 	
-	
 }
