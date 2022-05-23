@@ -69,5 +69,13 @@ public class CompanionService {
 	public Companion selectOneCompanion(int companionNo) {
 		return dao.selectOneCompanion(companionNo);
 	}
+
+	public int insertCompanion(Companion com) {
+		return dao.insertCompanion(com);	
+	}
+
+	public int companionProgress(int companionNo) {
+		return dao.companionProgress(companionNo);
+	}
 	
 }

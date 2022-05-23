@@ -33,4 +33,10 @@ where rnum between #{start} and #{end}
   from companion
   where companion_no = #{companionNo}
   </select>
+  <insert id="isnertCompanion" parameterType="co">
+  		insert into companion values(companion_seq.nextval, #{memberNo}, #{memberId}, #{companionTitle}, #{companionContent}, #{companionField}, #{trableDate}, #{companionTheme}, '모집 중',sysdate, companion_seq.currval)
+  </insert>
+  <update id="progressUpdate" parameterType="int">
+  		update companion set companion_progress = '모집 완료' where companion_no = #{companionNo}
+  </update>
 </mapper>

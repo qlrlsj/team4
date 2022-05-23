@@ -29,4 +29,12 @@ public class CompanionDao {
 		Companion com = sqlSession.selectOne("companion.selectOneCompanion",companionNo);
 		return com;
 	}
+
+	public int insertCompanion(Companion com) {
+		return sqlSession.insert("companion.isnertCompanion", com);
+	}
+
+	public int companionProgress(int companionNo) {
+		return sqlSession.update("companion.progressUpdate",companionNo);
+	}
 }

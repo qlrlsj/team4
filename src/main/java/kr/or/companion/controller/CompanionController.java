@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.google.gson.Gson;
 
 import kr.or.companion.model.service.CompanionService;
 import kr.or.companion.model.vo.Companion;
@@ -30,5 +33,28 @@ public class CompanionController {
 		Companion com = service.selectOneCompanion(companionNo);
 		model.addAttribute("com",com);
 		return "companion/companionView";
+	}
+	@RequestMapping (value="/companionWriteFrm.kt")
+	public String companionWriteFrm() {
+		return "companion/companionWriteFrm";
+	}
+	@RequestMapping (value="/companionInsert.kt")
+	public String companionInsert(Companion com) {
+		int result = service.insertCompanion(com);
+		if(result>0) {
+			return "redirect:/companionMain.kt?reqPage=1";			
+		}else {
+			return "redirect:/";
+		}
+	}
+	@ResponseBody
+	@RequestMapping(value="/companionProgress.kt", produces = "application/json;charset=utf-8")
+	public String companionProgress(int companionNo) {
+		int result = service.companionProgress(companionNo);
+		if(result>0) {
+			return new Gson().toJson("모집 완료");
+		}else {
+			return new Gson().toJson("error");
+		}
 	}
 }
