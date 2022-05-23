@@ -54,6 +54,7 @@
 
 	<!-- datepicker 는 jquery 1.7.1 이상 bootstrap 2.0.4 이상 버전이 필요함 -->
 <!-- jQuery가 먼저 로드 된 후 datepicker가 로드 되어야함.-->
+<!--현재페이지 title이랑 header사이에 넣으면 아래 cdn로드 후 header에 있는 jquery가 다시로드되면서 datepicker사용불가 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -67,20 +68,27 @@
 
 	
 	<script>
+		
 	$(document).ready(function(){
 // 		 날짜선택옵션
-		  $('#datepicker1').datepicker({
-		   minDate : 0
-		  });
-		  $('#datepicker2').datepicker({
-			  minDate : 0
-			  });
+	 $('#datepicker1').datepicker();
+	 $('#datepicker1').datepicker("option", "minDate", 0); // 시작일 오늘부터
+    $('#datepicker1').datepicker("option", "maxDate", $("#datepicker2").val()); //종료일보다 시작일을 늦게선택하는것 막기
+    $('#datepicker1').datepicker("option", "onClose", function ( selectedDate ) {
+    $("#datepicker2").datepicker( "option", "minDate", selectedDate );
+    });// 종료일이 시작일보다 빠르게 선택하는것 막기
+
+    $('#datepicker2').datepicker();
+    $('#datepicker2').datepicker("option", "minDate", $("#datepicker1").val());
+    $('#datepicker2').datepicker("option", "onClose", function ( selectedDate ) {
+        $("#datepicker1").datepicker( "option", "maxDate", selectedDate );
+    });
+
 
 		});
-	
-	 $('#datepicker1').on("change",function(){
-		 
-	 });
+   
+
+
 
 
 
