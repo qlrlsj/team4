@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,8 +43,7 @@ select option[value=""][disabled] {
             height: 600,
             maxHeight: 600,
             focus: false,
-            lang : "ko_KR",
-            
+            lang : "ko_KR"            
         });
 		// 날짜선택옵션
 	   	 $('#datepicker1').datepicker();
@@ -57,15 +57,19 @@ select option[value=""][disabled] {
 	     $('#datepicker2').datepicker("option", "minDate", $("#datepicker1").val());
 	     $('#datepicker2').datepicker("option", "onClose", function ( selectedDate ) {
 	     $("#datepicker1").datepicker( "option", "maxDate", selectedDate );
-	     });	     
+	     });	
+	     
+	     $('[name=companionField]').val('${com.companionField}');
+	     $('[name=companionTheme]').val('${com.companionTheme}');
    	});
 	</script>
-	<h2>동행자 모집 글 작성</h2>
-	<form method="post" action="/companionInsert.kt">	
+	<h2>동행자 모집 글 수정</h2>
+	<form method="post" action="/companionUpdate.kt">	
 		  <div class="mb-3">
 		    <label for="companionTitle" class="form-label">제목</label>
-		    <input type="text" class="form-control" name="companionTitle" id="companionTitle" >
+		    <input type="text" class="form-control" name="companionTitle" id="companionTitle" value="${com.companionTitle }">
 		  </div>
+		  <input type="hidden" name="companionNo" value="${com.companionNo }">
 		  <input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
 		  <input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
 		<div class="div-content p-3 mb-5 bg-secondary row">
@@ -90,8 +94,9 @@ select option[value=""][disabled] {
 		        <option value="경상남도">경상남도</option>
 		        <option value="제주">제주</option>
 		     </select>
-			 <input class="col comS" type="text"  id="datepicker1" placeholder="여행 시작일">
-			 <input class="col comS" type="text"  id="datepicker2" placeholder="여행 종료일">
+		     <c:forTokens var="date" items="${com.trableDate }" delims=" ~ " varStatus="i">
+				 <input class="col comS" type="text" value="${date }"  id="datepicker${i.count }">
+		     </c:forTokens>
 			 <input type="hidden" name="trableDate" value="">
 		     <select class="form-select col comS" name="companionTheme">
 		     	<option value="" disabled selected>여행테마</option>
@@ -101,8 +106,8 @@ select option[value=""][disabled] {
 		     	<option value="액티비티">액티비티</option>
 		     </select>
 	     </div>	
- 	 <textarea id="summernote" name="companionContent"></textarea>
- 	 <button type="submit" id="comSubmit" onclick="dateSum();">작성</button>
+ 	 <textarea id="summernote" name="companionContent"><c:out value="${com.companionContent}" escapeXml="false"/></textarea>
+ 	 <button type="submit" id="comSubmit" onclick="dateSum();">수정</button>
 	</form>
 	<script>
 	function dateSum(){
@@ -112,6 +117,5 @@ select option[value=""][disabled] {
 		$('[name=trableDate]').val(trableDate);
 	}
 	</script>
-	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>

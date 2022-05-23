@@ -57,4 +57,28 @@ public class CompanionController {
 			return new Gson().toJson("error");
 		}
 	}
+	@RequestMapping(value="companionDelete.kt")
+	public String companionDelete(int companionNo) {
+		int result = service.companionDelete(companionNo);
+		if(result>0) {
+			return "redirect:/companionMain.kt?reqPage=1";
+		}else {
+			return "redirect:/companionView.kt?companionNo="+companionNo;
+		}
+	}
+	@RequestMapping(value="companionUpdateFrm.kt")
+	public String companionUpdateFrm(int companionNo, Model model) {
+		Companion com = service.selectOneCompanion(companionNo);
+		model.addAttribute("com",com);
+		return "companion/companionUpdate";
+	}
+	@RequestMapping(value="/companionUpdate.kt")
+	public String companionUpdate(Companion com) {
+		int result = service.updateCompanion(com);
+		if(result > 0) {
+			return "redirect:/companionView.kt?companionNo="+com.getCompanionNo();
+		}else {
+			return "redirect:/companionMain.kt?reqPage=1";	
+		}
+	}
 }

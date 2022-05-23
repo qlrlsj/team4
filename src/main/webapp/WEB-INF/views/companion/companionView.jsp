@@ -32,23 +32,24 @@
 					<c:when test="${com.companionProgress eq '모집 완료' }">
 						<tr>
 							<td colspan="2"><a href="/companionUpdateFrm.kt?companionNo=${com.companionNo }">수정하기</a></td>
-							<td colspan="2"><a href="/companionDelete.kt?companionNo=${com.companionNo }">삭제하기</a></td>
+							<td colspan="2"><a onclick="return confirm('삭제하시겠습니까?');" href="/companionDelete.kt?companionNo=${com.companionNo }">삭제하기</a></td>
 						</tr>
 					</c:when>
 					<c:when test="${com.companionProgress eq '모집 중' }">
 						<tr>
-							<td colspan="4"><button class="btn btn-primary btn-sm" onclick="progress(${com.companionNo});">모집 완료로 변경하기</button></td>
+							<td id="progressBtn" colspan="4"><button class="btn btn-primary btn-sm" onclick="progress(${com.companionNo});">모집 완료로 변경하기</button></td>
 						</tr>
 						<tr>
 							<td colspan="2"><a href="/companionUpdateFrm.kt?companionNo=${com.companionNo }">수정하기</a></td>
-							<td colspan="2"><a href="/companionDelete.kt?companionNo=${com.companionNo }">삭제하기</a></td>
+							<td colspan="2"><a onclick="return confirm('삭제하시겠습니까?');" href="/companionDelete.kt?companionNo=${com.companionNo }">삭제하기</a></td>
 						</tr>
 					</c:when>					
 				</c:choose>
 			</c:when>
 			<c:otherwise>
 			<tr>
-				<td colspan="4"><button class="btn btn-primary btn-sm" onclick="progress(${com.companionNo});">동행 신청하기!</button></td>
+				<td colspan="2"><button class="btn btn-primary btn-sm" onclick="chat(${com.companionNo});">동행 신청하기!</button></td>
+				<td colspan="2"><button class="btn btn-primary btn-sm" onclick="chat(${com.companionNo});">신고하기</button></td>
 			</tr>
 			</c:otherwise>
 		</c:choose>
@@ -66,9 +67,13 @@
 			type: "post",
 			data : {"companionNo":companionNo},
 			success : function(data) {
-				$("#progress").text(data);		
+				$("#progress").text(data);
+				$("#progressBtn").remove();
 			}
 		});
+	}
+	function deleteCheck(){
+		
 	}
 	</script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>

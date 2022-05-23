@@ -77,5 +77,13 @@ public class CompanionService {
 	public int companionProgress(int companionNo) {
 		return dao.companionProgress(companionNo);
 	}
+
+	public int companionDelete(int companionNo) {
+		return dao.companionDelete(companionNo);
+	}
+
+	public int updateCompanion(Companion com) {
+		return dao.updateCompanion(com);
+	}
 	
 }
