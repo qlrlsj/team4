@@ -33,4 +33,8 @@
 		update member set member_Pw=#{memberPw}, member_Name=#{memberName}, member_Phone=#{memberPhone}, member_Email=#{memberEmail}, member_Intro=#{memberIntro} where member_no=#{memberNo}
 	</update>
 	
+<!-- 	<update id="updateMember" parameterType="m"> -->
+<!-- 		update member_tbl set phone=#{phone}, email=#{email} where member_no=#{memberNo} -->
+<!-- 	</update> -->
+	
 </mapper>

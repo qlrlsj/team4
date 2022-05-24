@@ -58,7 +58,7 @@ public class MemberController {
 		return "member/mypage";
 	}
 	
-	@RequestMapping(value="updateMember.kt")
+	@RequestMapping(value="/updateMember.kt")
 	public String updateMember(Member m, HttpSession session) {  //회원정보 받아올 멤버, 정상변경후 세션에 적용해야하니 세션도 넣어놓는다
 		System.out.println("jsp에서 Controller로 들어온 정보 : "+m);
 		int result = service.updateOneMember(m);
