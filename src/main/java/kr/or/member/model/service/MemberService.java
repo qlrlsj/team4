@@ -27,7 +27,6 @@ public class MemberService {
 	}
 
 	public int updateOneMember(Member m) {
-		System.out.println("Controller에서 Service로 들어온 정보 : "+m);
 		return dao.updateOneMember(m);
 	}
 }
