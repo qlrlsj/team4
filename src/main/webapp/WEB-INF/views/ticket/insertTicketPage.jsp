@@ -9,7 +9,7 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
-	<h3>1. 주소입력</h3>
+	<h3>1. 카테고리 입력</h3>
 	<form class="row g-3" action="/insertTicket.kt">
 		<div class="col-md-4">
 			<select id="category1" class="form-select">
@@ -21,8 +21,8 @@
 				<option value="0">2차 카테고리 선택</option>
 			</select>
 		</div>
-		<button type="submit" id="cateBtn">제출</button>
-		<pre class="chk" id="chk" style="font-size: 15px;">   </pre>
+		<pre class="chk" id="categoryChk" style="font-size: 15px;">   </pre>
+		<button type="button" id="btn">제출</button>
 	</form>
 
 
@@ -30,39 +30,63 @@
 
 	<script>
 	$(document).ready(function(){
-		let selectBox1 = $("#category1");
-		let selectBox2 = $("#category2");
 		
-		<c:forEach items="${ticketCategory }" var="tc">
-		<c:if test="${tc.parentCategoryId eq 0}">
-			selectBox1.append("<option value='${tc.categoryId}'>${tc.categoryName}</option>");
-		</c:if>
-		</c:forEach>
+		//1. 카테고리 데이터 불러오기
+		const categoryBox1 = $("#category1");
+		const categoryBox2 = $("#category2");
+		
+		$.ajax({
+	         url : "/selectAllTicketCategory.kt",
+	         success:function(list){
+               for(let i=0;i<list.length;i++){
+            	   if(list[i].parentCategoryId == 0){
+            		   categoryBox1.append("<option value='"+list[i].categoryId+"'>"+list[i].categoryName+"</option>");
+            	   }
+               }
+	         }
+	      });
 		
 		selectBox1.on("change",function(){
-			const selectBox1Val = $("#category1 option:selected").val();
+			const categoryBox1Val = $("#category1 option:selected").val();
 			selectBox2.children().remove();
-			if(selectBox1Val!=0){
-				<c:forEach items="${ticketCategory}" var="tc">
-				if(${tc.parentCategoryId}==selectBox1Val){
-					selectBox2.append("<option value='${tc.categoryId}'>${tc.categoryName}</option>");
-				}
-				</c:forEach>
+			if(categoryBox1Val!=0){
+				$.ajax({
+			         url : "/selectAllTicketCategory.kt",
+			         success:function(list){
+		               for(let i=0;i<list.length;i++){
+		            	   if(list[i].parentCategoryId == selectBox1Val){
+		            		   categoryBox2.append("<option value='"+list[i].categoryId+"'>"+list[i].categoryName+"</option>");
+		            	   }
+		               }
+			         }
+			      });
 			}else{
-				selectBox2.append("<option value='0'>2차 카테고리 선택</option>");
+				categoryBox2.append("<option value='0'>2차 카테고리 선택</option>");
 			}
 		});
 		
+		//2.지역 카테고리 데이터 불러오기
+		
+		
 	});
 	
+	
+	
+	//유효성검사
 	$("#cateBtn").on("click",function(){
-		const selectBox1Val = $("#category1 option:selected").val();
-		const selectBox2Val = $("#category2 option:selected").val();
-		if(selectBox1Val==0||selectBox2Val==0){
-			$("#chk").text("카테고리 입력하세요.");
-			$("#chk").css("color","red");
+		
+		//1.카테고리 유효성 검사
+		const categoryBox1Val = $("#category1 option:selected").val();
+		const categoryBox2Val = $("#category2 option:selected").val();
+		if(categoryBox1Val==0||categoryBox2Val==0){
+			$("#categoryChk").text("카테고리 입력하세요.");
+			$("#categoryChk").css("color","red");
+		}else{
+			$("#categoryChk").text(" ");
+			$("#btn").prop("type","submit");
 		}
 		
+		//2.
 	});
 	
 	

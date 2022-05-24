@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.google.gson.Gson;
 
 import kr.or.ticket.model.service.TicketService;
 import kr.or.ticket.model.vo.TicketCategory;
@@ -25,6 +28,14 @@ public class TicketController {
 		ArrayList<TicketCategory> ticketCategory = service.selectAllTicketCategory();
 		model.addAttribute("ticketCategory", ticketCategory);
 		return "ticket/insertTicketPage";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/selectAllTicketCategory.kt",produces = "application/json;charset=utf-8")
+	public String selectAllTicketCategory() {
+		Gson gson = new Gson();
+		ArrayList<TicketCategory> ticketCategory = service.selectAllTicketCategory();
+		return gson.toJson(ticketCategory);
 	}
 	
 }
