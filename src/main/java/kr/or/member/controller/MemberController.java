@@ -39,12 +39,46 @@ public class MemberController {
 		return "member/joinFrm";
 	}
 	
-	@RequestMapping(value="/join.kt")
+	@RequestMapping(value="/signUp.kt")
 	public String join(Member m) {
+		System.out.println("joinFrm.jsp에서 들어온 정보 : "+m);
+		m.setMemberGrade(2);
+		m.setMemberLevel(2);
 		int result = service.insertMember(m); //insert문은 어차피 결과를 1,0으로 return하기에 int로 변수를 만들어 놓는다.
+		if (result == 0) {
+			System.out.println("회원가입이 실패했습니다.");
+		}else {
+			System.out.println("회원가입에 성공했습니다.");
+		}
 		return "redirect:/";
 	}
 	
+	@RequestMapping(value="/mypage.kt")
+	public String mypage() {
+		return "member/mypage";
+	}
+	
+	@RequestMapping(value="updateMember.kt")
+	public String updateMember(Member m, HttpSession session) {  //회원정보 받아올 멤버, 정상변경후 세션에 적용해야하니 세션도 넣어놓는다
+		System.out.println("jsp에서 Controller로 들어온 정보 : "+m);
+		int result = service.updateOneMember(m);
+		if(result>0) {
+			session.setAttribute("m", m);
+			System.out.println("회원정보 변경이 완료 되었습니다.");
+		}else {
+			System.out.println("회원정보 변경에 실패 하였습니다.");
+		}
+		return "redirect:/mypage.kt";
+	}
+	
+//	@RequestMapping(value="updateMember.kh")
+//	public String updateMember(Member m, HttpSession session) { //회원정보 받아올 멤버, 정상변경후 세션에 적용해야하니 세션도 넣어놓는다
+//		int result = service.memberUpdate(m);
+//		if(result>0) {
+//			session.setAttribute("m", m);
+//		}
+//		return "redirect:/mypage.kh";
+//	}
 }
 
 

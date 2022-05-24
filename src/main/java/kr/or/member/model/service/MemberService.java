@@ -23,6 +23,11 @@ public class MemberService {
 	}
 
 	public int insertMember(Member m) {
-		return dao.insertMember(m);
+		return dao.insertMember(m); //dao에 컨트롤러에서 받은 m을 전달하고 결과값(1,0)을 돌려받는다.
+	}
+
+	public int updateOneMember(Member m) {
+		System.out.println("Controller에서 Service로 들어온 정보 : "+m);
+		return dao.updateOneMember(m);
 	}
 }

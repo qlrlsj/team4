@@ -25,4 +25,10 @@ public class MemberDao {
 		return result;
 	}
 
+	public int updateOneMember(Member m) {
+		System.out.println("Service에서 Dao로 들어온 정보 : "+m);
+		int result = sqlSession.update("member.updateOneMember",m); 
+		return result;
+	}
+
 }
