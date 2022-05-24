@@ -28,10 +28,11 @@
 				<option value="0">2차 카테고리 선택</option>
 			</select>
 		</div>
-		<pre class="chk" id="categoryChk" >   </pre>
+		<pre class="chk" id="categoryChk1" >   </pre>
 		
-		<label id="expireDate"></label>
-		<input type="hidden" placeholder="유효기간(만료날짜) 입력(YYYY-MM-DD)">
+		<label for="expireDate"></label>
+		<input class="col-md-4" type="hidden" id="expireDate" placeholder="유효기간(만료날짜) 입력(YYYY-MM-DD)">
+		<pre class="chk" id="categoryChk2" >   </pre>
 		
 		<h4>2. 주소 입력</h4>
 		<div class="col-md-4">
@@ -61,7 +62,6 @@
 
 	<script>
 	$(document).ready(function(){
-		
 		//1. 카테고리 데이터 불러오기
 		const categoryBox1 = $("#category1");
 		const categoryBox2 = $("#category2");
@@ -96,9 +96,10 @@
 				categoryBox2.append("<option value='0'>2차 카테고리 선택</option>");
 			}
 			
-			//카테고리1차-입장권시 유효기간 입력
+			//카테고리1차-입장권시 유효기간 입력폼 생성
 			if(categoryBox1Val == 1){
-				$("#expireDate").text("입장권시 유효기간 필수입력 : ")
+				$("label[for='expireDate']").text("입장권시 유효기간 필수입력 : ")
+				$("#expireDate").prop("type","text");
 			}
 		});
 		
@@ -142,20 +143,34 @@
 	
 	//유효성검사
 	$("#insertBtn").on("click",function(){
-		let chkArr = [false,false,false];
+		let chkArr = [false,false,false,false];
 		let count = 0;
 		
-		//1.카테고리 유효성 검사
+		//1-1.카테고리 유효성 검사
 		const categoryBox1Val = $("#category1 option:selected").val();
 		const categoryBox2Val = $("#category2 option:selected").val();
 		
 		if(categoryBox1Val==0||categoryBox2Val==0){
-			$("#categoryChk").text("카테고리 입력하세요.");
-			$("#categoryChk").css("color","red");
+			$("#categoryChk1").text("카테고리 입력하세요.");
+			$("#categoryChk1").css("color","red");
 			chkArr[0]=false;
 		}else{
 			$("#categoryChk").text(" ");
 			chkArr[0]=true;
+		}
+		
+		//1-2. 카테고리 입장권시 유효기간 유효성검사
+		if($("#expireDate").attr("type")=="text"){
+			const dateReg  = /^(20)\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])$/;	//2000년대 입력가능
+			const date = $("#expireDate").val();
+			if(!dateReg.test(date) || date == ""){
+				$("#categoryChk2").text("날짜(YYYY-MM-DD) 형식으로 입력해주세요 ");
+				$("#categoryChk2").css("color","red");
+				chkArr[1]=false;
+			}else{
+				$("#categoryChk2").text(" ");
+				chkArr[1]=true;
+			}
 		}
 		
 		//2-1.주소 유효성 검사 (카테고리)
@@ -164,20 +179,20 @@
 		if(localBox1Val==0||localBox2Val==0){
 			$("#localChk1").text("카테고리 입력하세요.");
 			$("#localChk1").css("color","red");
-			chkArr[1]=false;
+			chkArr[2]=false;
 		}else{
 			$("#localChk1").text(" ");
-			chkArr[1]=true;
+			chkArr[2]=true;
 		}
 		
 		//2-2.주소 유효성 검사 (상세주소)
 		if($("#sample6_address").val()==""||$("#sample6_detailAddress").val()==""){
 			$("#localChk2").text("주소를 입력하세요.");
 			$("#localChk2").css("color","red");
-			chkArr[2]=false;
+			chkArr[3]=false;
 		}else{
 			$("#localChk2").text(" ");
-			chkArr[2]=true;
+			chkArr[3]=true;
 		}
 		
 		
@@ -188,7 +203,7 @@
                 count++;
             }
         }
-      	if(count != 3){
+      	if(count != 4){
       		alert("정보를 확인하세요");
       	}else{
 			$("#insertBtn").prop("type","submit");
