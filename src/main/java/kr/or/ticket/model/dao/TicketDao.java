@@ -7,7 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-
+import kr.or.ticket.model.vo.LocalCategory;
 import kr.or.ticket.model.vo.TicketCategory;
 
 @Repository
@@ -18,6 +18,11 @@ public class TicketDao {
 	public ArrayList<TicketCategory> selectAllTicket() {
 		List list = sqlSession.selectList("ticket.selectAllTicketCategory");
 		return (ArrayList<TicketCategory>)list;
+	}
+
+	public ArrayList<LocalCategory> selectAllLocal() {
+		List list = sqlSession.selectList("ticket.selectAllLocal");
+		return (ArrayList<LocalCategory>)list;
 	}
 	
 }

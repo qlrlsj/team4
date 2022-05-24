@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 
 import kr.or.ticket.model.service.TicketService;
+import kr.or.ticket.model.vo.LocalCategory;
 import kr.or.ticket.model.vo.TicketCategory;
 
 @Controller
@@ -36,6 +37,13 @@ public class TicketController {
 		Gson gson = new Gson();
 		ArrayList<TicketCategory> ticketCategory = service.selectAllTicketCategory();
 		return gson.toJson(ticketCategory);
+	}
+	@ResponseBody
+	@RequestMapping(value="/selectAllLocal.kt",produces = "application/json;charset=utf-8")
+	public String selectAllLocal() {
+		Gson gson = new Gson();
+		ArrayList<LocalCategory> local = service.selectAllLocal();
+		return gson.toJson(local);
 	}
 	
 }

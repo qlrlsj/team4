@@ -14,4 +14,13 @@
 		from ticket_category
 	</select>
 	
+	<select id="selectAllLocal" resultType="lc"> 
+		select
+			local_id as localId, 
+			local_name as localName,
+			parent_local_id as parentLocalId,
+			local_filepath as localFilepath
+		from local_category order by localName
+	</select>
+	
 </mapper>

@@ -13,6 +13,7 @@
 		<typeAlias type="kr.or.chat.model.vo.Chat" alias="ch"/>
 		<typeAlias type="kr.or.ticket.model.vo.Ticket" alias="t"/>
 		<typeAlias type="kr.or.ticket.model.vo.TicketCategory" alias="tc"/>
+		<typeAlias type="kr.or.ticket.model.vo.LocalCategory" alias="lc"/>
 		
 		
 	</typeAliases>
