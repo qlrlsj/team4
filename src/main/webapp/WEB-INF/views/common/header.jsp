@@ -69,27 +69,55 @@
 						</div>
 					</c:when>
 					<c:otherwise>
-						<ul class="nav col-12 col-lg-auto ms-lg-auto mb-2 justify-content-center mb-md-0 me-lg-5">
-							<li><a href="#" class="nav-link px-2 link-dark">위시리스트</a></li>
-							<li><a href="#" class="nav-link px-2 link-dark">내 여행</a></li>
-							<li><a href="#" class="nav-link px-2 link-dark">문의하기</a></li>
-						</ul>
-		
-							<div class="dropdown">
-								<button class="btn btn-primary dropdown-toggle" type="button"
-									id="dropdownMenuButton2" data-bs-toggle="dropdown"
-									aria-expanded="false">내정보</button>
-								<ul class="dropdown-menu dropdown-menu-dark"
-									aria-labelledby="dropdownMenuButton2">
-									<li><a class="dropdown-item active" href="#">포인트</a></li>
-									<li><a class="dropdown-item" href="#">쿠폰</a></li>
-									<li><a class="dropdown-item" href="#">파트너 등록하기</a></li>
-									<li><a class="dropdown-item" href="/mypage.kt">마이페이지</a></li>
-									<li><hr class="dropdown-divider"></li>
-									<li><a class="dropdown-item" href="/logout.kt">로그아웃 </a></li>
-								</ul>
-							</div>
-
+						<c:set var="grade" value="${sessionScope.m.memberGrade }"/> <!-- 관리자로 로그인 했을 때, 회원관리 버튼 보이도록 -->
+						<c:choose>
+							<c:when test="${grade eq '0' }"><!-- <!-- 관리자 로그인 -->
+								<ul class="nav col-12 col-lg-auto ms-lg-auto mb-2 justify-content-center mb-md-0 me-lg-5">
+								<li><a href="#" class="nav-link px-2 link-dark">위시리스트</a></li>
+								<li><a href="#" class="nav-link px-2 link-dark">내 여행</a></li>
+								<li><a href="#" class="nav-link px-2 link-dark">문의하기</a></li>
+								<li><a href="#" class="nav-link px-2 link-dark">회원관리</a></li><!-- 관리자만 보이는 버튼 -->
+							</ul>
+								<div class="dropdown">
+									<button class="btn btn-primary dropdown-toggle" type="button"
+										id="dropdownMenuButton2" data-bs-toggle="dropdown"
+										aria-expanded="false">내정보</button>
+									<ul class="dropdown-menu dropdown-menu-dark"
+										aria-labelledby="dropdownMenuButton2">
+										<li><a class="dropdown-item active" href="#">포인트</a></li>
+										<li><a class="dropdown-item" href="#">쿠폰</a></li>
+										<li><a class="dropdown-item" href="#">파트너 등록하기</a></li>
+										<li><a class="dropdown-item" href="/mypage.kt">마이페이지</a></li>
+										<li><hr class="dropdown-divider"></li>
+										<li><a class="dropdown-item" href="/logout.kt">로그아웃 </a></li>
+									</ul>
+								</div>
+							</c:when>
+							<c:otherwise> <!-- 판매자,구매자 로그인 -->
+								<ul class="nav col-12 col-lg-auto ms-lg-auto mb-2 justify-content-center mb-md-0 me-lg-5">
+								<li><a href="#" class="nav-link px-2 link-dark">위시리스트</a></li>
+								<li><a href="#" class="nav-link px-2 link-dark">내 여행</a></li>
+								<li><a href="#" class="nav-link px-2 link-dark">문의하기</a></li>
+							</ul>
+								<div class="dropdown">
+									<button class="btn btn-primary dropdown-toggle" type="button"
+										id="dropdownMenuButton2" data-bs-toggle="dropdown"
+										aria-expanded="false">내정보</button>
+									<ul class="dropdown-menu dropdown-menu-dark"
+										aria-labelledby="dropdownMenuButton2">
+										<li><a class="dropdown-item active" href="#">포인트</a></li>
+										<li><a class="dropdown-item" href="#">쿠폰</a></li>
+										<li><a class="dropdown-item" href="#">파트너 등록하기</a></li>
+										<li><a class="dropdown-item" href="/mypage.kt">마이페이지</a></li>
+										<li><hr class="dropdown-divider"></li>
+										<li><a class="dropdown-item" href="/logout.kt">로그아웃 </a></li>
+									</ul>
+								</div>
+							</c:otherwise>
+						</c:choose>
+						
+						
+							
 					</c:otherwise>
 				</c:choose>
 			</div>
