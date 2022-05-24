@@ -9,19 +9,26 @@
 </head>
 <style>
 .comS{
-	margin : 2%;
+	margin : 0 2%;
 }
 .row{
 	width: 60%;
-	margin : 5% auto;
-	background-color: #333333;
+	text-align: center;
+	margin : 0 auto;
 }
 .table{
 	width: 80% !important;
 	margin: 50px auto;
 }
 .table>th{
-	width:10%''
+	width:10%;
+}
+.com-plus{
+	width: 10%;
+	margin-left: 80%;
+}
+select option[value=""][disabled] {
+	display: none;
 }
 </style>
 <body>
@@ -32,47 +39,62 @@
 	<script>
 	$(function(){
 		$("#datepick").datepicker({
-		    format: 'dd-mm-yyyy',
+		    format: 'yyyy-mm-dd',
 		    autoclose: true
 		});
 	});
+	$.datepicker.setDefaults({
+		  dateFormat: 'yy-mm-dd',
+		  prevText: '이전 달',
+		  nextText: '다음 달',
+		  monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+		  monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+		  dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+		  dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+		  dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+		  showMonthAfterYear: true,
+		  yearSuffix: '년'
+		});
 	</script>
 
 	<h2>동행자 모집</h2>
-	<div class="row">
-		<select class="form-select col comS" id="exampleSelect1">
-	    	<option>서울</option>
-	        <option>부산</option>
-	        <option>대구</option>
-	        <option>인천</option>
-	        <option>광주</option>
-	        <option>대전</option>
-	        <option>울산</option>
-	        <option>세종</option>
-	        <option>경기도</option>
-	        <option>강원도</option>
-	        <option>충청북도</option>
-	        <option>충청남도</option>
-	        <option>전라북도</option>
-	        <option>전라남도</option>
-	        <option>경상북도</option>
-	        <option>경상남도</option>
-	        <option>제주</option>
+	<div class="div-content p-3 mb-5 bg-secondary row">
+		<select class="form-select col comS" id="field">
+			<option value="" disabled selected>지역</option>
+	    	<option value="서울">서울</option>
+	        <option value="부산">부산</option>
+	        <option value="대구">대구</option>
+	        <option value="인천">인천</option>
+	        <option value="광주">광주</option>
+	        <option value="대전">대전</option>
+	        <option value="울산">울산</option>
+	        <option value="세종">세종</option>
+	        <option value="경기도">경기도</option>
+	        <option value="강원도">강원도</option>
+	        <option value="충청북도">충청북도</option>
+	        <option value="충청남도">충청남도</option>
+	        <option value="전라북도">전라북도</option>
+	        <option value="전라남도">전라남도</option>
+	        <option value="경상북도">경상북도</option>
+	        <option value="경상남도">경상남도</option>
+	        <option value="제주">제주</option>
 	     </select>
 		 <input class="col comS" type="text" id="datepick" placeholder="날짜">
-	     <select class="form-select col comS" id="exampleSelect1">
-	     	<option>맛집 탐방</option>
-	     	<option>관광지</option>
-	     	<option>액티비티</option>
+	     <select class="form-select col comS" id="theme">
+	     	<option value="" disabled selected>여행 테마</option>
+	     	<option value="맛집 탐방">맛집 탐방</option>
+	     	<option value="관광지">관광지</option>
+	     	<option value="액티비티">액티비티</option>
 	     </select>	
-	     <select class="form-select col comS" id="exampleSelect1">
-	     	<option>모집 중</option>
-	     	<option>모집 완료</option>
+	     <select class="form-select col comS" id="progress">
+	     	<option value="" disabled selected>모집 현황</option>
+	     	<option value="모집 중">모집 중</option>
+	     	<option value="모집 완료">모집 완료</option>
 	     </select>
-	     <button class="col">검색</button>
+	     <button class="col btn btn-primary comS btn-sm">검색</button>
 	</div>
 	<c:if test="${not empty sessionScope.m }">
-		<button>동행자 모집 +</button>		
+		<a href="/companionWriteFrm.kt" class="btn btn-primary btn-sm com-plus">동행자 모집 +</a>		
 	</c:if>
 	<table class="table table-striped table-hover">
 			<tr>

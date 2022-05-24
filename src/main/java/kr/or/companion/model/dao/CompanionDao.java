@@ -29,4 +29,25 @@ public class CompanionDao {
 		Companion com = sqlSession.selectOne("companion.selectOneCompanion",companionNo);
 		return com;
 	}
+
+	public int insertCompanion(Companion com) {
+		return sqlSession.insert("companion.isnertCompanion", com);
+	}
+
+	public int companionProgress(int companionNo) {
+		return sqlSession.update("companion.progressUpdate",companionNo);
+	}
+
+	public int companionDelete(int companionNo) {
+		return sqlSession.delete("companion.companionDelete",companionNo);
+	}
+
+	public int updateCompanion(Companion com) {
+		int result = sqlSession.update("companion.updateCompanion", com); 
+		System.out.println(result);
+		return result;
+//		System.out.println(com.getCompanionContent());
+//		System.out.println(com.getCompanionField());
+//		System.out.println(com.getTrableDate());
+	}
 }

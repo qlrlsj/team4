@@ -39,9 +39,17 @@ public class MemberController {
 		return "member/joinFrm";
 	}
 	
-	@RequestMapping(value="/join.kt")
+	@RequestMapping(value="/signUp.kt")
 	public String join(Member m) {
+		System.out.println("joinFrm.jsp에서 들어온 정보 : "+m);
+		m.setMemberGrade(2);
+		m.setMemberLevel(2);
 		int result = service.insertMember(m); //insert문은 어차피 결과를 1,0으로 return하기에 int로 변수를 만들어 놓는다.
+		if (result == 0) {
+			System.out.println("회원가입이 실패했습니다.");
+		}else {
+			System.out.println("회원가입에 성공했습니다.");
+		}
 		return "redirect:/";
 	}
 	

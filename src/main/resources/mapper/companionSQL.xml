@@ -8,7 +8,9 @@ select * from
 				companion_no as companionNo,
                 member_id as memberId,
 				companion_title as companionTitle,
+                companion_content as companionContent,
                 companion_field as companionField,
+                trable_date as trableDate,
                 companion_theme as companionTheme,
                 TO_CHAR(companion_date, 'YYYY/MM/DD')as companionDate,
                 companion_progress as companionProgress
@@ -33,4 +35,22 @@ where rnum between #{start} and #{end}
   from companion
   where companion_no = #{companionNo}
   </select>
+  <insert id="isnertCompanion" parameterType="co">
+  		insert into companion values(companion_seq.nextval, #{memberNo}, #{memberId}, #{companionTitle}, #{companionContent}, #{companionField}, #{trableDate}, #{companionTheme}, '모집 중',sysdate, companion_seq.currval)
+  </insert>
+  <update id="progressUpdate" parameterType="int">
+  		update companion set companion_progress = '모집 완료' where companion_no = #{companionNo}
+  </update>
+  <delete id="companionDelete" parameterType="int">
+  		delete from companion where companion_no = #{companionNo}
+  </delete>
+  <update id="updateCompanion" parameterType="co">
+  		update companion set 
+  			companion_title = #{companionTitle},
+  			companion_field = #{companionField},
+  			trable_date = #{trableDate},
+  			companion_theme = #{companionTheme},
+  			companion_content = #{companionContent}
+  		where companion_no = #{companionNo}
+  </update>
 </mapper>
