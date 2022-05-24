@@ -60,6 +60,18 @@ select option[value=""][disabled] {
 		  showMonthAfterYear: true,
 		  yearSuffix: '년'
 		});
+	function search(reqPage){
+		const companionField = $('#field').val();
+		const travleStart = $('#datepick').val();
+		const companionTheme = $('#theme').val();
+		const companionProgress = $('#progress').val();
+		console.log(reqPage);
+		console.log(companionField);
+		console.log(travleStart);
+		console.log(companionTheme);
+		console.log(companionProgress);
+		location.href= "/companionSearch.kt?companionField="+companionField+"&companionTheme="+companionTheme+"&companionProgress="+companionProgress+"&travleStart="+travleStart+"&reqPage="+reqPage;		
+	}
 	</script>
 
 	<h2>동행자 모집</h2>
@@ -123,20 +135,6 @@ select option[value=""][disabled] {
 				<th colspan="7">${pageNavi }</th>
 			</tr>
 	</table>
-	<script>
-	function search(reqPage){
-		const companionField = $('#field').val();
-		const travleStart = $('#datepick').val();
-		const companionTheme = $('#theme').val();
-		const companionProgress = $('#progress').val();
-		console.log(reqPage);
-		console.log(companionField);
-		console.log(travleStart);
-		console.log(companionTheme);
-		console.log(companionProgress);
-		location.href= "/companionSearch.kt?companionField="+companionField+"&companionTheme="+companionTheme+"&companionProgress="+companionProgress+"&travleStart="+travleStart+"&reqPage="+reqPage;		
-	}
-	</script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>

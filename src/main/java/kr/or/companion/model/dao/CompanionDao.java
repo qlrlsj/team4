@@ -53,7 +53,7 @@ public class CompanionDao {
 	}
 
 	public int selectNewCompanionCount(Companion com) {
-		int totalCount = sqlSession.selectOne("companion.selectNewTotalCount");
+		int totalCount = sqlSession.selectOne("companion.selectNewTotalCount",com);
 		return totalCount;
 	}
 }

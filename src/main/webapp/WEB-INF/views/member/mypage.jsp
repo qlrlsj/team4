@@ -24,7 +24,7 @@
 		<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 			<div class="div-content">
 				<div class="content-title">마이페이지</div>
-					<form action="updateMember.kt" method="post">
+					<form action="/updateMember.kt" method="post">
 						<div class="mb-3">
 							<label for="formGroupExampleInput" class="form-label">회원번호</label> <input type="text" name="memberNo" class="form-control"
 								id="formGroupExampleInput" value="${sessionScope.m.memberNo }">
@@ -44,16 +44,19 @@
 						<div class="mb-3">
 								<c:choose>
 									<c:when test="${sessionScope.m.memberGrade eq '0'}">
-										<label for="formGroupExampleInput" class="form-label">회원등급</label> <input type="text" name="memberGrade" class="form-control"
+										<label for="formGroupExampleInput" class="form-label">회원등급</label> <input type="text" class="form-control"
 											id="formGroupExampleInput" placeholder="Example input placeholder" value="관리자">
+											<input type="hidden" name="memberGrade" value="0">
 									</c:when>
 									<c:when test="${sessionScope.m.memberGrade eq '1'}">
-										<label for="formGroupExampleInput" class="form-label">회원등급</label> <input type="text" name="memberGrade" class="form-control"
-											id="formGroupExampleInput" placeholder="Example input placeholder" value="판매자">
+										<label for="formGroupExampleInput" class="form-label">회원등급</label> <input type="text" class="form-control"
+											id="formGroupExampleInput" placeholder="Example input placeholder" value="판매자"> 
+											<input type="hidden" name="memberGrade"value="1">
 									</c:when>
 									<c:when test="${sessionScope.m.memberGrade eq '2'}">
-										<label for="formGroupExampleInput" class="form-label">회원등급</label> <input type="text" name="memberGrade" class="form-control"
+										<label for="formGroupExampleInput" class="form-label">회원등급</label> <input type="text" class="form-control"
 											id="formGroupExampleInput" placeholder="Example input placeholder" value="구매자">
+											<input type="hidden" name="memberGrade"value="2">
 									</c:when>
 								</c:choose>
 							</div>

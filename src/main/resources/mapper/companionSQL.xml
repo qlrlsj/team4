@@ -91,7 +91,7 @@
   </select>
     <select id="selectNewTotalCount" parameterType="co" resultType="int">
   	select count(*) from companion
-  	<!-- trim -->
+			<!-- trim -->
 			<trim prefix="where" prefixOverrides="and">
 				<if test="companionField != null &amp;&amp; !companionField.equals('')">
 					companion_field = #{companionField}
