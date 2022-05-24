@@ -56,6 +56,8 @@ public class AirController {
 								.ignoreContentType(true)		//리턴하는 데이터 타입은 상관없음
 								.execute()						//실행
 								.body();
+			
+			
 			System.out.println(result);
 			JsonElement element = parser.parse(result);
 			JsonArray data = element.getAsJsonObject().get("data").getAsJsonArray();
