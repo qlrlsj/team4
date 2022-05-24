@@ -54,6 +54,10 @@
 		<input class="col-md-4" type="text" id="sample6_extraAddress" placeholder="참고항목">
 		<pre class="chk" id="localChk2" >   </pre>
 		
+		
+		
+		
+		
 		<button type="button" id="insertBtn">제출</button>
 	</form>
 
