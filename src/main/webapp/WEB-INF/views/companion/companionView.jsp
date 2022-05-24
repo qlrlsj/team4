@@ -21,7 +21,7 @@
 			<th>지역</th><th>여행일</th><th>여행 테마</th><th>모집 여부</th>
 		</tr>
 		<tr>
-			<td>${com.companionField }</td><td>${com.trableDate }</td><td>${com.companionTheme }</td><td id="progress">${com.companionProgress }</td>
+			<td>${com.companionField }</td><td>${com.travleStart } ~ ${com.travleEnd }</td><td>${com.companionTheme }</td><td id="progress">${com.companionProgress }</td>
 		</tr>
 		<tr>
 			<td colspan="4"><c:out value="${com.companionContent}" escapeXml="false"/></td>

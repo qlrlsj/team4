@@ -81,4 +81,18 @@ public class CompanionController {
 			return "redirect:/companionMain.kt?reqPage=1";	
 		}
 	}
+	@RequestMapping(value="companionSearch.kt", produces = "application/json;charset=utf-8")
+	public String companionSearch(int reqPage, Companion com,  Model model) {
+		System.out.println(com.getCompanionField());
+		System.out.println(com.getTravleStart());
+		System.out.println(com.getCompanionTheme());
+		System.out.println(com.getCompanionProgress());
+		System.out.println(reqPage);
+		CompanionPageData cpd = service.selectNewCompanion(reqPage,com);
+		model.addAttribute("list", cpd.getList());
+		model.addAttribute("pageNavi", cpd.getPageNavi());
+		model.addAttribute("reqPage", reqPage);
+		model.addAttribute("com",com);
+		return "companion/companionMain";
+	}
 }

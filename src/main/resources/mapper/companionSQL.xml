@@ -2,20 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="companion">
   <select id="selectCompanionList" parameterType="map" resultType="co">
-select * from
-	(select rownum as rnum, c.* from
-	(select 
-				companion_no as companionNo,
-                member_id as memberId,
-				companion_title as companionTitle,
-                companion_content as companionContent,
-                companion_field as companionField,
-                trable_date as trableDate,
-                companion_theme as companionTheme,
-                TO_CHAR(companion_date, 'YYYY/MM/DD')as companionDate,
-                companion_progress as companionProgress
-	from companion order by companion_no desc)c)
-where rnum between #{start} and #{end}
+		select * from
+			(select rownum as rnum, c.* from
+			(select 
+						companion_no as companionNo,
+		                member_id as memberId,
+						companion_title as companionTitle,
+		                companion_content as companionContent,
+		                companion_field as companionField,
+		                companion_theme as companionTheme,
+		                TO_CHAR(companion_date, 'YYYY/MM/DD')as companionDate,
+		                companion_progress as companionProgress,
+		                travle_start as travleStart,
+                		travle_end as travleEnd
+			from companion order by companion_no desc)c)
+		where rnum between #{start} and #{end}
   </select>
   <select id="selectTotalCount" resultType="int">
   	select count(*) from companion
@@ -27,16 +28,17 @@ where rnum between #{start} and #{end}
 				companion_title as companionTitle,
 				companion_content as companionContent,
                 companion_field as companionField,
-                trable_date as trableDate,
                 companion_theme as companionTheme,
                 companion_progress as companionProgress,
                 TO_CHAR(companion_date, 'YYYY/MM/DD')as companionDate,
-                companion_img as companionImg
+                companion_img as companionImg,
+                TO_CHAR( travle_start, 'YYYY/MM/DD')as travleStart,
+                TO_CHAR(travle_end, 'YYYY/MM/DD')as travleEnd
   from companion
   where companion_no = #{companionNo}
   </select>
   <insert id="isnertCompanion" parameterType="co">
-  		insert into companion values(companion_seq.nextval, #{memberNo}, #{memberId}, #{companionTitle}, #{companionContent}, #{companionField}, #{trableDate}, #{companionTheme}, '모집 중',sysdate, companion_seq.currval)
+  		insert into companion values(companion_seq.nextval, #{memberNo}, #{memberId}, #{companionTitle}, #{companionContent}, #{companionField}, #{companionTheme}, '모집 중',sysdate, companion_seq.currval , TO_DATE(#{travleStart},'yyyy-mm-dd'), TO_DATE(#{travleEnd},'yyyy-mm-dd'))
   </insert>
   <update id="progressUpdate" parameterType="int">
   		update companion set companion_progress = '모집 완료' where companion_no = #{companionNo}
@@ -48,9 +50,61 @@ where rnum between #{start} and #{end}
   		update companion set 
   			companion_title = #{companionTitle},
   			companion_field = #{companionField},
-  			trable_date = #{trableDate},
   			companion_theme = #{companionTheme},
-  			companion_content = #{companionContent}
+  			companion_content = #{companionContent},
+  			travle_start = TO_DATE(#{travleStart},'yyyy-mm-dd'),
+  			travle_end = TO_DATE(#{travleEnd},'yyyy-mm-dd')
   		where companion_no = #{companionNo}
   </update>
+    <select id="selectNewCompanionList" parameterType="map" resultType="co">
+		select * from
+			(select rownum as rnum, c.* from
+			(select 
+						companion_no as companionNo,
+		                member_id as memberId,
+						companion_title as companionTitle,
+		                companion_content as companionContent,
+		                companion_field as companionField,
+		                companion_theme as companionTheme,
+		                TO_CHAR(companion_date, 'YYYY/MM/DD')as companionDate,
+		                companion_progress as companionProgress,
+		                travle_start as travleStart,
+               			travle_end as travleEnd
+			from companion
+			<!-- trim -->
+			<trim prefix="where" prefixOverrides="and">
+				<if test="companionField != null &amp;&amp; !companionField.equals('')">
+					companion_field = #{companionField}
+				</if>
+				<if test="companionTheme != null &amp;&amp; !companionTheme.equals('')">
+					and companion_theme = #{companionTheme}
+				</if>
+				<if test="companionProgress != null &amp;&amp; !companionProgress.equals('')">
+					and companion_progress = #{companionProgress}
+				</if>
+				<if test="travleStart != null &amp;&amp; !travleStart.equals('')">
+					and ( to_date(#{travleStart}) between travle_start and travle_end)
+				</if>
+			</trim>
+			order by companion_no desc)c)
+		where rnum between #{start} and #{end}
+  </select>
+    <select id="selectNewTotalCount" parameterType="co" resultType="int">
+  	select count(*) from companion
+  	<!-- trim -->
+			<trim prefix="where" prefixOverrides="and">
+				<if test="companionField != null &amp;&amp; !companionField.equals('')">
+					companion_field = #{companionField}
+				</if>
+				<if test="companionTheme != null &amp;&amp; !companionTheme.equals('')">
+					and companion_theme = #{companionTheme}
+				</if>
+				<if test="companionProgress != null &amp;&amp; !companionProgress.equals('')">
+					and companion_progress = #{companionProgress}
+				</if>
+				<if test="travleStart != null &amp;&amp; !travleStart.equals('')">
+					and ( to_date(#{travleStart}) between travle_start and travle_end)
+				</if>
+			</trim>
+  </select>
 </mapper>
