@@ -44,12 +44,12 @@
 				 <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" onclick="howtoway(1)" checked>
 				 <label class="btn btn-outline-success" for="btnradio2">왕복</label>
 			</div>
-			<form>
+			<form action="/airSearch.kt" method="get">
 				<fieldset>
 					<div class="row selectmenu">
 						<!--출발지선택 -->
 						<div class="col">
-							<input type="text" class="form-control airStart" placeholder="출발지선택" data-bs-toggle="modal" data-bs-target="#selectStartModal" disabled>						
+							<input type="text" name="airStart" class="form-control airStart" placeholder="출발지선택" data-bs-toggle="modal" data-bs-target="#selectStartModal" readonly>						
 						</div>
 						<div class="modal fade" id="selectStartModal" tabindex="-1" aria-labelledby="airStartLabel" aria-hidden="true">
 							<div class="modal-dialog">
@@ -90,7 +90,7 @@
 						</div>
 						<!--도착지선택 -->
 						<div class="col">
-							<input type="text" class="form-control airEnd" placeholder="도착지선택" data-bs-toggle="modal" data-bs-target="#selectEndModal" disabled>						
+							<input type="text" name="airArrive" class="form-control airEnd" placeholder="도착지선택" data-bs-toggle="modal" data-bs-target="#selectEndModal" readonly>						
 						</div>
 						<div class="modal fade" id="selectEndModal" tabindex="-1" aria-labelledby="airEndLabel" aria-hidden="true">
 							<div class="modal-dialog">
@@ -131,15 +131,15 @@
 						</div>
 						<!--가는날짜선택 -->
 						<div class="col">
-							<input type="text" class="datepicker form-control goDate" placeholder="가는 날 선택">
+							<input type="text" name="airStartDate" class="datepicker form-control goDate" placeholder="가는 날 선택" readonly>
 						</div>
 						<!--오는날짜선택 -->
 						<div class="col comback">
-							<input type="text" class="datepicker form-control comDate" placeholder="오는 날 선택">						
+							<input type="text" name="airEndDate" class="datepicker form-control comDate" placeholder="오는 날 선택" readonly>						
 						</div>
 						<!--인원수선택 -->
 						<div class="col">
-							<input type="text" class="form-control" placeholder="인원수">						
+							<input type="number" name="airAmount" class="form-control amount" placeholder="인원수" min=1 max="8">						
 						</div>
 						<div class="col">
 							<button type="submit" class="btn btn-primary" style="float:right">
@@ -232,6 +232,13 @@
 		 $(".comDate").change(function(){
 			 call();
 		 })
+		 $(".amount").change(function(){
+			 if($(this).val()>8||$(this).val()<1){
+				 alert("잘못된 입력입니다.");
+				 $(this).val(1);
+			 }
+		 })
+		  
 // 		function searchStartPlace(){
 // 			$.ajax({
 // 				url:"/allAirSchedule.kt",
