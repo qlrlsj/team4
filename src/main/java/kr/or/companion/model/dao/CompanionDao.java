@@ -44,10 +44,16 @@ public class CompanionDao {
 
 	public int updateCompanion(Companion com) {
 		int result = sqlSession.update("companion.updateCompanion", com); 
-		System.out.println(result);
 		return result;
-//		System.out.println(com.getCompanionContent());
-//		System.out.println(com.getCompanionField());
-//		System.out.println(com.getTrableDate());
+	}
+
+	public ArrayList<Companion> selectNewCompanionList(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("companion.selectNewCompanionList",map);
+		return (ArrayList<Companion>)list;
+	}
+
+	public int selectNewCompanionCount(Companion com) {
+		int totalCount = sqlSession.selectOne("companion.selectNewTotalCount",com);
+		return totalCount;
 	}
 }

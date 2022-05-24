@@ -61,6 +61,8 @@ select option[value=""][disabled] {
 	     
 	     $('[name=companionField]').val('${com.companionField}');
 	     $('[name=companionTheme]').val('${com.companionTheme}');
+	     $('[name=travleStart]').val('${com.travleStart}');
+	     $('[name=travleEnd]').val('${com.travleEnd}');
    	});
 	</script>
 	<h2>동행자 모집 글 수정</h2>
@@ -94,10 +96,11 @@ select option[value=""][disabled] {
 		        <option value="경상남도">경상남도</option>
 		        <option value="제주">제주</option>
 		     </select>
-		     <c:forTokens var="date" items="${com.trableDate }" delims=" ~ " varStatus="i">
-				 <input class="col comS" type="text" value="${date }"  id="datepicker${i.count }">
-		     </c:forTokens>
-			 <input type="hidden" name="trableDate" value="">
+<%-- 		     <c:forTokens var="date" items="${com.trableDate }" delims=" ~ " varStatus="i"> --%>
+<%-- 				 <input class="col comS" type="text" value="${date }"  id="datepicker${i.count }"> --%>
+<%-- 		     </c:forTokens> --%>
+			 <input class="col comS" type="text" name="travleStart"  id="datepicker1" placeholder="여행 시작일">
+			 <input class="col comS" type="text" name="travleEnd"  id="datepicker2" placeholder="여행 종료일">
 		     <select class="form-select col comS" name="companionTheme">
 		     	<option value="" disabled selected>여행테마</option>
 		     	<option value="선택 안함">선택 안함</option>
@@ -107,15 +110,6 @@ select option[value=""][disabled] {
 		     </select>
 	     </div>	
  	 <textarea id="summernote" name="companionContent"><c:out value="${com.companionContent}" escapeXml="false"/></textarea>
- 	 <button type="submit" id="comSubmit" onclick="dateSum();">수정</button>
-	</form>
-	<script>
-	function dateSum(){
-		const dateStart = $('#datepicker1').val();
-		const dateEnd = $('#datepicker2').val();
-		const trableDate = dateStart +" ~ "+ dateEnd;
-		$('[name=trableDate]').val(trableDate);
-	}
-	</script>
+ 	 <button type="submit" id="comSubmit">수정</button>
 </body>
 </html>

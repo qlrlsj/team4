@@ -90,9 +90,8 @@ select option[value=""][disabled] {
 		        <option value="경상남도">경상남도</option>
 		        <option value="제주">제주</option>
 		     </select>
-			 <input class="col comS" type="text"  id="datepicker1" placeholder="여행 시작일">
-			 <input class="col comS" type="text"  id="datepicker2" placeholder="여행 종료일">
-			 <input type="hidden" name="trableDate" value="">
+			 <input class="col comS" type="text" name="travleStart"  id="datepicker1" placeholder="여행 시작일">
+			 <input class="col comS" type="text" name="travleEnd"  id="datepicker2" placeholder="여행 종료일">
 		     <select class="form-select col comS" name="companionTheme">
 		     	<option value="" disabled selected>여행테마</option>
 		     	<option value="선택 안함">선택 안함</option>
@@ -102,15 +101,15 @@ select option[value=""][disabled] {
 		     </select>
 	     </div>	
  	 <textarea id="summernote" name="companionContent"></textarea>
- 	 <button type="submit" id="comSubmit" onclick="dateSum();">작성</button>
+ 	 <button type="submit" id="comSubmit">작성</button>
 	</form>
 	<script>
-	function dateSum(){
-		const dateStart = $('#datepicker1').val();
-		const dateEnd = $('#datepicker2').val();
-		const trableDate = dateStart +" ~ "+ dateEnd;
-		$('[name=trableDate]').val(trableDate);
-	}
+// 	function dateSum(){
+// 		const dateStart = $('#datepicker1').val();
+// 		const dateEnd = $('#datepicker2').val();
+// 		const trableDate = dateStart +" ~ "+ dateEnd;
+// 		$('[name=trableDate]').val(trableDate);
+// 	}
 	</script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>

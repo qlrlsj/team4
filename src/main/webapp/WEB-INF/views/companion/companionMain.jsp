@@ -42,6 +42,11 @@ select option[value=""][disabled] {
 		    format: 'yyyy-mm-dd',
 		    autoclose: true
 		});
+		console.log('${com.companionField}');
+	    $('[name=companionField]').val('${com.companionField}');
+	    $('[name=companionTheme]').val('${com.companionTheme}');
+	    $('[name=companionProgress]').val('${com.companionProgress}');
+	    $('[name=travleStart]').val('${com.travleStart}');
 	});
 	$.datepicker.setDefaults({
 		  dateFormat: 'yy-mm-dd',
@@ -55,11 +60,24 @@ select option[value=""][disabled] {
 		  showMonthAfterYear: true,
 		  yearSuffix: '년'
 		});
+	function search(reqPage){
+		const companionField = $('#field').val();
+		const travleStart = $('#datepick').val();
+		const companionTheme = $('#theme').val();
+		const companionProgress = $('#progress').val();
+		console.log(reqPage);
+		console.log(companionField);
+		console.log(travleStart);
+		console.log(companionTheme);
+		console.log(companionProgress);
+		location.href= "/companionSearch.kt?companionField="+companionField+"&companionTheme="+companionTheme+"&companionProgress="+companionProgress+"&travleStart="+travleStart+"&reqPage="+reqPage;		
+	}
 	</script>
 
 	<h2>동행자 모집</h2>
 	<div class="div-content p-3 mb-5 bg-secondary row">
-		<select class="form-select col comS" id="field">
+		<!-- 지역 검색 -->
+		<select class="form-select col comS" name="companionField" id="field">
 			<option value="" disabled selected>지역</option>
 	    	<option value="서울">서울</option>
 	        <option value="부산">부산</option>
@@ -79,19 +97,22 @@ select option[value=""][disabled] {
 	        <option value="경상남도">경상남도</option>
 	        <option value="제주">제주</option>
 	     </select>
-		 <input class="col comS" type="text" id="datepick" placeholder="날짜">
-	     <select class="form-select col comS" id="theme">
+	     <!-- 여행 날짜 검색 -->
+		 <input class="col comS" type="text" id="datepick" name="travleStart" placeholder="여행 날짜">
+		 <!-- 여행 테마 검색 -->
+	     <select class="form-select col comS" name="companionTheme" id="theme">
 	     	<option value="" disabled selected>여행 테마</option>
 	     	<option value="맛집 탐방">맛집 탐방</option>
 	     	<option value="관광지">관광지</option>
 	     	<option value="액티비티">액티비티</option>
-	     </select>	
-	     <select class="form-select col comS" id="progress">
-	     	<option value="" disabled selected>모집 현황</option>
+	     </select>
+	     <!-- 모집 현황 검색 -->	
+	     <select class="form-select col comS" name="companionProgress" id="progress">
+	     	<option value="" disabled selected>모집 여부</option>
 	     	<option value="모집 중">모집 중</option>
 	     	<option value="모집 완료">모집 완료</option>
 	     </select>
-	     <button class="col btn btn-primary comS btn-sm">검색</button>
+	     <button onclick="search(1);" class="col btn btn-primary comS btn-sm">검색</button>
 	</div>
 	<c:if test="${not empty sessionScope.m }">
 		<a href="/companionWriteFrm.kt" class="btn btn-primary btn-sm com-plus">동행자 모집 +</a>		

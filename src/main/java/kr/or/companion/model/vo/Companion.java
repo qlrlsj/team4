@@ -16,9 +16,10 @@ public class Companion {
 	private String companionTitle;
 	private String companionContent;
 	private String companionField;
-	private String trableDate;
 	private String companionTheme;
 	private String companionProgress;
 	private String companionDate;
 	private String companionImg;
+	private String travleStart;
+	private String travleEnd;
 }
