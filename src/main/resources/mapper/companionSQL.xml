@@ -74,16 +74,16 @@
 			from companion
 			<!-- trim -->
 			<trim prefix="where" prefixOverrides="and">
-				<if test="companionField != null &amp;&amp; !companionField.equals('')">
+				<if test="companionField != null and !companionField.equals('')">
 					companion_field = #{companionField}
 				</if>
-				<if test="companionTheme != null &amp;&amp; !companionTheme.equals('')">
+				<if test="companionTheme != null and !companionTheme.equals('')">
 					and companion_theme = #{companionTheme}
 				</if>
-				<if test="companionProgress != null &amp;&amp; !companionProgress.equals('')">
+				<if test="companionProgress != null and !companionProgress.equals('')">
 					and companion_progress = #{companionProgress}
 				</if>
-				<if test="travleStart != null &amp;&amp; !travleStart.equals('')">
+				<if test="travleStart != null and !travleStart.equals('')">
 					and ( to_date(#{travleStart}) between travle_start and travle_end)
 				</if>
 			</trim>

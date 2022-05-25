@@ -98,6 +98,8 @@ public class CompanionService {
 		map.put("companionProgress",com.getCompanionProgress());
 		map.put("companionTheme",com.getCompanionTheme());
 		map.put("travleStart",com.getTravleStart());
+		System.out.println(map.get("companionField"));
+		System.out.println(map.get("companionTheme"));
 		ArrayList<Companion> list = dao.selectNewCompanionList(map);	
 		//전체 게시물 수
 		int totalCount = dao.selectNewCompanionCount(com);
@@ -124,37 +126,16 @@ public class CompanionService {
 		}
 		//pageNavi 생성 시작
 		String pageNavi = "";
-//		//이전버튼
-//		if(pageNo != 1) {
-//			pageNavi += "<a href='#' onclick='search("+(reqPage-1)+");'>[이전]</a>";
-//		}
-//		//페이지 숫자 생성
-//		for(int i=0;i<pageNaviSize;i++) {
-//			if(pageNo == reqPage) {
-//				pageNavi +="<span>"+pageNo+"</span>";
-//			}else {
-//				pageNavi += "<a href='#' onclick='search("+pageNo+");'>"+pageNo+"</a>";
-//			}
-//			pageNo++;
-//			if(pageNo>totalPage) {
-//				break;
-//			}
-//		}
-//		//다음버튼
-//		if(pageNo<=totalPage) {
-//			pageNavi += "<a href='#' onclick='search("+(reqPage+1)+");'>[다음]</a>";
-//		}
+		//이전버튼
 		if(pageNo != 1) {
-//			pageNavi += "<a href='/companionSearch.kt?reqPage="+(reqPage-1)+"&com="+com+"'>[이전]</a>";
-			pageNavi += "<a href='/companionSearch.kt?reqPage="+(reqPage-1)+"&companionField="+com.getCompanionField()+"&companionProgress="+com.getCompanionProgress()+"&companionTheme="+com.getCompanionTheme()+"&travleStart="+com.getTravleStart()+"'>[이전]</a>";
+			pageNavi += "<a href='#' onclick='comSearch("+(reqPage-1)+");'>[이전]</a>";
 		}
 		//페이지 숫자 생성
 		for(int i=0;i<pageNaviSize;i++) {
 			if(pageNo == reqPage) {
 				pageNavi +="<span>"+pageNo+"</span>";
 			}else {
-//				pageNavi += "<a href='/companionSearch.kt?reqPage="+pageNo+"&com="+com+"'>"+pageNo+"</a>";
-				pageNavi += "<a href='/companionSearch.kt?reqPage="+pageNo+"&companionField="+com.getCompanionField()+"&companionProgress="+com.getCompanionProgress()+"&companionTheme="+com.getCompanionTheme()+"&travleStart="+com.getTravleStart()+"'>"+pageNo+"</a>";
+				pageNavi += "<a href='#' onclick='comSearch("+pageNo+");'>"+pageNo+"</a>";
 			}
 			pageNo++;
 			if(pageNo>totalPage) {
@@ -163,9 +144,30 @@ public class CompanionService {
 		}
 		//다음버튼
 		if(pageNo<=totalPage) {
-//			pageNavi += "<a href='/companionSearch.kt?reqPage="+(reqPage+1)+"&com="+com+"'>[다음]</a>";
-			pageNavi += "<a href='/companionSearch.kt?reqPage="+(reqPage+1)+"&companionField="+com.getCompanionField()+"&companionProgress="+com.getCompanionProgress()+"&companionTheme="+com.getCompanionTheme()+"&travleStart="+com.getTravleStart()+"'>[다음]</a>";
+			pageNavi += "<a href='#' onclick='comSearch("+(reqPage+1)+");'>[다음]</a>";
 		}
+//		if(pageNo != 1) {
+////			pageNavi += "<a href='/companionSearch.kt?reqPage="+(reqPage-1)+"&com="+com+"'>[이전]</a>";
+//			pageNavi += "<a href='/companionSearch.kt?reqPage="+(reqPage-1)+"&companionField="+com.getCompanionField()+"&companionProgress="+com.getCompanionProgress()+"&companionTheme="+com.getCompanionTheme()+"&travleStart="+com.getTravleStart()+"'>[이전]</a>";
+//		}
+//		//페이지 숫자 생성
+//		for(int i=0;i<pageNaviSize;i++) {
+//			if(pageNo == reqPage) {
+//				pageNavi +="<span>"+pageNo+"</span>";
+//			}else {
+////				pageNavi += "<a href='/companionSearch.kt?reqPage="+pageNo+"&com="+com+"'>"+pageNo+"</a>";
+//				pageNavi += "<a href='/companionSearch.kt?reqPage="+pageNo+"&companionField="+com.getCompanionField()+"&companionProgress="+com.getCompanionProgress()+"&companionTheme="+com.getCompanionTheme()+"&travleStart="+com.getTravleStart()+"'>"+pageNo+"</a>";
+//			}
+//			pageNo++;
+//			if(pageNo>totalPage) {
+//				break;
+//			}
+//		}
+//		//다음버튼
+//		if(pageNo<=totalPage) {
+////			pageNavi += "<a href='/companionSearch.kt?reqPage="+(reqPage+1)+"&com="+com+"'>[다음]</a>";
+//			pageNavi += "<a href='/companionSearch.kt?reqPage="+(reqPage+1)+"&companionField="+com.getCompanionField()+"&companionProgress="+com.getCompanionProgress()+"&companionTheme="+com.getCompanionTheme()+"&travleStart="+com.getTravleStart()+"'>[다음]</a>";
+//		}
 		CompanionPageData cpd = new CompanionPageData(list, pageNavi);
 		return cpd;
 	}
