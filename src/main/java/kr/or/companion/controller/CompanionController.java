@@ -83,6 +83,10 @@ public class CompanionController {
 	}
 	@RequestMapping(value="companionSearch.kt", produces = "application/json;charset=utf-8")
 	public String companionSearch(int reqPage, Companion com,  Model model) {
+		System.out.println(reqPage);
+		System.out.println(com.getCompanionField());
+		System.out.println(com.getCompanionTheme());
+		System.out.println(com);
 		CompanionPageData cpd = service.selectNewCompanion(reqPage,com);
 		model.addAttribute("list", cpd.getList());
 		model.addAttribute("pageNavi", cpd.getPageNavi());

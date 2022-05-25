@@ -24,7 +24,22 @@
 		and member_pw=#{memberPw} 
 		</if>
 	</select>
-
+		<select id="selectOneMember1" parameterType="m" resultType="m"> <!-- 위와 동일하나, mybatis-config.xml에서 별칭을 지정했다 m으로 사용하기로 -->
+		select
+			member_no as memberNo, <!-- 쿼리를 이렇게 치는 이유 실제 테이블 컬럼명과 VO 변수명을 동일하게 맞춰주면 Mybatis에서는 자동으로 Member 객체로 묶어준다 -->
+			member_id as memberId,
+			member_pw as memberPw,
+			member_name as memberName,
+			member_level as memberLevel,
+			member_grade as memberGrade,
+			member_phone as memberPhone,
+			member_email as memberEmail,
+			enroll_date as enrollDate,
+			member_point as memberPoint,
+			member_intro as memberIntro
+		from member where member_id=#{memberId} <!-- #을쓰고 {}를 사용하면 파라미터를 사용하겠다는걸로 Mybatis가 인지한다 -->
+	</select>
+	
 	<insert id="insertMember" parameterType="m"><!-- insert,updqte,delete의 경우 어차피 정수(int)가 나가기 때문에 resultType이 필요가 없다 -->
 		insert into member values(member_seq.nextval,#{memberId},#{memberPw},#{memberName},#{memberLevel},#{memberGrade},#{memberPhone},#{memberEmail},sysdate,#{memberPoint},#{memberIntro})
 	</insert>

@@ -6,11 +6,12 @@ import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import kr.or.companion.model.vo.Companion;
 
-@Service
+@Repository
 public class CompanionDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;

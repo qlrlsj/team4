@@ -14,5 +14,5 @@ public class AirSchedule {
 	private String airEndTime;		//도착시간
 	private String airStart;		//출발지
 	private String airArrive;		//도착지
-	private String airDate;			//날짜
+	private String airDate;			//예약날짜 
 }

@@ -16,10 +16,6 @@
 	text-align: center;
 	margin : 0 auto;
 }
-.table{
-	width: 80% !important;
-	margin: 50px auto;
-}
 .table>th{
 	width:10%;
 }
@@ -33,7 +29,7 @@ select option[value=""][disabled] {
 </style>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
-	<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />
+<!-- 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" /> -->
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 	<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 	<script>
@@ -60,7 +56,7 @@ select option[value=""][disabled] {
 		  showMonthAfterYear: true,
 		  yearSuffix: '년'
 		});
-	function search(reqPage){
+	function comSearch(reqPage){
 		const companionField = $('#field').val();
 		const travleStart = $('#datepick').val();
 		const companionTheme = $('#theme').val();
@@ -112,7 +108,7 @@ select option[value=""][disabled] {
 	     	<option value="모집 중">모집 중</option>
 	     	<option value="모집 완료">모집 완료</option>
 	     </select>
-	     <button onclick="search(1);" class="col btn btn-primary comS btn-sm">검색</button>
+	     <button onclick="comSearch(1);" class="col btn btn-primary comS btn-sm">검색</button>
 	</div>
 	<c:if test="${not empty sessionScope.m }">
 		<a href="/companionWriteFrm.kt" class="btn btn-primary btn-sm com-plus">동행자 모집 +</a>		
