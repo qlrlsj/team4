@@ -28,8 +28,13 @@ public String hostelMain() {
 
 @RequestMapping(value = "/insertHostelForm.kt")
 public String insertHostelForm() {
-	
+
 	return "hostel/insertHostelForm";
+}
+@RequestMapping(value = "/insertHostelForm1.kt")
+public String insertHostelForm1() {
+
+	return "hostel/hostelInsert1";
 }
 
 }
