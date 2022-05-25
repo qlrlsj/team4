@@ -72,14 +72,12 @@ public class MemberController {
 		return "redirect:/mypage.kt";
 	}
 	
-//	@RequestMapping(value="updateMember.kh")
-//	public String updateMember(Member m, HttpSession session) { //회원정보 받아올 멤버, 정상변경후 세션에 적용해야하니 세션도 넣어놓는다
-//		int result = service.memberUpdate(m);
-//		if(result>0) {
-//			session.setAttribute("m", m);
-//		}
-//		return "redirect:/mypage.kh";
-//	}
+	@RequestMapping(value="/allMember.kt")
+	public String allMember(Model model) {
+		ArrayList<Member> list = service.selectAllMember();
+		model.addAttribute("list",list);
+		return "member/allMember";
+	}
 }
 
 
