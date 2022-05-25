@@ -127,27 +127,39 @@
         }
     });
 	
+	
 	$("#signUpBtn").on("click",function(){
 		chkArr = [false, false, false, false, false];
 		let count = 0;
 		
-		
 // 		const categoryBox1Val = $("#category1 option:selected").val();
 		
-		const memberID = $("#memberId").val();
+		const memberId = $("#memberId").val();
 		const memberPw = $("#memberPw").val();
 		const memberName = $("memberName").val();
 		const memberPhone = $("#memberPhone").val();
 		const memberEmail = $("#memberEmail").val();
 		
 		//아이디 유효성 검사
-		if(memberId==''){
+		if(memberId==""){
 			$("#memberIdChk").text("아이디를 입력하세요.");
 			$("#memberIdChk").css("color","red");
 			chkArr[0]=false;
 		}else{
-			
+			$("#idChk").text("");
+			chkArr[0]=true;
 		};
+		
+// 	    for(let i = 0;i<chkArr.length;i++){
+// 	        if(chkArr[i]){
+// 	            count++;
+// 	        }
+// 	    }
+// 	      if(count != 1){
+// 	          alert("정보를 확인하세요");
+// 	      }else{
+// 	        $("#insertBtn").prop("type","submit");
+// 	      }
 	});
 	
 // 	//비밀번호 확인 유효성 검사
