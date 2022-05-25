@@ -6,62 +6,76 @@
 <head>
 <meta charset="UTF-8">
 <title>:: 상품등록 ::</title>
+<!-- 다음 우편번호 api -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
 </head>
 <style>
 	.chk{
 		font-size: 15px;
 		margin: 0;
 	}
+	
 </style>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
-	<form class="row g-3" action="/insertTicket.kt">
-		<h4>1. 카테고리</h4>
-		<div class="col-md-4">
-			<select id="category1" class="form-select">
-				<option value="0">1차 카테고리 선택</option>
-			</select>
-		</div>
-		<div class="col-md-4">
-			<select id="category2" class="form-select">
-				<option value="0">2차 카테고리 선택</option>
-			</select>
-		</div>
-		<pre class="chk" id="categoryChk1" >   </pre>
-		
-		<label for="expireDate"></label>
-		<input class="col-md-4" type="hidden" id="expireDate" placeholder="유효기간(만료날짜) 입력(YYYY-MM-DD)">
-		<pre class="chk" id="categoryChk2" >   </pre>
-		
-		<h4>2. 주소 입력</h4>
-		<div class="col-md-4">
-			<select id="local1" class="form-select">
-				<option value="0">1차 카테고리 선택</option>
-			</select>
-		</div>
-		<div class="col-md-4">
-			<select id="local2" class="form-select">
-				<option value="0">2차 카테고리 선택</option>
-			</select>
-		</div>
-		<pre class="chk" id="localChk1" style="margin-top:0px;" >   </pre>
-		
-		<input class="col-md-4" type="text" id="sample6_postcode" placeholder="우편번호">
-		<input class="col-md-4" type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-		<input class="col-md-4" type="text" id="sample6_address" placeholder="주소"><br>
-		<input class="col-md-4" type="text" id="sample6_detailAddress" placeholder="상세주소">
-		<input class="col-md-4" type="text" id="sample6_extraAddress" placeholder="참고항목">
-		<pre class="chk" id="localChk2" >   </pre>
-		
-		
-		
-		
-		
-		<button type="button" id="insertBtn">제출</button>
-	</form>
+	
+	<div class="div-content">
+	
+		<form class="row g-3" action="/insertTicket.kt">
+			<h4>1. 카테고리</h4>
+			<div class="col-md-4">
+				<select id="category1" class="form-select">
+					<option value="0">1차 카테고리 선택</option>
+				</select>
+			</div>
+			<div class="col-md-4">
+				<select id="category2" class="form-select">
+					<option value="0">2차 카테고리 선택</option>
+				</select>
+			</div>
+			<pre class="chk" id="categoryChk1" style="margin-top:0;">   </pre>
+
+			<label for="expireDate" style="margin-top:0;"></label> 
+			 <input class="col-md-4 datepicker"
+				type="hidden" id="startDate" placeholder="시작날짜 입력">
+				<input class="col-md-4 datepicker"
+				type="hidden" id="expireDate" placeholder="만료날짜 입력">
+<!-- 			<pre class="chk" id="categoryChk2" style="margin-top:0;">   </pre> -->
+
+			<h4>2. 주소 입력</h4>
+			<div class="col-md-4">
+				<select id="local1" class="form-select">
+					<option value="0">광역시·도</option>
+				</select>
+			</div>
+			<div class="col-md-4">
+				<select id="local2" class="form-select">
+					<option value="0">읍/면/동</option>
+				</select>
+			</div>
+			<pre class="chk" id="localChk1" style="margin-top: 0px;">   </pre>
+
+			<input class="col-md-4" type="text" id="sample6_postcode"
+				placeholder="우편번호" readonly> <input class="col-md-4" type="button"
+				onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+			<input class="col-md-4" type="text" id="sample6_address"
+				placeholder="주소" readonly><br> <input class="col-md-4"
+				type="text" id="sample6_detailAddress" placeholder="상세주소"> <input
+				class="col-md-4" type="text" id="sample6_extraAddress"
+				placeholder="참고항목" readonly>
+			<pre class="chk" id="localChk2" style="margin-top:0;">   </pre>
 
 
+
+
+
+			<button type="button" id="insertBtn">제출</button>
+		</form>
+
+
+
+	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
 	<script>
@@ -103,6 +117,7 @@
 			//카테고리1차-입장권시 유효기간 입력폼 생성
 			if(categoryBox1Val == 1){
 				$("label[for='expireDate']").text("입장권시 유효기간 필수입력 : ")
+				$("#startDate").prop("type","text");
 				$("#expireDate").prop("type","text");
 			}
 		});
@@ -137,11 +152,55 @@
 			         }
 			      });
 			}else{
-				localBox2.append("<option value='0'>2차 카테고리 선택</option>");
+				localBox2.append("<option value='0'>읍/면/동</option>");
 			}
 		});
 		
-	});
+		//달력(DatePicker)
+		
+		
+// 		$.datepicker.setDefaults({
+// 		  dateFormat: 'yy-mm-dd',
+// 		  prevText: '이전 달',
+// 		  nextText: '다음 달',
+// 		  monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+// 		  monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+// 		  dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+// 		  dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+// 		  dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+// 		  showMonthAfterYear: true,
+// 		  yearSuffix: '년'
+// 		});
+		
+// 		$(function () {
+// 		  $(".datepicker").datepicker();
+// 		});
+	    $.datepicker.setDefaults({
+	      closeText: "닫기",
+	      prevText: "이전달",
+	      nextText: "다음달",
+	      currentText: "오늘",
+	      monthNames: ["1월", "2월", "3월", "4월", "5월", "6월",
+	        "7월", "8월", "9월", "10월", "11월", "12월"
+	      ],
+	      monthNamesShort: ["1월", "2월", "3월", "4월", "5월", "6월",
+	        "7월", "8월", "9월", "10월", "11월", "12월"
+	      ],
+	      dayNames: ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"],
+	      dayNamesShort: ["일", "월", "화", "수", "목", "금", "토"],
+	      dayNamesMin: ["일", "월", "화", "수", "목", "금", "토"],
+	      weekHeader: "주",
+	      dateFormat: "yy-mm-dd", // 날짜형태 예)yy년 m월 d일
+	      firstDay: 0,
+	      isRTL: false,
+	      showMonthAfterYear: true,
+	      yearSuffix: "년"
+	    })
+	
+	    $(".datepicker").datepicker({
+	      minDate: 0
+	    })
+	}); //페이지 로드시
 	
 	
 	
@@ -155,7 +214,7 @@
 		const categoryBox2Val = $("#category2 option:selected").val();
 		
 		if(categoryBox1Val==0||categoryBox2Val==0){
-			$("#categoryChk1").text("카테고리 입력하세요.");
+			$("#categoryChk1").text("카테고리를 선택하세요.");
 			$("#categoryChk1").css("color","red");
 			chkArr[0]=false;
 		}else{
@@ -164,24 +223,24 @@
 		}
 		
 		//1-2. 카테고리 입장권시 유효기간 유효성검사
-		if($("#expireDate").attr("type")=="text"){
-			const dateReg  = /^(20)\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])$/;	//2000년대 입력가능
-			const date = $("#expireDate").val();
-			if(!dateReg.test(date) || date == ""){
-				$("#categoryChk2").text("날짜(YYYY-MM-DD) 형식으로 입력해주세요 ");
-				$("#categoryChk2").css("color","red");
-				chkArr[1]=false;
-			}else{
-				$("#categoryChk2").text(" ");
-				chkArr[1]=true;
-			}
-		}
+// 		if($("#expireDate").attr("type")=="text"){
+// 			const dateReg  = /^(20)\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])$/;	//2000년대 입력가능
+// 			const date = $("#expireDate").val();
+// 			if(!dateReg.test(date) || date == ""){
+// 				$("#categoryChk2").text("날짜(YYYY-MM-DD) 형식으로 입력해주세요 ");
+// 				$("#categoryChk2").css("color","red");
+// 				chkArr[1]=false;
+// 			}else{
+// 				$("#categoryChk2").text(" ");
+// 				chkArr[1]=true;
+// 			}
+// 		}
 		
 		//2-1.주소 유효성 검사 (카테고리)
 		const localBox1Val = $("#local1 option:selected").val();
 		const localBox2Val = $("#local2 option:selected").val();
 		if(localBox1Val==0||localBox2Val==0){
-			$("#localChk1").text("카테고리 입력하세요.");
+			$("#localChk1").text("카테고리를 선택하세요.");
 			$("#localChk1").css("color","red");
 			chkArr[2]=false;
 		}else{
@@ -190,7 +249,7 @@
 		}
 		
 		//2-2.주소 유효성 검사 (상세주소)
-		if($("#sample6_address").val()==""||$("#sample6_detailAddress").val()==""){
+		if($("#sample6_address").val()==""){
 			$("#localChk2").text("주소를 입력하세요.");
 			$("#localChk2").css("color","red");
 			chkArr[3]=false;
@@ -199,7 +258,7 @@
 			chkArr[3]=true;
 		}
 		
-		
+		 
 		//모든 유효성검사 성공시 제출 가능한 버튼으로 변경
 		
 		for(let i = 0;i<chkArr.length;i++){
@@ -215,6 +274,25 @@
 	});
 	
 	
+	//날짜 유효성검사
+	function call()	{
+	    var ar1 = $("#startDate").val().split('-');
+	    var ar2 = $("#expireDate").val().split('-');
+	    var da1 = new Date(ar1[0], ar1[1], ar1[2]);
+	    var da2 = new Date(ar2[0], ar2[1], ar2[2]);
+	    var dif = da2 - da1;
+	    if(dif<0){
+	    	alert("날짜를 확인해주세요.");
+			$("#startDate").val("");
+			$("#expireDate").val("");
+	    }
+	}
+	 $("#startDate").change(function(){
+		 call();
+	 })
+	 $("#expireDate").change(function(){
+		 call();
+	 })
 	
 	//주소API
     function sample6_execDaumPostcode() {
@@ -264,6 +342,7 @@
             }
         }).open();
     }
+	
 	</script>
 </body>
 </html>
