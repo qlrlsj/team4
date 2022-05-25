@@ -33,6 +33,21 @@
 		update member set member_Pw=#{memberPw}, member_Name=#{memberName}, member_Phone=#{memberPhone}, member_Email=#{memberEmail}, member_Intro=#{memberIntro} where member_no=#{memberNo}
 	</update>
 	
+	<select id="selectAllMember" resultType="m">
+		select
+			member_no as memberNo,
+			member_id as memberId,
+			member_name as memberName,
+			member_level as memberLevel,
+			member_grade as memberGrade,
+			member_phone as memberPhone,
+			member_email as memberEmail,
+			enroll_date as enrollDate,
+			member_point as memberPoint,
+			member_intro as memberIntro
+		from member
+	</select>
+	
 <!-- 	<update id="updateMember" parameterType="m"> -->
 <!-- 		update member_tbl set phone=#{phone}, email=#{email} where member_no=#{memberNo} -->
 <!-- 	</update> -->

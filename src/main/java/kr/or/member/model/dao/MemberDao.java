@@ -30,4 +30,9 @@ public class MemberDao {
 		return result;
 	}
 
+	public ArrayList<Member> selectAllMember() {
+		List list = sqlSession.selectList("member.selectAllMember"); //전달해줄 값은 없으므로 위에서 사용한 m은 생략
+		return (ArrayList<Member>)list;
+	}
+
 }

@@ -29,4 +29,8 @@ public class MemberService {
 	public int updateOneMember(Member m) {
 		return dao.updateOneMember(m);
 	}
+
+	public ArrayList<Member> selectAllMember() {
+		return dao.selectAllMember();
+	}
 }

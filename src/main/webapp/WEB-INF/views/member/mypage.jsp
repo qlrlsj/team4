@@ -25,7 +25,9 @@
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="div-content">
-		<div class="content-title">마이페이지</div>
+		<div class="mb-3">
+			<div class="content-title">마이페이지</div>
+		</div>
 		<form action="/updateMember.kt" method="post">
 			<div class="mb-3">
 				<label for="formGroupExampleInput" class="form-label">회원번호</label>
