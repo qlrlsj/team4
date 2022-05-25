@@ -42,7 +42,7 @@ public class AirController {
 		model.addAttribute("air",airlist);
 		return "air/airMain";
 	}
-	@ResponseBody
+	
 	@RequestMapping(value="/airSearch.kt")
 	public String selectAllMemberId(HttpSession session, AirSearch air) {
 		String url = "https://api.odcloud.kr/api/15043890/v1/uddi:2ed58abb-3eb5-4dfc-a32e-a69030b1cdc4?serviceKey=sooYLNGU3ovHONF7COC4tvl8FS0QrwFu0475e%2FXjisbYjnPIBr2Y8E80D8wDI%2F0JC%2BI4IjfdTjT59jfjqMwRpA%3D%3D";

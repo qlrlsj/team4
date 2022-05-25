@@ -81,4 +81,5 @@ footer{
     align-self: center;
     flex-grow: 1;
     color: #383d40;
+    max-width:1200px;
 }
