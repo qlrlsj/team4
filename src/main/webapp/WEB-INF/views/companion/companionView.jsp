@@ -115,8 +115,7 @@
 				type : "post",
 				data : {"reporter":reporter,"reported":reported,"reportContent":reportContent},
 				success : function(data){
-					console.log(data);
-					alert("신고 완료되었습니다. 감사합니다.");
+					alert(reporter+"님의 신고가 접수되었습니다. 감사합니다.");
 				}
 			});
 		}else{
