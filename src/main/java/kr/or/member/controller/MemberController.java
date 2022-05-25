@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import kr.or.member.model.service.MemberService;
 import kr.or.member.model.vo.Member;
@@ -77,6 +78,17 @@ public class MemberController {
 		ArrayList<Member> list = service.selectAllMember();
 		model.addAttribute("list",list);
 		return "member/allMember";
+	}
+	
+	@ResponseBody//ajax사용을 위한 어노테이션 : ViewResolve가 관여하지 않도록 처리(주소값이 아닌 순수한 데이터를 return할때 사용)
+	@RequestMapping(value="/idChk.kt")
+	public String idChk(String memberId) {
+		Member m = service.selectIdChk(memberId);
+		if(m == null) {
+			return "0";
+		}else {
+			return "1";
+		}
 	}
 }
 

@@ -35,4 +35,17 @@ public class MemberDao {
 		return (ArrayList<Member>)list;
 	}
 
+	public Member selectIdChk(String memberId) {
+		System.out.println("mapper들어가기 전 보낼 값 memberId : "+memberId);
+		Member member = sqlSession.selectOne("member.selectOneMember1",memberId); 
+		System.out.println("mapper다녀온 후 DAO에서의 member : "+member);
+		return member;
+	}
+
+//	public Member selectOneMember1(Member m) {
+//		Member member = sqlSession.selectOne("member.selectOneMember1",m);
+//		System.out.println("mapper다녀온 후 dao에서의 member : "+member);
+//		return member;
+//	}
+
 }

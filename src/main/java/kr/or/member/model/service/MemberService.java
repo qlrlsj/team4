@@ -33,4 +33,15 @@ public class MemberService {
 	public ArrayList<Member> selectAllMember() {
 		return dao.selectAllMember();
 	}
+
+	public Member selectIdChk(String memberId) {
+		return dao.selectIdChk(memberId);
+	}
+
+
+//	public Member selectOneMember1(Member m) {
+//		Member member = dao.selectOneMember1(m);
+//		return member;
+//	}
+
 }

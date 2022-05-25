@@ -16,28 +16,30 @@
 		position: center;
 		margin: 0 auto;
 	}
+	tr>th {
+		text-align: center;
+	}
 </style>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
 	<div class="div-content">
 		<div class="content-title">전체회원 관리</div>
-		
-		<table border="1">
+		<table border="1" class="table table-hover">
 			<tr>
-				<th>회원번호</th><th>아이디</th><th>이름</th><th>회원레벨</th><th>회원등급</th><th>연락처</th><th>이메일</th><th>가입일</th><th>포인트</th><th>자기소개</th>
+				<th>번호</th><th>아이디</th><th>이름</th><th>회원레벨</th><th>등급</th><th>연락처</th><th>이메일</th><th>가입일</th><th>포인트</th><th>자기소개</th>
 			</tr>
 			<c:forEach items="${list }" var="m">
 				<tr>
-					<td>${m.memberNo }</td>
-					<td>${m.memberId }</td>
-					<td>${m.memberName }</td>
-					<td>${m.memberLevel }</td>
-					<td>${m.memberGrade }</td>
-					<td>${m.memberPhone }</td>
-					<td>${m.memberEmail }</td>
-					<td>${m.enrollDate }</td>
-					<td>${m.memberPoint }</td>
+					<td align="center">${m.memberNo }</td>
+					<td align="center">${m.memberId }</td>
+					<td align="center">${m.memberName }</td>
+					<td align="center">${m.memberLevel }</td>
+					<td align="center">${m.memberGrade }</td>
+					<td align="center">${m.memberPhone }</td>
+					<td >${m.memberEmail }</td>
+					<td align="center">${m.enrollDate }</td>
+					<td align="center">${m.memberPoint }</td>
 					<td>${m.memberIntro }</td>
 				</tr>
 			</c:forEach>
