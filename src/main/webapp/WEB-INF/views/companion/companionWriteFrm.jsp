@@ -13,13 +13,16 @@
 select option[value=""][disabled] {
 	display: none;
 }
+.center{
+	margin : 10px auto;
+}
 </style>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<!-- datepick -->
-	<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-	<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+<!-- 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" /> -->
+<!-- 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script> -->
+<!-- 	<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script> -->
 	<!-- include summernote css/js-->
 	<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
@@ -62,7 +65,8 @@ select option[value=""][disabled] {
 	</script>
 	<h2>동행자 모집 글 작성</h2>
 	<form method="post" action="/companionInsert.kt">	
-		  <div class="mb-3">
+		<div class="div-content center">
+		  <div class="div-content mb-3">
 		    <label for="companionTitle" class="form-label">제목</label>
 		    <input type="text" class="form-control" name="companionTitle" id="companionTitle" >
 		  </div>
@@ -100,8 +104,11 @@ select option[value=""][disabled] {
 		     	<option value="액티비티">액티비티</option>
 		     </select>
 	     </div>	
- 	 <textarea id="summernote" name="companionContent"></textarea>
- 	 <button type="submit" id="comSubmit">작성</button>
+	     <div class="div-content">
+		 	 <textarea id="summernote" name="companionContent"></textarea>
+		 	 <button class="btn btn-primary btn-lg com-plus" type="submit" id="comSubmit">작성</button>
+	     </div>
+	  </div>
 	</form>
 	<script>
 // 	function dateSum(){

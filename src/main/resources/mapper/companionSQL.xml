@@ -24,6 +24,7 @@
   <select id="selectOneCompanion" parameterType="int" resultType="co">
   select
   				companion_no as companionNo,
+  				member_no as memberNo,
                 member_id as memberId,
 				companion_title as companionTitle,
 				companion_content as companionContent,

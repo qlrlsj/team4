@@ -10,6 +10,7 @@
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<h2>동행자 모집</h2>
+	<div class="div-content">
 	<table class="table table-striped table-hover">
 		<tr>
 			<td colspan="4">${com.companionTitle }</td>
@@ -49,11 +50,40 @@
 			<c:otherwise>
 			<tr>
 				<td colspan="2"><button class="btn btn-primary btn-sm" onclick="chat(${com.companionNo});">동행 신청하기!</button></td>
-				<td colspan="2"><button class="btn btn-primary btn-sm" onclick="chat(${com.companionNo});">신고하기</button></td>
+				<c:if test="${!empty sessionScope.m }">
+					<td colspan="2"><button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#reportModal" data-bs-whatever="@mdo">신고하기</button></td>
+				</c:if>
 			</tr>
 			</c:otherwise>
 		</c:choose>
-	</table>
+	</table>	
+	<div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="reportModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="reportModalLabel">New message</h5>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <div class="modal-body">
+	        <form>
+	          <div class="mb-3">
+	            <label for="recipient-name" class="col-form-label">Recipient:</label>
+	            <input type="text" class="form-control" id="reported" readonly="readonly" value="${com.memberNo }">
+	          </div>
+	          <div class="mb-3">
+	            <label for="message-text" class="col-form-label">Message:</label>
+	            <textarea class="form-control" id="report-content" placeholder="신고내용"></textarea>
+	          </div>
+	        </form>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+	        <button type="button" onclick="report(${sessionScope.m.memberNo})" class="btn btn-primary">신고하기</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	</div>
 	<script>
 	function progress(companionNo){
 		var check = confirm("모집완료로 변경하시겠습니까?");
@@ -72,8 +102,26 @@
 			}
 		});
 	}
-	function deleteCheck(){
-		
+	function report(reporter){
+		var reportCheck = confirm("신고하시겠습니까?");
+		if(reportCheck){
+			const reported = $('#reported').val();
+			const reportContent = $('#report-content').val();
+			console.log(reporter);
+			console.log(reported);
+			console.log(reportContent);
+			$.ajax({
+				url : "/reportInsert.kt",
+				type : "post",
+				data : {"reporter":reporter,"reported":reported,"reportContent":reportContent},
+				success : function(data){
+					console.log(data);
+					alert("신고 완료되었습니다. 감사합니다.");
+				}
+			});
+		}else{
+			alert("확인~");
+		}
 	}
 	</script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>

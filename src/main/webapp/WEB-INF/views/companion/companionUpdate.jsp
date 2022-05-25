@@ -66,6 +66,7 @@ select option[value=""][disabled] {
    	});
 	</script>
 	<h2>동행자 모집 글 수정</h2>
+	<div class="div-content">
 	<form method="post" action="/companionUpdate.kt">	
 		  <div class="mb-3">
 		    <label for="companionTitle" class="form-label">제목</label>
@@ -111,5 +112,7 @@ select option[value=""][disabled] {
 	     </div>	
  	 <textarea id="summernote" name="companionContent"><c:out value="${com.companionContent}" escapeXml="false"/></textarea>
  	 <button type="submit" id="comSubmit">수정</button>
+ 	 </form>
+ 	 </div>
 </body>
 </html>
