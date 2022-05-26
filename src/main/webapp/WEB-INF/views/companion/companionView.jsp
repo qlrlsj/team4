@@ -9,6 +9,32 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+	<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+	<script>
+	function chatOpen(){
+		var chatCheck = confirm("동행신청을 위해 채팅해보실래용?");
+		if(chatCheck){
+			openwin();
+		}
+	}
+	function openwin() {
+		  window.open('about:blank','chat','width=570, height=700, resizable = no, scrollbars = yes');
+		  document.f1.submit();
+		}
+	</script>
+	<form name="f1" action="/chatOpen.kt" method="post" target="chat">
+	  <c:choose>
+	  	<c:when test="${sessionScope.m.memberNo gt com.memberNo}">
+		  <input type="hidden" name="memberNo2" value="${sessionScope.m.memberNo }">
+		  <input type="hidden" name="memberNo1" value="${com.memberNo }">
+	  	</c:when>
+	  	<c:otherwise>
+	  	  <input type="hidden" name="memberNo1" value="${sessionScope.m.memberNo }">
+		  <input type="hidden" name="memberNo2" value="${com.memberNo }">
+	  	</c:otherwise>
+	  </c:choose>
+	</form>
+	
 	<h2>동행자 모집</h2>
 	<div class="div-content">
 	<table class="table table-striped table-hover">
@@ -49,8 +75,8 @@
 			</c:when>
 			<c:otherwise>
 			<tr>
-				<td colspan="2"><button class="btn btn-primary btn-sm" onclick="chat(${com.companionNo});">동행 신청하기!</button></td>
 				<c:if test="${!empty sessionScope.m }">
+					<td colspan="2"><button class="btn btn-primary btn-sm" onclick="chatOpen();">동행 신청하기!</button></td>
 					<td colspan="2"><button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#reportModal" data-bs-whatever="@mdo">신고하기</button></td>
 				</c:if>
 			</tr>

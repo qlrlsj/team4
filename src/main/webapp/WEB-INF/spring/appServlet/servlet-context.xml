@@ -74,13 +74,18 @@
 	<!-- 작업예약 어노테이션을 사용하기 위한 설정 -->
 	<task:annotation-driven />
 	<!-- 웹소캣 전체채팅 객체생성 -->
-	<!-- <beans:bean id="allMemberChat" class="kr.or.common.AllMemberChat"/> -->
-	<!-- <beans:bean id="dmSocket" class="kr.or.dm.model.service.DirectMessageHandler"/> -->
+	<beans:bean id="directChat" class="kr.or.common.socket.ChatHandler"/>
+	<beans:bean id="alarmChat" class="kr.or.common.socket.AlarmHandler"/>
 	<!-- 웹소캣 맵핑 -->
-	<!-- <websocket:handlers> -->
-	<!-- <websocket:mapping handler="allMemberChat" path="/chat.kh"/> -->
-	<!-- <websocket:mapping handler="dmSocket" path="/dm.kh"/> -->
-	<!-- </websocket:handlers> -->
+	<websocket:handlers>
+		<websocket:mapping handler="directChat" path="/chat.kt"/>
+		<websocket:mapping handler="alarmChat" path="/alarm.kt"/>
+		<websocket:handshake-interceptors>
+	         <beans:bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/>
+	      </websocket:handshake-interceptors>
+	      <!-- sockjs를 추가해서 프론트에서 웹소켓 기능을 js로 구현할 수 있도록 해줌 -->
+	      <websocket:sockjs websocket-enabled="true"/>
+	</websocket:handlers>
 
 	<context:component-scan base-package="kr.or.iei" />
 	<context:component-scan base-package="kr.or.hostel" />

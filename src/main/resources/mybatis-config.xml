@@ -12,6 +12,7 @@
 		<typeAlias type="kr.or.companion.model.vo.Companion" alias="co"/>
 		<typeAlias type="kr.or.report.model.vo.Report" alias="rp"/>
 		<typeAlias type="kr.or.report.model.vo.BlackList" alias="bl"/>
+		<typeAlias type="kr.or.chat.model.vo.ChatRoom" alias="cr"/>
 		<typeAlias type="kr.or.chat.model.vo.Chat" alias="ch"/>
 		<typeAlias type="kr.or.ticket.model.vo.Ticket" alias="t"/>
 		<typeAlias type="kr.or.ticket.model.vo.TicketCategory" alias="tc"/>

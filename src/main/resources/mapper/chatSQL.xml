@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="chat">
+    <select id="selectOneChatting" parameterType="cr" resultType="ch">
+		select * from
+			(select rownum as rnum, c.* from
+			(select 
+						chat_no as chatNo,
+		                room_no as roomNo,
+						member_no as memberNo,
+		                TO_CHAR(chat_date, 'hh:mm')as chatDate,
+		                chat_content as chatContent
+			from chat 
+            where member_no=#{memberNo1} or member_no =#{memberNo2}
+            order by chat_no asc)c)
+  </select>
+</mapper>

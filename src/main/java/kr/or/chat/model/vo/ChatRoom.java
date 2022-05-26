@@ -7,10 +7,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class Chat {
-	private int chatNo;
+public class ChatRoom {
 	private int roomNo;
-	private int memberNo;
-	private String chatDate;
-	private String chatContent;
+	private int memberNo1;
+	private int memberNo2;
+	private String roomName;
+	private String roomDate;
 }
