@@ -98,6 +98,9 @@
               //  console.log(hostelType);
               // 타입별 행추가 내용 변경 
 
+
+            //  <input type='text' name='standardBooknum' style='width: 30%;'> / <input type='text' name='maxBooknum' style='width: 30%;'>
+
             if(hostelType==1){//호텔객실추가
                 var table = document.getElementById('hostel-option1');
                 const newRow = table.insertRow();
@@ -106,20 +109,20 @@
                 const newCell3 = newRow.insertCell(2);
                 const newCell4 = newRow.insertCell(3);
                 //추가한 셀에 내용추가 
-                newCell1.innerHTML = "<input type='text' placeholder='객실명' class='form-control' style='width: 70%;' required>";
+                newCell1.innerHTML = "<input type='text' placeholder='객실명'  name='roomNames' class='form-control' style='width: 70%;' >";
             /*    let inputTest = "<input type='text' placeholder='객실명' class='form-control' style='width: 70%;' required>";
                 inputTest += "<input type='text' placeholder='객실명' class='form-control' style='width: 70%;' required>";*/
-                let insertcell2 = "<select class='form-select' id='bedType' aria-label='Default select example' required>";
+                let insertcell2 = "<select class='form-select' id='bedType' name='bedType' aria-label='Default select example' required>";
                 insertcell2 += "  <option selected disabled>침대타입</option>";
-                insertcell2 += " <option value='1'>싱글</option><option value='2'>더블</option> <option value='3'>트윈</option <option value='4'>트리플</option><option value='5'>스위트</option><option value='6'>기타</option> </select>";
-                insertcell2 += " <select class='form-select' id='roomType' aria-label='Default select example' required>";
-                insertcell2 += "<option selected disabled>룸타입</option>   <option value='1'>스탠다드</option><option value='2'>디럭스</option><option value='3'>슈페리어</option><option value='4'>이즈제큐티브</option><option value='5'>기타</option>  </select>";
-                insertcell2 += "<select class='form-select' id='roomView' aria-label='Default select example' required>";
-                insertcell2 += "<option selected disabled>뷰</option><option value='1'>시티뷰</option><option value='2'>마운틴뷰</option><option value='3'>오션뷰</option><option value='4'>기타</option></select>";
-                insertcell2 += "<input type='hidden' name='roomOption'>";
+                insertcell2 += " <option value='싱글'>싱글</option><option value='더블'>더블</option> <option value='트윈'>트윈</option <option value='트리플'>트리플</option><option value='스위트'>스위트</option><option value='기타'>기타</option> </select>";
+                insertcell2 += " <select class='form-select' id='roomType' name='roomType' aria-label='Default select example' required>";
+                insertcell2 += "<option selected disabled>룸타입</option>   <option value='스탠다드'>스탠다드</option><option value='디럭스'>디럭스</option><option value='슈페리어'>슈페리어</option><option value='이그제큐티브'>이그제큐티브</option><option value='기타'>기타</option>  </select>";
+                insertcell2 += "<select class='form-select' id='roomView'name='roomView' aria-label='Default select example' required>";
+                insertcell2 += "<option selected disabled>뷰</option><option value='시티뷰'>시티뷰</option><option value='마운틴뷰'>마운틴뷰</option><option value='오션뷰'>오션뷰</option><option value='기타'>기타</option></select>";
+                insertcell2 += "<input type='hidden' name='roomOptions'>";
                 newCell2.innerHTML = insertcell2;
-                newCell3.innerHTML = "<input type='text' id='bookNum' placeholder='2/4' required><input type='hidden' name='standardBooknum'></td><input type='hidden' name='maxBooknum'>";
-                newCell4.innerHTML = "<input type='text' name='hostelPrice' placeholder='ex)50000' required>";
+                newCell3.innerHTML = "<input type='text' name='standardBooknums' style='width: 30%;'> / <input type='text' name='maxBooknums' style='width: 30%;'>";
+                newCell4.innerHTML = "<input type='text' name='hostelPrices' placeholder='ex)50000' >";
             }
 
             if(hostelType==2){//게스트하우스객실추가
@@ -129,13 +132,13 @@
                 const newCell2 = newRow.insertCell(1);
                 const newCell3 = newRow.insertCell(2);
                 const newCell4 = newRow.insertCell(3);
-                newCell1.innerHTML = "<input type='text' placeholder='객실명' class='form-control' style='width: 70%;' required>";
-                let insertcell2 = "<select class='form-select' id='bedType' aria-label='Default select example' required>";
+                newCell1.innerHTML = "<input type='text' placeholder='객실명' name='roomNames' class='form-control' style='width: 70%;' >";
+                let insertcell2 = "<select class='form-select' id='bedType' name='roomOptions' aria-label='Default select example' required>";
                 insertcell2 += "<option selected disabled>숙소유형</option><option value='1'>도미토리</option><option value='2'>1인실</option><option value='3'>2인실</option><option value='4'>패밀리</option><option value='4'>기타</option></select>";
-                insertcell2 += "  <input type='hidden' name='roomOption'>";
+         //       insertcell2 += "  <input type='hidden' name='roomOption'>";
                 newCell2.innerHTML = insertcell2;
-                newCell3.innerHTML = "<input type='text' id='bookNum' placeholder='2/4' required><input type='hidden' name='standardBooknum'></td><input type='hidden' name='maxBooknum'>";
-                newCell4.innerHTML = "<input type='text' name='hostelPrice' placeholder='ex)50000' required>";
+                newCell3.innerHTML = "<input type='text' name='standardBooknums' style='width: 30%;'> / <input type='text' name='maxBooknums' style='width: 30%;'>";
+                newCell4.innerHTML = "<input type='text' name='hostelPrices' placeholder='ex)50000' >";
       
             }
 
@@ -147,13 +150,13 @@
                 const newCell3 = newRow.insertCell(2);
                 const newCell4 = newRow.insertCell(3);
 
-                newCell1.innerHTML = "<input type='text' placeholder='객실명' class='form-control' style='width: 70%;' required>";
-                let insertcell2 = " <select class='form-select' id='bedType' aria-label='Default select example' required>";
+                newCell1.innerHTML = "<input type='text' placeholder='객실명'  name='roomNames' class='form-control' style='width: 70%;' >";
+                let insertcell2 = " <select class='form-select' id='bedType' name='roomOptions' aria-label='Default select example' required>";
                 insertcell2 += "  <option selected disabled>숙소유형</option><option value='1'>2인실</option><option value='2'>4인실-패밀리</option><option value='3'>기타</option></select>";
-                insertcell2 += "  <input type='hidden' name='roomOption'>";
+              //  insertcell2 += "  <input type='hidden' name='roomOption'>";
                 newCell2.innerHTML = insertcell2;
-                newCell3.innerHTML = "<input type='text' id='bookNum' placeholder='2/4' required><input type='hidden' name='standardBooknum'></td><input type='hidden' name='maxBooknum'>";
-                newCell4.innerHTML = "<input type='text' name='hostelPrice' placeholder='ex)50000' required>";
+                newCell3.innerHTML = "<input type='text' name='standardBooknums' style='width: 30%;'> / <input type='text' name='maxBooknums' style='width: 30%;'>";
+                newCell4.innerHTML = "<input type='text' name='hostelPrices' placeholder='ex)50000' >";
  
             }
 
@@ -164,14 +167,14 @@
                 const newCell2 = newRow.insertCell(1);
                 const newCell3 = newRow.insertCell(2);
                 const newCell4 = newRow.insertCell(3);
-                
-                newCell1.innerHTML = "<input type='text' placeholder='객실명' class='form-control' style='width: 70%;' required>";
-                let insertcell2 = " <select class='form-select' id='bedType' aria-label='Default select example' required>";
+
+                newCell1.innerHTML = "<input type='text' placeholder='객실명' name='roomNames' class='form-control' style='width: 70%;' >";
+                let insertcell2 = " <select class='form-select' id='bedType' name='roomOptions' aria-label='Default select example' required>";
                 insertcell2 += "  <option selected disabled>숙소유형</option><option value='1'>2인실</option><option value='2'>4인실-패밀리</option><option value='3'>기타</option></select>";
-                insertcell2 += "  <input type='hidden' name='roomOption'>";
+   //             insertcell2 += "  <input type='hidden' name='roomOption'>";
                 newCell2.innerHTML = insertcell2;
-                newCell3.innerHTML = "<input type='text' id='bookNum' placeholder='2/4' required><input type='hidden' name='standardBooknum'></td><input type='hidden' name='maxBooknum'>";
-                newCell4.innerHTML = "<input type='text' name='hostelPrice' placeholder='ex)50000' required>";
+                newCell3.innerHTML = "<input type='text' name='standardBooknums' style='width: 30%;'> / <input type='text' name='maxBooknums' style='width: 30%;'>";
+                newCell4.innerHTML = "<input type='text' name='hostelPrices' placeholder='ex)50000' >";
  
             }
 
@@ -180,3 +183,91 @@
             $("#delroom").on("click",function(){//객실 마지막행 삭제 
                 $(".hostel-option > tbody > tr:last ").remove();
             });
+
+         
+            
+	$(document).ready(function(){
+        $(".summernote").summernote({
+            height : 300 ,
+            width : 800,
+            lang: 'ko-KR' 
+           
+            });
+
+    });
+
+
+    // 편의시설+서비스항목 체크된거만 히든인풋 val로 넘겨주기 
+    $("[name=comfortCheck]").change(function(){
+    
+        const checkedComfort = []; // 체크한 항목담을 배열
+        $("input:checkbox[name=comfortCheck]:checked").each(function(){
+            checkedComfort.push($(this).val());
+       //     console.log(checkedComfort);
+            const checkedComfortList = checkedComfort.join("/");
+      //     console.log(checkedComfortList);
+            $("[name=hostelComfort").val(checkedComfortList);
+            console.log("편의시설:"+$("[name=hostelComfort").val());
+
+        });
+
+    });
+
+    $("[name=serviceCheck]").change(function(){
+        const checkedService = []; // 체크한 항목담을 배열
+        $("input:checkbox[name=serviceCheck]:checked").each(function(){
+            checkedService.push($(this).val());
+        //    console.log(checkedService);
+            const checkedServiceList = checkedService.join("/");
+        //    console.log(checkedServiceList);
+            $("[name=hostelService]").val(checkedServiceList);
+        });
+    });
+
+
+
+
+     //방옵션 string정리 
+     //침대타입
+    let bedType = [];
+    $(document).on("change","[name='bedType']",function(){
+        const idx = $("[name=bedType]").index(this);
+        $("select[name=bedType]").each(function(i,selected){
+        bedType[i]= $(selected).val();
+        });
+       //  console.log("test", bedType[idx], roomType[idx], roomView[idx]);
+        const roomOption = (bedType[idx]+"/"+roomType[idx]+"/"+roomView[idx]);
+        console.log(roomOption);
+
+        $("[name=roomOptions]").eq(idx).val(roomOption);
+        
+    });
+
+    
+    let roomType=[];
+    $(document).on("change","[name='roomType']",function(){
+        const idx = $("[name=roomType]").index(this);
+        $("select[name=roomType]").each(function(i,selected){
+        roomType[i]= $(selected).val();
+        });
+  //      console.log("test", bedType[idx], roomType[idx], roomView[idx]);
+            const roomOption = (bedType[idx]+"/"+roomType[idx]+"/"+roomView[idx]);
+            console.log(roomOption);
+   
+            $("[name=roomOptions]").eq(idx).val(roomOption);
+    });
+
+
+    let roomView=[];
+    $(document).on("change","[name='roomView']",function(){
+        const idx = $("[name=roomView]").index(this);
+        $("select[name=roomView]").each(function(i,selected){
+        roomView[i]= $(selected).val();
+        });
+   //      console.log("test", bedType[idx], roomType[idx], roomView[idx]);
+        const roomOption = (bedType[idx]+"/"+roomType[idx]+"/"+roomView[idx]);
+        console.log(roomOption);
+        $("[name=roomOptions]").eq(idx).val(roomOption);
+    //    $("[name=roomOption]").eq(idx).attr("value",roomOption);
+    });
+
