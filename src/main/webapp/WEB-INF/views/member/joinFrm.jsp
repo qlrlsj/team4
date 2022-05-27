@@ -37,27 +37,32 @@
 			</div>
 
 			<div class="mb-3">
-				<label for="formGroupExampleInput" class="form-label" >Password<span class='identify'> *</span></label> <input type="password" name="memberPw" class="form-control"
+				<label for="formGroupExampleInput" class="form-label" >Password<span class='identify'> *</span><span id="memberPwChk"></span></label><span id=pwChk></span>
+				 <input type="password" name="memberPw" class="form-control"
 					id="memberPw" placeholder="비밀번호를 입력해 주세요">
 			</div>
 			
 			<div class="mb-3">
-				<label for="formGroupExampleInput" class="form-label" >Password Confirm<span class='identify'> *</span><span id="ajaxCheckResult1"></span>	</label> <input type="password" name="memberPwRe" class="form-control"
+				<label for="formGroupExampleInput" class="form-label" >Password Confirm<span class='identify'> *</span><span id="memberPw2Chk"></span></label><span id=pw2Chk></span>
+				<input type="password" name="memberPwRe" class="form-control"
 					id="memberPwRe" placeholder="비밀번호를 다시 입력해 주세요">
 			</div>
 			
 			<div class="mb-3">
-				<label for="formGroupExampleInput" class="form-label" >Name<span class='identify'> *</span></label> <input type="text" name="memberName" class="form-control"
+				<label for="formGroupExampleInput" class="form-label" >Name<span class='identify'> *</span><span id="memberNameChk"></span></label><span id=nameCHk></span>
+				<input type="text" name="memberName" class="form-control"
 					id="memberName" placeholder="이름을 입력해 주세요">
 			</div>
 			
 			<div class="mb-3">
-				<label for="formGroupExampleInput" class="form-label" >Phone<span class='identify'> *</span></label> <input type="text" name="memberPhone" class="form-control"
+				<label for="formGroupExampleInput" class="form-label" >Phone<span class='identify'> *</span><span id="memberPhoneChk"></span></label><span id=phoneChk></span> 
+				<input type="text" name="memberPhone" class="form-control"
 					id="memberPhone" placeholder="휴대폰 번호(010-0000-0000) ">
 			</div>
 			
 			<div class="mb-3">
-				<label for="exampleFormControlInput1" class="form-label" >Email address<span class='identify'> *</span></label> <input type="email" name="memberEmail" class="form-control"
+				<label for="exampleFormControlInput1" class="form-label" >Email address<span class='identify'> *</span><span id="memberEmailChk"></span></label><span id=emailChk></span> 
+				<input type="email" name="memberEmail" class="form-control"
 					id="memberEmail" placeholder="name@example.com">
 			</div>
 			<div class="mb-3">
@@ -114,7 +119,7 @@
         var pwd1 = $("#memberPw").val();
         var pwd2 = $("#memberPwRe").val();
         
-        if (pwd1 != '' && pwd2 == '') {
+        if (pwd1 != "" && pwd2 == "") {
             null;
         }else if (pwd1 != "" || pwd2 != "") {
             if (pwd1 == pwd2) {
@@ -129,14 +134,17 @@
 	
 	
 	$("#signUpBtn").on("click",function(){
-		chkArr = [false, false, false, false, false];
+		chkArr = [false, false, false, false, false, false];
 		let count = 0;
 		
 // 		const categoryBox1Val = $("#category1 option:selected").val();
 		
+		
+/////////////////////////////유효성검사/////////////////////////////
 		const memberId = $("#memberId").val();
 		const memberPw = $("#memberPw").val();
-		const memberName = $("memberName").val();
+		const memberPwRe = $("#memberPwRe").val();
+		const memberName = $("#memberName").val();
 		const memberPhone = $("#memberPhone").val();
 		const memberEmail = $("#memberEmail").val();
 		
@@ -150,35 +158,65 @@
 			chkArr[0]=true;
 		};
 		
-// 	    for(let i = 0;i<chkArr.length;i++){
-// 	        if(chkArr[i]){
-// 	            count++;
-// 	        }
-// 	    }
-// 	      if(count != 1){
-// 	          alert("정보를 확인하세요");
-// 	      }else{
-// 	        $("#insertBtn").prop("type","submit");
-// 	      }
+		if(memberPw==""){
+			$("#memberPwChk").text("비밀번호를 입력하세요.");
+			$("#memberPwChk").css("color","red");
+			chkArr[1]=false;
+		}else{
+			$("#pwChk").text("");
+			chkArr[1]=true;
+		};
+		
+		if(memberPw==""){
+			$("#memberPw2Chk").text("비밀번호를 다시 입력하세요.");
+			$("#memberPw2Chk").css("color","red");
+			chkArr[2]=false;
+		}else{
+			$("#pw2Chk").text("");
+			chkArr[2]=true;
+		};
+		
+		if(memberName==""){
+			$("#memberNameChk").text("이름을 입력하세요.");
+			$("#memberNameChk").css("color","red");
+			chkArr[3]=false;
+		}else{
+			$("#nameChk").text("");
+			chkArr[3]=true;
+		};
+		
+		if(memberPhone==""){
+			$("#memberPhoneChk").text("전화번호를 입력하세요.");
+			$("#memberPhoneChk").css("color","red");
+			chkArr[4]=false;
+		}else{
+			$("#phoneChk").text("");
+			chkArr[4]=true;
+		};
+		
+		if(memberEmail==""){
+			$("#memberEmailChk").text("이메일 주소를 입력하세요.");
+			$("#memberEmailChk").css("color","red");
+			chkArr[5]=false;
+		}else{
+			$("#emailChk").text("");
+			chkArr[5]=true;
+		};
+		
+		//전체 체크
+	    for(let i = 0;i<chkArr.length;i++){
+	        if(chkArr[i]){
+	            count++;
+	        }
+	    }
+	      if(count != 6){
+          	alert("정보를 확인하세요");
+	      }else{
+	        $("#signUpBtn").prop("type","submit");
+	        alert("회원가입에 성공 하였습니다.")
+	      }
 	});
 	
-// 	//비밀번호 확인 유효성 검사
-// 	$("[name=memberPwRe]").on("change",function (){
-//         var pwd1 = $("#memberPw2").val();
-//         var pwd2 = $("#memberPwRe").val();
-        
-//         if (pwd1 != '' && pwd2 == '') {
-//             null;
-//         }else if (pwd1 != "" || pwd2 != "") {
-//             if (pwd1 == pwd2) {
-//             	$("#ajaxCheckResult1").text("비밀번호가 일치합니다.");
-// 				$("#ajaxCheckResult1").css("color","#00adb5");
-//             } else {
-//             	$("#ajaxCheckResult1").text("비밀번호가 일치하지 않습니다.");
-// 				$("#ajaxCheckResult1").css("color","#ff2e63");
-//             }
-//         }
-//     });
 	</script>
 </body>
 </html>
