@@ -32,12 +32,16 @@
 		width:600px;
 		max-width:600px;
 	}
+	.routeMenu>*{
+		text-align:center;
+		line-height: 50px;
+	}
 </style>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="div-content">
 		
-		<div class="p-3 mb-5" style="background-color:#9DEBA4">
+		<div class="p-3 mb-5" style="background-color:#FAC5B0">
 			<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
 				 <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" onclick="howtoway(0)">
 				 <label class="btn btn-outline-success" for="btnradio1">편도</label>
@@ -150,46 +154,80 @@
 				</fieldset>
 			</form>
 		</div>
-		<div class="mb-5" style="width: 100%; height:500px; background-color: #B5D9E8">
-			<div style="float: left; width: 50%; height:100%;">
-				<div class="mb-2" style="width: 100%; height:40px;">
-					
+		<div class="airTable" style="width: 100%; height:512px; background-color: #B5D9E8">
+			<div style="float: left; width: 50%; height:100%; background-color: #B3BEF5; overflow: hidden;" >
+				<div class="routeMenu" style="width: 100%; height:50px; background-color:#90A5EB;">
+					<span style="float: left; width: 25%; height:100%;">
+						가는편
+					</span>
+					<span style="float: left; width: 50%; height:100%;">
+						${AirSearch.airStart} - - - - - - -> ${AirSearch.airArrive}
+					</span>
+					<span style="float: left; width: 25%; height:100%;">
+						${AirSearch.airStartDate}
+					</span>
 				</div>
-				<table class="table" style="width: 100%; height: calc( 100% - 40px );">
-					<thead>
-						<tr>
-							<th scope="col">항공사</th>
-							<th scope="col">출발시간</th>
-							<th scope="col">도착시간</th>
-							<th scope="col">가격</th>
+				<table class="table table-hover airTableA" style="width: 100%; height: calc( 100% - 40px );">
+					<thead style="width: 100%;">
+						<tr class="table-dark" style="text-align: center; height:42px;">
+							<th scope="col" style="width: 25%;">항공사</th>
+							<th scope="col" style="width: 25%;">출발시간</th>
+							<th scope="col" style="width: 25%;">도착시간</th>
+							<th scope="col" style="width: 25%;">가격</th>
 						</tr>
 					</thead>
-					<tbody>
-						<tr>
-							<th scope="row">1</th>
-							<td>Mark</td>
-							<td>Otto</td>
-							<td>@mdo</td>
-						</tr>
-						<tr>
-							<th scope="row">2</th>
-							<td>Jacob</td>
-							<td>Thornton</td>
-							<td>@fat</td>
-						</tr>
-						<tr>
-							<th scope="row">3</th>
-							<td colspan="2">Larry the Bird</td>
-							<td>@twitter</td>
-						</tr>
+					<tbody class="airTableBodyA">
+						<c:forEach var="start" items="${startingList}">
+							<tr style="height:42px">
+								<td>${start.airLine}</td>
+								<td>${start.airStartTime}</td>
+								<td>${start.airEndTime}</td>
+								<td>10,000</td>
+							</tr>
+						</c:forEach>
 					</tbody>
 				</table>
 			</div>
-			<div style="float: left; width: 50%;">
-				<div class="mb-2">
-					
+			
+			<div style="float: left; width: 50%; height:100%; background-color: #F5E1B3; overflow: hidden;">
+				<div class="routeMenu" style="width: 100%; height:50px; background-color:#F5CB69">
+					<span style="float: left; width: 25%; height:100%;">
+						오는편
+					</span>
+					<span style="float: left; width: 50%; height:100%;">
+						${AirSearch.airArrive} - - - - - - -> ${AirSearch.airStart}
+					</span>
+					<span style="float: left; width: 25%; height:100%;">
+						${AirSearch.airEndDate}
+					</span>
 				</div>
+				<table class="table table-hover airTableB" style="width: 100%; height: calc( 100% - 40px );">
+					<thead style="width: 100%;">
+						<tr class="table-dark" style="text-align: center; height:42px;">
+							<th scope="col" style="width: 25%;">항공사</th>
+							<th scope="col" style="width: 25%;">출발시간</th>
+							<th scope="col" style="width: 25%;">도착시간</th>
+							<th scope="col" style="width: 25%;">가격</th>
+						</tr>
+					</thead>
+					<tbody class="airTableBodyB">
+						<c:forEach var="end" items="${arrivalList}">
+							<tr style="height:42px">
+								<td>${end.airLine}</td>
+								<td>${end.airStartTime}</td>
+								<td>${end.airEndTime}</td>
+								<td>10,000</td>
+							</tr>
+						</c:forEach>
+						
+					</tbody>
+				</table>
 			</div>
+		</div>
+		<div style="width:100%; height:100px">
+			<button style="width:100%; height:100%" onclick="sizeAdd();">
+				<span class="material-symbols-outlined" style="font-size: 70px;">keyboard_double_arrow_down</span>			
+			</button>
 		</div>
 		
 	</div>
@@ -247,28 +285,43 @@
 				$(".comDate").val("");
 		    }
 		}
-		 $(".goDate").change(function(){
-			 call();
-		 })
-		 $(".comDate").change(function(){
-			 call();
-		 })
-		 $(".amount").change(function(){
-			 if($(this).val()>8||$(this).val()<1){
-				 alert("잘못된 입력입니다.");
-				 $(this).val(1);
-			 }
-		 })
-		  
-// 		function searchStartPlace(){
-// 			$.ajax({
-// 				url:"/allAirSchedule.kt",
-				
-// 				success: function(list){
-// 					console.log("성공");
-// 				}
-// 			});
-// 		}
+		function sizeAdd(){
+			
+			const airTable = document.querySelector('.airTable');
+			const airTableBodyA = document.querySelector('.airTableBodyA');
+			const airTableBodyB = document.querySelector('.airTableBodyB');
+			const height = airTable.offsetHeight + 420;
+			const airTableBodyHeightA = airTableBodyA.offsetHeight;
+			const airTableBodyHeightB = airTableBodyB.offsetHeight;
+			$(".airTable").css("height",height);
+			if(height+50>airTableBodyHeightA){
+				$(".airTableA").css("height",airTableBodyHeightA);
+			}
+			if(height+50>airTableBodyHeightB){
+				$(".airTableB").css("height",airTableBodyHeightB);
+			}
+			if(height+50>airTableBodyHeightA && height+50>airTableBodyHeightB){
+				console.log(height);
+				console.log(airTableBodyHeightA);
+				console.log(airTableBodyHeightB);
+				const airTable = document.querySelector('.airTable');
+				console.log(airTable.offsetHeight);
+				$(".airTable").css("height",((airTableBodyHeightA>airTableBodyHeightB)?airTableBodyHeightA:airTableBodyHeightB)+10);
+			}
+			
+		}
+		$(".goDate").change(function(){
+			call();
+		})
+		$(".comDate").change(function(){
+			call();
+		})
+		$(".amount").change(function(){
+			if($(this).val()>8||$(this).val()<1){
+				alert("잘못된 입력입니다.");
+				$(this).val(1);
+			}
+		})
 	</script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
