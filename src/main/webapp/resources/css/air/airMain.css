@@ -1,0 +1,23 @@
+.airImgSize{
+    width:100%;
+    height:800px;
+}
+.selectmenu{
+    height:100px;
+}
+.selectmenu>*{
+    align-self: center;
+}
+tr .btn-warning{
+    color:#fff;
+}
+td{
+    text-align: center;
+}
+.btn-check{
+    width:10%;
+}
+.modal>.modal-dialog{
+    width:600px;
+    max-width:600px;
+}

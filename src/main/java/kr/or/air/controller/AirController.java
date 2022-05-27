@@ -69,17 +69,23 @@ public class AirController {
 			DateFormat dtFormat = new SimpleDateFormat("yyyy-MM-dd");			//날짜 초기화
 			Calendar cal1 = Calendar.getInstance();								//시작날짜계산
 			Calendar cal2 = Calendar.getInstance();								//종료날짜계산
-			
-			Date StartDate = dtFormat.parse(air.getAirStartDate());				//입력받은 출발날짜
-			Date EndDate = dtFormat.parse(air.getAirEndDate());					//입력받은 도착날짜
 			Calendar cal3 = Calendar.getInstance();
 			Calendar cal4 = Calendar.getInstance();
+			Date StartDate = dtFormat.parse(air.getAirStartDate());				//입력받은 출발날짜
 			cal3.setTime(StartDate);
-			cal4.setTime(EndDate);
+			Date EndDate = null;
+			if(!air.getAirEndDate().equals("")) {
+				EndDate = dtFormat.parse(air.getAirEndDate());					//입력받은 도착날짜
+				cal4.setTime(EndDate);
+			}
+			
 			int dayNum1 = cal3.get(Calendar.DAY_OF_WEEK);						//입력받은 출발날짜 요일
 			int dayNum2 = cal4.get(Calendar.DAY_OF_WEEK);						//입력받은 도착날짜 요일
 			String day1 = weekString(dayNum1);
 			String day2 = weekString(dayNum2);
+			
+			Date today = new Date();
+			DateFormat tiFormat = new SimpleDateFormat("HH:mm");
 			
 			for(int i = 0;i<data.size();i++) {
 				JsonObject oneData = (JsonObject)data.get(i);
@@ -91,24 +97,43 @@ public class AirController {
 					cal2.setTime(date2);
 					cal1.add(Calendar.YEAR, 1);												//스케줄 시작날짜와 종료날짜에 1년씩 추가(2021년도 스케줄이므로)
 					cal2.add(Calendar.YEAR, 1);
-					
-					if(cal1.before(cal3) && cal2.after(cal3) && oneData.get("운항요일").getAsString().contains(day1)) {				//출발일자가 시작일자 이후이고 종료일자 이전이며 요일이 맞을 경우 객체를 생성하여 리스트에 넣음			
-						AirSchedule airSchedule = insertSchedule(oneData, air.getAirStartDate());
-						startingList.add(airSchedule);
+					//출발일자가 시작일자 이후이고 종료일자 이전이며 요일이 맞을 경우	
+					if(cal1.before(cal3) && cal2.after(cal3) && oneData.get("운항요일").getAsString().contains(day1)) {	
+						String airStartTime;
+						if(oneData.get("출발시간").getAsString().length()==4) {
+							airStartTime = "0"+oneData.get("출발시간").getAsString();	
+						}else {
+							airStartTime = oneData.get("출발시간").getAsString();	
+						}
+						//출발날짜와 오늘날짜와 같지않거나, 출발시간이 지금 이후일 경우
+						if(!dtFormat.format(today).equals(dtFormat.format(StartDate))||(dtFormat.format(today).equals(dtFormat.format(StartDate)) && airStartTime.compareTo(tiFormat.format(today))>0)) {
+							AirSchedule airSchedule = insertSchedule(oneData, air.getAirStartDate());
+							startingList.add(airSchedule);							
+						}
 					}
 				}
-				
-				if(oneData.get("출발공항").getAsString().equals(air.getAirArrive()) && oneData.get("도착공항").getAsString().equals(air.getAirStart())) {
-					Date date1 = dtFormat.parse(oneData.get("시작일자").getAsString());
-					Date date2 = dtFormat.parse(oneData.get("종료일자").getAsString());
-					cal1.setTime(date1);
-					cal2.setTime(date2);
-					cal1.add(Calendar.YEAR, 1);
-					cal2.add(Calendar.YEAR, 1);
-					
-					if(cal1.before(cal4) && cal2.after(cal4) && oneData.get("운항요일").getAsString().contains(day2)){	
-						AirSchedule airSchedule = insertSchedule(oneData, air.getAirEndDate());
-						arrivalList.add(airSchedule);
+				if(!air.getAirEndDate().equals("")) {
+					//귀환 스케줄리스트에 추가
+					if(oneData.get("출발공항").getAsString().equals(air.getAirArrive()) && oneData.get("도착공항").getAsString().equals(air.getAirStart())) {
+						Date date1 = dtFormat.parse(oneData.get("시작일자").getAsString());
+						Date date2 = dtFormat.parse(oneData.get("종료일자").getAsString());
+						cal1.setTime(date1);
+						cal2.setTime(date2);
+						cal1.add(Calendar.YEAR, 1);
+						cal2.add(Calendar.YEAR, 1);
+						
+						if(cal1.before(cal4) && cal2.after(cal4) && oneData.get("운항요일").getAsString().contains(day2)){	
+							String airStartTime;
+							if(oneData.get("출발시간").getAsString().length()==4) {
+								airStartTime = "0"+oneData.get("출발시간").getAsString();			
+							}else {
+								airStartTime = oneData.get("출발시간").getAsString();	
+							}
+							if(!dtFormat.format(today).equals(dtFormat.format(EndDate))||(dtFormat.format(today).equals(dtFormat.format(EndDate)) && airStartTime.compareTo(tiFormat.format(today))>0)) {
+								AirSchedule airSchedule = insertSchedule(oneData, air.getAirEndDate());
+								arrivalList.add(airSchedule);							
+							}
+						}
 					}
 				}
 			}
