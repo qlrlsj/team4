@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="question">
+	<!-- select id="DAO에서 보내준 메소드명과 동일하다" -->
+	<!-- parameterType="패키지 경로를 전부 적어주어야 구분이 가능하다 mapper로 들어온 값을 의미한다" (Mybatis에서는 파라미터타입을 한개만 가능하다) -->
+	<!-- resultType="mapper에서 나가는 값을 의미한다" -->
+	<!-- <select id="selectOneMember" parameterType="kr.or.member.model.vo.Member" resultType="kr.or.member.model.vo.Member"></select> -->
+	
+	<select id="selectQuestionList" parameterType="map" resultType="q">
+		select * from 
+	    (select rownum as rnum, b.* from 
+	    (select 
+        question_no as questionNo,
+        question_title as questionTitle,
+        member_id as memberId,
+        question_date as questionDate
+	    from question order by question_no desc)b)
+	    where rnum between #{start} and #{end}
+	</select>
+	
+	<select id="selectTotalCount" resultType="int">
+		select count(*) from question
+	</select>
+	
+	
+</mapper>

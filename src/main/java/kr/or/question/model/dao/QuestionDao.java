@@ -19,6 +19,11 @@ public class QuestionDao {
 		List list = sqlSession.selectList("question.selectQuestionList", map);
 		return (ArrayList<Question>)list;
 	}
+
+	public int selectQuestionCount() {
+		int totalCount = sqlSession.selectOne("question.selectTotalCount");
+		return totalCount;
+	}
 	
 	//여기서부터 시작
 	

@@ -12,13 +12,13 @@ import kr.or.question.model.vo.QuestionPageDate;
 public class QuestionController {
 	@Autowired
 	private QuestionService service;
-	
-	@RequestMapping(value="/questionList.kt")
-	public String questionList(int reqPage, Model model) {
-		QuestionPageDate qpd = service.selectQuestionList(reqPage);
-		
-		
-	}
-	//여기서부터 시작
+	//하는중
+//	@RequestMapping(value="/questionList.kt")
+//	public String questionList(int reqPage, Model model) {
+//		QuestionPageDate qpd = service.selectQuestionList(reqPage);
+//		
+//		
+//	}
+
 	
 }
