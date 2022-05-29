@@ -38,6 +38,27 @@ public class MemberService {
 		return dao.selectIdChk(memberId);
 	}
 
+	public int deleteOneMember(int memberNo) {
+		return dao.deleteOneMember(memberNo);
+	}
+
+	public ArrayList<Member> checkedChangeLevel(int num, int level) {
+		/*
+		 * Mybatis에서는 selectOne, selectList, update, insert, delete 메소드로 쿼리문 수행
+		 * 각 쿼리문 수행 메소드의 첫번째 매개변수 : "mapper이름.쿼리문id"
+		 * 각 쿼리문 수행 메소드의 두번째 매개변수 : 쿼리문 수행시 필요한 데이터
+		 * 매개변수로 전달할 수 있는 데이터의 갯수는 무조건 1개
+		 * 전달해야할 데이터가 여러개인 경우에는?(아래)
+		 * 	1) VO
+		 * 	2) Map
+		 * 
+		 */
+		HashMap<Object, Object> map = new HashMap<Object, Object>();
+		map.put("num", num);
+		map.put("level", level);
+		return dao.checkedChangeLevel(map);
+	}
+
 
 //	public Member selectOneMember1(Member m) {
 //		Member member = dao.selectOneMember1(m);

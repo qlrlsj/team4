@@ -90,6 +90,25 @@ public class MemberController {
 			return "1";
 		}
 	}
+	
+	@RequestMapping(value="/exileMember.kt")
+	public String exileMember(int memberNo) {
+		System.out.println("jsp에서 가져온 No값 : "+memberNo);
+		int result = service.deleteOneMember(memberNo);
+		if(result == 1) {
+			return "redirect:/";
+		}else {
+			System.out.println("실패");
+		}
+		return "redirect:/";
+	}
+	
+	@RequestMapping("/checkedChangeLevel.kt")
+	public String checkedChangeLevel(int num, int level, Model model){
+		ArrayList<Member> list = service.checkedChangeLevel(num,level);
+		model.addAttribute("list",list);
+		return "redirect:/";
+	}
 }
 
 

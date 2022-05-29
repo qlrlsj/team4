@@ -63,6 +63,16 @@
 		from member
 	</select>
 	
+	<delete id="deleteOneMember" parameterType="int">
+		delete member where member_no=#{memberNo}
+	</delete>
+	
+<!-- 	<update id="checkedChangeLevel" parameterType="map" resultType="m"> -->
+<!-- 		update member set member_grade= -->
+<!-- 			하는중 너무어려움 일단 다른거부터 하고 나중에 감자님한테 물어보고 해야지  -->
+			
+<!-- 	</update> -->
+	
 <!-- 	<update id="updateMember" parameterType="m"> -->
 <!-- 		update member_tbl set phone=#{phone}, email=#{email} where member_no=#{memberNo} -->
 <!-- 	</update> -->

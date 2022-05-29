@@ -42,6 +42,18 @@ public class MemberDao {
 		return member;
 	}
 
+	public int deleteOneMember(int memberNo) {
+		System.out.println("mapper들어가기 전 보낼 값 memberNo : "+memberNo);
+		int result = sqlSession.delete("member.deleteOneMember",memberNo); 
+		return result;
+	}
+
+	public ArrayList<Member> checkedChangeLevel(HashMap<Object, Object> map) {
+		List list = sqlSession.selectList("member.checkedChangeLevel",map);
+		return (ArrayList<Member>)list;
+	}
+
+
 //	public Member selectOneMember1(Member m) {
 //		Member member = sqlSession.selectOne("member.selectOneMember1",m);
 //		System.out.println("mapper다녀온 후 dao에서의 member : "+member);
