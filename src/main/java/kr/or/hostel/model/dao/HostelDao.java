@@ -17,8 +17,8 @@ public class HostelDao {
 	private SqlSessionTemplate sqlSession; //마이바티스 쿼리용 
 
 	public int insertHostel(Hostel h) {
-		int result = sqlSession.insert("hostel/insertHostel",h);
-		return 0;
+		int result = sqlSession.insert("hostel.insertHostel",h);
+		return result;
 	}
 
 

@@ -161,45 +161,7 @@
                               </tr>
                             </thead>
                             <tbody>
-                              <tr>
-                                <th scope="row"><input type="text" name="roomNames" placeholder="객실명" class="form-control" style="width: 70%;" ></th>
-                                <td>
-                                    <select class="form-select" id="bedType" name="bedType" aria-label="Default select example" required>
-                                        <option selected disabled>침대타입</option>
-                                        <option value="싱글">싱글</option>
-                                        <option value="더블">더블</option>
-                                        <option value="트윈">트윈</option>
-                                        <option value="트리플">트리플</option>
-                                        <option value="스위트">스위트</option>
-                                        <option value="기타">기타</option>
-                                      </select>
-
-                                      <select class="form-select" id="roomType" name="roomType" aria-label="Default select example" required>
-                                        <option selected disabled>룸타입</option>
-                                        <option value="스탠다드">스탠다드</option>
-                                        <option value="디럭스">디럭스</option>
-                                        <option value="슈페리어">슈페리어</option>
-                                        <option value="이그제큐티브">이그제큐티브</option>
-                                        <option value="기타">기타</option>
-                                      </select>
-                                      
-                                      <select class="form-select" id="roomView" name="roomView" aria-label="Default select example" required>
-                                        <option selected disabled>뷰</option>
-                                        <option value="시티뷰">시티뷰</option>
-                                        <option value="마운틴뷰">마운틴뷰</option>
-                                        <option value="오션뷰">오션뷰</option>
-                                        <option value="기타">기타</option>
-                                      </select>
-                                     <input type="hidden" name="roomOptions"><!--선택한 텍스트 합쳐서 넘기기-->
-                                </td>
-                               <td>
-                                  <input type="text" name="standardBooknums" style="width: 30%;"> /
-                                <input type="text" name="maxBooknums" style="width: 30%;">
-                              </td>
-
-                                <td><input type="text" name="hostelPrice" placeholder="ex)50000" ></td>
-                              </tr>
-
+ 
                             </tbody>
                           </table>
                     </div>
@@ -215,25 +177,7 @@
                             </tr>
                           </thead>
                           <tbody>
-                            <tr>
-                              <th scope="row"><input type="text" name="roomNames" placeholder="객실명" name="roomName"class="form-control" style="width: 70%;" ></th>
-                              <td>
-                                  <select class="form-select" id="bedType" name="roomOptions" aria-label="Default select example" required>
-                                      <option selected disabled>숙소유형</option>
-                                      <option value="1">도미토리</option>
-                                      <option value="2">1인실</option>
-                                      <option value="3">2인실</option>
-                                      <option value="4">패밀리</option>
-                                      <option value="4">기타</option>
-                                    </select>
-
-                                    <!--<input type="text" name="roomOption"><!--선택한 텍스트 합쳐서 넘기기-->
-                              </td>
-                              <td><input type="text" name="standardBooknums" style="width: 30%;"> /
-                                <input type="text" name="maxBooknums" style="width: 30%;"></td>
-                              <td><input type="text" name="hostelPrices" placeholder="ex)50000" ></td>
-                            </tr>
-
+     
                           </tbody>
                         </table>
                     </div>
@@ -249,22 +193,7 @@
                             </tr>
                           </thead>
                           <tbody>
-                            <tr>
-                              <th scope="row"><input type="text" name="roomNames" placeholder="객실명" class="form-control" style="width: 70%;" ></th>
-                              <td>
-                                  <select class="form-select" id="bedType" name='roomOptions' aria-label="Default select example" required>
-                                      <option selected disabled>숙소유형</option>
-                                      <option value="1">2인실</option>
-                                      <option value="2">4인실-패밀리</option>
-                                      <option value="3">기타</option>
-                                    </select>
 
-                 
-                              </td>
-                              <td><input type="text" name="standardBooknums" style="width: 30%;"> /
-                                <input type="text" name="maxBooknums" style="width: 30%;"></td>
-                              <td><input type="text" name="hostelPrices" placeholder="ex)50000" ></td>
-                            </tr>
 
                           </tbody>
                         </table>
@@ -281,22 +210,6 @@
                             </tr>
                           </thead>
                           <tbody>
-                            <tr>
-                              <th scope="row"><input type="text" name="roomNames" placeholder="객실명" class="form-control" style="width: 70%;" ></th>
-                              <td>
-                                  <select class="form-select" id="bedType" name='roomOptions' aria-label="Default select example" required>
-                                      <option selected disabled>숙소유형</option>
-                                      <option value="1">2인실</option>
-                                      <option value="2">4인실-패밀리</option>
-                                      <option value="3">기타</option>
-                                    </select>
-
-                         
-                              </td>                              
-                              <td><input type="text" name="standardBooknums" style="width: 30%;"> /
-                                <input type="text" name="maxBooknums" style="width: 30%;"></td>
-                              <td><input type="text" name="hostelPrices" placeholder="ex)50000" ></td>
-                            </tr>
 
                           </tbody>
                         </table>
@@ -326,7 +239,7 @@
  <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <!--다음주소api-->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script src="/resources/js/insertHostel.js"></script>
+<script src="/resources/js/hostel/insertHostel.js"></script>
 <!-- include summernote css/js -->
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script><script src=" https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script><script src="/resources/summernote/summernote-lite.js"></script><script src="/resources/summernote/lang/summernote-ko-KR.js"></script><link rel="stylesheet" href="/resources/summernote/summernote-lite.css">
 

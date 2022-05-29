@@ -51,7 +51,11 @@ public String insertHostel(Hostel h, String[] roomOptions,String [] hostelPrices
 	System.out.println("최대인원:"+Arrays.toString(maxBooknums));
 
 	int result = service.insertHostel(h,roomOptions,hostelPrices,standardBooknums,maxBooknums,roomNames);
-	
+	if(result>0) {
+		System.out.println("Hostel 기본 테이블 인서트성공");
+	}else {
+		System.out.println("인서트 실패");
+	}
 	return "redirect:/insertHostelForm1.kt";
 }
 

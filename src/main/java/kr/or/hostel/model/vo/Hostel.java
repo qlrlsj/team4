@@ -13,13 +13,13 @@ public class Hostel {
 	private int hostelCode;
 	private int memberNo;
 	private String hostelName;
-	private String HostelAddress;
+	private String hostelAddress;
 	private String bookStart;
 	private String bookEnd;
 	private String CheckinOut;
 	private String hostelIntro;
 	private String hostelUsage;
-	private int HostelType;
+	private int hostelType;
 	private int hostelScore;
 	private String hostelComfort;
 	private String hostelService;

@@ -28,7 +28,7 @@ public class HostelService {
 		
 		//3. 각 옵션마다 예약가능일자 insert 
 		
-		return 0;
+		return Hostelresult;
 	}
 	
 
