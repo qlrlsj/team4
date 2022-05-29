@@ -62,7 +62,14 @@
             </div>
 
             <div class="row">
-                <div class="col-sm">	<h3>사진</h3></div>
+                <div class="col-sm">	<h3>사진</h3>
+                  <div class="mb-3">
+                    <label for="formFile" class="form-label">사진 추가 </label>
+                    <input class="form-control" type="file" id="formFile" name="" style="width: 40%;">
+                    <br><input type="text" class="form-control" name="fileInteo"style="width: 40%;" >
+                    <input type="hidden" name="">
+                  </div>
+                </div>
               </div>
 
               <div class="row">
