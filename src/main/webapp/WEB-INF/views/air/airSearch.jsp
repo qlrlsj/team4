@@ -161,7 +161,7 @@
 								<td>${start.airStartTime}</td>
 								<td>${start.airEndTime}</td>
 								<td>10,000</td>
-								<td><button class="btn btn-primary">선택</button></td>
+								<td><button class="btn btn-primary" onclick="startAirSelect(this);">선택</button></td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -193,7 +193,7 @@
 						</tr>
 					</thead>
 					<tbody class="airTableBodyB">
-						<c:if test="${empty startingList}">
+						<c:if test="${empty arrivalList}">
 							<div style="width: 100%; height:100%; text-align:center;">
 								조회 결과가 없습니다.
 							</div>
@@ -204,7 +204,7 @@
 								<td>${end.airStartTime}</td>
 								<td>${end.airEndTime}</td>
 								<td>10,000</td>
-								<td><button class="btn btn-primary">선택</button></td>
+								<td><button class="btn btn-primary" onclick="endAirSelect(this);">선택</button></td>
 							</tr>
 						</c:forEach>
 						
@@ -219,29 +219,73 @@
 				</button>
 			</div>
 		</c:if>
-		<div class="" style="width: 100%; height:200px; margin-top: 50px;">
-			<div class="" style="width: 100%; height:50%;">
-				<span style="float: left; width: 25%; height:100%;">
-					가는편
-				</span>
-				<span style="float: left; width: 50%; height:100%;">
-					${AirSearch.airStart} - - - - - - -> ${AirSearch.airArrive}
-				</span>
-				<span style="float: left; width: 25%; height:100%;">
-					${AirSearch.airStartDate}
-				</span>
+		<div style="width: 100%; height:160px; margin-top: 50px;">
+			<div class="selectStartAirClass selectedAirSchedule" style="width: 100%; height:50%;">
+				<div style="float: left; width: 25%; height:100%;">
+					<div>
+						가는편
+					</div>
+					<div class="selectStartAirLine">
+<!-- 						항공사 -->
+					</div>
+				</div>
+				<div style="float: left; width: 50%; height:100%;">
+					<div>
+						${AirSearch.airStart} - - - - - - - - - - - - - - - - - - -> ${AirSearch.airArrive}
+					</div>
+					<div class="selectStartAirStartTime" style="float: left; width:50%;">
+<!-- 						출발 시간 -->
+					</div>
+					<div class="selectStartAirEndTime" style="float: left; width:50%;">
+<!-- 						도착시간 -->
+					</div>
+				</div>
+				<div style="float: left; width: 25%; height:100%;">
+					<div>
+						${AirSearch.airStartDate}
+					</div>
+					<div class="selectStartPay">
+	<!-- 						가격 -->
+					</div>
+				</div>
 			</div>
-			<div style="width: 100%; height:50%;">
-				<span style="float: left; width: 25%; height:100%;">
-					오는편
-				</span>
-				<span style="float: left; width: 40%; height:100%;">
-					${AirSearch.airArrive} - - - - - - -> ${AirSearch.airStart}
-				</span>
-				<span style="float: left; width: 35%;  height:100%;">
-					${AirSearch.airEndDate}
-				</span>
+
+			<div class="selectEndAirClass selectedAirSchedule" style="width: 100%; height:50%;">
+				<div style="float: left; width: 25%; height:100%;">
+					<div>
+						오는편
+					</div>
+					<div class="selectEndAirLine">
+
+					</div>
+				</div>
+				<div style="float: left; width: 50%; height:100%;">
+					<div>
+						${AirSearch.airArrive} - - - - - - - - - - - - - - - - - - -> ${AirSearch.airStart}
+					</div>
+					<div class="selectEndAirStartTime" style="float: left; width:50%;">
+
+					</div>
+					<div class="selectEndAirEndTime" style="float: left; width:50%;">
+
+					</div>
+				</div>
+				<div style="float: left; width: 25%;  height:100%;">
+					<div>
+						${AirSearch.airEndDate}
+					</div>
+					<div class="selectEndPay">
+
+					</div>
+				</div>
 			</div>
+		</div>
+		<div>
+			<form action="airReserve.kt">
+				<input type="hidden" name="airStartSchedule">
+				<input type="hidden" name="airEndSchedule">
+				<button type="submit" class="btn btn-primary">예매</button>
+			</form>
 		</div>
 	</div>
 	<script src="/resources/js/air/airSearch.js"></script>

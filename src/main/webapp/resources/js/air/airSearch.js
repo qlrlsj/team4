@@ -1,3 +1,5 @@
+var startAirSelectTr;
+var endAirSelectTr;
 $.datepicker.setDefaults({
     dateFormat: 'yy-mm-dd',
     prevText: '이전 달',
@@ -89,3 +91,53 @@ $(".amount").change(function(){
         $(this).val(1);
     }
 })
+function startAirSelect(obj){
+    if(startAirSelectTr==null){
+        startAirSelectTr = $(obj).parent().parent();
+        startAirSelectTr.addClass('startSelectTr');
+    }else{
+        startAirSelectTr.removeClass('startSelectTr');
+        startAirSelectTr = $(obj).parent().parent();
+        startAirSelectTr.addClass('startSelectTr');
+    }
+    $(".selectStartAirLine").text(startAirSelectTr.children().eq(0).text());
+    $(".selectStartAirStartTime").text(startAirSelectTr.children().eq(1).text());
+    $(".selectStartAirEndTime").text(startAirSelectTr.children().eq(2).text());
+    $(".selectStartPay").text(startAirSelectTr.children().eq(3).text()+'원');
+    $(obj).attr("onclick","startAirSelectRemove(this)");
+}
+
+function endAirSelect(obj){
+    if(endAirSelectTr==null){
+        endAirSelectTr = $(obj).parent().parent();
+        endAirSelectTr.addClass('endSelectTr');
+    }else{
+        endAirSelectTr.removeClass('endSelectTr');
+        endAirSelectTr = $(obj).parent().parent();
+        endAirSelectTr.addClass('endSelectTr');
+    }
+    $(".selectEndAirLine").text(endAirSelectTr.children().eq(0).text());
+    $(".selectEndAirStartTime").text(endAirSelectTr.children().eq(1).text());
+    $(".selectEndAirEndTime").text(endAirSelectTr.children().eq(2).text());
+    $(".selectEndPay").text(endAirSelectTr.children().eq(3).text()+"원");
+    $(obj).attr("onclick","endAirSelectRemove(this)");
+}
+
+function startAirSelectRemove(obj){
+    startAirSelectTr.removeClass('startSelectTr');
+    startAirSelectTr==null;
+    $(".selectStartAirLine").text("");
+    $(".selectStartAirStartTime").text("");
+    $(".selectStartAirEndTime").text("");
+    $(".selectStartPay").text("");
+    $(obj).attr("onclick","startAirSelect(this)");
+}
+function endAirSelectRemove(obj){
+    endAirSelectTr.removeClass('endSelectTr');
+    endAirSelectTr==null;
+    $(".selectEndAirLine").text("");
+    $(".selectEndAirStartTime").text("");
+    $(".selectEndAirEndTime").text("");
+    $(".selectEndPay").text("");
+    $(obj).attr("onclick","endAirSelect(this)");
+}
