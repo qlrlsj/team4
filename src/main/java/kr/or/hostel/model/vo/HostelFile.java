@@ -14,5 +14,5 @@ public class HostelFile {
 	private int hostelCode;
 	private String filename;
 	private String filepath;
-	private String fileIntro;
+
 }

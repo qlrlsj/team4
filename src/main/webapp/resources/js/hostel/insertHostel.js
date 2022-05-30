@@ -69,19 +69,19 @@
             var fullAddr = "";
             //전체주소 히든인풋으로 넘겨주기 
             function full_address(){
-                    console.log(addr);
-                    const addrAd = $("#sample6_detailAddress").val();
-                    console.log(addrAd);
-                    fullAddr = (addr+addrAd);
-                    console.log("전체주소:"+fullAddr);
-
-                    $("#hostelAddress").val(fullAddr);
+    //                    console.log(addr); // 위에서 찍어둔 주소 확인용
+                    const addrAd = $("#sample6_detailAddress").val(); // 세부주소 
+      //              console.log(addrAd);
+                    fullAddr = (addr+" "+addrAd); // 검색한주소 + 공백 + 세부주소 
+        //            console.log("전체주소:"+fullAddr);
+ 
+                    $("#hostelAddress").val(fullAddr); // 히든인풋에 값 바꿔주기 
                 }
         
         
             $("#hostelType").on("change",function(){ // 숙소 타입에 따라 옵션창 바꿔주기 
                 $( '#hostel-option1 > tbody').empty(); // 바뀔때마다 테이블비우기
-                const hostelType = $(this).val(); 
+                const hostelType = $(this).val();  // 선택한 숙소타입번호 
                 
                 //    console.log(hostelType);
                 $(".select-option").hide();	// 다 숨기고 선택한 옵션에 해당하는거만 보여주기 
@@ -100,7 +100,7 @@
             $("#addroom").on("click",function(){
                 const hostelType = $("#hostelType").val();
               //  console.log(hostelType);
-              // 타입별 행추가 내용 변경 
+              // 타입별 행추가 내용 다름! 
 
 
             //  <input type='text' name='standardBooknum' style='width: 30%;'> / <input type='text' name='maxBooknum' style='width: 30%;'>
@@ -204,16 +204,16 @@
 
 
     // 편의시설+서비스항목 체크된거만 히든인풋 val로 넘겨주기 
-    $("[name=comfortCheck]").change(function(){
-    
+    $("[name=comfortCheck]").change(function(){ // 체크박스 바뀔때마다
+     
         const checkedComfort = []; // 체크한 항목담을 배열
         $("input:checkbox[name=comfortCheck]:checked").each(function(){
-            checkedComfort.push($(this).val());
+            checkedComfort.push($(this).val()); //체크한항목 배열에 추가 
        //     console.log(checkedComfort);
-            const checkedComfortList = checkedComfort.join("/");
+            const checkedComfortList = checkedComfort.join("/"); //구분자추가
       //     console.log(checkedComfortList);
-            $("[name=hostelComfort").val(checkedComfortList);
-            console.log("편의시설:"+$("[name=hostelComfort").val());
+            $("[name=hostelComfort").val(checkedComfortList); // 히든인풋으로 값 넘겨주기 
+//            console.log("편의시설:"+$("[name=hostelComfort").val());
 
         });
 

@@ -6,4 +6,14 @@
 insert into hostel values(hostel_seq.nextval,#{memberNo},#{hostelName},#{hostelAddress},#{bookStart},#{bookEnd},#{CheckinOut},#{hostelIntro},#{hostelUsage},#{hostelType},#{hostelScore},#{hostelComfort},#{hostelService})
 </insert>
 
+<select id="hostelCode" resultType="int">
+select max(hostel_code) from hostel
+</select>
+
+<insert id="insertFile" parameterType="hf">
+insert into hostel_file VALUES(hostel_file_seq.nextval,#{hostelCode},#{filename},#{filepath})
+</insert>
+
+
+
 </mapper>
