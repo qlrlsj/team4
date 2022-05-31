@@ -161,8 +161,10 @@
 								<td>${start.airStartTime}</td>
 								<td>${start.airEndTime}</td>
 								<td>10,000</td>
+								<td class="hiddenTd">${start.airNumber}</td>
 								<td><button class="btn btn-primary" onclick="startAirSelect(this);">선택</button></td>
 							</tr>
+							
 						</c:forEach>
 					</tbody>
 				</table>
@@ -204,6 +206,7 @@
 								<td>${end.airStartTime}</td>
 								<td>${end.airEndTime}</td>
 								<td>10,000</td>
+								<td class="hiddenTd">${end.airNumber}</td>
 								<td><button class="btn btn-primary" onclick="endAirSelect(this);">선택</button></td>
 							</tr>
 						</c:forEach>
@@ -247,10 +250,13 @@
 					<div class="selectStartPay">
 	<!-- 						가격 -->
 					</div>
+					<div style="display:none" class="selectAirStartNumber">
+	<!-- 						편명 -->
+					</div>
 				</div>
 			</div>
 
-			<div class="selectEndAirClass selectedAirSchedule" style="width: 100%; height:50%;">
+			<div class="selectEndAirClass selectedAirSchedule" style="width: 100%; height:50%; margin-top: 10px;">
 				<div style="float: left; width: 25%; height:100%;">
 					<div>
 						오는편
@@ -274,17 +280,38 @@
 					<div>
 						${AirSearch.airEndDate}
 					</div>
-					<div class="selectEndPay">
-
+					<div>
+						<div class="selectEndPay">
+							
+						</div>
+					</div> 
+					
+					<div style="display:none" class="selectAirEndNumber">
+					
 					</div>
 				</div>
 			</div>
 		</div>
-		<div>
+		<div style="text-align:center; margin-top:20px;">
 			<form action="airReserve.kt">
-				<input type="hidden" name="airStartSchedule">
-				<input type="hidden" name="airEndSchedule">
-				<button type="submit" class="btn btn-primary">예매</button>
+				<input type="hidden" name="airLineST">
+				<input type="hidden" name="airNumberST">
+				<input type="hidden" name="airStartTimeST">
+				<input type="hidden" name="airEndTimeST">
+				<input type="hidden" name="airStartST">
+				<input type="hidden" name="airArriveST">
+				<input type="hidden" name="airDateST">
+				<input type="hidden" name="airPayST">
+				<input type="hidden" name="airLineED">
+				<input type="hidden" name="airNumberED">
+				<input type="hidden" name="airStartTimeED">
+				<input type="hidden" name="airEndTimeED">
+				<input type="hidden" name="airStartED">
+				<input type="hidden" name="airArriveED">
+				<input type="hidden" name="airDateED">
+				<input type="hidden" name="airPayED">
+				<button type="submit" style="display: none;" class="submitBtn"></button>
+				<button type="button" style="width:25%; height:50px; text-align:center;" class="btn btn-primary" onclick="airReserveBtn()">예매</button>
 			</form>
 		</div>
 	</div>

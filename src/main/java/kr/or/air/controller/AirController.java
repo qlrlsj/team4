@@ -29,6 +29,7 @@ import com.google.gson.JsonParser;
 
 import kr.or.air.model.service.AirService;
 import kr.or.air.model.vo.Air;
+import kr.or.air.model.vo.AirReserve;
 import kr.or.air.model.vo.AirSchedule;
 import kr.or.air.model.vo.AirSearch;
 
@@ -190,5 +191,10 @@ public class AirController {
 		String airArrive = oneData.get("도착공항").getAsString();
 		AirSchedule airSchedule;
 		return airSchedule = new AirSchedule(airLine,airNumber,airStartTime,airEndTime,airStart,airArrive,airDate);
+	}
+	@RequestMapping(value="/airReserve.kt")
+	public String selectAllAir(HttpSession session, Model model, AirReserve airReserve) {
+		model.addAttribute("airReserve",airReserve);
+		return "air/airSelectGrade";
 	}
 }

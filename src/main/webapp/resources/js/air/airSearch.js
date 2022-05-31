@@ -103,7 +103,8 @@ function startAirSelect(obj){
     $(".selectStartAirLine").text(startAirSelectTr.children().eq(0).text());
     $(".selectStartAirStartTime").text(startAirSelectTr.children().eq(1).text());
     $(".selectStartAirEndTime").text(startAirSelectTr.children().eq(2).text());
-    $(".selectStartPay").text(startAirSelectTr.children().eq(3).text()+'원');
+    $(".selectStartPay").text(startAirSelectTr.children().eq(3).text());
+    $(".selectAirStartNumber").text(startAirSelectTr.children().eq(4).text());
     $(obj).attr("onclick","startAirSelectRemove(this)");
 }
 
@@ -119,7 +120,8 @@ function endAirSelect(obj){
     $(".selectEndAirLine").text(endAirSelectTr.children().eq(0).text());
     $(".selectEndAirStartTime").text(endAirSelectTr.children().eq(1).text());
     $(".selectEndAirEndTime").text(endAirSelectTr.children().eq(2).text());
-    $(".selectEndPay").text(endAirSelectTr.children().eq(3).text()+"원");
+    $(".selectEndPay").text(endAirSelectTr.children().eq(3).text());
+    $(".selectAirEndNumber").text(endAirSelectTr.children().eq(4).text());
     $(obj).attr("onclick","endAirSelectRemove(this)");
 }
 
@@ -130,6 +132,7 @@ function startAirSelectRemove(obj){
     $(".selectStartAirStartTime").text("");
     $(".selectStartAirEndTime").text("");
     $(".selectStartPay").text("");
+    $(".selectAirStartNumber").text("");
     $(obj).attr("onclick","startAirSelect(this)");
 }
 function endAirSelectRemove(obj){
@@ -139,5 +142,30 @@ function endAirSelectRemove(obj){
     $(".selectEndAirStartTime").text("");
     $(".selectEndAirEndTime").text("");
     $(".selectEndPay").text("");
+    $(".selectAirEndNumber").text("");
     $(obj).attr("onclick","endAirSelect(this)");
+}
+
+function airReserveBtn(){
+    const url = new URL(document.location.href);
+	const urlParams = url.searchParams;
+    
+    $("[name=airLineST]").val($(".selectStartAirLine").text());
+    $("[name=airNumberST]").val($(".selectAirStartNumber").text());
+    $("[name=airStartTimeST]").val($(".selectStartAirStartTime").text());
+    $("[name=airEndTimeST]").val($(".selectStartAirEndTime").text());
+    $("[name=airStartST]").val(urlParams.get("airStart"));
+    $("[name=airArriveST]").val(urlParams.get("airArrive"));
+    $("[name=airDateST]").val(urlParams.get("airStartDate"));
+    $("[name=airPayST]").val($(".selectStartPay").text());
+    $("[name=airLineED]").val($(".selectEndAirLine").text());
+    $("[name=airNumberED]").val($(".selectAirEndNumber").text());
+    $("[name=airStartTimeED]").val($(".selectEndAirStartTime").text());
+    $("[name=airEndTimeED]").val($(".selectEndAirEndTime").text());
+    $("[name=airStartED]").val(urlParams.get("airArrive"));
+    $("[name=airArriveED]").val(urlParams.get("airStart"));
+    $("[name=airDateED]").val(urlParams.get("airEndDate"));
+    $("[name=airPayED]").val($(".selectEndPay").text());
+    
+    $(".submitBtn").trigger("click");
 }

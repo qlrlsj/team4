@@ -54,3 +54,6 @@ td{
 .selectEndAirClass{
     background-color: #F5E1B3;
 }
+.hiddenTd{
+    display: none;
+}
