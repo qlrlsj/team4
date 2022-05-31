@@ -23,4 +23,18 @@
 	</select>
 	
 	
+	<insert id="insertMember" parameterType="m"><!-- insert,updqte,delete의 경우 어차피 정수(int)가 나가기 때문에 resultType이 필요가 없다 -->
+		insert into member values(member_seq.nextval,#{memberId},#{memberPw},#{memberName},#{memberLevel},#{memberGrade},#{memberPhone},#{memberEmail},sysdate,#{memberPoint},#{memberIntro})
+	</insert>
+	
+	
+	<insert id="insertQuestion" parameterType="q">
+		insert into question values(question_seq.nextval,#{memberId},#{questionTitle},#{questionContent},to_char(sysdate, 'yyyy-mm-dd'))
+	</insert>
+	
+	<select id="selectOneQuestion" parameterType="int" resultType="q">
+		select * from question where question_no=#{questionNo}
+	</select>
+	
+	
 </mapper>

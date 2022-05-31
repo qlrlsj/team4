@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class Question {
-	private int question;
-	private int memberNo;
+	private int questionNo;
+	private String memberId;
 	private String questionTitle;
 	private String questionContent;
 	private String questionDate;
