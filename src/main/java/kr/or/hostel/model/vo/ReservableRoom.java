@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class ReservableRoom {
 	private int reservableNo;
 	private int optionNo;
-	private Date reservableDate;
+	private String reservableDate;
 	
 	
 }

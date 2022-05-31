@@ -22,4 +22,8 @@ insert into hostel_option values(hostel_option_seq.nextval,#{hostelCode},#{roomO
 select max(OPTION_NO) from hostel_option
 </select>
 
+<insert id="insertHostelDate" parameterType="rvr"  >
+insert into reserveable_room values(reservable_room_seq.nextval,#{optionNo},#{reservableDate})
+</insert>
+
 </mapper>

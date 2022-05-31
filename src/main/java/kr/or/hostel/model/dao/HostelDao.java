@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import kr.or.hostel.model.vo.Hostel;
 import kr.or.hostel.model.vo.HostelFile;
 import kr.or.hostel.model.vo.HostelOption;
+import kr.or.hostel.model.vo.ReservableRoom;
 import kr.or.member.model.vo.Member;
 
 @Repository
@@ -41,6 +42,11 @@ public class HostelDao {
 
 	public int selectOptionNum() {
 		int result = sqlSession.selectOne("hostel.selectOptionNum");
+		return result;
+	}
+
+	public int insertHostelDate(ReservableRoom rvr) {
+		int result = sqlSession.insert("hostel.insertHostelDate",rvr);
 		return result;
 	}
 
