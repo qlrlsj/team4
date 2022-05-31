@@ -39,5 +39,10 @@ public class HostelDao {
 		return result;
 	}
 
+	public int selectOptionNum() {
+		int result = sqlSession.selectOne("hostel.selectOptionNum");
+		return result;
+	}
+
 
 }

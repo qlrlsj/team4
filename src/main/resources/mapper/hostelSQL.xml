@@ -14,6 +14,12 @@ select max(hostel_code) from hostel
 insert into hostel_file VALUES(hostel_file_seq.nextval,#{hostelCode},#{filename},#{filepath})
 </insert>
 
+<insert id="insertOption" parameterType="ho">
+insert into hostel_option values(hostel_option_seq.nextval,#{hostelCode},#{roomOption},#{hostelPrice},#{standardBooknum},#{maxBooknum},#{roomName})
+</insert>
 
+<select id="selectOptionNum" resultType="int">
+select max(OPTION_NO) from hostel_option
+</select>
 
 </mapper>

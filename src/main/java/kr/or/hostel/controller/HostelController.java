@@ -140,10 +140,10 @@ public class HostelController {
 			} // 포문 종료
 
 		}//if else종료 
-		System.out.println("파일업로드 : "+fileList);
+		// System.out.println("파일업로드 : "+fileList);
 		int result = service.insertHostel(h,fileList, roomOptions, hostelPrices, standardBooknums, maxBooknums, roomNames);
 		if (result > 0) {
-			System.out.println("Hostel 기본 테이블 인서트성공");
+			System.out.println("호스텔인서트 완료");
 		} else {
 			System.out.println("인서트 실패");
 		}
