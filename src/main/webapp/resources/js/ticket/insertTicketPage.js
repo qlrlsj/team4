@@ -18,7 +18,7 @@ $(document).ready(function(){
     categoryBox1.on("change",function(){
         const categoryBox1Val = $("#category1 option:selected").val();
         categoryBox2.children().remove();
-        if(categoryBox1Val!=0){
+        if(categoryBox1Val!=0){ 
             $.ajax({
                  url : "/selectAllTicketCategory.kt",
                  success:function(list){
@@ -105,10 +105,16 @@ $(document).ready(function(){
     $(".datepicker").datepicker({
       minDate: 0	//현재날짜 이전으로는 클릭 할 수 없게함
     })
-}); //페이지 로드시
+}); //페이지 로드시**********************8
 
-//유효성검사
+
+
+
+//제출시 -유효성검사
 $("#insertBtn").on("click",function(){
+  //제출시 주소+상세주소
+  const businessAddr = $('input[name=businessAddr]').val($("#sample6_address").val()+" "+$("#sample6_detailAddress").val());
+
     let chkArr = [false,false,false,false];
     let count = 0;
     
@@ -119,7 +125,6 @@ $("#insertBtn").on("click",function(){
     if(categoryBox1Val==0||categoryBox2Val==0){
         $("#categoryChk1").text("카테고리를 선택하세요.");
         $("#categoryChk1").css("color","red");
-        chkArr[0]=false;
     }else{
         $("#categoryChk").text(" ");
         chkArr[0]=true;
@@ -145,7 +150,6 @@ $("#insertBtn").on("click",function(){
     if(localBox1Val==0||localBox2Val==0){
         $("#localChk1").text("카테고리를 선택하세요.");
         $("#localChk1").css("color","red");
-        chkArr[2]=false;
     }else{
         $("#localChk1").text(" ");
         chkArr[2]=true;
@@ -155,12 +159,35 @@ $("#insertBtn").on("click",function(){
     if($("#sample6_address").val()==""){
         $("#localChk2").text("주소를 입력하세요.");
         $("#localChk2").css("color","red");
-        chkArr[3]=false;
     }else{
         $("#localChk2").text(" ");
         chkArr[3]=true;
     }
     
+    //3-4. 파일 유효성 검사 (파일1개)
+    const placeLength = $("input[name=placeFilepath]")[0].files.length;
+    if(placeLength==0){
+      $("#placeChk").text("사진 한장 필수입니다.");
+      $("#placeChk").css("color","red");
+    }else{
+        $("#placeChk").text(" ");
+        chkArr[4]=true;
+    }
+    //3-5. 파일 유효성 검사 (파일 multiple)
+    //null이거나 4장이 아니면
+    const fileLength = $("input[name=ticketFilepath]")[0].files.length;
+    console.log(fileLength);
+    if(fileLength==0||fileLength<4){
+      $("#productChk").text("사진 4장 필수입니다.");
+      $("#productChk").css("color","red");
+    }else if(fileLength>4){
+      $("#productChk").text("최대 4장까지 가능합니다.");
+      $("#productChk").css("color","red");
+    }else{
+        $("#productChk").text(" ");
+        chkArr[5]=true;
+    }
+
      
     //모든 유효성검사 성공시 제출 가능한 버튼으로 변경
     
@@ -174,7 +201,7 @@ $("#insertBtn").on("click",function(){
       }else{
         $("#insertBtn").prop("type","submit");
       }
-});
+});//제출시 끝
 
 
 //날짜 유효성검사
@@ -323,12 +350,12 @@ const dropFile = new DropFile("drop-file", "files");
     
     // 이미지와 체크 박스를 감싸고 있는 div 속성
     var div_style = 'display:inline-block;position:relative;'
-                  + 'width:150px;height:120px;margin:5px;border:1px solid #00f;z-index:1';
+                  + 'width:150px;height:120px;margin:5px;border:1px solid #fff;z-index:1';
     // 미리보기 이미지 속성
-    var img_style = 'width:100%;height:100%;z-index:none';
+    var img_style = 'width:100%;height:100%;border:0.3px solid rgb(215, 197, 197);z-index:none';
     // 이미지안에 표시되는 체크박스의 속성
-    var chk_style = 'width:30px;height:30px;position:absolute;font-size:24px;'
-                  + 'right:0px;bottom:0px;z-index:999;background-color:rgba(255,255,255,0.1);color:#f00';
+    var chk_style = 'width:30px;height:30px;line-height:30px;position:absolute;font-size:18px;'
+                  + 'right:0px;top:0px;z-index:999;background-color:rgba(0,0,0,0.5);border:none;color:#fff';
   
     btnAtt.onchange = function(e){
       var files = e.target.files;
@@ -386,7 +413,7 @@ const dropFile = new DropFile("drop-file", "files");
       
       var btn = document.createElement('input')
       btn.setAttribute('type', 'button')
-      btn.setAttribute('value', 'x')
+      btn.setAttribute('value', 'X')
       btn.setAttribute('delFile', file.name);
       btn.setAttribute('style', chk_style);
       btn.onclick = function(ev){
@@ -415,8 +442,29 @@ const dropFile = new DropFile("drop-file", "files");
 )('att_zone', 'btnAtt')
 
 
+
 //썸머노트
 $('.summernote').summernote({
   height: 500,
   lang: "ko-KR"
 });
+
+let addCount = 0;
+
+//옵션추가
+function add_optbox(){
+  if(addCount >= 3) return;
+  let newDiv = document.createElement('div');
+  newDiv.setAttribute("class","optBox");
+  newDiv.innerHTML = "<input type='button' value='X' class='delOptBtn' ><br> <label for='optTitle'>옵션 제목</label> <input class='form-control' type='text' id='optTitle' name='optTitle' placeholder='제목을 입력해 주세요. (30자 이내)' maxlength='30'><label for='optContent'>옵션 설명</label> <input class='form-control' type='text' id='optContent' name='optContent' placeholder='내용을 입력해 주세요. (100자 이내)' maxlength='100'> <label for='optPrice'>가격</label> <input class='form-control price' type='number' id='optPrice' name='optPrice' min='100'> <label for='optDiscountRate'>할인율</label><span>퍼센트(%)</span> <input class='form-control' type='number' id='optDiscountRate' name='optDiscountRate' min='0' max='100'> <label for='optDiscountPrice'>할인된 가격</label> <input class='form-control price' type='number' id='optDiscountPrice' name='optDiscountPrice' min='100'> <label for='optMaxQuantity'>최대 수량</label> <input class='form-control' type='number' id='optMaxQuantity' name='optMaxQuantity' value='10' min='0'> ";
+  addCount++;
+  $("#opt").append(newDiv);
+  del_optBox();
+}
+
+//옵션 삭제
+function del_optBox(){
+  $(".delOptBtn").on("click",function(){
+    $(this).parent().remove();
+  });
+}

@@ -59,7 +59,8 @@
     max-width: 900px;
     min-height:150px;
     padding:10px;
-    border:1px dotted #00f;
+    border:1px dashed rgb(162, 162, 162);
+    
   }
   #att_zone:empty:before{
     content : attr(data-placeholder);
