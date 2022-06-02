@@ -36,5 +36,9 @@ public class TicketDao {
 		return sqlSession.insert("ticket.insertTicketOption",option);
 	}
 
+	public int insertTicketFile(TicketFile ticketFile) {
+		return sqlSession.insert("ticket.insertTicketFile",ticketFile);
+	}
+
 	
 }
