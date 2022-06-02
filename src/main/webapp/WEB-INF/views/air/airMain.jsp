@@ -131,13 +131,13 @@
 		<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
 			<div class="carousel-inner">
 				<div class="carousel-item active">
-					<img src="/upload/air/air_p1.png" class="d-block w-100 airImgSize" alt="프로모션1">
+					<img src="/resources/upload/air/air_p1.png" class="d-block w-100 airImgSize" alt="프로모션1">
 				</div>
 				<div class="carousel-item">
-					<img src="/upload/air/air_p2.png" class="d-block w-100 airImgSize" alt="프로모션2">
+					<img src="/resources/upload/air/air_p2.png" class="d-block w-100 airImgSize" alt="프로모션2">
 				</div>
 				<div class="carousel-item">
-					<img src="/upload/air/air_p3.png" class="d-block w-100 airImgSize" alt="프로모션3">
+					<img src="/resources/upload/air/air_p3.png" class="d-block w-100 airImgSize" alt="프로모션3">
 				</div>
 			</div>
 			<button class="carousel-control-prev" type="button"	data-bs-target="#carouselExampleControls" data-bs-slide="prev">
