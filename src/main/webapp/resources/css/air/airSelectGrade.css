@@ -54,12 +54,14 @@
 }
 .airTable{
     width: 100%;
-    height: auto;
+    height: 100px;
     margin: 0 auto;
+}
+.airTable tbody{
+    height: 60px;
 }
 .airTable tr>td, th{
     width:calc(100%/7);
-    height: 50px;
     font-size: 20px;
 }
 .airTable>thead{
@@ -68,6 +70,78 @@
 .airTableST{
     margin-bottom: 50px;
 }
-.btn-outline-danger{
+
+.test_obj{
     width: 32%;
+    height: 100%;
+}
+.test_obj>span{
+    width: 100%;
+    height: 100%;
+    font-size: 25px;
+}
+.test_obj input[type="radio"] {
+    display: none;
+}
+.test_obj input[type="radio"] + span {
+    display: inline-block;
+    border: 2px solid #dc3545;
+    border-radius: 0.25rem;
+    background-color: #ffffff;
+    text-align: center;
+    cursor: pointer;
+    color: #dc3545;
+}
+.test_obj input[type="radio"]:checked + span {
+    background-color: #dc3545;
+    color: #ffffff;
+}
+.test_obj input[type="radio"]:hover + span{
+    background-color: #dc3545;
+    color: #ffffff;
+}
+.VipLine{
+    width: 100%; 
+    height:100px; 
+    text-align: center;
+}
+.VipBlock{
+    float: left;
+    width: 50%;
+    height: 100%;
+    text-align: center;
+    margin: 3px auto;
+}
+.VipSeat{
+    width: 80px;
+    height: 100px;
+    float: left;
+    content: url(/resources/upload/air/air_icon.png);
+}
+.VipBlank{
+    float: left;
+    width: calc(100% - 160px);
+    height: 100%;
+}
+.VipFront{
+    width: 50%;
+    height: 40px;
+    margin: auto;
+    text-align: center;
+    border: 2px solid red;
+    font-size: 22px;
+}
+.Result{
+    width: 100%;
+    height: 80px;
+    background-color: rgb(162, 162, 162);
+    border: 1px solid black;
+    display: flex;
+}
+.Result>div{
+    color: #fff;
+    font-size: 22px;
+    margin: auto;
+    margin-top: 20px;
+    
 }

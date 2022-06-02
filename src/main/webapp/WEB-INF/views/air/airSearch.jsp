@@ -255,42 +255,43 @@
 					</div>
 				</div>
 			</div>
-
-			<div class="selectEndAirClass selectedAirSchedule" style="width: 100%; height:50%; margin-top: 10px;">
-				<div style="float: left; width: 25%; height:100%;">
-					<div>
-						오는편
-					</div>
-					<div class="selectEndAirLine">
-
-					</div>
-				</div>
-				<div style="float: left; width: 50%; height:100%;">
-					<div>
-						${AirSearch.airArrive} - - - - - - - - - - - - - - - - - - -> ${AirSearch.airStart}
-					</div>
-					<div class="selectEndAirStartTime" style="float: left; width:50%;">
-
-					</div>
-					<div class="selectEndAirEndTime" style="float: left; width:50%;">
-
-					</div>
-				</div>
-				<div style="float: left; width: 25%;  height:100%;">
-					<div>
-						${AirSearch.airEndDate}
-					</div>
-					<div>
-						<div class="selectEndPay">
-							
+			<c:if test="${!empty AirSearch.airEndDate}">
+				<div class="selectEndAirClass selectedAirSchedule" style="width: 100%; height:50%; margin-top: 10px;">
+					<div style="float: left; width: 25%; height:100%;">
+						<div>
+							오는편
 						</div>
-					</div> 
-					
-					<div style="display:none" class="selectAirEndNumber">
-					
+						<div class="selectEndAirLine">
+	
+						</div>
+					</div>
+					<div style="float: left; width: 50%; height:100%;">
+						<div>
+							${AirSearch.airArrive} - - - - - - - - - - - - - - - - - - -> ${AirSearch.airStart}
+						</div>
+						<div class="selectEndAirStartTime" style="float: left; width:50%;">
+	
+						</div>
+						<div class="selectEndAirEndTime" style="float: left; width:50%;">
+	
+						</div>
+					</div>
+					<div style="float: left; width: 25%;  height:100%;">
+						<div>
+							${AirSearch.airEndDate}
+						</div>
+						<div>
+							<div class="selectEndPay">
+								
+							</div>
+						</div> 
+						
+						<div style="display:none" class="selectAirEndNumber">
+						
+						</div>
 					</div>
 				</div>
-			</div>
+			</c:if>
 		</div>
 		<div style="text-align:center; margin-top:20px;">
 			<form action="airReserve.kt">
