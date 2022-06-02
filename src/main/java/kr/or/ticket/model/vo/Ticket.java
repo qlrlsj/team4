@@ -1,5 +1,7 @@
 package kr.or.ticket.model.vo;
 
+import java.util.ArrayList;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,8 +22,6 @@ public class Ticket {
 	private String businessTime;
 	private String businessAddr;
 	private int requiredTime;
-	private String placeFilepath;
-	private String[] ticketFilepath;
 	private int likeCount; 
 	private int ticketScore; 
 	

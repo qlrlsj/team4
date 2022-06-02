@@ -36,6 +36,7 @@
 	<div class="div-content">
 
 		<form class="row g-3" action="/insertTicket.kt" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo}">
 			<div class="content-box">
 				<h4>1. 카테고리</h4>
 				<div class="col-md-4">
@@ -102,14 +103,14 @@
 						<img src="" alt="미리보기 이미지" class="preview">
 					</div>
 				</div>
-				<input class="file" id="chooseFile" name="placeFilepath" type="file" onchange="dropFile.handleFiles(this.files)"
+				<input class="file" id="chooseFile" name="file1" type="file" onchange="dropFile.handleFiles(this.files)"
 					accept="image/png, image/jpeg, image/gif">
 				<label class="file-label" for="btnAtt">상품 사진</label>
 				<p>첫번째 사진이 대표 사진이 됩니다. (4장 필수) </p>
 				<p class="chk" id="productChk"> </p>
 
 				<div id='image_preview'>
-					<input class="file" type='file' id='btnAtt' name="ticketFilepath" multiple='multiple' accept="image/png, image/jpeg, image/gif" onchange="addFile(this);"/>
+					<input class="file" type='file' id='btnAtt' name="file2" multiple='multiple' accept="image/png, image/jpeg, image/gif" onchange="addFile(this);"/>
 					<div id='att_zone' data-placeholder='파일을 첨부 하려면 파일 선택 버튼을 클릭하거나 파일을 드래그앤드롭 하세요'></div>
 				</div>
 				<label for="ticket-content">상품 설명</label>
@@ -132,8 +133,8 @@
 					<input class="form-control" type="number" id="optDiscountRate" name="optDiscountRate" min="0" max="100">
 					<label for="optDiscountPrice">할인된 가격</label>
 					<input class="form-control price" type="number" id="optDiscountPrice" name="optDiscountPrice" min="100">
-					<label for="optMaxQuantity">최대 수량</label>
-					<input class="form-control" type="number" id="optMaxQuantity" name="optMaxQuantity" value="10" min="0">
+					<label for="optStock">재고</label>
+					<input class="form-control" type="number" id="optStock" name="optStock" value="10" min="0">
 				</div>
 			</div>
 			<button type="button" id="optAdd" onclick="add_optbox()">추가</button>
@@ -149,12 +150,13 @@
 					<span>시간</span>
 				</div>	
 				<div class="col-md-4">
-					<select id="hour" class="form-select">
-						<option value="00">00</option>
+					<select id="minute" class="form-select">
+						<option value="0">00</option>
 						<option value="30">30</option>
 					</select>
 					<span>분 소요</span>
 				</div>	
+				<input type="hidden" name="requiredTime">
 			</div>
 
 			<button type="button" id="insertBtn">제출</button>

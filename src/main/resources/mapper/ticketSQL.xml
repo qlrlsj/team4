@@ -23,4 +23,24 @@
 		from local_category order by localName
 	</select>
 	
+	<insert id="insertTicket" parameterType="t" >
+		insert into ticket values
+		(ticket_seq.nextval
+		,#{localId}
+		,#{categoryId}
+		,#{memberNo}
+		,#{expireDate}
+		,#{ticketTitle}
+		,#{ticketContent}
+		,#{importantContent}
+		,#{businessTime}
+		,#{businessAddr}
+		,#{requiredTime}
+		,0,0,#{startDate})
+		<selectKey resultType="int" order="AFTER" keyProperty="ticketNo">
+			select max(ticket_no) from ticket
+		</selectKey>
+	</insert>
+	
+	
 </mapper>

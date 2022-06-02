@@ -110,12 +110,20 @@ $(document).ready(function(){
 
 
 
-//제출시 -유효성검사
+//제출시 
 $("#insertBtn").on("click",function(){
+
   //제출시 주소+상세주소
   const businessAddr = $('input[name=businessAddr]').val($("#sample6_address").val()+" "+$("#sample6_detailAddress").val());
+  //소요시간 계산
+  const hour = $("#hour").val();
+  const minute = $("#minute").val();
+  $("input[name=requiredTime]").val((hour*60)+minute);
 
-    let chkArr = [false,false,false,false];
+
+
+  /********유효성 검사 *********/
+    let chkArr = [false,false,false,false,false];
     let count = 0;
     
     //1-1.카테고리 유효성 검사
@@ -152,7 +160,7 @@ $("#insertBtn").on("click",function(){
         $("#localChk1").css("color","red");
     }else{
         $("#localChk1").text(" ");
-        chkArr[2]=true;
+        chkArr[1]=true;
     }
     
     //2-2.주소 유효성 검사 (상세주소)
@@ -161,21 +169,21 @@ $("#insertBtn").on("click",function(){
         $("#localChk2").css("color","red");
     }else{
         $("#localChk2").text(" ");
-        chkArr[3]=true;
+        chkArr[2]=true;
     }
     
     //3-4. 파일 유효성 검사 (파일1개)
-    const placeLength = $("input[name=placeFilepath]")[0].files.length;
+    const placeLength = $("input[name=file1]")[0].files.length;
     if(placeLength==0){
       $("#placeChk").text("사진 한장 필수입니다.");
       $("#placeChk").css("color","red");
     }else{
         $("#placeChk").text(" ");
-        chkArr[4]=true;
+        chkArr[3]=true;
     }
     //3-5. 파일 유효성 검사 (파일 multiple)
     //null이거나 4장이 아니면
-    const fileLength = $("input[name=ticketFilepath]")[0].files.length;
+    const fileLength = $("input[name=file2]")[0].files.length;
     console.log(fileLength);
     if(fileLength==0||fileLength<4){
       $("#productChk").text("사진 4장 필수입니다.");
@@ -185,8 +193,9 @@ $("#insertBtn").on("click",function(){
       $("#productChk").css("color","red");
     }else{
         $("#productChk").text(" ");
-        chkArr[5]=true;
+        chkArr[4]=true;
     }
+    
 
      
     //모든 유효성검사 성공시 제출 가능한 버튼으로 변경
@@ -196,11 +205,14 @@ $("#insertBtn").on("click",function(){
             count++;
         }
     }
-      if(count != 4){
+      if(count != 5){
           alert("정보를 확인하세요");
       }else{
         $("#insertBtn").prop("type","submit");
       }
+
+      
+      
 });//제출시 끝
 
 
@@ -273,7 +285,8 @@ function sample6_execDaumPostcode() {
     }).open();
 }
 
-//파일업로드 js --업체사진(1장)
+/************************************************/
+// 파일업로드 js --업체사진(1장)
 function DropFile(dropAreaId, fileListId) {
 let dropArea = document.getElementById(dropAreaId);
 let fileList = document.getElementById(fileListId);
@@ -338,6 +351,12 @@ handleFiles
 }
 
 const dropFile = new DropFile("drop-file", "files");
+
+/*********************************************************/
+
+
+
+
 
 
 //파일 업로드 js -- 상품사진 4장(multiple)
@@ -442,7 +461,6 @@ const dropFile = new DropFile("drop-file", "files");
 )('att_zone', 'btnAtt')
 
 
-
 //썸머노트
 $('.summernote').summernote({
   height: 500,
@@ -456,7 +474,7 @@ function add_optbox(){
   if(addCount >= 3) return;
   let newDiv = document.createElement('div');
   newDiv.setAttribute("class","optBox");
-  newDiv.innerHTML = "<input type='button' value='X' class='delOptBtn' ><br> <label for='optTitle'>옵션 제목</label> <input class='form-control' type='text' id='optTitle' name='optTitle' placeholder='제목을 입력해 주세요. (30자 이내)' maxlength='30'><label for='optContent'>옵션 설명</label> <input class='form-control' type='text' id='optContent' name='optContent' placeholder='내용을 입력해 주세요. (100자 이내)' maxlength='100'> <label for='optPrice'>가격</label> <input class='form-control price' type='number' id='optPrice' name='optPrice' min='100'> <label for='optDiscountRate'>할인율</label><span>퍼센트(%)</span> <input class='form-control' type='number' id='optDiscountRate' name='optDiscountRate' min='0' max='100'> <label for='optDiscountPrice'>할인된 가격</label> <input class='form-control price' type='number' id='optDiscountPrice' name='optDiscountPrice' min='100'> <label for='optMaxQuantity'>최대 수량</label> <input class='form-control' type='number' id='optMaxQuantity' name='optMaxQuantity' value='10' min='0'> ";
+  newDiv.innerHTML = "<input type='button' value='X' class='delOptBtn' ><br> <label for='optTitle'>옵션 제목</label> <input class='form-control' type='text' id='optTitle' name='optTitle' placeholder='제목을 입력해 주세요. (30자 이내)' maxlength='30'><label for='optContent'>옵션 설명</label> <input class='form-control' type='text' id='optContent' name='optContent' placeholder='내용을 입력해 주세요. (100자 이내)' maxlength='100'> <label for='optPrice'>가격</label> <input class='form-control price' type='number' id='optPrice' name='optPrice' min='100'> <label for='optDiscountRate'>할인율</label><span>퍼센트(%)</span> <input class='form-control' type='number' id='optDiscountRate' name='optDiscountRate' min='0' max='100'> <label for='optDiscountPrice'>할인된 가격</label> <input class='form-control price' type='number' id='optDiscountPrice' name='optDiscountPrice' min='100'> <label for='optStock'>재고</label> <input class='form-control' type='number' id='optStock' name='optStock' value='10' min='0'> ";
   addCount++;
   $("#opt").append(newDiv);
   del_optBox();
