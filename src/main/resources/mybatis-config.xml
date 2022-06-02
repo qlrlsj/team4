@@ -21,6 +21,7 @@
 		<typeAlias type="kr.or.ticket.model.vo.TicketCategory" alias="tc"/>
 		<typeAlias type="kr.or.ticket.model.vo.LocalCategory" alias="lc"/>
 		<typeAlias type="kr.or.question.model.vo.Question" alias="q"/>
+		<typeAlias type="kr.or.comment.model.vo.Comment" alias="c"/>
 <!-- 		<typeAlias type="kr.or.question.model.vo.FileVo" alias="f"/> -->
 	</typeAliases>
 </configuration>

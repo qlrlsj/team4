@@ -93,5 +93,10 @@ public class QuestionService {
 		return dao.deleteQuestion(questionNo);
 	}
 
+
+	public int questionUpdate(Question q) {
+		return dao.questionUpdate(q);
+	}
+
 	
 }

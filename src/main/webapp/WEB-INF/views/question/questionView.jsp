@@ -59,7 +59,13 @@
 				<c:when test="${grade eq '0'}"> <!-- 로그인한 사용자의 회원등급이 '0'(관리자) -->
 					<tr scope="row">
 						<th id="buttons" colspan="8">
-							<a class="btn btn-primary" href="/questionUpdateFrm.kt?questionNo=${q.questionNo}">수정</a>
+<%-- 							<a class="btn btn-primary" href="/questionUpdateFrm.kt?questionNo=${q.questionNo}">수정</a> --%>
+							<form action="/questionUpdateFrm.kt" method="post">
+								<input type="hidden" name="questionNo" value='${q.questionNo }'>
+								<input type="hidden" name="questionTitle" value='${q.questionTitle }'>
+								<input type="hidden" name="questionContent" value='${q.questionContent }'>
+								<button class="btn btn-primary" type="submit">수정</button>
+							</form>
 							<button class="btn btn-secondary" onclick="questionDelete(${q.questionNo});">삭제</button>
 						</th>
 					</tr>
@@ -68,10 +74,10 @@
 					<tr scope="row">
 						<th id="buttons" colspan="8">
 							<form action="/questionUpdateFrm.kt" method="post">
-								<input type="hidden" name="questionNo" value="${q.questionNo }">
-								<input type="hidden" name="questionTitle" value="${q.questionTitle }">
-								<input type="hidden" name="questionContent" value="${q.questionContent }">
-								<button class="btn btn-primary" type="submit"></button>
+								<input type="hidden" name="questionNo" value='${q.questionNo }'>
+								<input type="hidden" name="questionTitle" value='${q.questionTitle }'>
+								<input type="hidden" name="questionContent" value='${q.questionContent }'>
+								<button class="btn btn-primary" type="submit">수정</button>
 							</form>
 <%-- 							<a class="btn btn-primary" href="/questionUpdateFrm.kt?questionNo=${q.questionNo}&questionTitle=${q.questionTitle}&questionContent=${q.questionContent}">수정</a> --%>
 							<button class="btn btn-secondary" onclick="questionDelete(${q.questionNo});">삭제</button>

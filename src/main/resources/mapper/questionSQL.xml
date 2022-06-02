@@ -46,5 +46,9 @@
 		delete from question where question_no=#{questionNo}	
 	</delete>
 	
+	<update id="questionUpdate" parameterType="q">
+		update question set question_title=#{questionTitle}, question_content=#{questionContent} where question_no=#{questionNo}
+	</update>
+	
 	
 </mapper>

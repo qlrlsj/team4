@@ -27,13 +27,14 @@ $(document).ready(function() {
 			<div class="content-title"><h1>게시글 작성(파일추가)</h1></div>
 			<hr>
 			<div style="width: 80%; margin: auto;">
-				<form method="post" action="/questionWrite.kt">
+				<form method="post" action="/questionUpdate.kt">
 	<!-- 			<input type="text" name="writer" style="width: 20%;" placeholder="작성자"/><br> -->
-					<input type="text" name="questionTitle" style="width: 40%;" placeholder="제목"/>
+					<input type="text" name="questionTitle" style="width: 40%;" value="${questionTitle }"/>
 					<br><br> 
-					<textarea class="summernote" name="questionContent"></textarea>
-					<input id="subBtn" type="button" value="글 작성" style="float: right;" onclick="goWrite(this.form)"/>
-					<input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
+					<textarea class="summernote" name="questionContent">${questionContent }</textarea>
+					<input id="subBtn" type="submit" value="글 수정" style="float: right;" onclick="goWrite(this.form)"/>
+					<input type="hidden" name="questionNo" value="${questionNo }"/>
+<%-- 					<input type="hidden" name="memberId" value="${sessionScope.m.memberId }"> --%>
 				</form>
 			</div>
 			

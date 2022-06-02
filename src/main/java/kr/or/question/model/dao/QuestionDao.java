@@ -38,6 +38,18 @@ public class QuestionDao {
 		return result;
 	}
 
+
+	public int questionUpdate(Question q) {
+		System.out.println("service에서 dao로 들어온 question : "+q);
+		int result = sqlSession.update("question.questionUpdate",q);
+		if(result == 1) {
+			System.out.println("게시글 변경 완료");
+		}else {
+			System.out.println("게시글 변경 실패");
+		}
+		return result;
+	}
+
 	//여기서부터 시작
 	
 }

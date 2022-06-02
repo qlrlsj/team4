@@ -68,10 +68,21 @@ public class QuestionController {
 	
 	@RequestMapping(value="/questionUpdateFrm.kt")
 	public String questionUpdateFrm(int questionNo, String questionTitle, String questionContent, Model model) {
-		System.out.println("jsp에서 넘어온 게시글 번호 : "+questionNo);
-		System.out.println("jsp에서 넘어온 게시글 제목 : "+questionTitle);
-		System.out.println("jsp에서 넘어온 게시글 내용 : "+questionContent);
+//		System.out.println("jsp에서 넘어온 게시글 번호 : "+questionNo);
+//		System.out.println("jsp에서 넘어온 게시글 제목 : "+questionTitle);
+//		System.out.println("jsp에서 넘어온 게시글 내용 : "+questionContent);
 		model.addAttribute("questionNo",questionNo);
+		model.addAttribute("questionTitle",questionTitle);
+		model.addAttribute("questionContent",questionContent);
 		return "question/questionUpdateFrm";
+	}
+	
+	@RequestMapping(value="/questionUpdate.kt")
+	public String questionUpdate(Question q) {
+		System.out.println("변경된 q : "+q);
+//		System.out.println("변경된 questionTitle :"+questionTitle);
+//		System.out.println("변경된 questionContent : "+questionContent);
+		int result = service.questionUpdate(q);
+		return "redirect:/questionList.kt?reqPage=1";
 	}
 }
