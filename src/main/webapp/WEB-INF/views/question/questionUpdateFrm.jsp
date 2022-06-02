@@ -22,8 +22,6 @@ $(document).ready(function() {
 <body>
 		<div class="div-content"><br><br>
 			<div class="content-title" id="content">FAQ수정</div>
-			<h2>컨트롤러에서 가져온 번호 ${questionNo}</h2>
-			
 			<div class="content-title"><h1>게시글 작성(파일추가)</h1></div>
 			<hr>
 			<div style="width: 80%; margin: auto;">

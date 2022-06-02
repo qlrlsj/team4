@@ -1,6 +1,5 @@
 package kr.or.comment.model.vo;
 
-import kr.or.member.model.vo.Member;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
