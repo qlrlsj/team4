@@ -41,7 +41,7 @@ public class QuestionController {
 		}else {
 			System.out.println("글 작성 실패");
 		}
-		return "redirect:/";
+		return "redirect:/questionList.kt?reqPage=1";
 	}
 	
 	@RequestMapping(value="/questView.kt")
@@ -54,6 +54,24 @@ public class QuestionController {
 		return "question/questionView";
 	}
 	
+	@RequestMapping(value="/questionDelete.kt")
+	public String questionDelete(int questionNo) {
+//		System.out.println("jsp에서 넘어온 게시글 번호 : "+questionNo);
+		int result = service.deleteQuestion(questionNo);
+//		if(result == 1) {
+//			System.out.println("게시글 삭제 완료");
+//		}else {
+//			System.out.println("게시글 삭제 실패");
+//		}
+		return "redirect:/questionList.kt?reqPage=1";
+	}
 	
-	
+	@RequestMapping(value="/questionUpdateFrm.kt")
+	public String questionUpdateFrm(int questionNo, String questionTitle, String questionContent, Model model) {
+		System.out.println("jsp에서 넘어온 게시글 번호 : "+questionNo);
+		System.out.println("jsp에서 넘어온 게시글 제목 : "+questionTitle);
+		System.out.println("jsp에서 넘어온 게시글 내용 : "+questionContent);
+		model.addAttribute("questionNo",questionNo);
+		return "question/questionUpdateFrm";
+	}
 }

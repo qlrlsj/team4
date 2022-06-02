@@ -29,11 +29,15 @@ public class QuestionDao {
 	}
 
 	public Question selectOneQuestion(int questionNo) {
-		List list = sqlSession.selectOne("question.selectOneQuestion",questionNo);
-		System.out.println("mapper에 다녀온 후 list : " +list);
-		return null;
+		Question q = sqlSession.selectOne("question.selectOneQuestion",questionNo);
+		return q;
 	}
-	
+
+	public int deleteQuestion(int questionNo) {
+		int result = sqlSession.delete("question.deleteQuestion",questionNo);
+		return result;
+	}
+
 	//여기서부터 시작
 	
 }
