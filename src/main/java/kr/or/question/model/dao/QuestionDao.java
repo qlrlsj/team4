@@ -6,6 +6,8 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import kr.or.comment.model.vo.Comment;
 import kr.or.question.model.vo.Question;
 
 @Repository
@@ -49,6 +51,13 @@ public class QuestionDao {
 		}
 		return result;
 	}
+
+	public Comment selectNoticeComment(int questionNo) {
+		Comment c = sqlSession.selectOne("comment.selectOneQuestion",questionNo);
+		System.out.println("mapper다녀온 후 해당 게시글의 comment : "+c);
+		return c;
+	}
+
 
 	//여기서부터 시작
 	

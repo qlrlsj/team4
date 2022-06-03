@@ -61,15 +61,15 @@
 			</div>
 			
 			<div class="mb-3">
-				<label for="exampleFormControlInput1" class="form-label" >Email address<span class='identify'> *</span><span id="memberEmailChk"></span></label><span id=emailChk></span> 
-				<input type="email" name="memberEmail" class="form-control"
-					id="memberEmail" placeholder="name@example.com">
+				<label for="memberName" class="form-label" >이메일 인증<span class='identify'> *</span><span id="memberEmailChk"></span></label><span id=emailChk></span> 
+				<input type="email" name="memberEmail" class="form-control"	id="memberEmail" placeholder="name@example.com">
 			</div>
 			<div class="mb-3">
 				<label for="exampleFormControlTextarea1" class="form-label" >자기소개</label>
 				<textarea class="form-control" name="memberIntro" id="memberIntro"
 					rows="3"></textarea><br>
 			</div>
+
 			<div class="mb-3">
 				<div class="form-check" style="padding-bottom: 1px">
 					<input class="form-check-input" type="checkbox" value=""

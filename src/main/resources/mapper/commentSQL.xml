@@ -5,6 +5,16 @@
 	<!-- parameterType="패키지 경로를 전부 적어주어야 구분이 가능하다 mapper로 들어온 값을 의미한다" (Mybatis에서는 파라미터타입을 한개만 가능하다) -->
 	<!-- resultType="mapper에서 나가는 값을 의미한다" -->
 	<!-- <select id="selectOneMember" parameterType="kr.or.member.model.vo.Member" resultType="kr.or.member.model.vo.Member"></select> -->
+	<insert id="insertComment" parameterType="c">
+		insert into qc_comment values(qc_sequence.nextval,#{questionNo},#{qcComment},to_char(sysdate, 'yyyy-mm-dd'))
+	</insert>
 	
-	
+	<select id="selectOneQuestion" parameterType="int" resultType="c">
+		select 
+			qc_no as qcNo,
+			question_no as questionNo,
+			qc_comment as qcComment,
+			qc_date as qcDate
+		from qc_comment where question_no=#{questionNo}
+	</select>
 </mapper>

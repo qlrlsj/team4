@@ -32,6 +32,15 @@
 	#uuu, #ddd{
 		margin-right: 3px;
 	}
+	.qcqc{
+		display: flex;
+		flex-direction: row;
+		justify-content: left;
+	}
+	.logo{
+		vertical-align: middle;
+		margin-top: 13px;
+	}
 </style>
 </head>
 <body>
@@ -55,7 +64,7 @@
 								<button class="btn btn-primary" type="submit" id="uuu">수정</button>
 								<button class="btn btn-secondary" onclick="questionDelete(${q.questionNo});" id="ddd">삭제</button>
 								<div class="noticeListbtn">
-									<button class="btn btn-light" id="noticeListbtn" onclick="noticeList()">처음으로</button>
+									<button class="btn btn-light" id="noticeListbtn" onclick="noticeList1()" type="button">처음으로</button>
 								</div>
 							</form>
 						</th>
@@ -71,7 +80,7 @@
 								<button class="btn btn-primary" type="submit" id="uuu">수정</button>
 								<button class="btn btn-secondary" onclick="questionDelete(${q.questionNo});" id="ddd">삭제</button>
 								<div class="noticeListbtn">
-									<button class="btn btn-light" id="noticeListbtn" onclick="noticeList()">처음으로</button>
+									<button class="btn btn-light" id="noticeListbtn" onclick="noticeList1()" type="button">처음으로</button>
 								</div>
 							</form>
 <%-- 							<a class="btn btn-primary" href="/questionUpdateFrm.kt?questionNo=${q.questionNo}&questionTitle=${q.questionTitle}&questionContent=${q.questionContent}">수정</a> --%>
@@ -80,7 +89,7 @@
 				</c:when>
 				<c:otherwise>
 					<div class="noticeListbtn">
-						<button class="btn btn-light" id="noticeListbtn" onclick="noticeList()">처음으로</button>
+						<button class="btn btn-light" id="noticeListbtn" onclick="noticeList()" type="button">처음으로</button>
 					</div>
 				</c:otherwise>
 			</c:choose><br>
@@ -102,43 +111,31 @@
 					</td>
 			</tr>
 			</table>
-			
-			<!-- ------------------------------- -->
-<!-- 			<div> -->
-<!-- 				<form action="/insertComment.kt" method="post"> -->
-<!-- 					<ul> -->
-<!-- 						<li> -->
-<!-- 							<span>account_box</span> -->
-<!-- 						</li> -->
-<!-- 						<li> -->
-<!-- 							<textarea name="ncComment" placeholder="댓글 내용을 입력하세요."></textarea> -->
-<!-- 						</li> -->
-<!-- 					</ul> -->
-<!-- 				</form> -->
-<!-- 			</div> -->
-			
-			<div>
-
-    <form method="post" action="/insertComment.kt">
-    
-        <p>
-            <input type="text" value="${q.memberId }" readonly>
-        </p>
-        <p>
-            <textarea rows="5" cols="158" name="ncComment"></textarea>
-        </p>
-        <p>
-        	<c:choose>
-        		<c:when test="${grade eq '0'}">
-		            <button type="submit">댓글 작성</button>
-        		</c:when>
-				<c:when test="${memberId == questionId}">
-		            <button type="submit">댓글 작성</button>
-				</c:when>				
-        	</c:choose>
-        </p>
-    </form>
-    
+<%-- 			<h2>${q.questionTitle }</h2> --%>
+<%-- 			<h2>코멘트 타이틀 : ${c.qcComment }</h2> --%>
+<div>
+	<!-- 관리자 로그인 했을때 && comment가 달려있지 않은 글만 아래의 답글작성 버튼이 활성화 -->
+	<c:choose>
+		<c:when test="${sessionScope.m.memberGrade eq '0' && c eq null }">
+						<form method="post" action="/insertComment.kt">
+		        <div class="qcqc">
+		            <img src="/resources/img/logo.png" height="100px" class="logo">
+		            <textarea rows="5" cols="158" name="qcComment"></textarea>
+		            <input type="hidden" name="questionNo" value="${q.questionNo }"/>
+		        </div>
+	    		<button type="submit">답글작성</button>
+			</form>
+		</c:when>
+		<c:when test="${c eq null}"> <!-- K-TRIP의 답변이 아직 달리지 않은 상태 -->
+			<h3>K-TRIP의 답변을 잠시만 기다려주세요 </h3>
+		</c:when>
+		<c:otherwise>
+			<div class="qcqc">
+            	<img src="/resources/img/logo.png" height="100px" class="logo">
+            	<textarea rows="5" cols="158" name="qcComment" readonly>${c.qcComment }</textarea>
+			</div>
+		</c:otherwise>
+	</c:choose>
 </div>
 			
 
@@ -147,6 +144,9 @@
 		
 	<script>
 		function noticeList(){
+			location.href="/questionList.kt?reqPage=1";
+		}
+		function noticeList1(){
 			location.href="/questionList.kt?reqPage=1";
 		}
 		function questionDelete(questionNo){
@@ -158,9 +158,6 @@
 				alert("삭제요청이 취소 되었습니다.");
 			}
 		}
-		
-		
-		
 	</script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>

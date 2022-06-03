@@ -8,10 +8,13 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
+import kr.or.comment.model.vo.Comment;
 import kr.or.question.model.dao.QuestionDao;
 import kr.or.question.model.vo.Question;
 import kr.or.question.model.vo.QuestionPageDate;
+import kr.or.question.model.vo.QuestionViewData;
 
 @Service
 public class QuestionService {
@@ -96,6 +99,16 @@ public class QuestionService {
 
 	public int questionUpdate(Question q) {
 		return dao.questionUpdate(q);
+	}
+
+	public QuestionViewData selectQuestionView(int questionNo) {
+		//기존 게시물 정보 불러오기
+		Question q = dao.selectOneQuestion(questionNo);
+		//코멘트에 달려있는 댓글 조회
+		Comment c = dao.selectNoticeComment(questionNo);
+		QuestionViewData qvd = new QuestionViewData(q, c);
+		System.out.println("service에서 합쳐진 qvd : "+qvd);
+		return qvd;
 	}
 
 	
