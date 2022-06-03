@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TicketFile {
+	private int ticketNo;
 	private String placeFilepath;
 	private String ticketFilepath1;
 	private String ticketFilepath2;
