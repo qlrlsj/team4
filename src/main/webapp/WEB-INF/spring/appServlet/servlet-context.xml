@@ -80,11 +80,6 @@
 	<websocket:handlers>
 		<websocket:mapping handler="directChat" path="/chat.kt"/>
 		<websocket:mapping handler="alarmChat" path="/alarm.kt"/>
-		<websocket:handshake-interceptors>
-	         <beans:bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/>
-	      </websocket:handshake-interceptors>
-	      <!-- sockjs를 추가해서 프론트에서 웹소켓 기능을 js로 구현할 수 있도록 해줌 -->
-	      <websocket:sockjs websocket-enabled="true"/>
 	</websocket:handlers>
 
 	<context:component-scan base-package="kr.or.iei" />

@@ -70,8 +70,8 @@ select option[value=""][disabled] {
 	}
 	</script>
 
-	<h2>동행자 모집</h2>
-	
+	<h2>동행자 모집</h2>	
+	<button type="button" onclick="location.href='/chatList.kt?memberNo='+${sessionScope.m.memberNo}">리스트</button>
 		<div class="div-content p-3 mb-5 bg-secondary row">
 			<!-- 지역 검색 -->
 			<select class="form-select col comS" name="companionField" id="field">

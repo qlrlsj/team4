@@ -27,10 +27,12 @@
 	  	<c:when test="${sessionScope.m.memberNo gt com.memberNo}">
 		  <input type="hidden" name="memberNo2" value="${sessionScope.m.memberNo }">
 		  <input type="hidden" name="memberNo1" value="${com.memberNo }">
+		  <input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
 	  	</c:when>
 	  	<c:otherwise>
 	  	  <input type="hidden" name="memberNo1" value="${sessionScope.m.memberNo }">
 		  <input type="hidden" name="memberNo2" value="${com.memberNo }">
+		  <input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
 	  	</c:otherwise>
 	  </c:choose>
 	</form>

@@ -18,4 +18,20 @@ public class ChatService {
 	public ArrayList<Chat> selectOneChatting(ChatRoom chat) {
 		return dao.selectOneChatting(chat);
 	}
+
+	public ChatRoom selectOneRoom(ChatRoom chat) {
+		return dao.selectOneRoom(chat);
+	}
+
+	public int insertChatRoom(ChatRoom chat) {
+		return dao.insertChatRoom(chat);
+	}
+
+	public int insertChat(Chat ch) {		
+		return dao.insertChat(ch);
+	}
+
+	public ArrayList<ChatRoom> getChatList(int memberNo) {
+		return dao.getChatList(memberNo);
+	}
 }
