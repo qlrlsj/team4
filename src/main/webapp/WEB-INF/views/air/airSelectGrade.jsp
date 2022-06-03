@@ -10,7 +10,6 @@
 <link rel="stylesheet" href="/resources/css/air/airSelectGrade.css">
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
-
 	<div class="div-content">
 		<div class="orderNavi">
 			<div class="orderDiv Proceeding">
@@ -75,7 +74,7 @@
 							<td>${airReserve.airNumberST}</td>
 							<td>${airReserve.airStartTimeST}</td>
 							<td>${airReserve.airEndTimeST}</td>
-							<td colspan="3" aria-label="Basic radio toggle button group">
+							<td colspan="3">
 								<label class="test_obj">
 									<input type="radio" name="airStartPay" value="1" checked>
 									<span>50000</span>
@@ -160,21 +159,21 @@
 		</div>
 		<div style="text-align:center;">
 			<div style="width: 100%; height:50px; margin-bottom: 100px;">
-				<button class="btn btn-primary" style="width: 25%; text-align: center;" placeholder="좌석선택" data-bs-toggle="modal" data-bs-target="#selectSeat"> 예약하기</button>
+				<button class="btn btn-primary" style="width: 25%; text-align: center;" placeholder="좌석선택" data-bs-toggle="modal" data-bs-target="#selectSeat"> 좌석 선택</button>
 			</div>
 			<div class="modal fade" id="selectSeat" tabindex="-1" aria-labelledby="airStartSeat" aria-hidden="true">
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h5 class="modal-title" id="airStartSeat">좌석 선택</h5>
+							<h5 class="modal-title" id="airStartSeat">출발 항공권 좌석 선택</h5>
 							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						</div>
 						<div class="modal-body">
-							<div class="VipMenu" style="width: 100%; height: 500px;">
-								<div style="width: 100%; height:100px; text-align: center;">
-									<div class="VipFront">정면</div>
+							<div class="VipMenu">
+								<div class="FrontDiv"">
+									<div class="Front">정면</div>
 								</div>
-								<div class="VipLine">
+								<div class="Line">
 									<div class="VipBlock">
 										<div class="VipSeat"></div>
 										<div class="VipBlank"></div>
@@ -186,7 +185,7 @@
 										<div class="VipSeat"></div> 
 									</div>
 								</div>
-								<div class="VipLine">
+								<div class="Line">
 									<div class="VipBlock">
 										<div class="VipSeat"></div>
 										<div class="VipBlank"></div>
@@ -198,7 +197,7 @@
 										<div class="VipSeat"></div> 
 									</div>
 								</div>
-								<div class="VipLine">
+								<div class="Line">
 									<div class="VipBlock">
 										<div class="VipSeat"></div>
 										<div class="VipBlank"></div>
@@ -208,6 +207,496 @@
 										<div class="VipSeat"></div>
 										<div class="VipBlank"></div>
 										<div class="VipSeat"></div> 
+									</div>
+								</div>
+							</div>
+
+							<div class="BusinessMenu">
+								<div class="FrontDiv"">
+									<div class="Front">정면</div>
+								</div>
+								<div class="Line">
+									<div class="BusinessBlock">
+										<div class="BusinessSeat"></div>
+										<div class="BusinessSeat"></div>
+									</div>
+									<div class="BusinessBlock">
+										<div class="BusinessSeat"></div>
+										<div class="BusinessSeat"></div> 
+									</div>
+									<div class="BusinessBlock">
+										<div class="BusinessSeat"></div>
+										<div class="BusinessSeat"></div> 
+									</div>
+								</div>
+								<div class="Line">
+									<div class="BusinessBlock">
+										<div class="BusinessSeat"></div>
+										<div class="BusinessSeat"></div>
+									</div>
+									<div class="BusinessBlock">
+										<div class="BusinessSeat"></div>
+										<div class="BusinessSeat"></div> 
+									</div>
+									<div class="BusinessBlock">
+										<div class="BusinessSeat"></div>
+										<div class="BusinessSeat"></div> 
+									</div>
+								</div>
+								<div class="Line">
+									<div class="BusinessBlock">
+										<div class="BusinessSeat"></div>
+										<div class="BusinessSeat"></div> 
+									</div>
+									<div class="BusinessBlock">
+										<div class="BusinessSeat"></div>
+										<div class="BusinessSeat"></div>
+									</div>
+									<div class="BusinessBlock">
+										<div class="BusinessSeat"></div>
+										<div class="BusinessSeat"></div> 
+									</div>
+								</div>
+								<div class="Line">
+									<div class="BusinessBlock">
+										<div class="BusinessSeat"></div>
+										<div class="BusinessSeat"></div> 
+									</div>
+									<div class="BusinessBlock">
+									</div>
+									<div class="BusinessBlock">
+										<div class="BusinessSeat"></div>
+										<div class="BusinessSeat"></div> 
+									</div>
+								</div>
+								<div class="Service_Img"></div>
+								<div class="Line" style="margin-top: 80px;">
+									<div class="BusinessBlock">
+										<div class="BusinessSeat"></div>
+										<div class="BusinessSeat"></div> 
+									</div>
+									<div class="BusinessBlock">
+										<div class="BusinessSeat"></div>
+										<div class="BusinessSeat"></div>
+									</div>
+									<div class="BusinessBlock">
+										<div class="BusinessSeat"></div>
+										<div class="BusinessSeat"></div> 
+									</div>
+								</div>
+							</div>
+
+							<div class="EconomyMenu">
+								<div class="FrontDiv"">
+									<div class="Front">정면</div>
+								</div>
+								<div class="EconomyLine">
+									<div class="EconomyBlock">
+										<div class="EconomySeat">1</div>
+										<div class="EconomySeat"></div> 
+										<div class="EconomySeat"></div> 
+									</div>
+									<div class="EconomyBlock">										
+									</div>
+									<div class="EconomyBlock EconomyLastBlock">
+									</div>
+								</div>
+								<div class="EconomyLine">
+									<div class="EconomyBlock">
+										<div class="EconomySeat"></div>
+										<div class="EconomySeat"></div> 
+										<div class="EconomySeat"></div> 
+									</div>
+									<div class="EconomyBlock">									
+									</div>
+									<div class="EconomyBlock EconomyLastBlock">
+									</div>
+								</div>
+								<div class="EconomyLine">
+									<div class="EconomyBlock">
+										<div class="EconomySeat"></div>
+										<div class="EconomySeat"></div> 
+										<div class="EconomySeat"></div> 
+									</div>
+									<div class="EconomyBlock">
+										<div class="EconomySeat"></div> 
+										<div class="EconomySeat"></div> 
+										<div class="EconomySeat"></div> 
+										<div class="EconomySeat"></div> 										
+									</div>
+									<div class="EconomyBlock EconomyLastBlock">
+										<div class="EconomySeat"></div>
+										<div class="EconomySeat"></div> 
+										<div class="EconomySeat"></div> 
+									</div>
+								</div>
+								<div class="EconomyLine">
+									<div class="EconomyBlock">
+										<div class="EconomySeat"></div>
+										<div class="EconomySeat"></div> 
+										<div class="EconomySeat"></div> 
+									</div>
+									<div class="EconomyBlock">
+										<div class="EconomySeat"></div> 
+										<div class="EconomySeat"></div> 
+										<div class="EconomySeat"></div> 
+										<div class="EconomySeat"></div> 										
+									</div>
+									<div class="EconomyBlock EconomyLastBlock">
+										<div class="EconomySeat"></div>
+										<div class="EconomySeat"></div> 
+										<div class="EconomySeat"></div> 
+									</div>
+								</div>
+								<div class="EconomyLine">
+									<div class="EconomyBlock">
+										<div class="EconomySeat"></div>
+										<div class="EconomySeat"></div> 
+										<div class="EconomySeat"></div> 
+									</div>
+									<div class="EconomyBlock">
+										<div class="EconomySeat"></div> 
+										<div class="EconomySeat"></div> 
+										<div class="EconomySeat"></div> 
+										<div class="EconomySeat"></div> 										
+									</div>
+									<div class="EconomyBlock EconomyLastBlock">
+										<div class="EconomySeat"></div>
+										<div class="EconomySeat"></div> 
+										<div class="EconomySeat"></div> 
+									</div>
+								</div>
+								<div class="EconomyLine">
+									<div class="EconomyBlock">
+										<div class="EconomySeat"></div>
+										<div class="EconomySeat"></div> 
+										<div class="EconomySeat"></div> 
+									</div>
+									<div class="EconomyBlock">
+										<div class="EconomySeat"></div> 
+										<div class="EconomySeat"></div> 
+										<div class="EconomySeat"></div> 
+										<div class="EconomySeat"></div> 										
+									</div>
+									<div class="EconomyBlock EconomyLastBlock">
+										<div class="EconomySeat"></div>
+										<div class="EconomySeat"></div> 
+										<div class="EconomySeat"></div> 
+									</div>
+								</div>
+								<div class="EconomyLine">
+									<div class="EconomyBlock">
+										<div class="EconomySeat"></div>
+										<div class="EconomySeat"></div> 
+										<div class="EconomySeat"></div> 
+									</div>
+									<div class="EconomyBlock">
+										<div class="EconomySeat"></div> 
+										<div class="EconomySeat"></div> 
+										<div class="EconomySeat"></div> 
+										<div class="EconomySeat"></div> 										
+									</div>
+									<div class="EconomyBlock EconomyLastBlock">
+										<div class="EconomySeat"></div>
+										<div class="EconomySeat"></div> 
+										<div class="EconomySeat"></div> 
+									</div>
+								</div>
+								<div class="EconomyLine">
+									<div class="EconomyBlock">
+										<div class="EconomySeat"></div>
+										<div class="EconomySeat"></div> 
+										<div class="EconomySeat"></div> 
+									</div>
+									<div class="EconomyBlock">
+										<div class="EconomySeat"></div> 
+										<div class="EconomySeat"></div> 
+										<div class="EconomySeat"></div> 
+										<div class="EconomySeat"></div> 										
+									</div>
+									<div class="EconomyBlock EconomyLastBlock">
+										<div class="EconomySeat"></div>
+										<div class="EconomySeat"></div> 
+										<div class="EconomySeat"></div> 
+									</div>
+								</div>
+							</div>
+							<div class="Result">
+								<div class="Pay"></div>
+								<div>X</div>
+								<div class="Amount">1</div>
+								<div>=</div>
+								<div class="Multiply">400000</div>
+								<div>(원)</div>
+							</div>
+						</div>
+						
+						<div class="modal-footer">
+							<button class="btn btn-primary" style="width: 45%; text-align: center;" placeholder="좌석선택" data-bs-toggle="modal" data-bs-target="#selectEndSeat">돌아갈 좌석선택</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<!--왕복선 모달-->
+			<div class="modal fade" id="selectEndSeat" tabindex="-1" aria-labelledby="airEndSeat" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="airEndSeat">돌아갈 항공권 좌석 선택</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<div class="VipMenu">
+								<div class="FrontDiv">
+									<div class="Front">정면</div>
+								</div>
+								<div class="Line">
+									<div class="VipBlock">
+										<div class="VipSeat"></div>
+										<div class="VipBlank"></div>
+										<div class="VipSeat"></div>
+									</div>
+									<div class="VipBlock">
+										<div class="VipSeat"></div>
+										<div class="VipBlank"></div>
+										<div class="VipSeat"></div> 
+									</div>
+								</div>
+								<div class="Line">
+									<div class="VipBlock">
+										<div class="VipSeat"></div>
+										<div class="VipBlank"></div>
+										<div class="VipSeat"></div>
+									</div>
+									<div class="VipBlock">
+										<div class="VipSeat"></div>
+										<div class="VipBlank"></div>
+										<div class="VipSeat"></div> 
+									</div>
+								</div>
+								<div class="Line">
+									<div class="VipBlock">
+										<div class="VipSeat"></div>
+										<div class="VipBlank"></div>
+										<div class="VipSeat"></div>
+									</div>
+									<div class="VipBlock">
+										<div class="VipSeat"></div>
+										<div class="VipBlank"></div>
+										<div class="VipSeat"></div> 
+									</div>
+								</div>
+							</div>
+
+							<div class="BusinessMenu">
+								<div class="FrontDiv"">
+									<div class="Front">정면</div>
+								</div>
+								<div class="Line">
+									<div class="BusinessBlock">
+										<div class="BusinessSeat"></div>
+										<div class="BusinessSeat"></div>
+									</div>
+									<div class="BusinessBlock">
+										<div class="BusinessSeat"></div>
+										<div class="BusinessSeat"></div> 
+									</div>
+									<div class="BusinessBlock">
+										<div class="BusinessSeat"></div>
+										<div class="BusinessSeat"></div> 
+									</div>
+								</div>
+								<div class="Line">
+									<div class="BusinessBlock">
+										<div class="BusinessSeat"></div>
+										<div class="BusinessSeat"></div>
+									</div>
+									<div class="BusinessBlock">
+										<div class="BusinessSeat"></div>
+										<div class="BusinessSeat"></div> 
+									</div>
+									<div class="BusinessBlock">
+										<div class="BusinessSeat"></div>
+										<div class="BusinessSeat"></div> 
+									</div>
+								</div>
+								<div class="Line">
+									<div class="BusinessBlock">
+										<div class="BusinessSeat"></div>
+										<div class="BusinessSeat"></div> 
+									</div>
+									<div class="BusinessBlock">
+										<div class="BusinessSeat"></div>
+										<div class="BusinessSeat"></div>
+									</div>
+									<div class="BusinessBlock">
+										<div class="BusinessSeat"></div>
+										<div class="BusinessSeat"></div> 
+									</div>
+								</div>
+								<div class="Line">
+									<div class="BusinessBlock">
+										<div class="BusinessSeat"></div>
+										<div class="BusinessSeat"></div> 
+									</div>
+									<div class="BusinessBlock">
+									</div>
+									<div class="BusinessBlock">
+										<div class="BusinessSeat"></div>
+										<div class="BusinessSeat"></div> 
+									</div>
+								</div>
+								<div class="Service_Img"></div>
+								<div class="Line" style="margin-top: 80px;">
+									<div class="BusinessBlock">
+										<div class="BusinessSeat"></div>
+										<div class="BusinessSeat"></div> 
+									</div>
+									<div class="BusinessBlock">
+										<div class="BusinessSeat"></div>
+										<div class="BusinessSeat"></div>
+									</div>
+									<div class="BusinessBlock">
+										<div class="BusinessSeat"></div>
+										<div class="BusinessSeat"></div> 
+									</div>
+								</div>
+							</div>
+
+							<div class="EconomyMenu">
+								<div class="FrontDiv"">
+									<div class="Front">정면</div>
+								</div>
+								<div class="EconomyLine">
+									<div class="EconomyBlock">
+										<div class="EconomySeat"></div>
+										<div class="EconomySeat"></div> 
+										<div class="EconomySeat"></div> 
+									</div>
+									<div class="EconomyBlock">										
+									</div>
+									<div class="EconomyBlock EconomyLastBlock">
+									</div>
+								</div>
+								<div class="EconomyLine">
+									<div class="EconomyBlock">
+										<div class="EconomySeat"></div>
+										<div class="EconomySeat"></div> 
+										<div class="EconomySeat"></div> 
+									</div>
+									<div class="EconomyBlock">									
+									</div>
+									<div class="EconomyBlock EconomyLastBlock">
+									</div>
+								</div>
+								<div class="EconomyLine">
+									<div class="EconomyBlock">
+										<div class="EconomySeat"></div>
+										<div class="EconomySeat"></div> 
+										<div class="EconomySeat"></div> 
+									</div>
+									<div class="EconomyBlock">
+										<div class="EconomySeat"></div> 
+										<div class="EconomySeat"></div> 
+										<div class="EconomySeat"></div> 
+										<div class="EconomySeat"></div> 										
+									</div>
+									<div class="EconomyBlock EconomyLastBlock">
+										<div class="EconomySeat"></div>
+										<div class="EconomySeat"></div> 
+										<div class="EconomySeat"></div> 
+									</div>
+								</div>
+								<div class="EconomyLine">
+									<div class="EconomyBlock">
+										<div class="EconomySeat"></div>
+										<div class="EconomySeat"></div> 
+										<div class="EconomySeat"></div> 
+									</div>
+									<div class="EconomyBlock">
+										<div class="EconomySeat"></div> 
+										<div class="EconomySeat"></div> 
+										<div class="EconomySeat"></div> 
+										<div class="EconomySeat"></div> 										
+									</div>
+									<div class="EconomyBlock EconomyLastBlock">
+										<div class="EconomySeat"></div>
+										<div class="EconomySeat"></div> 
+										<div class="EconomySeat"></div> 
+									</div>
+								</div>
+								<div class="EconomyLine">
+									<div class="EconomyBlock">
+										<div class="EconomySeat"></div>
+										<div class="EconomySeat"></div> 
+										<div class="EconomySeat"></div> 
+									</div>
+									<div class="EconomyBlock">
+										<div class="EconomySeat"></div> 
+										<div class="EconomySeat"></div> 
+										<div class="EconomySeat"></div> 
+										<div class="EconomySeat"></div> 										
+									</div>
+									<div class="EconomyBlock EconomyLastBlock">
+										<div class="EconomySeat"></div>
+										<div class="EconomySeat"></div> 
+										<div class="EconomySeat"></div> 
+									</div>
+								</div>
+								<div class="EconomyLine">
+									<div class="EconomyBlock">
+										<div class="EconomySeat"></div>
+										<div class="EconomySeat"></div> 
+										<div class="EconomySeat"></div> 
+									</div>
+									<div class="EconomyBlock">
+										<div class="EconomySeat"></div> 
+										<div class="EconomySeat"></div> 
+										<div class="EconomySeat"></div> 
+										<div class="EconomySeat"></div> 										
+									</div>
+									<div class="EconomyBlock EconomyLastBlock">
+										<div class="EconomySeat"></div>
+										<div class="EconomySeat"></div> 
+										<div class="EconomySeat"></div> 
+									</div>
+								</div>
+								<div class="EconomyLine">
+									<div class="EconomyBlock">
+										<div class="EconomySeat"></div>
+										<div class="EconomySeat"></div> 
+										<div class="EconomySeat"></div> 
+									</div>
+									<div class="EconomyBlock">
+										<div class="EconomySeat"></div> 
+										<div class="EconomySeat"></div> 
+										<div class="EconomySeat"></div> 
+										<div class="EconomySeat"></div> 										
+									</div>
+									<div class="EconomyBlock EconomyLastBlock">
+										<div class="EconomySeat"></div>
+										<div class="EconomySeat"></div> 
+										<div class="EconomySeat"></div> 
+									</div>
+								</div>
+								<div class="EconomyLine">
+									<div class="EconomyBlock">
+										<div class="EconomySeat"></div>
+										<div class="EconomySeat"></div> 
+										<div class="EconomySeat"></div> 
+									</div>
+									<div class="EconomyBlock">
+										<div class="EconomySeat"></div> 
+										<div class="EconomySeat"></div> 
+										<div class="EconomySeat"></div> 
+										<div class="EconomySeat"></div> 										
+									</div>
+									<div class="EconomyBlock EconomyLastBlock">
+										<div class="EconomySeat"></div>
+										<div class="EconomySeat"></div> 
+										<div class="EconomySeat"></div> 
 									</div>
 								</div>
 							</div>
@@ -220,6 +709,7 @@
 								<div>(원)</div>
 							</div>
 						</div>
+						
 						<div class="modal-footer">
 							<button type="button" class="btn btn-primary">Save changes</button>
 							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

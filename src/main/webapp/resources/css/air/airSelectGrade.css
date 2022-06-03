@@ -100,7 +100,12 @@
     background-color: #dc3545;
     color: #ffffff;
 }
-.VipLine{
+.FrontDiv{
+    width: 100%; 
+    height:100px; 
+    text-align: center;
+}
+.Line{
     width: 100%; 
     height:100px; 
     text-align: center;
@@ -117,13 +122,14 @@
     height: 100px;
     float: left;
     content: url(/resources/upload/air/air_icon.png);
+    cursor: pointer;
 }
 .VipBlank{
     float: left;
     width: calc(100% - 160px);
     height: 100%;
 }
-.VipFront{
+.Front{
     width: 50%;
     height: 40px;
     margin: auto;
@@ -144,4 +150,58 @@
     margin: auto;
     margin-top: 20px;
     
+}
+.VipMenu{
+    width: 100%; 
+    height: 500px;
+    display: none;
+}
+.BusinessMenu{
+    width: 100%;
+    height: 1000px;
+    display: none;
+}
+.BusinessBlock{
+    width: 33%;
+    height: 100px;
+    float: left;
+    padding-left: 36px;
+}
+.BusinessSeat{
+    width: 40px;
+    height: 50px;
+    float: left;
+    content: url(/resources/upload/air/air_icon3.png);
+    cursor: pointer;
+}
+.Service_Img{
+    content: url(/resources/upload/air/airService_Img.png);
+    width: 100%;
+    height: 300px;
+}
+.EconomyMenu{
+    width: 100%;
+    height: 650px;
+}
+.EconomyBlock{
+    width: 33%;
+    height: 50px;
+    float: left;
+}
+.EconomySeat{
+    width: 35px;
+    height: 100%;
+    float: left;
+    content: url(/resources/upload/air/air_icon2.png);
+    cursor: pointer;
+
+}
+.EconomyLastBlock{
+    padding-left: 30px;
+}
+.EconomyLine{
+    width: 100%; 
+    height:60px; 
+    text-align: center;
+    padding-left: 15px;
 }
