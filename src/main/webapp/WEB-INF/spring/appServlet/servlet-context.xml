@@ -91,5 +91,6 @@
 	<context:component-scan base-package="kr.or.chat" />
 	<context:component-scan base-package="kr.or.report" />
 	<context:component-scan base-package="kr.or.question" />
+	<context:component-scan base-package="kr.or.comment" />
 	
 </beans:beans>

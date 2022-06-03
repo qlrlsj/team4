@@ -33,8 +33,22 @@
 	</insert>
 	
 	<select id="selectOneQuestion" parameterType="int" resultType="q">
-		select * from question where question_no=#{questionNo}
+		select 
+			question_no as questionNo,
+			member_id as memberId,
+			question_title as questionTitle,
+			question_content as questionContent,
+			question_date as questionDate
+		from question where question_no=#{questionNo}
 	</select>
+	
+	<delete id="deleteQuestion" parameterType="int">
+		delete from question where question_no=#{questionNo}	
+	</delete>
+	
+	<update id="questionUpdate" parameterType="q">
+		update question set question_title=#{questionTitle}, question_content=#{questionContent} where question_no=#{questionNo}
+	</update>
 	
 	
 </mapper>

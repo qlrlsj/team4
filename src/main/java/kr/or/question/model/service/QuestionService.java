@@ -88,7 +88,15 @@ public class QuestionService {
 	public Question selectOneQuestion(int questionNo) {
 		return dao.selectOneQuestion(questionNo);
 	}
-	
-	
+
+	public int deleteQuestion(int questionNo) {
+		return dao.deleteQuestion(questionNo);
+	}
+
+
+	public int questionUpdate(Question q) {
+		return dao.questionUpdate(q);
+	}
+
 	
 }
