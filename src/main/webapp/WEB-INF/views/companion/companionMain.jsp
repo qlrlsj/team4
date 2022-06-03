@@ -71,7 +71,6 @@ select option[value=""][disabled] {
 	</script>
 
 	<h2>동행자 모집</h2>
-	
 		<div class="div-content p-3 mb-5 bg-secondary row">
 			<!-- 지역 검색 -->
 			<select class="form-select col comS" name="companionField" id="field">

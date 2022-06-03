@@ -19,4 +19,22 @@ public class ChatDao {
 		List list = sqlSession.selectList("chat.selectOneChatting", chat);
 		return (ArrayList<Chat>) list;
 	}
+
+	public ChatRoom selectOneRoom(ChatRoom chat) {
+		ChatRoom cr = sqlSession.selectOne("chat.selectOneRoom",chat);
+		return cr;
+	}
+
+	public int insertChatRoom(ChatRoom chat) {
+		return sqlSession.insert("chat.insertChatRoom",chat);
+	}
+
+	public int insertChat(Chat ch) {
+		return sqlSession.insert("chat.inserChat", ch);
+	}
+
+	public ArrayList<ChatRoom> getChatList(int memberNo) {
+		List list = sqlSession.selectList("chat.getChatList",memberNo);
+		return (ArrayList<ChatRoom>) list;
+	}
 }

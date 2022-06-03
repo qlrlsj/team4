@@ -33,6 +33,9 @@
 	padding:8px;
 	border-radius: 3px;
 }
+.chat:first-child{
+	margin-top: 10px;
+}
 .left{
      position: relative;
      max-width: 300px;
@@ -89,14 +92,23 @@
 <script src="/resources/js/jquery-3.6.0.js"></script>
 <!-- 부트스트랩 -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-<script>
+<script>	
 	//웹소켓 객체용 변수
 	let ws;
 	//접속회원 아이디용 변수
+	let memberNo;
+	//접속한 채팅방용 변수
+	let roomNo;
+	//아이디를 가져오는 변수
 	let memberId;
 	//채팅을 시작하는 함수
-	function initChat(param){
-		memberId = param;
+	$(function(){		
+		memberNo = ${sessionScope.m.memberNo };
+		roomNo = ${room.roomNo};
+		memberId = $("#hiddenId").val();
+		console.log(memberNo);
+		console.log(roomNo);
+		console.log(memberId);
 		//웹소켓 연결 시도
 		ws = new WebSocket("ws://192.168.35.249/chat.kt");
 		// 주소 바꿔줘야함
@@ -105,28 +117,35 @@
 		//서버에서 화면으로 데이터를 전송하면 처리할 함수 지정
 		ws.onmessage = receiveMsg;
 		//웹소켓 연결이 종료되면 실행할 함수 지정
-		ws.onclose = endChat;
-	}
-	
+		ws.onclose = endChat;	
+		
+		$("#sendMsg").on("keyup",function(key){
+			if(key.keyCode == 13){
+				sendMsg();
+			}
+		});
+		
+		$(".messageArea").scrollTop($(".messageArea")[0].scrollHeight);
+	});
 	function startChat(){
 		//msg라는 키값으로 회원아이디를 웹소켓 서버로 전송
-		const data = {type:"enter",msg:memberId};
+		const data = {type:"enter",msg:memberNo,roomNo:roomNo,memberId:memberId};
 		ws.send(JSON.stringify(data));//data객체를 문자열로 변환해서 웹소켓 서버로 전송	
-		appendChat("<p>채팅방에 입장했습니다.</p>");//화면채팅방에 입장했음을 알려줌
 	}
-	
+	//사용자가 채팅을 보낼때
 	function receiveMsg(param){
 		appendChat(param.data);		
 	}
-	
+	//채팅 팝업창 닫을 때
 	function endChat(){
 		console.log("웹소켓 종료")
 	}
 	//전송버튼 클릭 시 입력한 메세지를 전송하는 함수
 	function sendMsg(){
 		const msg = $("#sendMsg").val();
+		chatInsert(msg);
 		if(msg != ''){
-			const data = {type:"chat",msg:msg};
+			const data = {type:"chat",msg:msg,roomNo:roomNo,memberId:memberId};
 			ws.send(JSON.stringify(data));
 			appendChat("<div class='chat right'>"+msg+"</div>");
 			$("#sendMsg").val("");
@@ -137,18 +156,29 @@
 		$(".messageArea").append(msg);
 		$(".messageArea").scrollTop($(".messageArea")[0].scrollHeight);
 	}
-	$(function(){
-		$("#sendMsg").on("keyup",function(key){
-			if(key.keyCode == 13){
-				sendMsg();
+	//채팅 db에 저장
+	function chatInsert(msg){
+		$.ajax({
+			url : "/insertChat.kt",
+			type: "post",
+			data : {"chatContent":msg,"roomNo":roomNo,"memberNo":memberNo,"memberId":memberId},
+			success : function(data) {
+				console.log(data);
 			}
 		});
-	});
+	}
+	
+// 	$(window).bind('beforeunload', function(){
+// 	    const data = {type:"exit",msg:memberNo,roomNo:roomNo,memberId:memberId};
+// 		ws.send(JSON.stringify(data));
+// 	});​​
+	
 </script>
 </head>
 <body>
 	<h1>채팅</h1>
-	<h2>${sessionScope.m.memberNo }</h2>
+	<h2>${room.roomName }</h2>
+	<input type="hidden" id="hiddenId" value="${sessionScope.m.memberId }">	
 	<div class="chatting">
 		<div class="messageArea">
 			<c:forEach items="${chat }" var="ch" varStatus="i">
@@ -157,7 +187,7 @@
 						<div class='chat right'>${ch.chatContent }</div>
 					</c:when>
 					<c:otherwise>
-						<div class='chat left'><span class='chatId'>${ch.memberNo } : </span>${ch.chatContent }</div>
+						<div class='chat left'><span class='chatId'>${ch.memberId } : </span>${ch.chatContent }</div>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>

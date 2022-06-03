@@ -13,4 +13,5 @@ public class Chat {
 	private int memberNo;
 	private String chatDate;
 	private String chatContent;
+	private String memberId;
 }

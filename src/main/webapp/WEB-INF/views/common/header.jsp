@@ -28,6 +28,8 @@
   <script src=" https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script>
 <!--파일 업로드 css-->
 <link rel="stylesheet" href="/resources/css/file.css">
+<!-- 채팅 리스트 js -->
+<script src="/resources/js/chat/chatHeader.js"></script>
 <title>Insert title here</title>
 <style>
 
@@ -114,7 +116,13 @@
 										<li><a class="dropdown-item active" href="#">포인트</a></li>
 										<li><a class="dropdown-item" href="#">쿠폰</a></li>
 										<li><a class="dropdown-item" href="#">파트너 등록하기</a></li>
-										<li><a class="dropdown-item" href="/mypage.kt">마이페이지</a></li>
+										<li><a class="dropdown-item" href="/mypage.kt">마이페이지</a></li>										
+										<li>
+											<a class="dropdown-item" href="#" onclick="openList();">내 채팅</a>
+											<form name="myChat" action="/chatList.kt" method="post">
+												<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
+											</form>
+										</li>
 										<li><hr class="dropdown-divider"></li>
 										<li><a class="dropdown-item" href="/logout.kt">로그아웃 </a></li>
 									</ul>

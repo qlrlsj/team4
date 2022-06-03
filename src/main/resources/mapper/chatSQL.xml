@@ -9,9 +9,36 @@
 		                room_no as roomNo,
 						member_no as memberNo,
 		                TO_CHAR(chat_date, 'hh:mm')as chatDate,
-		                chat_content as chatContent
+		                chat_content as chatContent,
+		                memberid as memberId
 			from chat 
-            where member_no=#{memberNo1} or member_no =#{memberNo2}
+            where room_no = #{roomNo}
             order by chat_no asc)c)
+  </select>
+  <select id="selectOneRoom" parameterType = "cr" resultType="cr">
+		  select 
+		  		room_no as roomNo,
+		  		member_no1 as memberNo1,
+		  		member_no2 as memberNo2,
+		  		room_name as roomName,
+		  		room_date as roomDate	
+		  from  room
+		  where member_no1 = #{memberNo1} and member_no2 = #{memberNo2}
+  </select>
+  <insert id="insertChatRoom" parameterType="cr">
+  		insert into room values(room_seq.nextval,#{memberNo1},#{memberNo2},#{memberNo1}||' and '||#{memberNo2}, sysdate)
+  </insert>
+  <insert id="inserChat" parameterType="ch">
+  		insert into chat values(chat_seq.nextval,#{roomNo},#{memberNo},sysdate, #{chatContent}, #{memberId})
+  </insert>
+  <select id="getChatList" parameterType="int" resultType="cr">
+		  select 
+		  		room_no as roomNo,
+		  		member_no1 as memberNo1,
+		  		member_no2 as memberNo2,
+		  		room_name as roomName,
+		  		room_date as roomDate	
+		  from  room
+		  where member_no1 = #{memberNo} or member_no2 = #{memberNo}
   </select>
 </mapper>
