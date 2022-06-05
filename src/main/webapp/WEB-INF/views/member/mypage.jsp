@@ -90,6 +90,12 @@
 				<input class="btn btn-primary" type="submit" value="정보수정">
 			</div>
 		</form>
+		<form action="#">
+			<div class="mb-3">
+				<input class="btn btn-danger" type="submit" value="회원탈퇴">
+				<input type="hidden" value="${sessionScope.m.memberNo }">
+			</div>
+		</form>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>

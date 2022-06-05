@@ -6,7 +6,6 @@
 	</settings>
 	<typeAliases>
 		<typeAlias type="kr.or.member.model.vo.Member" alias="m"/>
-<!-- 		<typeAlias type="kr.or.package.model.vo.Package" alias="p"/> -->
 		<typeAlias type="kr.or.air.model.vo.Air" alias="air"/>
 		<typeAlias type="kr.or.hostel.model.vo.Hostel" alias="h"/>
 		<typeAlias type="kr.or.hostel.model.vo.HostelFile" alias="hf"/>
@@ -24,6 +23,7 @@
 		<typeAlias type="kr.or.ticket.model.vo.TicketFile" alias="tf"/>
 		<typeAlias type="kr.or.question.model.vo.Question" alias="q"/>
 		<typeAlias type="kr.or.comment.model.vo.Comment" alias="c"/>
+		<typeAlias type="kr.or.pck.model.vo.Pck" alias="p"/>
 <!-- 		<typeAlias type="kr.or.question.model.vo.FileVo" alias="f"/> -->
 	</typeAliases>
 </configuration>

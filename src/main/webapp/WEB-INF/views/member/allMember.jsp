@@ -101,21 +101,22 @@
 		//선택회원 등급변경
 			$(".checkedChangeLevel").on("click",function(){
 			const check = $(".chk:checked"); //chk중 선택된옵션
+			console.log(check);
 			if(check.length == 0){
 				alert("선택된 회원이 없습니다.");
 				return;//함수종료
 			}
-			const num = new Array();	//회원번호 저장용 배열
-			const level = new Array();	//회원등급 저장용 배열
+			const memberNo = new Array();	//회원번호 저장용 배열
+			const memberGrade = new Array();	//회원등급 저장용 배열
 			check.each(function(index,item){
-				num.push($(item).parent().next().text());
+				memberNo.push($(item).parent().next().text());
 				//td의 부모인 tr의 후손들중 select태그를 가져와서 val값을 push
-				level.push($(item).parent().parent().find("select").val());
+				memberGrade.push($(item).parent().parent().find("select").val());
 			});
-			console.log(num,level);
+			console.log(memberNo,memberGrade);
 			//자바스크립트에서의 join은 여러개의 배열을 하나로 합쳐 구분자 / 를 주어 하나의 문자열로 리턴해주는 것
 			//아래의 코드는 선택한 여러개를 하나의 배열로 구분자 / 로 넘겨주는 것
-			location.href="/checkedChangeLevel.kt?num="+num.join("/")+"&level="+level.join("/");
+			location.href="/checkedChangeLevel.kt?memberNo="+memberNo+"&memberGrade="+memberGrade;
 		});
 	</script>
 	

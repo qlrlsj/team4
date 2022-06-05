@@ -6,26 +6,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import kr.or.member.controller.SHA256Enc;
+//import kr.or.member.controller.SHA256Enc;
 import kr.or.member.model.dao.MemberDao;
 import kr.or.member.model.vo.Member;
+import kr.or.member.model.vo.MemberPageData;
 
 @Service
 public class MemberService {
 	@Autowired
 	private MemberDao dao;
-	@Autowired
-	private SHA256Enc enc;
+//	@Autowired
+//	private SHA256Enc enc;
 	
 	public Member selectOneMember(Member m) {
 		// TODO Auto-generated method stub
-		try {
-			String encPw = enc.endData(m.getMemberPw());
-			m.setMemberPw(encPw);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			String encPw = enc.endData(m.getMemberPw());
+//			m.setMemberPw(encPw);
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		if(m.getMemberId().isEmpty() || m.getMemberPw().isEmpty()) {
 			throw new IllegalArgumentException("아이디나 패스워드를 입력해야 합니다.");
 		}
@@ -34,25 +35,24 @@ public class MemberService {
 	}
 
 	public int insertMember(Member m) {
-		try {
-			String encPw = enc.endData(m.getMemberPw());
-			m.setMemberPw(encPw);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+//		try {
+//			String encPw = enc.endData(m.getMemberPw());
+//			m.setMemberPw(encPw);
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		return dao.insertMember(m); //dao에 컨트롤러에서 받은 m을 전달하고 결과값(1,0)을 돌려받는다.
 	}
 
 	public int updateOneMember(Member m) {
-		try {
-			String encPw = enc.endData(m.getMemberPw());
-			m.setMemberPw(encPw);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			String encPw = enc.endData(m.getMemberPw());
+//			m.setMemberPw(encPw);
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		return dao.updateOneMember(m);
 	}
 
@@ -83,6 +83,10 @@ public class MemberService {
 		map.put("num", num);
 		map.put("level", level);
 		return dao.checkedChangeLevel(map);
+	}
+
+	public MemberPageData selectMemberList(int reqPage) {
+		return null;
 	}
 
 

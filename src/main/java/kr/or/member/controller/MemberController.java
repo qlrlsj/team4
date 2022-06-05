@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import kr.or.member.model.service.MemberService;
 import kr.or.member.model.vo.Member;
+import kr.or.member.model.vo.MemberPageData;
 
 @Controller
 public class MemberController {
@@ -74,7 +75,8 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/allMember.kt")
-	public String allMember(Model model) {
+	public String allMember(int reqPage, Model model) {
+//		MemberPageData mpd = service.selectMemberList(reqPage);
 		ArrayList<Member> list = service.selectAllMember();
 		model.addAttribute("list",list);
 		return "member/allMember";
@@ -96,7 +98,7 @@ public class MemberController {
 		System.out.println("jsp에서 가져온 No값 : "+memberNo);
 		int result = service.deleteOneMember(memberNo);
 		if(result == 1) {
-			return "redirect:/";
+			System.out.println("성공");
 		}else {
 			System.out.println("실패");
 		}
@@ -104,8 +106,11 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/checkedChangeLevel.kt")
-	public String checkedChangeLevel(int num, int level, Model model){
-		ArrayList<Member> list = service.checkedChangeLevel(num,level);
+	public String checkedChangeLevel(int memberNo, int memberGrade, Model model){
+		System.out.println("jsp에서 넘어온 정보 : "+memberNo+memberGrade);
+//		Member m = new Member();
+//		m.setMemberGrade(memberGrade);
+		ArrayList<Member> list = service.checkedChangeLevel(memberNo,memberGrade);
 		model.addAttribute("list",list);
 		return "redirect:/";
 	}

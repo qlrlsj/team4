@@ -92,5 +92,6 @@
 	<context:component-scan base-package="kr.or.report" />
 	<context:component-scan base-package="kr.or.question" />
 	<context:component-scan base-package="kr.or.comment" />
+	<context:component-scan base-package="kr.or.pck" />
 	
 </beans:beans>
