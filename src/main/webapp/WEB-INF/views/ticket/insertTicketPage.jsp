@@ -131,9 +131,9 @@
 					<label for="optPrice">가격</label>
 					<input class="form-control price" type="number" id="optPrice" name="optPrices" min="100">
 					<label for="optDiscountRate">할인율</label><span>퍼센트(%)</span>
-					<input class="form-control" type="number" id="optDiscountRate" name="optDiscountRates" min="0" max="100">
+					<input class="form-control rate" type="number" id="optDiscountRate" name="optDiscountRates" min="0" max="100" value="0">
 					<label for="optDiscountPrice">할인된 가격</label>
-					<input class="form-control price" type="number" id="optDiscountPrice" name="optDiscountPrices" min="100">
+					<input class="form-control" type="number" id="optDiscountPrice" name="optDiscountPrices" min="100">
 					<label for="optStock">재고</label>
 					<input class="form-control" type="number" id="optStock" name="optStocks" value="10" min="0">
 					<input type="hidden" id="count" name="count" value="1">
