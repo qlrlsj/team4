@@ -12,6 +12,7 @@ import kr.or.ticket.model.vo.Ticket;
 import kr.or.ticket.model.vo.TicketCategory;
 import kr.or.ticket.model.vo.TicketFile;
 import kr.or.ticket.model.vo.TicketOption;
+import kr.or.ticket.model.vo.TicketOptions;
 
 @Repository
 public class TicketDao {
@@ -39,6 +40,5 @@ public class TicketDao {
 	public int insertTicketFile(TicketFile ticketFile) {
 		return sqlSession.insert("ticket.insertTicketFile",ticketFile);
 	}
-
 	
 }

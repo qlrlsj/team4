@@ -41,7 +41,18 @@
 			select max(ticket_no) from ticket
 		</selectKey>
 	</insert>
-
+	<insert id="insertTicketOption" parameterType="to">
+		insert into ticket_option values
+		(ticket_opt_seq.nextval
+		,#{ticketNo}
+		,#{optTitle}
+		,#{optContent}
+		,#{optPrice}
+		,#{optDiscountRate}
+		,#{optDiscountPrice}
+		,#{optStock})
+	</insert>
+	
 	<insert id="insertTicketFile" parameterType="tf">
 		insert into ticket_file values
 		(#{ticketNo}

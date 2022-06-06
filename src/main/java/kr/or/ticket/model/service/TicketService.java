@@ -11,6 +11,7 @@ import kr.or.ticket.model.vo.Ticket;
 import kr.or.ticket.model.vo.TicketCategory;
 import kr.or.ticket.model.vo.TicketFile;
 import kr.or.ticket.model.vo.TicketOption;
+import kr.or.ticket.model.vo.TicketOptions;
 
 @Service
 public class TicketService {
@@ -25,33 +26,51 @@ public class TicketService {
 		return dao.selectAllLocal();
 	}
 
-	public int insertTicket(Ticket ticket, TicketOption option, TicketFile ticketFile) {
+	public int insertTicket(Ticket ticket, TicketOptions options, TicketFile ticketFile) {
 		int result = 0;
+		//1.ticket테이블 삽입
 		int result1 = dao.insertTicket(ticket);
-		if(result1>0) {
-			System.out.println("ticket insert성공");
+		//2. option 삽입
+		int result2 = 0;
+		for(int i=0;i<options.getCount();i++) {
+			TicketOption option = new TicketOption();
 			option.setTicketNo(ticket.getTicketNo());
-			ticketFile.setTicketNo(ticket.getTicketNo());
-			int result2 = dao.insertTicketOption(option);
-			if(result2>0) {
-				System.out.println("ticketOption insert성공");
-			}else {
-				System.out.println("ticketOption insert실패");
-				int result3 = dao.insertTicketFile(ticketFile);
-				if(result3>0) {
-					System.out.println("ticketFile insert성공");
-					result = 1;
-				}else {
-					System.out.println("ticketFile insert실패");
-					result = -1;
-				}
-			}
-			
-		}else {
-			System.out.println("ticket insert실패");
-			result = -1;
+			option.setOptTitle(options.getOptTitles().get(i));
+			option.setOptContent(options.getOptContents().get(i));
+			option.setOptPrice(options.getOptPrices().get(i));
+			option.setOptDiscountRate(options.getOptDiscountRates().get(i));
+			option.setOptDiscountPrice(options.getOptDiscountPrices().get(i));
+			option.setOptStock(options.getOptStocks().get(i));
+			result2 = dao.insertTicketOption(option);
 		}
+		//3. file 삽입
+		ticketFile.setTicketNo(ticket.getTicketNo());
+		int result3 = dao.insertTicketFile(ticketFile);
+		
+		result = result1 + result2 + result3;
+
 		return result;
+	}
+
+	public int insertOptTest(TicketOptions options) {
+		int results = 0;
+		for(int i=0;i<options.getCount();i++) {
+			TicketOption option = new TicketOption();
+			option.setTicketNo(1);
+			option.setOptTitle(options.getOptTitles().get(i));
+			option.setOptContent(options.getOptContents().get(i));
+			option.setOptPrice(options.getOptPrices().get(i));
+			option.setOptDiscountRate(options.getOptDiscountRates().get(i));
+			option.setOptDiscountPrice(options.getOptDiscountPrices().get(i));
+			option.setOptStock(options.getOptStocks().get(i));
+			System.out.println("service부분 : ");
+			System.out.println(option);
+			int result = dao.insertTicketOption(option);
+			if(result>0) {
+				results++;
+			}
+		}
+		return results;
 	}
 	
 }

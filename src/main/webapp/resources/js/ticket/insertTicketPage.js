@@ -121,7 +121,6 @@ $("#insertBtn").on("click",function(){
   $("input[name=requiredTime]").val((hour*60)+minute);
 
 
-
   /********유효성 검사 *********/
     let chkArr = [false,false,false,false,false];
     let count = 0;
@@ -467,22 +466,26 @@ $('.summernote').summernote({
   lang: "ko-KR"
 });
 
-let addCount = 0;
-
 //옵션추가
+
 function add_optbox(){
-  if(addCount >= 3) return;
+	let addCount = $("#count").val();
+  if(addCount > 3) return;
   let newDiv = document.createElement('div');
   newDiv.setAttribute("class","optBox");
-  newDiv.innerHTML = "<input type='button' value='X' class='delOptBtn' ><br> <label for='optTitle'>옵션 제목</label> <input class='form-control' type='text' id='optTitle' name='optTitle' placeholder='제목을 입력해 주세요. (30자 이내)' maxlength='30'><label for='optContent'>옵션 설명</label> <input class='form-control' type='text' id='optContent' name='optContent' placeholder='내용을 입력해 주세요. (100자 이내)' maxlength='100'> <label for='optPrice'>가격</label> <input class='form-control price' type='number' id='optPrice' name='optPrice' min='100'> <label for='optDiscountRate'>할인율</label><span>퍼센트(%)</span> <input class='form-control' type='number' id='optDiscountRate' name='optDiscountRate' min='0' max='100'> <label for='optDiscountPrice'>할인된 가격</label> <input class='form-control price' type='number' id='optDiscountPrice' name='optDiscountPrice' min='100'> <label for='optStock'>재고</label> <input class='form-control' type='number' id='optStock' name='optStock' value='10' min='0'> ";
-  addCount++;
-  $("#opt").append(newDiv);
-  del_optBox();
-}
+  newDiv.innerHTML = "<input type='button' value='X' class='delOptBtn' ><br> <label for='optTitle'>옵션 제목</label> <input class='form-control' type='text' id='optTitle' name='optTitles' placeholder='제목을 입력해 주세요. (30자 이내)' maxlength='30'><label for='optContent'>옵션 설명</label> <input class='form-control' type='text' id='optContent' name='optContents' placeholder='내용을 입력해 주세요. (100자 이내)' maxlength='100'> <label for='optPrice'>가격</label> <input class='form-control price' type='number' id='optPrice' name='optPrices' min='100'> <label for='optDiscountRate'>할인율</label><span>퍼센트(%)</span> <input class='form-control' type='number' id='optDiscountRate' name='optDiscountRates' min='0' max='100'> <label for='optDiscountPrice'>할인된 가격</label> <input class='form-control price' type='number' id='optDiscountPrice' name='optDiscountPrices' min='100'> <label for='optStock'>재고</label> <input class='form-control' type='number' id='optStock' name='optStocks' value='10' min='0'> ";
 
-//옵션 삭제
-function del_optBox(){
-  $(".delOptBtn").on("click",function(){
-    $(this).parent().remove();
+  $("#opt").append(newDiv);
+  addCount++;
+  
+  $("#count").val(addCount);
+  console.log($("#count").val());
+
+  $(".delOptBtn").off().on("click",function(){
+		let addCount = $("#count").val();
+		$(this).parent().remove();
+		addCount--;
+		$("#count").val(addCount);
+		console.log($("#count").val());
   });
 }
