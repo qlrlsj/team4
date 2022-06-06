@@ -6,15 +6,17 @@ $(function(){
     if($(".edCheck").text()==''){
         $(".airTableBase").css("height","200px");
     }
-
 })
 var airStartGrade=1;
 var airStartPay =50000;
 var airEndGrade=1;
 var airEndPay =50000;
+var StartSeatCount=0;
+var EndSeatCount=0;
 $(".Pay").eq(0).text(airStartPay);
 $(".Pay").eq(1).text(airEndPay);
 $("input[name=airStartPay]").change(function(){
+    StartSeatCount=0;
     airStartGrade = this.value;
     airStartPay =  $(this).next().text();
     if(airStartGrade==3){
@@ -31,9 +33,11 @@ $("input[name=airStartPay]").change(function(){
         $(".EconomyMenu").eq(0).css("display","block");
     }
     $(".Pay").eq(0).text(airStartPay);
+
 })
 $("input[name=airEndPay]").change(function(){
-    var airEndGrade = this.value;
+    EndSeatCount=0;
+    airEndGrade = this.value;
     airEndPay = $(this).next().text();
     if(airEndGrade==3){
         $(".VipMenu").eq(1).css("display","block");
@@ -50,36 +54,71 @@ $("input[name=airEndPay]").change(function(){
     }
     $(".Pay").eq(1).text(airEndPay);
 })
-
-var StartSeatCount=0;
-var EndSeatCount=0;
+var EC1 = 0;
+var EC2 = 0;
+var BC1 = 0;
+var BC2 = 0;
+var VC1 = 0;
+var VC2 = 0;
 $(".EconomySeat").click(function(){
-    $(this).css("content","url(/resources/upload/air/air_icon2_2.png)")
-    $(this).addClass('SelectedEconomySeat');
-
-    $(".SelectedEconomySeat").click(function(){
+    var text = $(this).css("content").substr(-15,13);
+    //$(this).css("content").substr(-15,13) = air_icon2.png
+    if(text=='air_icon2.png'){
+        $(this).addClass('SelectedEconomySeat');
+        $(this).css("content","url(/resources/upload/air/air_icon2_2.png)")
+        if($(this).parent().parent().parent().hasClass("ec1")){
+            EC1++;
+        }else{
+            EC2++;
+        }
+    }else{
         $(this).css("content","url(/resources/upload/air/air_icon2.png)")
         $(this).removeClass('SelectedEconomySeat');
-    })
+        if($(this).parent().parent().parent().hasClass("ec1")){
+            EC1--;
+        }else{
+            EC2--;
+        }
+    }
+    
 })
 $(".BusinessSeat").click(function(){
-    $(this).css("content","url(/resources/upload/air/air_icon3_2.png)")
-    $(this).addClass('SelectedBusinessSeat');
-
-    $(".SelectedBusinessSeat").click(function(){
+    var text = $(this).css("content").substr(-15,13);
+    if(text=='air_icon3.png'){
+        $(this).css("content","url(/resources/upload/air/air_icon3_2.png)")
+        $(this).addClass('SelectedBusinessSeat');
+        if($(this).parent().parent().parent().hasClass("bc1")){
+            BC1++;
+        }else{
+            BC2++;
+        }
+    }else{
         $(this).css("content","url(/resources/upload/air/air_icon3.png)")
         $(this).removeClass('SelectedBusinessSeat');
-    })
+        if($(this).parent().parent().parent().hasClass("bc1")){
+            BC1--;
+        }else{
+            BC2--;
+        }
+    }
 })
 $(".VipSeat").click(function(){
-    $(this).css("content","url(/resources/upload/air/air_icon_2.png)")
-    $(this).addClass('SelectedVipSeat');
-
-    $(".SelectedVipSeat").click(function(){
+    var text = $(this).css("content").substr(-14,12);
+    if(text=='air_icon.png'){
+        $(this).css("content","url(/resources/upload/air/air_icon_2.png)")
+        $(this).addClass('SelectedVipSeat');
+        if($(this).parent().parent().parent().hasClass("vc1")){
+            VC1++;
+        }else{
+            VC2++;
+        }
+    }else{
         $(this).css("content","url(/resources/upload/air/air_icon.png)")
         $(this).removeClass('SelectedVipSeat');
-    })
+        if($(this).parent().parent().parent().hasClass("vc1")){
+            VC1--;
+        }else{
+            VC2--;
+        }
+    }
 })
-
-
-
