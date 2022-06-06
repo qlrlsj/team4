@@ -61,19 +61,24 @@
                         // 우편번호와 주소 정보를 해당 필드에 넣는다.
                         document.getElementById('sample6_postcode').value = data.zonecode;
                         document.getElementById("sample6_address").value = addr;
+                        document.getElementById("hostelAddress").value = addr;
                         // 커서를 상세주소 필드로 이동한다.
                         document.getElementById("sample6_detailAddress").focus();
+             
                     }
                 }).open();
             }
             var fullAddr = "";
             //전체주소 히든인풋으로 넘겨주기 
+
             function full_address(){
     //                    console.log(addr); // 위에서 찍어둔 주소 확인용
                     const addrAd = $("#sample6_detailAddress").val(); // 세부주소 
       //              console.log(addrAd);
-                    fullAddr = (addr+" "+addrAd); // 검색한주소 + 공백 + 세부주소 
-        //            console.log("전체주소:"+fullAddr);
+                      fullAddr = (addr+" "+addrAd); // 검색한주소 + 한칸공백 + 세부주소 
+                    
+                   
+                    console.log("전체주소:"+fullAddr);
  
                     $("#hostelAddress").val(fullAddr); // 히든인풋에 값 바꿔주기 
                 }
@@ -86,13 +91,13 @@
                 //    console.log(hostelType);
                 $(".select-option").hide();	// 다 숨기고 선택한 옵션에 해당하는거만 보여주기 
                 if(hostelType==1){
-                    $("#select-option1").show();
+                    $("#select-option1").show(); //호텔 
                 }else if(hostelType==2){
-                    $("#select-option2").show();
+                    $("#select-option2").show(); //게하
                 }else if(hostelType==3){
-                    $("#select-option3").show();
+                    $("#select-option3").show(); //펜션 
                 }else if(hostelType==4){
-                    $("#select-option4").show();
+                    $("#select-option4").show(); //풀빌라
                 }
         
             });
@@ -140,7 +145,7 @@
                 const newCell4 = newRow.insertCell(3);
                 newCell1.innerHTML = "<input type='text' placeholder='객실명' name='roomNames' class='form-control' style='width: 70%;' >";
                 let insertcell2 = "<select class='form-select' id='bedType' name='roomOptions' aria-label='Default select example' required>";
-                insertcell2 += "<option selected disabled>숙소유형</option><option value='1'>도미토리</option><option value='2'>1인실</option><option value='3'>2인실</option><option value='4'>패밀리</option><option value='4'>기타</option></select>";
+                insertcell2 += "<option selected disabled>숙소유형</option><option value='도미토리'>도미토리</option><option value='1인실'>1인실</option><option value='2인실'>2인실</option><option value='패밀리'>패밀리</option><option value='기타'>기타</option></select>";
          //       insertcell2 += "  <input type='hidden' name='roomOption'>";
                 newCell2.innerHTML = insertcell2;
                 newCell3.innerHTML = "<input type='text' name='standardBooknums' style='width: 30%;'> / <input type='text' name='maxBooknums' style='width: 30%;'>";
@@ -158,7 +163,7 @@
 
                 newCell1.innerHTML = "<input type='text' placeholder='객실명'  name='roomNames' class='form-control' style='width: 70%;' >";
                 let insertcell2 = " <select class='form-select' id='bedType' name='roomOptions' aria-label='Default select example' required>";
-                insertcell2 += "  <option selected disabled>숙소유형</option><option value='1'>2인실</option><option value='2'>4인실-패밀리</option><option value='3'>기타</option></select>";
+                insertcell2 += "  <option selected disabled>숙소유형</option><option value='2인실'>2인실</option><option value='4인실'>4인실-패밀리</option><option value='기타'>기타</option></select>";
               //  insertcell2 += "  <input type='hidden' name='roomOption'>";
                 newCell2.innerHTML = insertcell2;
                 newCell3.innerHTML = "<input type='text' name='standardBooknums' style='width: 30%;'> / <input type='text' name='maxBooknums' style='width: 30%;'>";
@@ -176,7 +181,7 @@
 
                 newCell1.innerHTML = "<input type='text' placeholder='객실명' name='roomNames' class='form-control' style='width: 70%;' >";
                 let insertcell2 = " <select class='form-select' id='bedType' name='roomOptions' aria-label='Default select example' required>";
-                insertcell2 += "  <option selected disabled>숙소유형</option><option value='1'>2인실</option><option value='2'>4인실-패밀리</option><option value='3'>기타</option></select>";
+                insertcell2 += "  <option selected disabled>숙소유형</option><option value='2인실'>2인실</option><option value='4인실'>4인실-패밀리</option><option value='기타'>기타</option></select>";
    //             insertcell2 += "  <input type='hidden' name='roomOption'>";
                 newCell2.innerHTML = insertcell2;
                 newCell3.innerHTML = "<input type='text' name='standardBooknums' style='width: 30%;'> / <input type='text' name='maxBooknums' style='width: 30%;'>";

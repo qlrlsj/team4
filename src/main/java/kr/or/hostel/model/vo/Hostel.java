@@ -19,10 +19,12 @@ public class Hostel {
 	private String CheckinOut;
 	private String hostelIntro;
 	private String hostelUsage;
-	private int hostelType;
+	private int roomType;
 	private int hostelScore;
 	private String hostelComfort;
 	private String hostelService;
+	private int hostelPrice;
+	private String hostelfilepath;
 	
 	
 	

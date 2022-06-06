@@ -3,7 +3,7 @@
 <mapper namespace="hostel">
 
 <insert id="insertHostel" parameterType="h" >
-insert into hostel values(hostel_seq.nextval,#{memberNo},#{hostelName},#{hostelAddress},#{bookStart},#{bookEnd},#{CheckinOut},#{hostelIntro},#{hostelUsage},#{hostelType},#{hostelScore},#{hostelComfort},#{hostelService})
+insert into hostel values(hostel_seq.nextval,#{memberNo},#{hostelName},#{hostelAddress},#{bookStart},#{bookEnd},#{CheckinOut},#{hostelIntro},#{hostelUsage},#{roomType},#{hostelScore},#{hostelComfort},#{hostelService})
 </insert>
 
 <select id="hostelCode" resultType="int">
@@ -25,5 +25,50 @@ select max(OPTION_NO) from hostel_option
 <insert id="insertHostelDate" parameterType="rvr"  >
 insert into reserveable_room values(reservable_room_seq.nextval,#{optionNo},#{reservableDate})
 </insert>
+
+<resultMap type="h" id="hostelSelect">
+<result property="hostelCode" column="HOSTEL_CODE"/>
+<result property="hostelName" column="HOSTEL_NAME"/>
+<result property="hostelAddress" column="HOSTEL_ADDRESS"/>
+<result property="hostelService" column="HOSTEL_SERVICE"/>
+<result property="hostelComfort" column="HOSTEL_COMFORT"/>
+<result property="roomType" column="ROOM_TYPE"/>
+<result property="hostelScore" column="HOSTEL_SCORE"/>
+<result property="hostelPrice" column="HOSTEL_PRICE"/>
+<result property="hostelfilepath" column="HOSTEL_FILEPATH"/>
+
+</resultMap>
+
+<select id="searchHostelListMain" parameterType="map" resultType="h" resultMap="hostelSelect">
+select * from (
+SELECT 
+    HOSTEL_CODE, HOSTEL_NAME,HOSTEL_ADDRESS,HOSTEL_SERVICE,HOSTEL_COMFORT,room_type,HOSTEL_SCORE,
+    (SELECT MIN(HOSTEL_PRICE) FROM HOSTEL_OPTION HO WHERE HO.HOSTEL_CODE=H.HOSTEL_CODE AND HO.OPTION_NO IN 
+    (
+        SELECT OPTION_NO FROM HOSTEL_OPTION
+            WHERE
+            (HOSTEL_CODE,HOSTEL_PRICE) IN 
+            (
+            SELECT HOSTEL_CODE , MIN(HOSTEL_PRICE)
+            FROM HOSTEL_OPTION WHERE OPTION_NO NOT IN (SELECT OPTION_NO FROM RESERVED_ROOM WHERE RESERVED_DATE BETWEEN to_date(#{startDate},'yyyy-mm-dd') and to_date(#{endDate},'yyyy-mm-dd')) GROUP BY HOSTEL_CODE
+            )
+    )) AS HOSTEL_PRICE,
+    (SELECT FILEPATH FROM HOSTEL_FILE HF WHERE HF.HOSTEL_CODE = H.HOSTEL_CODE AND FILE_NO = (SELECT MIN(FILE_NO) FROM HOSTEL_FILE HF2 WHERE HF2.HOSTEL_CODE=H.HOSTEL_CODE)) AS HOSTEL_FILEPATH
+FROM HOSTEL H
+WHERE 
+    H.HOSTEL_ADDRESS LIKE '%'||#{searchKeyword}||'%' OR H.HOSTEL_NAME LIKE '%'||#{searchKeyword}||'%'
+    AND
+    H.HOSTEL_CODE IN (
+        SELECT HOSTEL_CODE FROM HOSTEL_OPTION
+        WHERE
+        (HOSTEL_CODE,HOSTEL_PRICE) IN 
+        (
+        SELECT HOSTEL_CODE , MIN(HOSTEL_PRICE)
+        FROM HOSTEL_OPTION WHERE OPTION_NO NOT IN (SELECT OPTION_NO FROM RESERVED_ROOM WHERE RESERVED_DATE BETWEEN to_date(#{startDate},'yyyy-mm-dd') and to_date(#{endDate},'yyyy-mm-dd')) GROUP BY HOSTEL_CODE
+        )
+    )
+    ) where  room_type = #{roomType}
+
+</select>
 
 </mapper>

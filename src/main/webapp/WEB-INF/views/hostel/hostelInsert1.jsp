@@ -28,7 +28,7 @@
         <div class="container">
             <div class="row">
               <div class="col-sm hostel-type">	<h3>분류</h3> 
-                <select id="hostelType" name="hostelType" class="form-select hostel-type-select" aria-label="Default select example" style="width: 30%;">
+                <select id="hostelType" name="roomType" class="form-select hostel-type-select" aria-label="Default select example" style="width: 30%;">
                     <option selected disabled>객실종류를 선택하세요</option>	<!--이옵션 선택되는지 나중에 확인-->
                     <option value="1">호텔</option>
                     <option value="2">게스트하우스</option>
@@ -40,21 +40,21 @@
 
             <div class="row">
               <div class="col-sm hostel-content from-group " >	<h3>숙소정보</h3>
-            	제목  <input type="text" placeholder="검색용제목" class=" form-control"name="hostelName" style="width:30%;"><br>
-		        예약 가능 기간(시작일)  <input type="text" name="bookStart" class="datepicker form-control"   id = "datepicker1" style="width:30%;"><br> <!-- 오늘보다 이전날짜는 비활성화-->
-	        	예약 가능 기간(종료일)  <input type="text" name="bookEnd" class="datepicker form-control" id = "datepicker2"  style="width:30%;"><br>
-	        	체크인 체크아웃시간 : <input type="text" name="checkinOut" class="form-control"  style="width:30%;" placeholder="(ex 15:00/12:00)"><br><br>
+            	제목  <input type="text" placeholder="검색용제목" class=" form-control"name="hostelName" required style="width:30%;"><br>
+		        예약 가능 기간(시작일)  <input type="text" name="bookStart" class="datepicker form-control"  required  id = "datepicker1" style="width:30%;"><br> <!-- 오늘보다 이전날짜는 비활성화-->
+	        	예약 가능 기간(종료일)  <input type="text" name="bookEnd" class="datepicker form-control" required id = "datepicker2"  style="width:30%;"><br>
+	        	체크인 체크아웃시간 : <input type="text" name="checkinOut" class="form-control" required style="width:30%;" placeholder="(ex 15:00/12:00)"><br><br>
                 <label for="hostelIntro">숙소소개</label><br>
-	        	<textarea class=" summernote" name="hostelIntro" id="hostelIntro" "></textarea><br>
+	        	<textarea class="summernote" required name="hostelIntro" id="hostelIntro" "></textarea><br>
 	        	<label for="hostelUsage">이용안내/유의사항</label>
-	        	<textarea class=" summernote" name="hostelUsage" id="hostelUsage"    "></textarea>
+	        	<textarea class="summernote" required name="hostelUsage" id="hostelUsage"    "></textarea>
               
                 <h5>위치</h5>
 	
                 <input type="text" id="sample6_postcode" class="post " style="width: 20%;" placeholder="우편번호" readonly>
                 <input type="button" onclick="sample6_execDaumPostcode()" class="btn btn-outline-info btn-sm" value="우편번호 찾기"><br>
-                <input type="text" id="sample6_address" class="post " placeholder="주소" readonly ><br>
-                <input type="text" id="sample6_detailAddress" class="post " onchange="full_address()"placeholder="상세주소">
+                <input type="text" id="sample6_address" class="post " placeholder="주소" readonly  ><br>
+                <input type="text" id="sample6_detailAddress" class="post " onchange="full_address()" placeholder="상세주소">
                 <input type="text" id="sample6_extraAddress"  class="post  " readonly placeholder="참고항목"><br>
                         <!-- 서블릿에는 상세주소까지 합쳐서 보내주기용 히든 인풋 -->
                         <input type="hidden" name="hostelAddress" id="hostelAddress">
@@ -65,14 +65,15 @@
                 <div class="col-sm">	<h3>사진</h3>
                   <div class="mb-3">
                     <label for="formFile" class="form-label">사진 추가 </label>
-                    <input class="form-control" type="file" id="formFile" name="upfile" multiple style="width: 40%;">
+                    <input class="form-control" type="file" id="formFile" name="upfile" required multiple style="width: 40%;">
                  
                   </div>
                 </div>
               </div>
-
+              <hr>
               <div class="row">
                 <div class="col-sm">	<h3>시설/서비스</h3>
+                  <hr style="width: 300px; ">
                 </div>
               </div>
 
@@ -145,18 +146,20 @@
                         <!-- 서블렛으로 합쳐서에 넘길거 -->
                         <input type="hidden" name="hostelService" id="hostelService">
                       </div>
+       
               </div>
+              <hr>
 
               <div class="row">
                 <div class="col-sm hostel-option">	<!--style="display: none;-->
                     <h3>객실</h3>
-                    <div class="select-option">상단에서 객실타입을 선택하세요. </div>
+                    <div class=""><h5>상단에서 객실타입을 선택하세요.</h5> </div>
                     <!--상단에서 객실타입을 선택하세요 문구만 출력 / 선택시 하단내용 출력 -->
-                    <button type="button" class="btn btn-outline-primary"  id="addroom" >객실추가</button>
-                    <button type="button" class="btn btn-outline-warning" id="delroom">객실삭제</button>
+                    <button type="button" class="btn btn-outline-primary"  id="addroom"  style="margin-bottom :10px">객실추가</button>
+                    <button type="button" class="btn btn-outline-warning" id="delroom" style="margin-bottom :10px">객실삭제</button>
       
                     <div class="select-option" id="select-option1" >
-                        호텔옵션선택
+<!--                         호텔옵션선택 -->
                         <table class="table hostel-option" id="hostel-option1">
                             <thead>
                               <tr>
@@ -172,7 +175,7 @@
                           </table>
                     </div>
                     <div class="select-option" id="select-option2" >
-                        게하옵션선택
+<!--                         게하옵션선택 -->
                         <table class="table hostel-option" id="hostel-option2">
                           <thead>
                             <tr>
@@ -188,7 +191,7 @@
                         </table>
                     </div>
                     <div class="select-option" id="select-option3" >
-                        펜션옵션선택
+<!--                         펜션옵션선택 -->
                         <table class="table hostel-option " id="hostel-option3">
                           <thead>
                             <tr>
@@ -205,7 +208,7 @@
                         </table>
                     </div>
                     <div class="select-option" id="select-option4" >
-                        풀빌라옵션선택
+<!--                         풀빌라옵션선택 -->
                         <table class="table hostel-option" id="hostel-option4">
                           <thead>
                             <tr>
@@ -225,8 +228,8 @@
 
           </div>
 
-          <div lass="d-grid gap-2" style="margin: auto 0; width: 400px;">
-            <button class="btn btn-lg btn-primary" type="submit">등록하기</button>
+          <div class="d-grid gap-2" style="width: 100%;" >
+            <button class="btn btn-lg btn-primary" type="submit"  style="width: 30%; margin: 0 auto;">등록하기</button>
           </div>
 
 
@@ -247,7 +250,8 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="/resources/js/hostel/insertHostel.js"></script>
 <!-- include summernote css/js -->
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script><script src=" https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script><script src="/resources/summernote/summernote-lite.js"></script><script src="/resources/summernote/lang/summernote-ko-KR.js"></script><link rel="stylesheet" href="/resources/summernote/summernote-lite.css">
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>

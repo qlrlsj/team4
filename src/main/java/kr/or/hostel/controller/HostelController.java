@@ -53,13 +53,7 @@ public class HostelController {
 	@RequestMapping(value = "/insertHostel.kt")
 	public String insertHostel(Hostel h, MultipartFile[] upfile, HttpServletRequest request, String[] roomOptions,
 			String[] hostelPrices, String[] standardBooknums, String[] maxBooknums, String[] roomNames) {
-//	System.out.println("호텔정보:"+h);
-//	System.out.println("----------------옵션정보------------");
-//	System.out.println("방이름:"+Arrays.toString(roomNames));
-//	System.out.println("옵션상세정보:"+Arrays.toString(roomOptions));
-//	System.out.println("가격:"+Arrays.toString(hostelPrices));
-//	System.out.println("기준인원:"+Arrays.toString(standardBooknums));
-//	System.out.println("최대인원:"+Arrays.toString(maxBooknums));
+
 
 		// 파일처리
 
@@ -145,9 +139,30 @@ public class HostelController {
 		if (result > 0) {
 			System.out.println("호스텔인서트 완료");
 		} else {
+			
 			System.out.println("인서트 실패");
 		}
 		return "redirect:/insertHostelForm1.kt";
+	}
+	
+	@RequestMapping(value = "searchHostelList.kt")
+	public String searchHostelList(int roomType, String searchKeyword, String startDate, String endDate, int customerNum, Model model) {
+// 받아오는 값 - roomType, searchKeyword , startDate , endDate , customerNum
+		ArrayList<Hostel> hostelList = service.searchHostelList(roomType, searchKeyword , startDate , endDate , customerNum);
+		
+		//vo만들기 
+		//리턴페이지에 띄울값 - hostel  - 상품코드, 제목, 주소,  서비스, 편의시설, 숙소타입, 숙소평점,
+		// 파일vo  - 파일1장
+		//option Vo  -  최저가
+		//    HOSTEL_CODE, HOSTEL_NAME,HOSTEL_ADDRESS,HOSTEL_SERVICE,HOSTEL_COMFORT, ROOM_TYPE,HOSTEL_SCORE,HOSTEL_PRICE, HOSTEL_PATH
+		/*
+		model.addAttribute("searchKeyword",searchKeyword);
+		model.addAttribute("startDate", startDate);
+		model.addAttribute("endDate", endDate);
+		model.addAttribute("customerNum", customerNum);
+		model.addAttribute("roomType",roomType);*/
+		model.addAttribute("list", hostelList);
+		return "hostel/searchHostelList";
 	}
 
 }
