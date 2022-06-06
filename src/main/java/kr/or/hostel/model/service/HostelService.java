@@ -124,4 +124,17 @@ public class HostelService {
 		return result;
 	}
 
+	public ArrayList<Hostel> searchHostelList(int roomType, String searchKeyword, String startDate, String endDate,
+			int customerNum) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("roomType", roomType);
+		map.put("searchKeyword", searchKeyword);
+		map.put("startDate", startDate);
+		map.put("endDate", endDate);
+		map.put("customerNum", customerNum);
+		ArrayList<Hostel> list = dao.searchHostelList(map);
+		System.out.println("List 출력전"+list.indexOf(0));
+		return list;
+	}
+
 }

@@ -51,4 +51,13 @@ public class HostelDao {
 	}
 
 
+	public ArrayList<Hostel> searchHostelList(HashMap<String, Object> map) {
+		System.out.println("dao직전"+map);
+		List list = sqlSession.selectList("hostel.searchHostelListMain",map);
+		System.out.println("mapper완료");
+		System.out.println("mapper처리 후 "+list.get(0));
+		return (ArrayList<Hostel>)list;
+	}
+
+
 }
