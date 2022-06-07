@@ -9,12 +9,13 @@ import lombok.NoArgsConstructor;
 @Data
 public class Pck {
 	private int packageNo;
-	private int memberNo;
+	private String memberId;
 	private String packageTitle;
 	private String packageContent;
 	private String packageDate;
 	private int likeCount;
 	private int packagePrice;
 	private int packageScore;
-	private String memberId;
+	private String packageStart;
+	private String packageEnd;
 }

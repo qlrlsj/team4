@@ -169,7 +169,7 @@
 							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						</div>
 						<div class="modal-body">
-							<div class="VipMenu">
+							<div class="VipMenu vc1">
 								<div class="FrontDiv"">
 									<div class="Front">정면</div>
 								</div>
@@ -211,7 +211,7 @@
 								</div>
 							</div>
 
-							<div class="BusinessMenu">
+							<div class="BusinessMenu bc1">
 								<div class="FrontDiv"">
 									<div class="Front">정면</div>
 								</div>
@@ -286,7 +286,7 @@
 								</div>
 							</div>
 
-							<div class="EconomyMenu">
+							<div class="EconomyMenu ec1">
 								<div class="FrontDiv"">
 									<div class="Front">정면</div>
 								</div>
