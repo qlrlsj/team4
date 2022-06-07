@@ -29,14 +29,101 @@
 <!--파일 업로드 css-->
 <link rel="stylesheet" href="/resources/css/file.css">
 <!-- 채팅 리스트 js -->
+<link rel="stylesheet" href="/resources/css/chat/chatHeader.css">
 <script src="/resources/js/chat/chatHeader.js"></script>
 <title>Insert title here</title>
 <style>
-
+.alarm{
+	display : none;
+}
 </style>
+<script>
+$(function(){
+	
+});
+//웹소켓 객체용 변수
+let alarmWs;
+//접속회원 아이디용 변수
+let senderNo;
+//접속한 채팅방용 변수
+let roomNo;
+//아이디를 가져오는 변수
+// const memberId = ${sessionScope.m.memberNo };
+//화면 로딩 후 실행
+//채팅을 시작하는 함수
+function connenctAlarm(){		
+	senderNo = ${sessionScope.m.memberNo };
+	//웹소켓 연결 시도
+	alarmWs = new WebSocket("ws://192.168.35.249//alarm.kt");
+	// 주소 바꿔줘야함
+	//웹소켓 연결이 성공하면 실행할 함수 지정
+	alarmWs.onopen = startAlarm;
+	//서버에서 화면으로 데이터를 전송하면 처리할 함수 지정
+	alarmWs.onmessage = receiveAlarm;
+	//웹소켓 연결이 종료되면 실행할 함수 지정
+	alarmWs.onclose = endAlarm;	
+}
+function startAlarm(){
+	//msg라는 키값으로 회원아이디를 웹소켓 서버로 전송
+	const data = {type:"enter",senderNo:senderNo};
+	ws.send(JSON.stringify(data));//data객체를 문자열로 변환해서 웹소켓 서버로 전송	
+}
+//사용자가 채팅을 보낼때
+function receiveAlarm(param){
+	if(Number.isInteger(param.data)){
+		appendCount(param.data);
+	}else{
+		appendAlarm(param.data);		
+	}
+	
+}
+//채팅 팝업창 닫을 때
+function endAlarm(){
+	console.log("웹소켓 종료");
+}
+//전송버튼 클릭 시 입력한 메세지를 전송하는 함수
+function sendAlarm(){
+	const msg = $("#sendMsg").val();
+	chatInsert(msg);
+	if(msg != ''){
+		const data = {type:"chatSend",msg:msg,roomNo:roomNo,memberId:memberId};
+		ws.send(JSON.stringify(data));
+		appendChat("<div class='chat right'>"+msg+"</div>");
+		$("#sendMsg").val("");
+	}
+}
+//.알람에 text를 추가하는 함수
+function appendAlarm(msg){
+	$(".alarm").empty();
+	$(".alarm").append(msg);
+}
+// count를 늘려주는 함수
+function appendCount(msg){
+	$("#alarmCount").empty();
+	$("#alarmCount").append(msg);
+}
+//채팅 db에 저장
+function alarmInsert(msg){
+	$.ajax({
+		url : "/insertAlarm.kt",
+		type: "post",
+		data : {"alarmContent":msg,"roomNo":roomNo,"senderNo":memberNo,"receiverId":memberId},
+		success : function(data) {
+			console.log(data);
+		}
+	});
+}
+</script>
 </head>
 <body>
 	<header class="p-3 border-bottom">
+	<div class="alarm">
+		<span id="senderNo">senderNo</span><hr>
+		<span id="sendContent">안녕하세요</span>
+		<span>${loginMessage }</span>
+		<span>${sessionScope.m.memberId }</span>
+		<span>${mem11.memberId }</span>
+	</div>
 		<div class="container">
 			<div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
 				<a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
@@ -85,6 +172,7 @@
 								<li><a href="#" class="nav-link px-2 link-dark">내 여행</a></li>
 								<li><a href="/questionList.kt?reqPage=1" class="nav-link px-2 link-dark">문의하기</a></li>
 								<li><a href="/allMember.kt?reqPage=1" class="nav-link px-2 link-dark">회원관리</a></li><!-- 관리자만 보이는 버튼 -->
+								<li><span class="material-symbols-outlined bell">notifications</span><span id="alarmCount"></span></li>
 							</ul>
 								<div class="dropdown">
 									<button class="btn btn-primary dropdown-toggle" type="button"
@@ -106,6 +194,7 @@
 								<li><a href="#" class="nav-link px-2 link-dark">위시리스트</a></li>
 								<li><a href="#" class="nav-link px-2 link-dark">내 여행</a></li>
 								<li><a href="/questionList.kt?reqPage=1" class="nav-link px-2 link-dark">문의하기</a></li>
+								<li><span class="material-symbols-outlined bell">notifications</span><span id="alarmCount"></span></li>
 							</ul>
 								<div class="dropdown">
 									<button class="btn btn-primary dropdown-toggle" type="button"

@@ -27,6 +27,8 @@
 select option[value=""][disabled] {
 	display: none;
 }
+
+
 </style>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
@@ -69,8 +71,8 @@ select option[value=""][disabled] {
  		location.href= "/companionSearch.kt?companionField="+companionField+"&companionTheme="+companionTheme+"&companionProgress="+companionProgress+"&travleStart="+travleStart+"&reqPage="+reqPage;		
 	}
 	</script>
-
-	<h2>동행자 모집</h2>
+		
+		<h2>동행자 모집</h2>
 		<div class="div-content p-3 mb-5 bg-secondary row">
 			<!-- 지역 검색 -->
 			<select class="form-select col comS" name="companionField" id="field">
@@ -133,6 +135,7 @@ select option[value=""][disabled] {
 				</tr>
 		</table>
 	</div>
+	
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>

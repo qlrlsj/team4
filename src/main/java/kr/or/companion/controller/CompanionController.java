@@ -40,7 +40,7 @@ public class CompanionController {
 	}
 	@RequestMapping (value="/companionInsert.kt")
 	public String companionInsert(Companion com) {
-		int result = service.insertCompanion(com);
+		int result = service.insertCompanion(com);		
 		if(result>0) {
 			return "redirect:/companionMain.kt?reqPage=1";			
 		}else {

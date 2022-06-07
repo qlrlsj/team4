@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
@@ -12,52 +14,83 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
+import kr.or.chat.model.service.ChatService;
+import kr.or.chat.model.vo.Alarm;
 import kr.or.member.model.vo.Member;
 
 
 public class AlarmHandler extends TextWebSocketHandler {
+	@Autowired
+	private ChatService chatService;
 	//접속한 회원 세션을 저장하는 리스트(알림용)
-	private List<WebSocketSession> sessionList;
-	// 1:1 체팅용 채팅방 세션 생성
-	private Map<String, WebSocketSession> memberList;	
+	private Map<Integer, WebSocketSession> sessionList;	
 	
 	//생성자 생성
 	public AlarmHandler() {
 		super();
-		sessionList = new ArrayList<WebSocketSession>();
-		memberList = new HashMap<String, WebSocketSession>();
+		sessionList = new HashMap<Integer, WebSocketSession>();
 	}	
 	
 	@Override
-	public void afterConnectionEstablished(WebSocketSession session) throws Exception{
-		System.out.println("접속세션 : "+session);
-		//웹소켓 접속 시 접속 세션을 list에 추가
-		sessionList.add(session);
-		String senderId = currentUserName(session);
-		System.out.println(senderId);
-		if(senderId != null) {
-			memberList.put(senderId, session);			
-		}
+	public void afterConnectionEstablished(WebSocketSession session) throws Exception{		
 	}
 	
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message)throws Exception{
-		String msg = message.getPayload();
 		JsonParser parser = new JsonParser();
+		//getPatload = 받아온 데이터를 키값:값 으로 주는 메소드
 		JsonElement element = parser.parse(message.getPayload());
+		//전송데이터 구분을위한 값인 type값 확인
+		String type = element.getAsJsonObject().get("type").getAsString();
+		if(type.equals("enter")) {
+			int memberNo = element.getAsJsonObject().get("msg").getAsInt();			
+			sessionList.put(memberNo, session);				
+			System.out.println("enter");
+			//최초 접속인 경우 읽지않은 쪽지 수를 조회해서 리턴
+			int amCount = chatService.alarmCount(memberNo);
+			WebSocketSession s = sessionList.get(memberNo);
+			if(s != null) {
+				TextMessage tm = new TextMessage(String.valueOf(amCount));
+				s.sendMessage(tm);				
+			}
+		}else if(type.equals("chatSend")) {
+			int roomNo = element.getAsJsonObject().get("roomNo").getAsInt();
+			int senderNo = element.getAsJsonObject().get("senderNo").getAsInt();
+			int receiverNo = element.getAsJsonObject().get("receiverNo").getAsInt();
+			String sendContent = element.getAsJsonObject().get("sendContent").getAsString();
+			Alarm am = new Alarm();
+			am.setRoomNo(roomNo);
+			am.setSenderNo(senderNo);
+			am.setReceiverNo(receiverNo);
+			am.setSendContent(sendContent);
+			int result = chatService.insertDm(am);
+			if(result != -1) {
+				WebSocketSession receiverSession = sessionList.get(receiverNo);
+				if(receiverSession!=null) {
+					TextMessage tm = new TextMessage("<span id=\"senderNo\">"+senderNo+"</span><hr>\r\n"+"<span id=\"sendContent\">"+sendContent+"</span>");
+					receiverSession.sendMessage(tm);					
+				}				
+			}
+		}
+	}
+	@Override
+	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception{
+		int currentNo = getMemberNo(session);
+		sessionList.remove(currentNo);
+	}
+	//세션의 memberNo를 찾아주는 메소드
+	public int getMemberNo(WebSocketSession session) {
+		 //value로 key 찾기        
+		for (int key : sessionList.keySet()) {
+           WebSocketSession value = sessionList.get(key);
+           System.out.println("Iterating, key: " + key);
+           if (value == session) {
+               return key;
+           }
+       }
+		return 1;		 
 	}
 	
-	//session에 저장돼있는 member의 이름 가져오기
-	private String currentUserName(WebSocketSession session) {
-		Map<String, Object> httpSession = session.getAttributes();
-		Member loginUser = (Member)httpSession.get("memberId");
-		
-		if(loginUser == null) {
-			String mid = session.getId();
-			return mid;
-		}
-		String mid = loginUser.getMemberId();
-		return mid;
-		
-	}
+	
+	
 }

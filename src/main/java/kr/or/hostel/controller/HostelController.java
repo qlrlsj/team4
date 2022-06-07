@@ -53,7 +53,7 @@ public class HostelController {
 	@RequestMapping(value = "/insertHostel.kt")
 	public String insertHostel(Hostel h, MultipartFile[] upfile, HttpServletRequest request, String[] roomOptions,
 			String[] hostelPrices, String[] standardBooknums, String[] maxBooknums, String[] roomNames) {
-
+		System.out.println("1");
 
 		// 파일처리
 
