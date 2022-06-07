@@ -48,7 +48,7 @@ let senderNo;
 //접속한 채팅방용 변수
 let roomNo;
 //아이디를 가져오는 변수
-const memberId = ${sessionScope.m.memberNo };
+// const memberId = ${sessionScope.m.memberNo };
 //화면 로딩 후 실행
 //채팅을 시작하는 함수
 function connenctAlarm(){		
