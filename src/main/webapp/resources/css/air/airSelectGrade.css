@@ -205,3 +205,95 @@
     text-align: center;
     padding-left: 15px;
 }
+.SelectSeatMenu{
+    width: 100%; 
+    height:300px;
+}
+.SelectSeat{
+    width: 100%;
+    height: 50px;
+    border: 2px solid black;
+}
+.startSelectSeat{
+    background-color: #dbf5b3;
+    margin-bottom: 5px;
+}
+.EndSelectSeat{
+    background-color: #f5e6b3;
+}
+.addSeat{
+    display: block;
+    float: left;
+    width: 80px;
+    height: 44px;
+    line-height: 35px;
+    border: 3px solid rgb(90, 30, 255);
+    border-radius: 10px;
+    font-size: 30px;
+    color: rgb(91, 83, 83);
+    margin: 0px 20px;
+}
+.nextMenu{
+    margin-top: 30px;
+    width: 25%;
+}
+.airTable2{
+    width: 100%;
+    height: 100px;
+    margin: 50px 0px auto;
+}
+.airTable2 tbody{
+    height: 60px;
+}
+.airTable2 tr>td, th{
+    width:8%;
+    font-size: 20px;
+    text-align: center;
+}
+.airTable2 tr>td:nth-child(7){
+    width: 10%;
+}
+.airTable2 tr>td:last-child{
+    width: 15%;
+}
+.airTable2>thead{
+    background-color: #B3BEF5;
+}
+.addEndPay, .addStartPay, .addEndSeatNum, .addStartSeatNum{
+    color: #dc3545;
+}
+.terms{
+    margin-top: 50px;
+    width: 100%;
+    height: 1000px;
+    background-color: rgb(229, 229, 229);
+}
+.termsTextBox{
+    width: 80%;
+    height: 300px;
+}
+.btnIcon{
+    margin-top: 2px;
+    margin-left: 120px;
+    float: left;
+    color: rgb(67, 67, 67);
+}
+.btnText{
+    margin-left: 20px;
+    float: left;
+    font-size: 20px;
+}
+.airTable3{
+    width: 100%;
+    margin: 50px 0px auto;
+    border: 1px solid black;
+}
+.airTable3 tr>th{
+    width: 15%;
+    height: 80px;
+    text-align: center;
+    background-color: #B3BEF5;
+}
+.airTable3 tr>td{
+    width: 35%;
+}

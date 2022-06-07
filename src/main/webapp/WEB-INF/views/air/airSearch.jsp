@@ -117,10 +117,12 @@
 						<div class="col">
 							<input type="number" name="airAmount" class="form-control amount" placeholder="인원수" min=1 max="8">						
 						</div>
+						<!-- 버튼 -->
 						<div class="col">
-							<button type="submit" class="btn btn-primary" style="float:right">
+							<button type="button" class="btn btn-primary airSubmitBtn" style="float:right">
 								<span class="material-icons">search</span>
 							</button>
+							<button type="submit" style="display: none;" class="airBtn"></button>
 						</div>
 					</div>
 				</fieldset>
