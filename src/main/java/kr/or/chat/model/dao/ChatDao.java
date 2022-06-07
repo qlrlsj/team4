@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.or.chat.model.vo.Alarm;
 import kr.or.chat.model.vo.Chat;
 import kr.or.chat.model.vo.ChatRoom;
 
@@ -36,5 +37,13 @@ public class ChatDao {
 	public ArrayList<ChatRoom> getChatList(int memberNo) {
 		List list = sqlSession.selectList("chat.getChatList",memberNo);
 		return (ArrayList<ChatRoom>) list;
+	}
+
+	public int getAlarmCount(int memberNo) {
+		return sqlSession.selectOne("chat.getAlarmCount",memberNo);
+	}
+
+	public int insertAlarm(Alarm am) {
+		return sqlSession.insert("chat.insertAlarm",am);
 	}
 }

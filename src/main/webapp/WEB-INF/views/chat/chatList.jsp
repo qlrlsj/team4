@@ -24,7 +24,6 @@
 	<script>
 	function chatOpen(roomNo){
 		  window.open('about:blank','chat','width=570, height=700, resizable = no, scrollbars = yes');
-		  document.roomNo.submit();
 	}
 	</script>
 	<div class="div-content2">

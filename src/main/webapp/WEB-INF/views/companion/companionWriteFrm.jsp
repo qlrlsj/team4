@@ -16,6 +16,9 @@ select option[value=""][disabled] {
 .center{
 	margin : 10px auto;
 }
+.ex{
+	margin-left:20px;
+}
 </style>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
@@ -54,20 +57,48 @@ select option[value=""][disabled] {
 	     $('#datepicker2').datepicker("option", "minDate", $("#datepicker1").val());
 	     $('#datepicker2').datepicker("option", "onClose", function ( selectedDate ) {
 	     $("#datepicker1").datepicker( "option", "maxDate", selectedDate );
-	     });	     
+	     });	
+	     
    	});
+    
+    function checkForm(){
+		if($('#companionTitle').val() == ''){
+			alert("제목을 입력해주세요!");
+			return false;
+		}
+		if($('#companionField').val() == null){
+			alert("여행 지역을 입력해주세요!");
+			return false;
+		}
+		if($('#datepicker1').val() == ''){
+			alert("여행 시작 예정일을 입력해주세요!");
+			return false;
+		}
+		if($('#datepicker2').val() == ''){
+			alert("여행 시작 예정일을 입력해주세요!");
+			return false;
+		}
+		if($('#theme').val() == null){
+			alert("여행 테마를 입력해주세요!");
+			return false;
+		}
+		if($('#summernote').val() == ''){
+			alert("글 내용을 입력해주세요!");
+			return false;
+		}
+    }
 	</script>
-	<h2>동행자 모집 글 작성</h2>
-	<form method="post" action="/companionInsert.kt">	
+	<form method="post" action="/companionInsert.kt"  onsubmit="return checkForm()">	
 		<div class="div-content center">
+			<h2>동행자 모집 글 작성</h2>
 		  <div class="div-content mb-3">
 		    <label for="companionTitle" class="form-label">제목</label>
 		    <input type="text" class="form-control" name="companionTitle" id="companionTitle" >
 		  </div>
 		  <input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
 		  <input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
-		<div class="div-content p-3 mb-5 bg-secondary row">
-			<select class="form-select col comS" name="companionField">
+		<div class="div-content p-3 mb-5 bg-secondary row ex">
+			<select class="form-select col comS" name="companionField" id="companionField">
 				<option value="" disabled selected>지역</option>
 				<option value="선택 안함">선택 안함</option>
 		    	<option value="서울">서울</option>
@@ -90,7 +121,7 @@ select option[value=""][disabled] {
 		     </select>
 			 <input class="col comS" type="text" name="travleStart"  id="datepicker1" placeholder="여행 시작일">
 			 <input class="col comS" type="text" name="travleEnd"  id="datepicker2" placeholder="여행 종료일">
-		     <select class="form-select col comS" name="companionTheme">
+		     <select class="form-select col comS" name="companionTheme" id="theme">
 		     	<option value="" disabled selected>여행테마</option>
 		     	<option value="선택 안함">선택 안함</option>
 		     	<option value="맛집 탐방">맛집 탐방</option>
@@ -102,7 +133,7 @@ select option[value=""][disabled] {
 		 	 <textarea id="summernote" name="companionContent"></textarea>
 		 	 <button class="btn btn-primary btn-lg com-plus" type="submit" id="comSubmit">작성</button>
 	     </div>
-	  </div>
+	  </div>	  
 	</form>
 	<script>
 // 	function dateSum(){

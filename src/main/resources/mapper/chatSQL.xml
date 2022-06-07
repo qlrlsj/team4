@@ -41,4 +41,7 @@
 		  from  room
 		  where member_no1 = #{memberNo} or member_no2 = #{memberNo}
   </select>
+  <select id="getAlarmCount" parameterType="int" resultType="int">
+  		select count(*) from alarm where receiver_no = #{memberNo}
+  </select>
 </mapper>

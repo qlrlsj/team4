@@ -1,0 +1,18 @@
+.alarm>span{
+	margin-left : 5px;
+}
+.alarm{
+	width : 200px;
+	height : 100px;
+	text-align: justify;
+	position: fixed;
+	top: 50px;
+	right: 50px;
+	opacity : 0.9;
+	background: #C6FBD4;
+	border-radius: 5px;
+	z-index: 100;
+}
+.bell:hover{
+	cursor: pointer;
+}
