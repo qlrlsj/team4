@@ -162,7 +162,18 @@ public class HostelController {
 		model.addAttribute("customerNum", customerNum);
 		model.addAttribute("roomType",roomType);*/
 		model.addAttribute("list", hostelList);
+		model.addAttribute("startDate",startDate);
+		model.addAttribute("endDate",endDate);
+		model.addAttribute("searchKeyword",searchKeyword);
 		return "hostel/searchHostelList";
+	}
+
+	@RequestMapping(value = "hostelDetail.kt")
+	public String hostelDetail(int hostelCode, String startDate, String endDate ,Model model) {
+		System.out.println("jsp에서 넘어오는 hostelCode"+hostelCode);
+		Hostel hostel = service.hostelDetail(hostelCode,startDate,endDate);
+		model.addAttribute("hostel",hostel);
+		return "hostel/hostelDetail";
 	}
 
 }

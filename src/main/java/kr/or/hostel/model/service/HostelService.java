@@ -133,8 +133,24 @@ public class HostelService {
 		map.put("endDate", endDate);
 		map.put("customerNum", customerNum);
 		ArrayList<Hostel> list = dao.searchHostelList(map);
-		System.out.println("List 출력전"+list.indexOf(0));
+		//System.out.println("List 출력전"+list.indexOf(0));
 		return list;
+	}
+
+	public Hostel hostelDetail(int hostelCode, String startDate, String endDate) {
+		
+		Hostel hostel = dao.hostelDetail(hostelCode); // 호스텔 기본정보 
+		
+		HashMap<String, Object> optionMap  = new HashMap<String, Object>(); // 예약가능한 날짜가 있는 옵션 가져오기 
+		optionMap.put("startDate", startDate);
+		optionMap.put("endDate", endDate);
+		optionMap.put("hostelCode", hostelCode);
+		ArrayList<HostelOption> optionList = dao.detailOptionList(optionMap);
+		System.out.println("옵션리스트:"+optionList.get(0));
+		
+		//파일 
+		
+		return hostel;
 	}
 
 }

@@ -71,4 +71,40 @@ WHERE
 
 </select>
 
+<resultMap type="h" id="hostelDetail">
+<result property="hostelCode" column="HOSTEL_CODE"/>
+<result property="hostelName" column="HOSTEL_NAME"/>
+<result property="hostelAddress" column="HOSTEL_ADDRESS"/>
+<result property="CheckinOut" column="CHECKIN_OUT"/>
+<result property="hostelIntro" column="HOSTEL_INTRO"/>
+<result property="hostelUsage" column="HOSTEL_USAGE"/>
+<result property="hostelService" column="HOSTEL_SERVICE"/>
+<result property="hostelComfort" column="HOSTEL_COMFORT"/>
+<result property="hostelScore" column="HOSTEL_SCORE"/>
+
+</resultMap>
+
+<select id="selectHostelDetail" parameterType="int" resultType="h" resultMap="hostelDetail">
+select * from hostel where hostel_code = #{hostelCode}
+</select>
+
+
+<resultMap type="ho" id="hostelOptionList">
+<result property="optionNo" column="OPTION_NO" />
+<result property="hostelCode" column="HOSTEL_CODE" />
+<result property="roomOption" column="ROOM_OPTION" />
+<result property="hostelPrice" column="HOSTEL_PRICE" />
+<result property="standardBooknum" column="STANDARD_BOOKNUM" />
+<result property="maxBooknum" column="MAX_BOOKNUM" />
+<result property="roomName" column="ROOM_NAME" />
+</resultMap>
+
+<select id="selectOptionList" parameterType="map" resultType="ho" resultMap="hostelOptionList">
+ SELECT *  FROM HOSTEL_OPTION WHERE hostel_code=#{hostelCode} and OPTION_NO NOT IN (SELECT OPTION_NO FROM RESERVED_ROOM WHERE RESERVED_DATE BETWEEN to_date(#{startDate},'yyyy-mm-dd') and to_date(#{endDate},'yyyy-mm-dd')) 
+
+</select>
+
+
+
+
 </mapper>

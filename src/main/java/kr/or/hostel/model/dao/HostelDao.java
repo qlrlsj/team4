@@ -52,11 +52,31 @@ public class HostelDao {
 
 
 	public ArrayList<Hostel> searchHostelList(HashMap<String, Object> map) {
-		System.out.println("dao직전"+map);
+		//System.out.println("dao직전"+map);
 		List list = sqlSession.selectList("hostel.searchHostelListMain",map);
-		System.out.println("mapper완료");
-		System.out.println("mapper처리 후 "+list.get(0));
+		//System.out.println("mapper완료");
+		//System.out.println("mapper처리 후 "+list.get(0));
 		return (ArrayList<Hostel>)list;
+	}
+
+	public Hostel hostelDetail(int hostelCode) {
+		Hostel hostel = sqlSession.selectOne("hostel.selectHostelDetail",hostelCode);
+//		List ho = sqlSession.selectList("hostel.selectOptionList",hostelCode);
+//		//ArrayList<HostelOption>
+				
+		// 가져올거 - hostel - 이름, 주소 , 평점, 체크인체크아웃 , 소개, 안내, 편의시설, 서비스 
+		 // 	 file  - filepath (list)
+		 // option -  (list) 
+		//review 
+		//System.out.println("쿼리 조회:"+hostel);
+		
+		return hostel;
+	}
+
+	public ArrayList<HostelOption> detailOptionList(HashMap<String, Object> optionMap) {
+		List list = sqlSession.selectList("hostel.selectHostelDetail",optionMap);
+		
+		return (ArrayList<HostelOption>)list;
 	}
 
 
