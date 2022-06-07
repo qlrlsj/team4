@@ -33,7 +33,9 @@
 <script src="/resources/js/chat/chatHeader.js"></script>
 <title>Insert title here</title>
 <style>
-
+.alarm{
+	display : none;
+}
 </style>
 <script>
 $(function(){
