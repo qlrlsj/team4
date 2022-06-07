@@ -74,7 +74,7 @@ public class HostelDao {
 	}
 
 	public ArrayList<HostelOption> detailOptionList(HashMap<String, Object> optionMap) {
-		List list = sqlSession.selectList("hostel.selectHostelDetail",optionMap);
+		List list = sqlSession.selectList("hostel.selectOptionList",optionMap);
 		
 		return (ArrayList<HostelOption>)list;
 	}
