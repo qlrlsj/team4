@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="product">
+	<select id="selectSellerHostelList" parameterType="m" resultType="h" >
+	select
+	
+	from hostel
+	where member_no = #{memberNo}
+	</select>
+	<select id="selectSellerTicketList" parameterType="m" resultType="t" >
+	
+	</select>
+	<select id="selectSellerPackageList" parameterType="m" resultType="p" >
+	
+	</select>
+</mapper>

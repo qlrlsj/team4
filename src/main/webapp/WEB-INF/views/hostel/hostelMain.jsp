@@ -55,13 +55,7 @@ height: 400px;
 			<input type="radio" class="btn-check" name="roomType" id="btnradio3"  value="4" autocomplete="off" checked="">
 			<label class="btn btn-outline-primary" for="btnradio4">풀빌라</label>
 		  </div>
-	<!--	<div class="type-btn ">
-			<button class="btn btn-outline-info" type="button" >호텔/리조트</button>
-			<button class="btn btn-outline-info" type="button">게스트하우스</button>
-			<button class="btn btn-outline-info" type="button">펜션</button>
-			<button class="btn btn-outline-info" type="button">풀빌라</button>			
-			<input type="hidden" name="roomType" value="1" ><!--기본value 1로 넘겨주기
-		</div>-->
+
 		<div class="search-content ">
 			<input type="text" class="form-control" name="searchKeyword" required placeholder="지역/숙소이름" style="width:22%; display: inline;" >
 			<input type="text" name="startDate" class="datepicker form-control" required  id = "datepicker1" style="width:22%; display: inline;" placeholder="입실날짜">

@@ -64,3 +64,26 @@ $(".amount").change(function(){
         $(this).val(1);
     }
 })
+$(".submitBtn").click(function(){
+    if($(".airStart").val()==''){
+        alert("출발지입력");
+        return false;
+    }
+    if($(".airEnd").val()==''){
+        alert("도착지입력");
+        return false;
+    }
+    if($(".goDate").val()==''){
+        alert("출발일입력");
+        return false;
+    }
+    if($(".comDate").val()=='' && $(".comDate").css("display") !="none"){
+        alert("도착일입력");
+        return false;
+    }
+    if($(".amount").val()==''){
+        alert("인원수 입력");
+        return false;
+    }
+    $(".submitbtn").trigger("click");
+})

@@ -54,6 +54,7 @@ public class MemberDao {
 	}
 
 
+
 //	public Member selectOneMember1(Member m) {
 //		Member member = sqlSession.selectOne("member.selectOneMember1",m);
 //		System.out.println("mapper다녀온 후 dao에서의 member : "+member);
