@@ -24,7 +24,9 @@ import com.google.gson.Gson;
 
 import kr.or.hostel.model.service.HostelService;
 import kr.or.hostel.model.vo.Hostel;
+import kr.or.hostel.model.vo.HostelDetailList;
 import kr.or.hostel.model.vo.HostelFile;
+import kr.or.hostel.model.vo.HostelOption;
 import kr.or.member.model.vo.Member;
 
 @Controller
@@ -165,15 +167,41 @@ public class HostelController {
 		model.addAttribute("startDate",startDate);
 		model.addAttribute("endDate",endDate);
 		model.addAttribute("searchKeyword",searchKeyword);
+		model.addAttribute("customerNum",customerNum);
 		return "hostel/searchHostelList";
 	}
-
+	
+//	@ResponseBody
 	@RequestMapping(value = "hostelDetail.kt")
-	public String hostelDetail(int hostelCode, String startDate, String endDate ,Model model) {
+	public String hostelDetail(int hostelCode, String startDate, String endDate ,int customerNum,Model model) {
 		System.out.println("jsp에서 넘어오는 hostelCode"+hostelCode);
-		Hostel hostel = service.hostelDetail(hostelCode,startDate,endDate);
-		model.addAttribute("hostel",hostel);
+		HostelDetailList hdl = service.hostelDetail(hostelCode,startDate,endDate);
+		model.addAttribute("hostel", hdl.getHostel());
+		model.addAttribute("optionList", hdl.getOptionList());
+		model.addAttribute("fileList",hdl.getFileList());
+		model.addAttribute("startDate",startDate);
+		model.addAttribute("endDate",endDate);
+		model.addAttribute("customerNum",customerNum);
 		return "hostel/hostelDetail";
+	}
+	
+	
+	
+	
+	
+	@RequestMapping(value = "hostelReserveFrm.kt")
+	public String hostelReserveFrm(int opitonNo, String hostelIndate,String hostelOutdate, int reserveNum ) {
+		// 예약페이지로 이동 
+		// 옵션번호로 가격, 호텔제목 등등 조회해서 넘겨주기 
+		
+		return "hostel/hostelReserveFrm";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "searchHostelOptionList.kt" , produces = "application/json;charset=utf-8")
+	public String searchHostelOptionList (int hostelCode, String startDate, String endDate, int customerNum  ) {
+		ArrayList<HostelOption> list = service.searchHostelOptionList(hostelCode,startDate,endDate,customerNum );
+		return  new Gson().toJson(list);
 	}
 
 }

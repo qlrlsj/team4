@@ -75,7 +75,7 @@ WHERE
 <result property="hostelCode" column="HOSTEL_CODE"/>
 <result property="hostelName" column="HOSTEL_NAME"/>
 <result property="hostelAddress" column="HOSTEL_ADDRESS"/>
-<result property="CheckinOut" column="CHECKIN_OUT"/>
+<result property="checkinOut" column="CHECKIN_OUT"/>
 <result property="hostelIntro" column="HOSTEL_INTRO"/>
 <result property="hostelUsage" column="HOSTEL_USAGE"/>
 <result property="hostelService" column="HOSTEL_SERVICE"/>
@@ -105,6 +105,9 @@ select * from hostel where hostel_code = #{hostelCode}
 </select>
 
 
+<select id="searchHostelFile" parameterType="int" resultType="hf">
+select filepath from hostel_file where hostel_code=#{hostelCode}
+</select>
 
 
 </mapper>

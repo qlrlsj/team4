@@ -79,5 +79,11 @@ public class HostelDao {
 		return (ArrayList<HostelOption>)list;
 	}
 
+	public ArrayList<HostelFile> searchHostelFile(int hostelCode) {
+		List list = sqlSession.selectList("hostel.searchHostelFile",hostelCode);
+		
+		return (ArrayList<HostelFile>)list;
+	}
+
 
 }

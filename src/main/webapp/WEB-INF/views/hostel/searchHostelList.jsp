@@ -85,7 +85,7 @@ margin-bottom: 20px;
 				<input type="text" class="form-control" name="searchKeyword" required placeholder="지역/숙소이름" style="width:22%; display: inline;" value="${searchKeyword}" >
 				<input type="text" name="startDate" class="datepicker form-control" required  id = "datepicker1" style="width:22%; display: inline;" value="${startDate}">
 				<input type="text" name="endDate" class="datepicker form-control"   required id = "datepicker2" style="width:20%; display: inline;" value="${endDate}">
-				<input type="number" name="customerNum" class="form-control" required placeholder="인원" style="width:22%; display: inline;" >
+				<input type="number" name="customerNum" class="form-control" required placeholder="인원" style="width:22%; display: inline;" value="${customerNum }">
 				<button type="submit" class="btn btn-outline-info">검색하기</button>
 			</div>
 		</div>
@@ -202,7 +202,7 @@ margin-bottom: 20px;
 				
 				<tr>
 					<td>${hostel.hostelCode }</td><!--히든-->
-					<td><a href="/hostelDetail.kt?hostelCode=${hostel.hostelCode }">${hostel.hostelName }</a></td>
+					<td><a href="/hostelDetail.kt?hostelCode=${hostel.hostelCode }&startDate=${startDate}&endDate=${endDate}&customerNum=${customerNum}">${hostel.hostelName }</a></td>
 					<td>주소 : ${hostel.hostelAddress }<br>
 					가격 : ${hostel.hostelPrice}</td>
 					<td>${hostel.hostelScore }</td>
