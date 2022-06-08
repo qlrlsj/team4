@@ -19,13 +19,13 @@ public class SellerDao {
 
 	public List getProductList(String type, Member m) {
 		if(type.equals("hostel")) {
-			List list = sqlSession.selectList("product.selectSellerHostelList",m);
+			List list = sqlSession.selectList("seller.selectSellerH",m);
 			return (ArrayList<Hostel>)list;
 		}else if(type.equals("ticket")) {
-			List list = sqlSession.selectList("product.selectSellerTicketList",m);
+			List list = sqlSession.selectList("seller.selectSellerT",m);
 			return (ArrayList<Ticket>)list;
 		}else if(type.equals("package")) {
-			List list = sqlSession.selectList("product.selectSellerPackageList",m);
+			List list = sqlSession.selectList("seller.selectSellerP",m);
 			return (ArrayList<Pck>)list;
 		}else {
 			return null;

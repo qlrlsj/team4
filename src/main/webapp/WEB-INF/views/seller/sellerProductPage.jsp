@@ -38,11 +38,11 @@
 					<span>hostel</span>
 					<c:forEach items="${list }" var="ho">
 						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
+							<td>${ho.getHostelName } / ${ho.getHostelCode }</td>
+							<td>${ho.getBookStart }</td>
+							<td>${ho.getBookEnd }</td>
+							<td>${ho.getHostelScore }</td>
+							<td>${ho.getHostelCode }</td>
 							<td></td>
 						</tr>
 					</c:forEach>

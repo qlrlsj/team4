@@ -1,16 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="product">
-	<select id="selectSellerHostelList" parameterType="m" resultType="h" >
-	select
-	
+<mapper namespace="seller">
+
+	<select id="selectSellerH" parameterType="m" resultType="h" >
+	select 
+		hostel_code as hostelCode,
+		hostel_name as hostelName,
+		book_start as bookStart,
+		book_end as bookEnd,
+		hostel_score as hostelScore
 	from hostel
 	where member_no = #{memberNo}
 	</select>
-	<select id="selectSellerTicketList" parameterType="m" resultType="t" >
-	
+	<select id="selectSellerT" parameterType="m" resultType="t" >
+	  	select 
+			ticket_no as ticketNo,			
+			member_no as memberNo,
+			start_date as startDate,
+			expire_date as expireDate,
+			ticket_title as ticketTitle,
+			ticket_content as ticketContent,
+			important_content as importantContent,
+			business_time as businessTime,
+			business_addr as businessAddr,
+			required_time as requiredTime,
+			like_count as likeCount,
+			ticket_score as ticketScore
+        from ticket
+        where member_no=#{memberNo}
 	</select>
-	<select id="selectSellerPackageList" parameterType="m" resultType="p" >
+	<select id="selectSellerP" parameterType="m" resultType="p" >
 	
 	</select>
 </mapper>
