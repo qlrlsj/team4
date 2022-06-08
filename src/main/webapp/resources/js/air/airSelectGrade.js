@@ -256,3 +256,63 @@ $(".btnIcon").eq(0).click(function(){
 $(".btnIcon").eq(1).click(function(){
     check2 = !check2;
 })
+$(".nextMenu2").click(function(){
+    if(check1&&check2){
+        if($("input[name=memberName]").val()==''||$("input[name=memberEmail]").val()==''||$("input[name=memberPhone]").val()==''){
+            alert("예약정보를 입력해주세요");
+        }else if(!$("input[name=memberEmail]").val().includes('@')){
+            alert("이메일 형식이 잘못됐어요");
+        }else if(!$("input[name=memberPhone]").val().includes('-',3)||!$("input[name=memberPhone]").val().includes('-',8)){
+            alert("전화번호를 010-0000-0000 형식으로 입력해주세요")
+        }else{
+            $(".airTableBase2").css("display","none");
+            $(".airTableBase3").css("display","block");
+            $(".Proceeding").removeClass("Proceeding");
+            $(".orderDiv").eq(2).addClass("Proceeding");
+            $(".userName").text($("input[name=memberName]").val());
+            $(".userEmail").text($("input[name=memberEmail]").val());
+            $(".userPhone").text($("input[name=memberPhone]").val());
+            $(".payAmount").text(Number($(".addStartPay").eq(1).text())+Number($(".addEndPay").eq(1).text())+"(원)");
+            $(".paymentAmount").text(Number($(".addStartPay").eq(1).text())+Number($(".addEndPay").eq(1).text())+"(원)");
+        }
+    }else{
+        alert("약관에 동의해주세요.");
+    }
+})
+$(".couponSelect").click(function(){
+    
+})
+
+
+
+
+$("#payment").on("click",function(){
+    const price = $("#totalPrice").text();
+    //거래 고유 ID를 생성하기위해 현재 날짜를 이용해서 처리
+    const d = new Date();
+    //date 값 생성시 ""를 더하지 않으면 숫자 + 연산이 되므로 문자 덧샘을 추가
+    const date = d.getFullYear()+""+(d.getMonth()+1)+""+d.getDate()+""+d.getHours()+""+d.getMinutes()+""+d.getSeconds();
+    IMP.init("imp43584751");//결재API사용을 위한 식별코드입력
+    IMP.request_pay({
+        merchant_uid :"상품코드_"+date,//거래아이디
+        name:"결재테스트",				//결재이름
+        amount:price,				//결재금액
+        buyer_email:"gyehf3492@naver.com",	//구매자이메일
+        buyer_name:"구매자",				//구매자이름
+        buyer_tel:"010-5378-3492",		//구매자전번
+        buyer_addr:"인천서구가정동",			//구매자주소
+        buyer_postcode:"12345",			//구매자 우편번호
+        
+    }),function(rsp){
+        if(rsp.success){
+            console.log("결재완료");
+            console.log("고유ID:"+rsp.imp);
+            console.log("상점거래ID"+rsp.merchant_uid);
+            console.log("결재금액"+rsp.paid_amount);
+            console.log("카드승인번호"+rsp.apply_num);
+            
+        }else{
+            alert("에러내용:"+rsp.err_msg);
+        }
+    }
+})
