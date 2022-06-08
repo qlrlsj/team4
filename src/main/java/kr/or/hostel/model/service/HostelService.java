@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.hostel.model.dao.HostelDao;
 import kr.or.hostel.model.vo.Hostel;
+import kr.or.hostel.model.vo.HostelDetailList;
 import kr.or.hostel.model.vo.HostelFile;
 import kr.or.hostel.model.vo.HostelOption;
 import kr.or.hostel.model.vo.ReservableRoom;
@@ -133,8 +134,39 @@ public class HostelService {
 		map.put("endDate", endDate);
 		map.put("customerNum", customerNum);
 		ArrayList<Hostel> list = dao.searchHostelList(map);
-		System.out.println("List 출력전"+list.indexOf(0));
+		//System.out.println("List 출력전"+list.indexOf(0));
 		return list;
+	}
+
+	public HostelDetailList hostelDetail(int hostelCode, String startDate, String endDate) {
+		
+		Hostel hostel = dao.hostelDetail(hostelCode); // 호스텔 기본정보 
+		
+		HashMap<String, Object> optionMap  = new HashMap<String, Object>(); // 예약가능한 날짜가 있는 옵션 가져오기 
+		optionMap.put("startDate", startDate);
+		optionMap.put("endDate", endDate);
+		optionMap.put("hostelCode", hostelCode);
+		ArrayList<HostelOption> optionList = dao.detailOptionList(optionMap);
+		//System.out.println("옵션리스트:"+optionList.get(0));
+		
+		//파일
+		ArrayList<HostelFile> fileList = dao.searchHostelFile(hostelCode);
+		System.out.println("서비스hostel값 : "+hostel);
+		HostelDetailList hdl = new HostelDetailList(hostel, optionList, fileList);
+		
+		return hdl;
+	}
+
+	public ArrayList<HostelOption> searchHostelOptionList(int hostelCode, String startDate, String endDate,
+			int customerNum) {
+		HashMap<String, Object> optionMap  = new HashMap<String, Object>(); // 예약가능한 날짜가 있는 옵션 가져오기 
+		optionMap.put("startDate", startDate);
+		optionMap.put("endDate", endDate);
+		optionMap.put("hostelCode", hostelCode);
+		optionMap.put("customerNum", customerNum);
+		ArrayList<HostelOption> optionList = dao.detailOptionList(optionMap);
+		
+		return optionList;
 	}
 
 }

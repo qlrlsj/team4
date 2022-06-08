@@ -16,7 +16,7 @@ public class Hostel {
 	private String hostelAddress;
 	private String bookStart;
 	private String bookEnd;
-	private String CheckinOut;
+	private String checkinOut;
 	private String hostelIntro;
 	private String hostelUsage;
 	private int roomType;
