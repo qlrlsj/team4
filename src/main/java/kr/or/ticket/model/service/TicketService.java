@@ -18,12 +18,12 @@ public class TicketService {
 	@Autowired
 	private TicketDao dao;
 
-	public ArrayList<TicketCategory> selectAllTicketCategory() {
-		return dao.selectAllTicket();
+	public ArrayList<TicketCategory> selectTicketCategory() {
+		return dao.selectTicketCategory();
 	}
 
-	public ArrayList<LocalCategory> selectAllLocal() {
-		return dao.selectAllLocal();
+	public ArrayList<LocalCategory> selectLocalCategory() {
+		return dao.selectLocalCategory();
 	}
 
 	public int insertTicket(Ticket ticket, TicketOptions options, TicketFile ticketFile) {
@@ -71,6 +71,18 @@ public class TicketService {
 			}
 		}
 		return results;
+	}
+
+	public Ticket selectTicket(int ticketNo) {
+		return dao.selectTicket(ticketNo);
+	}
+
+	public ArrayList<TicketOption> selectTicketOption(int ticketNo) {
+		return dao.selectTicketOption(ticketNo);
+	}
+
+	public TicketFile selectTicketFile(int ticketNo) {
+		return dao.selectTicketFile(ticketNo);
 	}
 	
 }

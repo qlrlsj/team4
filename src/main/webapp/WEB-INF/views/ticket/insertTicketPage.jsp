@@ -36,7 +36,6 @@
 	<div class="div-content">
 
 		<form class="row g-3" action="/insertTicket.kt" method="post" enctype="multipart/form-data">
-			<h2>${sessionScope.m.memberNo}</h2>
 			<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo}">
 			<div class="content-box">
 				<h4>1. 카테고리</h4>

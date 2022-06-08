@@ -24,6 +24,7 @@ import kr.or.ticket.model.vo.LocalCategory;
 import kr.or.ticket.model.vo.Ticket;
 import kr.or.ticket.model.vo.TicketCategory;
 import kr.or.ticket.model.vo.TicketFile;
+import kr.or.ticket.model.vo.TicketOption;
 import kr.or.ticket.model.vo.TicketOptions;
 
 @Controller
@@ -105,7 +106,7 @@ public class TicketController {
 	
 	@RequestMapping(value="/insertTicketPage.kt")
 	public String insertTicketPage(Model model) {
-		ArrayList<TicketCategory> ticketCategory = service.selectAllTicketCategory();
+		ArrayList<TicketCategory> ticketCategory = service.selectTicketCategory();
 		model.addAttribute("ticketCategory", ticketCategory);
 		return "ticket/insertTicketPage";
 	}
@@ -114,53 +115,33 @@ public class TicketController {
 	@RequestMapping(value="/selectAllTicketCategory.kt",produces = "application/json;charset=utf-8")
 	public String selectAllTicketCategory() {
 		Gson gson = new Gson();
-		ArrayList<TicketCategory> ticketCategory = service.selectAllTicketCategory();
+		ArrayList<TicketCategory> ticketCategory = service.selectTicketCategory();
 		return gson.toJson(ticketCategory);
 	}
 	@ResponseBody
 	@RequestMapping(value="/selectAllLocal.kt",produces = "application/json;charset=utf-8")
 	public String selectAllLocal() {
 		Gson gson = new Gson();
-		ArrayList<LocalCategory> local = service.selectAllLocal();
+		ArrayList<LocalCategory> local = service.selectLocalCategory();
 		return gson.toJson(local);
 	}
 	
 	//티겟등록
 	@RequestMapping(value="/insertTicket.kt")
 	public String insertTicket(Ticket ticket,MultipartFile[] file1, MultipartFile[] file2, TicketOptions options,HttpServletRequest request) {
-		System.out.println("memberNo : "+ticket.getMemberNo());
-		System.out.println("categoryId : "+ticket.getCategoryId());
-		System.out.println("localId : "+ticket.getLocalId());
-		System.out.println("businessAddr : "+ticket.getBusinessAddr());
-		System.out.println("ticketTitle : "+ticket.getTicketTitle());
-		System.out.println("importantContent : "+ticket.getImportantContent());
-		System.out.println("businessTime : "+ticket.getBusinessTime());
-		System.out.println("file1 : "+file1);
-		System.out.println("file2 : "+file2);
-		System.out.println(file1[0]);
-		System.out.println(file2[0]);
-		System.out.println("ticketContent : "+ticket.getTicketContent());
-		System.out.println("requiredTime : "+ticket.getRequiredTime());
-		
-		
-//		TicketFile ticketFile = new TicketFile();
-//		ArrayList<String> placeFilepaths = upfile(request, file1);
-//		ArrayList<String> ticketFilepaths = upfile(request, file2);
-//		System.out.println(placeFilepaths.get(0));
-//		System.out.println(ticketFilepaths.get(0));
-//		System.out.println(ticketFilepaths.get(1));
-//		System.out.println(ticketFilepaths.get(2));
-//		System.out.println(ticketFilepaths.get(3));
-//		ticketFile.setPlaceFilepath(placeFilepaths.get(0));
-//		ticketFile.setTicketFilepath1(ticketFilepaths.get(0));
-//		ticketFile.setTicketFilepath2(ticketFilepaths.get(1));
-//		ticketFile.setTicketFilepath3(ticketFilepaths.get(2));
-//		ticketFile.setTicketFilepath4(ticketFilepaths.get(3));
-//		System.out.println(ticketFile.getPlaceFilepath());
-//		System.out.println(ticketFile.getTicketFilepath1());
-//		System.out.println(ticketFile.getTicketFilepath2());
-//		System.out.println(ticketFile.getTicketFilepath3());
-//		System.out.println(ticketFile.getTicketFilepath4());
+//		System.out.println("memberNo : "+ticket.getMemberNo());
+//		System.out.println("categoryId : "+ticket.getCategoryId());
+//		System.out.println("localId : "+ticket.getLocalId());
+//		System.out.println("businessAddr : "+ticket.getBusinessAddr());
+//		System.out.println("ticketTitle : "+ticket.getTicketTitle());
+//		System.out.println("importantContent : "+ticket.getImportantContent());
+//		System.out.println("businessTime : "+ticket.getBusinessTime());
+//		System.out.println("file1 : "+file1);
+//		System.out.println("file2 : "+file2);
+//		System.out.println(file1[0]);
+//		System.out.println(file2[0]);
+//		System.out.println("ticketContent : "+ticket.getTicketContent());
+//		System.out.println("requiredTime : "+ticket.getRequiredTime());
 		
 		ArrayList<String> placeFilepath = upfile(request, file1);
 		ArrayList<String> ticketFilepath = upfile(request, file2);
@@ -174,7 +155,20 @@ public class TicketController {
 		int result = service.insertTicket(ticket,options,ticketFile);
 		
 		
-		return "ticket/insertTicketPage";
+		return "ticket/ticketMain";
+	}
+	
+	@RequestMapping(value="/ticketView.kt")
+	public String selectTicket(int ticketNo,Model model) {
+		Ticket ticket = service.selectTicket(ticketNo);
+		ArrayList<TicketOption> optionList = service.selectTicketOption(ticketNo);
+		TicketFile file = service.selectTicketFile(ticketNo);
+
+		model.addAttribute("ticket", ticket);
+		model.addAttribute("optionList", optionList);
+		model.addAttribute("file", file);
+		
+		return "ticket/ticketView";
 	}
 	
 	@RequestMapping(value="/insertTest.kt")
@@ -184,7 +178,6 @@ public class TicketController {
 	@RequestMapping(value="/ticketTest.kt")
 	public String ticketTest(TicketOptions options) {
 		int result = service.insertOptTest(options);
-		System.out.println(result);
 		return "ticket/test";
 	}
 	

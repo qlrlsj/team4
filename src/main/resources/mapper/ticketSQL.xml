@@ -63,4 +63,56 @@
 		,#{ticketFilepath4})
 	</insert>
 	
+	<select id="selectTicket" parameterType="int" resultType="t">
+		select 
+            c1.category_name as categoryName,
+            c2.category_name as parentCategoryName,
+            l1.local_name as localName,
+            l2.local_name as parentLocalName,
+			ticket_no as ticketNo,
+			t.local_id as localId,
+			t.category_id as categoryId,
+			member_no as memberNo,
+			start_date as startDate,
+			expire_date as expireDate,
+			ticket_title as ticketTitle,
+			ticket_content as ticketContent,
+			important_content as importantContent,
+			business_time as businessTime,
+			business_addr as businessAddr,
+			required_time as requiredTime,
+			like_count as likeCount,
+			ticket_score as ticketScore
+        from ticket t
+        join ticket_Category c1 on (t.category_id = c1.category_id)
+        join ticket_category c2 on (c1.parent_category_id = c2.category_id)
+        join local_category l1 on (t.local_id = l1.local_id)
+        join local_category l2 on (l1.parent_local_id = l2.local_id)
+        where ticket_no=#{ticketNo}
+	</select>
+	<select id="selectTicketOption" parameterType="int" resultType="to">
+		select
+			opt_no as optNo,
+			ticket_no  as ticketNo,
+			opt_title  as optTitle,
+			opt_content  as optContent,
+			opt_price  as optPrice,
+			opt_discount_rate  as optDiscountRate,
+			opt_discount_price  as optDiscountPrice,
+			opt_stock  as optStock
+		from ticket_option
+		where ticket_No = #{ticketNo}
+	</select>
+	
+	<select id="selectTicketFile" parameterType="int" resultType="tf">
+		select
+			ticket_no  as ticketNo,
+			place_filepath  as placeFilepath,
+			ticket_filepath1  as ticketFilepath1,
+			ticket_filepath2  as ticketFilepath2,
+			ticket_filepath3  as ticketFilepath3,
+			ticket_filepath4  as ticketFilepath4
+		from ticket_file
+		where ticket_No = #{ticketNo}
+	</select>
 </mapper>
