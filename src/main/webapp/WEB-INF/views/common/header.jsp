@@ -52,7 +52,7 @@ let roomNo;
 //화면 로딩 후 실행
 //채팅을 시작하는 함수
 function connenctAlarm(){		
-	senderNo = ${sessionScope.m.memberNo };
+// 	senderNo = ${sessionScope.m.memberNo };
 	//웹소켓 연결 시도
 	alarmWs = new WebSocket("ws://192.168.35.249//alarm.kt");
 	// 주소 바꿔줘야함
@@ -205,7 +205,10 @@ function alarmInsert(msg){
 										<li><a class="dropdown-item active" href="#">포인트</a></li>
 										<li><a class="dropdown-item" href="#">쿠폰</a></li>
 										<li><a class="dropdown-item" href="#">파트너 등록하기</a></li>
-										<li><a class="dropdown-item" href="/mypage.kt">마이페이지</a></li>										
+										<li><a class="dropdown-item" href="/mypage.kt">마이페이지</a></li>	
+										<c:if test="${grade eq '1' }">
+											<li><a class="dropdown-item" href="/sellerPage.kt">판매자 페이지</a></li>										
+										</c:if>
 										<li>
 											<a class="dropdown-item" href="#" onclick="openList();">내 채팅</a>
 											<form name="myChat" action="/chatList.kt" method="post">

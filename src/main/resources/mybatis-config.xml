@@ -25,5 +25,6 @@
 		<typeAlias type="kr.or.comment.model.vo.Comment" alias="c"/>
 		<typeAlias type="kr.or.pck.model.vo.Pck" alias="p"/>
 		<typeAlias type="kr.or.pck.model.vo.FileVO" alias="f"/>
+		<typeAlias type="kr.or.seller.model.vo.Product" alias="pr"/>
 	</typeAliases>
 </configuration>
