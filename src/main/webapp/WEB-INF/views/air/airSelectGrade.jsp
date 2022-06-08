@@ -8,6 +8,8 @@
 <title>Insert title here</title>
 </head>
 <link rel="stylesheet" href="/resources/css/air/airSelectGrade.css">
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="div-content">
@@ -36,6 +38,7 @@
 		</div>
 		
 		<div class="airTableBase">
+			<h2 class="naviH2">결재 정보 확인</h2>
 			<div class="airTableST">
 				<div class="airTableTitle">
 					<div style="float: left; width: 25%;">
@@ -155,11 +158,11 @@
 					</table>
 				</div>
 			</c:if>
-		</div>
-		<div class="airTableSelect" style="text-align:center;">
-			<div style="width: 100%; height:50px; margin-bottom: 100px;">
+			<div style="width: 100%; height:50px; text-align: center;">
 				<button class="btn btn-primary" style="width: 25%; text-align: center;" placeholder="좌석선택" data-bs-toggle="modal" data-bs-target="#selectSeat"> 좌석 선택</button>
 			</div>
+		</div>
+		<div class="airTableSelect" style="text-align:center;">
 
 			<div class="modal fade modal1" id="selectSeat" tabindex="-1" aria-labelledby="airStartSeat" aria-hidden="true">
 				<div class="modal-dialog">
@@ -725,6 +728,7 @@
 			</div>
 			<!-- 모달종료 -->
 			<div class="SelectSeatMenu">
+				<h2 class="naviH2">좌석 선택</h2>
 				<div class="startSelectSeat SelectSeat">
 					<div style="float: left; width: 30%; height: 100%; font-size: 30px;">
 						출발 선택된 좌석번호 :
@@ -744,13 +748,15 @@
 				</div>
 			</div>
 
-			<div style="width: 100%; height:1450px">
+			<div style="width: 100%; height:1600px">
+				<h2 class="naviH2">좌석배치도</h2>
 				<img src="/resources/upload/air/seat.png">
 			</div>
 		</div>
 
 		<!-- 약관동의페이지 -->
 		<div class="airTableBase2" style="display: none;">
+			<h2 class="naviH2" style="margin-top: 100px;">선택 좌석 정보 & 예약자 정보 입력</h2>
 			<table class="table airTable2">
 				<thead>
 					<tr style="text-align: center;">
@@ -790,26 +796,40 @@
 					</tr>
 				</tbody>
 			</table>
-			
-			<div>
-				<table class="airTable3">
-					<tbody>
-						<tr>
-							<th>예약자이름</th>
-							<td></td>
-							<th>이메일</th>
-							<td></td>
-						</tr>
-						<tr>
-							<th>휴대폰번호</th>
-							<td></td>
-							<th></th>
-							<td></td>
-						</tr>
-					</tbody>
-					</table>
+			<div class="airTable3Tool">
+				<c:choose>
+					<c:when test="${!empty m}">
+						<table class="airTable3">
+							<tbody>
+								<tr>
+									<th>예약자이름</th>
+									<td><input type="text" name="memberName" value="${sessionScope.m.memberName }" readonly></td>
+									<th>이메일</th>
+									<td><input type="text" name="memberEmail" value="${sessionScope.m.memberEmail }" readonly></td>
+									<th>휴대폰번호</th>
+									<td><input type="text" name="memberPhone" value="${sessionScope.m.memberPhone }" readonly></td>
+								</tr>
+							</tbody>
+						</table>
+					</c:when>
+					<c:otherwise>
+						<table class="airTable3">
+							<tbody>
+								<tr>
+									<th>예약자이름</th>
+									<td><input type="text" name="memberName"></td>
+									<th>이메일</th>
+									<td><input type="text" name="memberEmail"></td>
+									<th>휴대폰번호</th>
+									<td><input type="text" name="memberPhone"></td>
+								</tr>
+							</tbody>
+						</table>
+					</c:otherwise>
+				</c:choose>
 			</div>
-
+			<h2 class="naviH2">약관 동의</h2>
+			
 
 			<div class="terms">
 				<table>
@@ -864,7 +884,7 @@
 					<tr>
 						<td>
 							<br>
-							<div style="margin-left: 100px; width: 250px; font-size: 20px;"> <b>항공권 예매 약관 동의</b></div>
+							<div style="margin-left: 100px; width: 250px; font-size: 20px;"> <b>개인정보 수집 동의</b></div>
 							<br> 
 							<textarea class="termsTextBox" rows="20" cols="150">
 첫째, 고객상담, 각종 서비스의 제공을 위해 최초 회원가입 당시 아래와 같은 최소한의 개인정보를 필수항목으로 수집하고 있습니다.
@@ -905,8 +925,78 @@
 						</td>
 					</tr>
 				</table>
+				<div style="float: right;">
+					<button class="btn btn-primary nextMenu2">진행</button>
+				</div>
 			</div>
-
+		</div>
+		<!-- 결제페이지 -->
+		<div class="airTableBase3">
+			<h2 class="naviH2" style="margin-top: 100px;">항공권 정보 확인</h2>
+			<table class="table airTable4">
+				<thead>
+					<tr style="text-align: center;">
+						<th scope="col">편명</th>
+						<th scope="col">날짜</th>
+						<th scope="col" colspan="2">출발->도착</th>
+						<th scope="col">선택좌석</th>
+						<th scope="col">가격</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr style="text-align: center;">
+						<td>${airReserve.airNumberST}</td>
+						<td>${airReserve.airDateST}</td>
+						<td>${airReserve.airStartST}->${airReserve.airArriveST}</td>
+						<td>${airReserve.airStartTimeST}->${airReserve.airEndTimeST}</td>
+						<td class="addStartSeatNum"></td>
+						<td class="addStartPay">0</td>
+					</tr>
+					<tr class="comback" style="text-align: center;">
+						<td>${airReserve.airNumberED}</td>
+						<td>${airReserve.airDateED}</td>
+						<td>${airReserve.airStartED}->${airReserve.airArriveED}</td>
+						<td>${airReserve.airStartTimeED}->${airReserve.airEndTimeED}</td>
+						<td class="addEndSeatNum"></td>
+						<td class="addEndPay">0</td>
+					</tr>
+				</tbody>
+			</table>
+			
+			<h2 class="naviH2" style="margin-top: 100px;">결제 정보</h2>
+			<div class="payMenu">
+				<table class="payTable">
+					<tbody>
+						<tr>
+							<th>예매자 이름</th>
+							<td class="userName"></td>
+						</tr>
+						<tr>
+							<th>예매자 휴대폰번호</th>
+							<td class="userPhone"></td>
+						</tr>
+						<tr>
+							<th>예매자 이메일</th>
+							<td class="userEmail"></td>
+						</tr>
+						<tr>
+							<th>예매 가격</th>
+							<td class="payAmount"></td>
+						</tr>
+						<tr>
+							<th>쿠폰 적용 할인 금액</th>
+							<td class="coupon">0 (원) <button class="couponSelect">쿠폰선택</button></td>
+						</tr>
+						<tr>
+							<th>총 결제 금액</th>
+							<td class="paymentAmount"></td>
+						</tr>
+					</tbody>
+				</table>
+				<form action="">
+					<input type="hidden">
+				</form>
+			</div>
 		</div>
 	</div>
 	<script src="/resources/js/air/airSelectGrade.js"></script>

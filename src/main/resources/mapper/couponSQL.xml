@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="po">
+<!-- 	<select id="selectAllAir" parameterType="air" resultType="air"> -->
+<!-- 	select  -->
+<!-- 		reserve_no as reserveNo, -->
+<!-- 		pay_no as payNo, -->
+<!-- 		air_name as airName, -->
+<!-- 		member_no as memberNo, -->
+<!-- 		air_level as airLevel, -->
+<!-- 		order_date as orderDate, -->
+<!-- 		air_start as airStart, -->
+<!-- 		air_end as airEnd, -->
+<!-- 		air_pay as airPay, -->
+<!-- 		member_name as memberName, -->
+<!-- 		phone, -->
+<!-- 		reserve_state as reserveState -->
+<!-- 	from air_reserve -->
+<!-- 	</select> -->
+	
+</mapper>
