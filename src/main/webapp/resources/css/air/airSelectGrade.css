@@ -356,3 +356,17 @@
     font-size: 20px;
     margin-left: 50px;
 }
+.airTable5{
+    width: 100%;
+}
+.airTable5 tr>th:nth-child(n+1){
+    width: calc(100%/5);
+    font-size: 15px;
+}
+.airTable5 tr>th:first-child{
+    width: 10%;
+    font-size: 8px;
+}
+.airTable5 tbody>tr>td{
+    font-size: 18px;
+}

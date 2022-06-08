@@ -985,7 +985,11 @@
 						</tr>
 						<tr>
 							<th>쿠폰 적용 할인 금액</th>
-							<td class="coupon">0 (원) <button class="couponSelect">쿠폰선택</button></td>
+							<td class="coupon">0 (원) 
+								<c:if test="${!empty m}">
+									<button class="couponSelect" data-bs-toggle="modal" data-bs-target="#selectcoupon">쿠폰선택</button>
+								</c:if>
+							</td>
 						</tr>
 						<tr>
 							<th>총 결제 금액</th>
@@ -993,6 +997,35 @@
 						</tr>
 					</tbody>
 				</table>
+				<div class="modal fade modal3" id="selectcoupon" tabindex="-1" aria-labelledby="coupon" aria-hidden="true">
+					<div class="modal-dialog modal-xl">
+						<div class="modal-content"" >
+							<div class="modal-header">
+								<h5 class="modal-title" id="selectcoupon">쿠폰선택</h5>
+								<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							</div>
+							<div class="modal-body">
+								<table class="table airTable5">
+									<thead>
+										<tr style="text-align: center;">
+											<th scope="col"><span class="material-symbols-outlined">done</span></th>
+											<th scope="col">쿠폰 이름</th>
+											<th scope="col">할인가격</th>
+											<th scope="col">할인율</th>
+											<th scope="col">유효기간</th>
+										</tr>
+									</thead>
+									<tbody>
+									</tbody>
+								</table>
+							</div>
+							<div class="modal-footer">
+								<button class="btn btn-primary" style="width: 200px; text-align: center;">쿠폰적용</button>
+							</div>
+						</div>
+					</div>
+				</div>
+
 				<form action="">
 					<input type="hidden">
 				</form>

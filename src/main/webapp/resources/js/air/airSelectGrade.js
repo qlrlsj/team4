@@ -6,6 +6,8 @@ $(function(){
         $(".SelectSeatMenu").css("height","250px");
         $(".comback").css("display","none");
     }
+    
+
 })
 var airStartGrade=1;
 var airStartPay =50000;
@@ -280,7 +282,41 @@ $(".nextMenu2").click(function(){
     }
 })
 $(".couponSelect").click(function(){
-    
+    $.ajax({
+        type:"POST",
+        url:"/selectAllCoupon.kt",
+        data:{memberNo:71},
+        success: function(list){
+            $(".airTable5>tbody").empty();
+            console.log(list);
+            if(list.length==0){
+                const tr = $("<tr>");
+                const td = $("<td colspan='5' style='font-size:30px; height:200px; line-height:300px'>");
+
+                td.append("조회 가능한 쿠폰없습니다");
+                tr.append(td);
+                $(".airTable5>tbody").append(tr);
+                
+            }else{
+                for(let i=0;i<list.length;i++){
+                    const tr = $("<tr>");
+                    console.log(tr);
+                    console.log(list[i].couponName);
+
+                    let td ='<td>'+'aa'+'</td>';
+                    td+='<td>' +list[i].couponName+'</td>';
+                    td+='<td>' +list[i].couponDCPrice+'</td>';
+                    td+='<td>' +list[i].couponDCRate+'</td>';
+                    td+='<td>' +list[i].conponEndDate+'</td>';
+                    tr.append(td);
+                    $(".airTable5>tbody").append(tr);
+                }
+            }
+        },
+        error : function(){
+            alert("실패");
+        }
+    })
 })
 
 
