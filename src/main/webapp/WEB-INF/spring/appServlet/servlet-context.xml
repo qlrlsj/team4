@@ -94,4 +94,5 @@
 	<context:component-scan base-package="kr.or.comment" />
 	<context:component-scan base-package="kr.or.pck" />
 	<context:component-scan base-package="kr.or.coupon" />
+	<context:component-scan base-package="kr.or.payment" />
 </beans:beans>
