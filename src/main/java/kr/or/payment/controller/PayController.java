@@ -19,8 +19,8 @@ public class PayController {
 	private PayService service;
 	
 	@ResponseBody
-	@RequestMapping(value="selectAllCoupon.kt", produces = "application/json;charset=utf-8")
-	public String selectAllCoupon(int memberNo) {
+	@RequestMapping(value="insertPayment.kt", produces = "application/json;charset=utf-8")
+	public String insertPayment(int memberNo) {
 		int result = service.insertPayment(memberNo);
 		return String.valueOf(result);
 	}
