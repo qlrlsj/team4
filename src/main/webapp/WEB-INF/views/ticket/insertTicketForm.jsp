@@ -29,23 +29,27 @@
 	.delOptBtn{
 		float: right;
 	}
+	.div-content{
+		margin-top: 50px;
+	}
+
 </style>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 
 	<div class="div-content">
-
+		<h1>티켓 상품 등록</h1>
 		<form class="row g-3" action="/insertTicket.kt" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo}">
 			<div class="content-box">
 				<h4>1. 카테고리</h4>
-				<div class="col-md-4">
+				<div class="col-md-4" style="margin: 0;">
 					<select id="category1" class="form-select">
 						<option value="0">1차 카테고리 선택</option>
 					</select>
 				</div>
 				<div class="col-md-4">
-					<select id="category2" name="categoryId" class="form-select">
+					<select id="category2" name="categoryId" class="form-select ">
 						<option value="0">2차 카테고리 선택</option>
 					</select>
 				</div>
@@ -163,12 +167,12 @@
 			<button type="button" id="insertBtn">제출</button>
 		</form>
 
-
-
+		
+		
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
-	<script src="/resources/js/ticket/insertTicketPage.js"></script>
+	<script src="/resources/js/ticket/insertTicketForm.js"></script>
 </body>
 
 </html>
