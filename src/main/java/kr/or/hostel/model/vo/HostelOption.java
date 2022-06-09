@@ -15,6 +15,7 @@ public class HostelOption {
 	private int standardBooknum;
 	private int maxBooknum;
 	private String roomName;
+	private String hostelName;
 	
 	
 }

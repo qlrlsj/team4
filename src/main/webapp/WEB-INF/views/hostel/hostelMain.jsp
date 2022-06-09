@@ -60,7 +60,7 @@ height: 400px;
 			<input type="text" class="form-control" name="searchKeyword" required placeholder="지역/숙소이름" style="width:22%; display: inline;" >
 			<input type="text" name="startDate" class="datepicker form-control" required  id = "datepicker1" style="width:22%; display: inline;" placeholder="입실날짜">
 			<input type="text" name="endDate" class="datepicker form-control"   required id = "datepicker2" style="width:20%; display: inline;" placeholder="퇴실날짜">
-			<input type="number" name="customerNum" class="form-control" required placeholder="인원" style="width:22%; display: inline;" >
+			<input type="number" name="customerNum" min="1"class="form-control" required placeholder="인원" style="width:22%; display: inline;" >
 			<button type="submit" class="btn btn-outline-info">검색하기</button>
 		</div>
 	</div>

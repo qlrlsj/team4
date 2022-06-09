@@ -14,7 +14,7 @@ public class ReservedRoom {
 	private int optionNo;
 	private int memberNo;
 	private String reservationNo;
-	private Date reservedDate;
+	private String reservedDate;
 	
 	
 }

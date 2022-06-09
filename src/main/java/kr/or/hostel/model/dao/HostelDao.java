@@ -12,6 +12,7 @@ import kr.or.hostel.model.vo.Hostel;
 import kr.or.hostel.model.vo.HostelFile;
 import kr.or.hostel.model.vo.HostelOption;
 import kr.or.hostel.model.vo.ReservableRoom;
+import kr.or.hostel.model.vo.ReservedRoom;
 import kr.or.member.model.vo.Member;
 
 @Repository
@@ -83,6 +84,32 @@ public class HostelDao {
 		List list = sqlSession.selectList("hostel.searchHostelFile",hostelCode);
 		
 		return (ArrayList<HostelFile>)list;
+	}
+
+	public HostelOption searchSelectedHostel(int optionNo) {
+		HostelOption hostel = sqlSession.selectOne("hostel.searchSelectedHostel",optionNo);
+		return hostel;
+	}
+
+	public int insertHostelPay(int payPrice) {
+		int result = sqlSession.insert("hostel.insertHostelPay",payPrice);
+		return result;
+	}
+
+	public int selectPayNo() {
+		int payNo = sqlSession.selectOne("hostel.selectPayNo");
+		return payNo;
+	}
+
+	public int insertHostelReserve(HashMap<String, Object> reserveMap) {
+		int rhNo = sqlSession.insert("hostel.insertHostelReserve",reserveMap);
+		
+		return rhNo;
+	}
+
+	public int insertReseredRoom(ReservedRoom rdr) {
+		int result = sqlSession.insert("hostel.insertReseredRoom",rdr);
+		return 0;
 	}
 
 

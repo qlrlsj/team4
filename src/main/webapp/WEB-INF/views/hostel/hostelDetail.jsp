@@ -120,15 +120,15 @@
       <div class="hostel-optionList">
         <div class="search-optionbox">
           <input type="hidden" id="searchHostelCode" value="${hostel.hostelCode}">
-          <input type="text" id="startDate" name="startDate" class="datepicker form-control" required  id = "datepicker1" style="width:20%; display: inline;" value="${startDate }">
-            <input type="text" id="endDate" name="endDate" class="datepicker form-control"   required id = "datepicker2" style="width:20%; display: inline;" value="${endDate}">
-            <input type="number" id="customerNum" name="customerNum" class="form-control" required  style="width:22%; display: inline;"  value="${customerNum}">
+          <input type="text" id="datepicker1" name="startDate" class="datepicker form-control" required  id = "datepicker1" style="width:20%; display: inline;" value="${startDate }">
+            <input type="text" id="datepicker2" name="endDate" class="datepicker form-control"   required id = "datepicker2" style="width:20%; display: inline;" value="${endDate}">
+            <input type="number" id="customerNum" min="1" name="customerNum" class="form-control" required  style="width:22%; display: inline;"  value="${customerNum}">
             <button type="button" id="reSearch"  class="btn btn-outline-info">재검색하기</button><!--아작스처리-->
         </div>
       
         <div class="optionList-box">
+ <!-- 아작스로 불러온 옵션리스트 들어갈 자리 -->
 
-          
         </div>
       </div>
       <div class="hostel-info">
