@@ -21,24 +21,27 @@
 			</div>
 			<div class="div-content">
 				<h2>정산 관리</h2>
-				<form action="/sellerCashInfo.kt" method="post">
-					<input type="hidden" name="type" value="hostel">
-					<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
-					<input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
-					<button type="submit" >호스텔 정산 조회</button>
-				</form>
-				<form action="/sellerCashInfo.kt">
-					<input type="hidden" name="type" value="ticket">
-					<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
-					<input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
-					<button type="submit">티켓 정산 조회</button>
-				</form>
-				<form action="/sellerCashInfo.kt">
-					<input type="hidden" name="type" value="package">
-					<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
-					<input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
-					<button type="submit" >패키지 정산 조회</button>
-				</form>				
+				<table class="table table-sm">
+				<tr>
+					<th>구분</th><th>날짜</th><th>상품 번호 / 주문 번호</th><th>상품명</th><th>구매자 정보</th><th>금액</th><th>포인트</th><th>쿠폰</th><th>송금액</th>
+				</tr>
+				<c:forEach items="${list }" var="pay">
+					<tr>
+						<td>${type }</td>
+						<td><a href="#">${pay.payDate }</a></td>
+						<td>
+							<a href="#">${pay.productNo }</a><br>
+							<a href="#">${pay.payNo }</a>							
+						</td>
+						<td>${pay.productName }</td>
+						<td>${pay.memberName }</td>
+						<td>${pay.productPrice }</td>
+						<td>${pay.pointUse }</td>
+						<td>${pay.couponUse }</td>
+						<td>${pay.payPrice }</td>
+					</tr>
+				</c:forEach>			
+			</table>
 			</div>
 		</div>
 		

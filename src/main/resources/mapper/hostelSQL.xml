@@ -109,5 +109,28 @@ select * from hostel where hostel_code = #{hostelCode}
 select filepath from hostel_file where hostel_code=#{hostelCode}
 </select>
 
+<select id="searchSelectedHostel" parameterType="int" resultType="ho">
+SELECT
+ h.hostel_name as hostelName,
+ ho.hostel_code as hostelCode,
+  ho.room_option as roomOption,
+   ho.hostel_price as hostelPrice
+      FROM hostel h , (select  hostel_code, room_option , hostel_price from hostel_option where option_no=#{optionNo})ho  where h.hostel_code= ho.hostel_code
+
+</select>
+
+<insert id="insertHostelPay" parameterType="int">
+insert into payment VALUES(PAYMENT_SEQ.nextval,#{payPrice}, 0,0,0,SYSDATE,0)
+</insert>
+
+<select id="selectPayNo" resultType="int" >
+    
+select max(pay_no) from payment
+
+</select>
+
+<insert id="insertHostelReserve">
+insert into hostel_reserve VALUES(HOSTEL_RESERVE_SEQ.nextval,optionNo, payNo, memberNo,to_char(sysdate,'yyyy-mm-dd'),reserveName,reserveEmail,reservePhone,reserveNum,hostelIndate,hostelOutdate )
+</insert>
 
 </mapper>

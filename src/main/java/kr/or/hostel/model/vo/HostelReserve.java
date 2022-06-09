@@ -19,8 +19,8 @@ public class HostelReserve {
 	private String reserveEmail;
 	private String reservePhone;
 	private int reserveNum;
-	private Date hostelIndate;
-	private Date hostelOutdate;
+	private String hostelIndate;
+	private String hostelOutdate;
 	
 	
 }

@@ -1,4 +1,8 @@
-@charset "UTF-8";
 .list-style{
 	width: 300px;
+}
+
+.sellerWrap{
+	display : flex;
+	justify-content: space-evenly;
 }

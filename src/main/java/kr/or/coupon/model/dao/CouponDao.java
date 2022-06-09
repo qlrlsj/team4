@@ -15,8 +15,13 @@ public class CouponDao {
 	private SqlSessionTemplate sqlSession;
 
 	public ArrayList<Coupon> selectAllCoupon(int memberNo) {
-		List list = sqlSession.selectList("po.selectAllCoupon",memberNo);
+		List list = sqlSession.selectList("coupon.selectAllCoupon",memberNo);
 		return (ArrayList<Coupon>)list;
 	}
+
+//	public int updateCouponUse(Coupon coupon) {
+////		int result = sqlSession.update("coupon.updateCouponUse",coupon);
+////		return result;
+//	}
 	
 }

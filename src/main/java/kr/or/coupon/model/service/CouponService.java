@@ -17,5 +17,9 @@ public class CouponService {
 	public ArrayList<Coupon> selectAllCoupon(int memberNo) {
 		return Dao.selectAllCoupon(memberNo);
 	}
+
+//	public int updateCouponUse(Coupon coupon) {
+////		return Dao.updateCouponUse(coupon);
+//	}
 	
 }

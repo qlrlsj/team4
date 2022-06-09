@@ -17,7 +17,9 @@ import kr.or.hostel.model.vo.Hostel;
 import kr.or.hostel.model.vo.HostelDetailList;
 import kr.or.hostel.model.vo.HostelFile;
 import kr.or.hostel.model.vo.HostelOption;
+import kr.or.hostel.model.vo.HostelReserve;
 import kr.or.hostel.model.vo.ReservableRoom;
+import kr.or.hostel.model.vo.ReservedRoom;
 import kr.or.member.model.vo.Member;
 
 @Service
@@ -167,6 +169,103 @@ public class HostelService {
 		ArrayList<HostelOption> optionList = dao.detailOptionList(optionMap);
 		
 		return optionList;
+	}
+
+	public HostelOption searchSelectedHostel(int optionNo) {
+		HostelOption hostel = dao.searchSelectedHostel(optionNo);
+		return hostel;
+	}
+
+	public int reserveHostel(int payPrice, HostelReserve hr) {
+		// 결제테이블(결제금액) , 예약테이블(optionNo memberNo..), 예약된방테이블 세개 인서트 필요 
+		   //  결제테이블 - 결제금액 
+     // 예약테이블 - 옵션번호, 회원번호, 주문자이름, 이메일, 번호, 인원, 입실일  ,퇴실일
+     // 예약테이블까지 인서트 끝나면 reserved room 인서트까지 ! 
+	
+		//마지막 날짜 삽입 
+		
+		
+		
+		
+		int payresult = dao.insertHostelPay(payPrice);
+		if(payresult>0) {//결제 성공하여 결제테이블 인서트 완료시 
+			//예약테이블 인서트 시작 
+			int repayNo = dao.selectPayNo();
+			HashMap<String, Object> reserveMap = new HashMap<String, Object>();
+			reserveMap.put("payNo",repayNo);
+			reserveMap.put("optionNo",hr.getOptionNo() );
+			reserveMap.put("memberNo",hr.getMemberNo() );
+			reserveMap.put("reserveName",hr.getReserveName() );
+			reserveMap.put("reserveEmail",hr.getReserveEmail() );
+			reserveMap.put("reservePhone",hr.getReservePhone() );
+			reserveMap.put("reserveNum",hr.getReserveNum() );
+			reserveMap.put("hostelIndate",hr.getHostelIndate() );
+			reserveMap.put("hostelOutdate",hr.getHostelOutdate() );
+			int rh = dao.insertHostelReserve(reserveMap);
+			System.out.println("입실일"+hr.getHostelIndate());
+			if(rh>0) { // 예약완료까지 인서트하면 예약된일자 인서트 시작 
+				 // 옵션하나 인서트 성공하면 예약가능일자를 옵션넘버에맞춰 전부 인서트
+				String startDate = hr.getHostelIndate();
+				String endDate = hr.getHostelOutdate();
+				
+				System.out.println("예약시작일:" + startDate + "/종료일:" + endDate);
+				int sYear = Integer.parseInt(startDate.split("-")[0]);
+				int sMon = Integer.parseInt(startDate.split("-")[1]);
+				int sDate = Integer.parseInt(startDate.split("-")[2]);
+				int eYear = Integer.parseInt(endDate.split("-")[0]);
+				int eMon = Integer.parseInt(endDate.split("-")[1]);
+				int eDate = Integer.parseInt(endDate.split("-")[2]);
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				Calendar cal = Calendar.getInstance();
+				//캘린더 객체 사용시 순서 주의! eday를 sday밑으로 넣을경우 밑에 while문에서 +1에서 사용되는 cal객체에 eday가 들어감 
+				cal.set(eYear, eMon-1, eDate);
+				String eDay = sdf.format(cal.getTime());
+				cal.set(sYear, sMon-1, sDate);
+				String sDay = sdf.format(cal.getTime());
+				
+				System.out.println("데이트 포맷-시작일:" + sDay + "종료일" + eDay);
+				
+				ArrayList<String> date = new ArrayList<String>();
+				
+				while(!sDay.equals(eDay)) {
+					date.add(sDay);
+					cal.add(Calendar.DATE, 1);
+					sDay = sdf.format(cal.getTime());
+					//System.out.println("s"+sDay);
+				}
+								
+				date.add(eDay); // 검색/예약할땐 eday넣을지말지 주의 
+				System.out.println("예약가능일:"+date);
+//				System.out.println("날짜 length"+date.size());
+				int dateResult = 0;
+				for(String rv : date) {
+					ReservedRoom rdr = new ReservedRoom();
+					rdr.setOptionNo(hr.getOptionNo());
+					rdr.setMemberNo(hr.getMemberNo()); // 비회원이면.. 
+					rdr.setReservedDate(rv);
+					
+					 System.out.println("리스트 포문테스트:"+rv);
+					dateResult = dao.insertReseredRoom(rdr);
+				}//예약가능일자 인서트 종료 
+				if(dateResult>0) {
+
+				}else {
+					System.out.println("날짜 인서트 실패 ");
+					return dateResult; 
+				}
+
+
+			
+			}else {
+				return -1;
+			}
+			
+			
+		}else {
+			return -2;
+		}
+		
+		return 0;
 	}
 
 }

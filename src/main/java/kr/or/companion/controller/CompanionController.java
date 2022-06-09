@@ -94,4 +94,6 @@ public class CompanionController {
 		model.addAttribute("com",com);
 		return "companion/companionMain";
 	}
+	
+	
 }

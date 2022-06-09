@@ -20,8 +20,9 @@ public class PayController {
 	
 	@ResponseBody
 	@RequestMapping(value="insertPayment.kt", produces = "application/json;charset=utf-8")
-	public String insertPayment(int memberNo) {
-		int result = service.insertPayment(memberNo);
+	public String insertPayment(Payment pay) {
+		System.out.println(pay);
+		int result = service.insertPayment(pay);
 		return String.valueOf(result);
 	}
 }

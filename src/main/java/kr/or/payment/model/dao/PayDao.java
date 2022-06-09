@@ -4,13 +4,15 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.or.payment.model.vo.Payment;
+
 @Repository
 public class PayDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
-	public int insertPayment() {
-		// TODO Auto-generated method stub
-		return 0;
+	public int insertPayment(Payment pay) {
+		int result = sqlSession.insert("payment.insertMember",pay);
+		return result;
 	}
 }
