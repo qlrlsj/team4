@@ -12,7 +12,11 @@ import lombok.NoArgsConstructor;
 public class Ticket {
 	private int ticketNo;
 	private int localId;
+	private String localName;
+	private String parentLocalName;
 	private int categoryId;
+	private String categoryName;
+	private String parentCategoryName;
 	private int memberNo;
 	private String startDate;
 	private String expireDate;

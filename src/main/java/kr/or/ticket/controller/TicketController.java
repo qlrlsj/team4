@@ -21,80 +21,19 @@ import com.google.gson.Gson;
 
 import kr.or.ticket.model.service.TicketService;
 import kr.or.ticket.model.vo.LocalCategory;
+import kr.or.ticket.model.vo.OptionReserves;
 import kr.or.ticket.model.vo.Ticket;
 import kr.or.ticket.model.vo.TicketCategory;
 import kr.or.ticket.model.vo.TicketFile;
 import kr.or.ticket.model.vo.TicketOption;
+import kr.or.ticket.model.vo.TicketOptions;
 
 @Controller
 public class TicketController {
 	@Autowired
 	private TicketService service;
 	
-	@RequestMapping(value="/ticketMain.kt")
-	public String TicketMain() {
-		return "ticket/ticketMain";
-	}
-	
-	@RequestMapping(value="/insertTicketPage.kt")
-	public String insertTicketPage(Model model) {
-		ArrayList<TicketCategory> ticketCategory = service.selectAllTicketCategory();
-		model.addAttribute("ticketCategory", ticketCategory);
-		return "ticket/insertTicketPage";
-	}
-	
-	@ResponseBody
-	@RequestMapping(value="/selectAllTicketCategory.kt",produces = "application/json;charset=utf-8")
-	public String selectAllTicketCategory() {
-		Gson gson = new Gson();
-		ArrayList<TicketCategory> ticketCategory = service.selectAllTicketCategory();
-		return gson.toJson(ticketCategory);
-	}
-	@ResponseBody
-	@RequestMapping(value="/selectAllLocal.kt",produces = "application/json;charset=utf-8")
-	public String selectAllLocal() {
-		Gson gson = new Gson();
-		ArrayList<LocalCategory> local = service.selectAllLocal();
-		return gson.toJson(local);
-	}
-	
-	//티겟등록
-	@RequestMapping(value="/insertTicket.kt")
-	public String insertTicket(Ticket ticket,MultipartFile[] file1, MultipartFile[] file2, TicketOption option,HttpServletRequest request) {
-		System.out.println("memberNo : "+ticket.getMemberNo());
-		System.out.println("categoryId : "+ticket.getCategoryId());
-		System.out.println("localId : "+ticket.getLocalId());
-		System.out.println("businessAddr : "+ticket.getBusinessAddr());
-		System.out.println("ticketTitle : "+ticket.getTicketTitle());
-		System.out.println("importantContent : "+ticket.getImportantContent());
-		System.out.println("businessTime : "+ticket.getBusinessTime());
-		System.out.println("file1 : "+file1);
-		System.out.println("file2 : "+file2);
-		System.out.println("ticketContent : "+ticket.getTicketContent());
-		System.out.println("requiredTime : "+ticket.getRequiredTime());
-		
-		System.out.println("optTitle : "+option.getOptTitle());
-		System.out.println("optContent : "+option.getOptContent());
-		System.out.println("optPrice : "+option.getOptPrice());
-		System.out.println("optDiscountRate: "+option.getOptDiscountRate());
-		System.out.println("optDiscountPrice: "+option.getOptDiscountPrice());
-		System.out.println("optStock : "+option.getOptStock());
-		
-		TicketFile ticketFile = new TicketFile();
-		ArrayList<String> placeFilepaths = upfile(request, file1);
-		ArrayList<String> ticketFilepaths = upfile(request, file2);
-		ticketFile.setPlaceFilepath(placeFilepaths.get(0));
-		ticketFile.setTicketFilepath1(ticketFilepaths.get(0));
-		ticketFile.setTicketFilepath2(ticketFilepaths.get(1));
-		ticketFile.setTicketFilepath3(ticketFilepaths.get(2));
-		ticketFile.setTicketFilepath4(ticketFilepaths.get(3));
-		
-		int result1 = service.insertTicket(ticket,option,ticketFile);
-		
-		
-		return "ticket/insertTicketPage";
-	}
-	
+	//파일을 중복검사 후 파일업로드, 파일경로를 ArrayList<String>으로 반환해주는 함수
 	public ArrayList<String> upfile(HttpServletRequest request, MultipartFile[] files) {
 		//파일 목록을 저장할 리스트를 생성
 		ArrayList<String> fileList= new ArrayList<String>();
@@ -146,6 +85,7 @@ public class TicketController {
 					byte[] bytes = file.getBytes();
 					bos.write(bytes);
 					bos.close();
+					
 				} catch (FileNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -159,15 +99,92 @@ public class TicketController {
 		}
 		return fileList;
 	}
-//	@RequestMapping(value="/insertTest.kt")
-//	public String insertTest() {
-//		return "ticket/test";
-//	}
-//	@RequestMapping(value="/ticketTest.kt")
-//	public String ticketTest(TicketOption Option) {
-//		System.out.println(Option.getOptTitle().get(0));
-//		return "redirect:/";
-//	}
+		
+	@RequestMapping(value="/ticketMain.kt")
+	public String TicketMain() {
+		return "ticket/ticketMain";
+	}
+	
+	@RequestMapping(value="/insertTicketForm.kt")
+	public String insertTicketForm(Model model) {
+		ArrayList<TicketCategory> ticketCategory = service.selectTicketCategory();
+		model.addAttribute("ticketCategory", ticketCategory);
+		return "ticket/insertTicketForm";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/selectAllTicketCategory.kt",produces = "application/json;charset=utf-8")
+	public String selectAllTicketCategory() {
+		Gson gson = new Gson();
+		ArrayList<TicketCategory> ticketCategory = service.selectTicketCategory();
+		return gson.toJson(ticketCategory);
+	}
+	@ResponseBody
+	@RequestMapping(value="/selectAllLocal.kt",produces = "application/json;charset=utf-8")
+	public String selectAllLocal() {
+		Gson gson = new Gson();
+		ArrayList<LocalCategory> local = service.selectLocalCategory();
+		return gson.toJson(local);
+	}
+	
+	//티겟등록
+	@RequestMapping(value="/insertTicket.kt")
+	public String insertTicket(Ticket ticket,MultipartFile[] file1, MultipartFile[] file2, TicketOptions options,HttpServletRequest request) {
+//		System.out.println("memberNo : "+ticket.getMemberNo());
+//		System.out.println("categoryId : "+ticket.getCategoryId());
+//		System.out.println("localId : "+ticket.getLocalId());
+//		System.out.println("businessAddr : "+ticket.getBusinessAddr());
+//		System.out.println("ticketTitle : "+ticket.getTicketTitle());
+//		System.out.println("importantContent : "+ticket.getImportantContent());
+//		System.out.println("businessTime : "+ticket.getBusinessTime());
+//		System.out.println("file1 : "+file1);
+//		System.out.println("file2 : "+file2);
+//		System.out.println(file1[0]);
+//		System.out.println(file2[0]);
+//		System.out.println("ticketContent : "+ticket.getTicketContent());
+//		System.out.println("requiredTime : "+ticket.getRequiredTime());
+		
+		ArrayList<String> placeFilepath = upfile(request, file1);
+		ArrayList<String> ticketFilepath = upfile(request, file2);
+		TicketFile ticketFile = new TicketFile();
+		ticketFile.setPlaceFilepath(placeFilepath.get(0));
+		ticketFile.setTicketFilepath1(ticketFilepath.get(0));
+		ticketFile.setTicketFilepath2(ticketFilepath.get(1));
+		ticketFile.setTicketFilepath3(ticketFilepath.get(2));
+		ticketFile.setTicketFilepath4(ticketFilepath.get(3));
+		
+		int result = service.insertTicket(ticket,options,ticketFile);
+		
+		
+		return "ticket/ticketMain";
+	}
+	
+	@RequestMapping(value="/ticketView.kt")
+	public String selectTicket(int ticketNo,Model model) {
+		Ticket ticket = service.selectTicket(ticketNo);
+		ArrayList<TicketOption> optionList = service.selectTicketOption(ticketNo);
+		TicketFile file = service.selectTicketFile(ticketNo);
+
+		model.addAttribute("ticket", ticket);
+		model.addAttribute("optionList", optionList);
+		model.addAttribute("file", file);
+		
+		return "ticket/ticketView";
+	}
+	
+	@RequestMapping(value="/reserveForm.kt")
+	public String reserveForm(int ticketNo, OptionReserves optionReserves, Model model) {
+		return "ticket/reserveForm";
+	}
+	@RequestMapping(value="/insertTest.kt")
+	public String insertTest() {
+		return "ticket/test";
+	}
+	@RequestMapping(value="/ticketTest.kt")
+	public String ticketTest(TicketOptions options) {
+		int result = service.insertOptTest(options);
+		return "ticket/test";
+	}
 	
 	
 }

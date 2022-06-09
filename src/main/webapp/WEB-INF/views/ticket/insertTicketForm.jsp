@@ -124,17 +124,18 @@
 			<div class="content-box" id="opt">
 				<div class="optBox">
 					<label for="optTitle">옵션 제목</label>
-					<input class="form-control" type="text" id="optTitle" name="optTitle" placeholder="제목을 입력해 주세요. (30자 이내)" maxlength="30">
+					<input class="form-control" type="text" id="optTitle" name="optTitles" placeholder="제목을 입력해 주세요. (30자 이내)" maxlength="30">
 					<label for="optContent">옵션 설명</label>
-					<input class="form-control" type="text" id="optContent" name="optContent" placeholder="내용을 입력해 주세요. (100자 이내)" maxlength="100">
+					<input class="form-control" type="text" id="optContent" name="optContents" placeholder="내용을 입력해 주세요. (100자 이내)" maxlength="100">
 					<label for="optPrice">가격</label>
-					<input class="form-control price" type="number" id="optPrice" name="optPrice" min="100">
+					<input class="form-control price" type="number" id="optPrice" name="optPrices" min="100">
 					<label for="optDiscountRate">할인율</label><span>퍼센트(%)</span>
-					<input class="form-control" type="number" id="optDiscountRate" name="optDiscountRate" min="0" max="100">
+					<input class="form-control rate" type="number" id="optDiscountRate" name="optDiscountRates" min="0" max="100" value="0">
 					<label for="optDiscountPrice">할인된 가격</label>
-					<input class="form-control price" type="number" id="optDiscountPrice" name="optDiscountPrice" min="100">
+					<input class="form-control" type="number" id="optDiscountPrice" name="optDiscountPrices" min="100">
 					<label for="optStock">재고</label>
-					<input class="form-control" type="number" id="optStock" name="optStock" value="10" min="0">
+					<input class="form-control" type="number" id="optStock" name="optStocks" value="10" min="0">
+					<input type="hidden" id="count" name="count" value="1">
 				</div>
 			</div>
 			<button type="button" id="optAdd" onclick="add_optbox()">추가</button>

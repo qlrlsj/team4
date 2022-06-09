@@ -12,18 +12,19 @@ import kr.or.ticket.model.vo.Ticket;
 import kr.or.ticket.model.vo.TicketCategory;
 import kr.or.ticket.model.vo.TicketFile;
 import kr.or.ticket.model.vo.TicketOption;
+import kr.or.ticket.model.vo.TicketOptions;
 
 @Repository
 public class TicketDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
-	public ArrayList<TicketCategory> selectAllTicket() {
+	public ArrayList<TicketCategory> selectTicketCategory() {
 		List list = sqlSession.selectList("ticket.selectAllTicketCategory");
 		return (ArrayList<TicketCategory>)list;
 	}
 
-	public ArrayList<LocalCategory> selectAllLocal() {
+	public ArrayList<LocalCategory> selectLocalCategory() {
 		List list = sqlSession.selectList("ticket.selectAllLocal");
 		return (ArrayList<LocalCategory>)list;
 	}
@@ -40,5 +41,17 @@ public class TicketDao {
 		return sqlSession.insert("ticket.insertTicketFile",ticketFile);
 	}
 
+	public Ticket selectTicket(int ticketNo) {
+		return sqlSession.selectOne("ticket.selectTicket", ticketNo);
+	}
+
+	public ArrayList<TicketOption> selectTicketOption(int ticketNo) {
+		List list = sqlSession.selectList("ticket.selectTicketOption", ticketNo);
+		return (ArrayList<TicketOption>)list;
+	}
+
+	public TicketFile selectTicketFile(int ticketNo) {
+		return sqlSession.selectOne("ticket.selectTicketFile", ticketNo);
+	}
 	
 }
