@@ -10,9 +10,9 @@ $(function(){
 
 })
 var airStartGrade=1;
-var airStartPay =50000;
+var airStartPay = 100;
 var airEndGrade=1;
-var airEndPay =50000;
+var airEndPay = 0;
 var StartSeatCount=0;
 var EndSeatCount=0;
 $(".Pay").eq(0).text(airStartPay);
@@ -274,21 +274,24 @@ $(".nextMenu2").click(function(){
             $(".userName").text($("input[name=memberName]").val());
             $(".userEmail").text($("input[name=memberEmail]").val());
             $(".userPhone").text($("input[name=memberPhone]").val());
-            $(".payAmount").text(Number($(".addStartPay").eq(1).text())+Number($(".addEndPay").eq(1).text())+"(원)");
-            $(".paymentAmount").text(Number($(".addStartPay").eq(1).text())+Number($(".addEndPay").eq(1).text())+"(원)");
+            $(".payAmount").text(Number($(".addStartPay").eq(1).text())+Number($(".addEndPay").eq(1).text()));
+            $(".paymentAmount").text(Number($(".addStartPay").eq(1).text())+Number($(".addEndPay").eq(1).text()));
         }
     }else{
         alert("약관에 동의해주세요.");
     }
 })
+var couponlist; 
 $(".couponSelect").click(function(){
+    const memberNo = Number($(".memberNo").text());
+    console.log(memberNo);
     $.ajax({
         type:"POST",
         url:"/selectAllCoupon.kt",
-        data:{memberNo:71},
+        data:{memberNo:memberNo},
         success: function(list){
             $(".airTable5>tbody").empty();
-            console.log(list);
+            
             if(list.length==0){
                 const tr = $("<tr>");
                 const td = $("<td colspan='5' style='font-size:30px; height:200px; line-height:300px'>");
@@ -297,13 +300,14 @@ $(".couponSelect").click(function(){
                 tr.append(td);
                 $(".airTable5>tbody").append(tr);
                 
-            }else{
+            }else{ 
+                couponlist=list;
                 for(let i=0;i<list.length;i++){
                     const tr = $("<tr>");
                     console.log(tr);
                     console.log(list[i].couponName);
 
-                    let td ='<td>'+'aa'+'</td>';
+                    let td ="<td>"+"<input type='radio' name='index' value='"+i+"'>"+"</td>";
                     td+='<td>' +list[i].couponName+'</td>';
                     td+='<td>' +list[i].couponDCPrice+'</td>';
                     td+='<td>' +list[i].couponDCRate+'</td>';
@@ -318,29 +322,35 @@ $(".couponSelect").click(function(){
         }
     })
 })
+$(".selectedCoupon").on("click",function(){
+    // 선택한 쿠폰의 사용조건보다 예매가격이 큰경우
+    if(Number(couponlist[$("input[name=index]:checked").val()].couponIf)<Number($(".addStartPay").eq(1).text())+Number($(".addEndPay").eq(1).text())){
+        //쿠폰적용할인금액에 할인금액 + 예매가격*할인율
+        $(".coupon").text(Number(couponlist[$("input[name=index]:checked").val()].couponDCPrice)+Number(couponlist[$("input[name=index]:checked").val()].couponDCRate)/100*(Number($(".addStartPay").eq(1).text())+Number($(".addEndPay").eq(1).text())));
+        $(".paymentAmount").text(Number($(".addStartPay").eq(1).text())+Number($(".addEndPay").eq(1).text())-Number($(".coupon").text()));
+    }
 
+})
 
-
-
-$("#payment").on("click",function(){
-    const price = $("#totalPrice").text();
+$(".nextMenu3").on("click",function(){
     //거래 고유 ID를 생성하기위해 현재 날짜를 이용해서 처리
     const d = new Date();
     //date 값 생성시 ""를 더하지 않으면 숫자 + 연산이 되므로 문자 덧샘을 추가
     const date = d.getFullYear()+""+(d.getMonth()+1)+""+d.getDate()+""+d.getHours()+""+d.getMinutes()+""+d.getSeconds();
     IMP.init("imp43584751");//결재API사용을 위한 식별코드입력
     IMP.request_pay({
-        merchant_uid :"상품코드_"+date,//거래아이디
-        name:"결재테스트",				//결재이름
-        amount:price,				//결재금액
-        buyer_email:"gyehf3492@naver.com",	//구매자이메일
-        buyer_name:"구매자",				//구매자이름
-        buyer_tel:"010-5378-3492",		//구매자전번
-        buyer_addr:"인천서구가정동",			//구매자주소
-        buyer_postcode:"12345",			//구매자 우편번호
-        
+        merchant_uid : $(".airST").text()+"_"+date,//거래아이디
+        name:"KTRIP_PAYMENT",				//결재이름
+        amount:Number($(".paymentAmount").text()),				//결재금액
+        buyer_email:$(".userEmail").text(),	//구매자이메일
+        buyer_name:$(".userName").text(),				//구매자이름
+        buyer_tel:$(".userPhone").text()		//구매자전번
     }),function(rsp){
         if(rsp.success){
+            $.ajax({
+                type:"POST",
+            })
+
             console.log("결재완료");
             console.log("고유ID:"+rsp.imp);
             console.log("상점거래ID"+rsp.merchant_uid);
