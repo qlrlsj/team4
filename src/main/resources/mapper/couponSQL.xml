@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="po">
+<mapper namespace="coupon">
 
 	<select id="selectAllCoupon" parameterType="int" resultType="po">
 		select 
@@ -14,5 +14,4 @@
 			t1.coupon_range as couponRange
 		from (coupon t1 inner join (select * from couponuse where member_no=#{memberNo} and coupon_state=0)t2 on t1.coupon_no=t2.coupon_no)
 	</select>
-	
 </mapper>
