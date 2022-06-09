@@ -27,6 +27,7 @@ import kr.or.hostel.model.vo.Hostel;
 import kr.or.hostel.model.vo.HostelDetailList;
 import kr.or.hostel.model.vo.HostelFile;
 import kr.or.hostel.model.vo.HostelOption;
+import kr.or.hostel.model.vo.HostelReserve;
 import kr.or.member.model.vo.Member;
 
 @Controller
@@ -185,23 +186,49 @@ public class HostelController {
 		return "hostel/hostelDetail";
 	}
 	
-	
-	
-	
-	
-	@RequestMapping(value = "hostelReserveFrm.kt")
-	public String hostelReserveFrm(int opitonNo, String hostelIndate,String hostelOutdate, int reserveNum ) {
-		// 예약페이지로 이동 
-		// 옵션번호로 가격, 호텔제목 등등 조회해서 넘겨주기 
-		
-		return "hostel/hostelReserveFrm";
-	}
-	
 	@ResponseBody
 	@RequestMapping(value = "searchHostelOptionList.kt" , produces = "application/json;charset=utf-8")
 	public String searchHostelOptionList (int hostelCode, String startDate, String endDate, int customerNum  ) {
 		ArrayList<HostelOption> list = service.searchHostelOptionList(hostelCode,startDate,endDate,customerNum );
 		return  new Gson().toJson(list);
 	}
+	
+	
+	
+	
+	@RequestMapping(value = "hostelReserveFrm.kt")
+	public String hostelReserveFrm(int optionNo, String hostelIndate,String hostelOutdate, int reserveNum ,Model model) {
+		// 예약페이지로 이동 
+		// 옵션번호로 가격, 호텔제목 등등 조회해서 넘겨주기 
+		System.out.println("넘어온값 ");
+		System.out.println("옵션넘버 " + optionNo);
+		//	reservefrm.kt로 넘겨주는 값 옵션번호/입퇴실일/입실인원 
+		 // 화면에서 미리 불러올 값 - 옵션번호로 - 숙소이름, 옵션내용, 입실일, 퇴실일, 입실인원, 가격 
+		HostelOption hostel = service.searchSelectedHostel(optionNo);
+		
+		model.addAttribute("optionNo",optionNo);
+		model.addAttribute("hostelIndate",hostelIndate);
+		model.addAttribute("hostelOutdate",hostelOutdate);
+		model.addAttribute("reserveNum",reserveNum);
+		model.addAttribute("hostel",hostel);
+		
+		return "hostel/hostelReserveFrm";
+	}
+	
+	@RequestMapping(value = "reserveHostel.kt")
+	public String reserveHostel(int payPrice, HostelReserve hr ) {
+		// 결제테이블(결제금액) , 예약테이블(optionNo memberNo..), 예약된방테이블 세개 인서트 필요 
+		   //  결제테이블 - 결제금액 
+        // 예약테이블 - 옵션번호, 회원번호, 주문자이름, 이메일, 번호, 인원, 입실일  ,퇴실일
+        // 예약테이블까지 인서트 끝나면 reserved room 인서트까지 ! 
+		
+		System.out.println("결제 성공, 테이블 인서트 시작 ");
+		System.out.println("optionNo"+hr.getOptionNo());
+		System.out.println("memberNo:"+hr.getMemberNo());
+		int result = service.reserveHostel(payPrice,hr);
+		
+		return "hostel/reserveSuccess";
+	}
+	
 
 }

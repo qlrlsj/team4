@@ -24,4 +24,11 @@ public class CouponController {
 		ArrayList<Coupon> list = service.selectAllCoupon(memberNo);
 		return new Gson().toJson(list);
 	}
+//	@ResponseBody
+//	@RequestMapping(value="updateCouponUse", produces = "application/json;charset=utf-8")
+//	public String updateCouponUse(int couponNo, int MemberNo) {
+//		System.out.println(coupon);
+//		int result = service.updateCouponUse(couponNo);
+//		return String.valueOf(result);
+//	}
 }

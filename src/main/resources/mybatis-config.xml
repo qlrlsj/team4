@@ -11,6 +11,7 @@
 		<typeAlias type="kr.or.hostel.model.vo.HostelFile" alias="hf"/>
 		<typeAlias type="kr.or.hostel.model.vo.HostelOption" alias="ho"/>
 		<typeAlias type="kr.or.hostel.model.vo.ReservableRoom" alias="rvr"/>
+		<typeAlias type="kr.or.hostel.model.vo.ReservedRoom" alias="rdr"/>
 		<typeAlias type="kr.or.companion.model.vo.Companion" alias="co"/>
 		<typeAlias type="kr.or.report.model.vo.Report" alias="rp"/>
 		<typeAlias type="kr.or.report.model.vo.BlackList" alias="bl"/>
@@ -29,5 +30,6 @@
 		<typeAlias type="kr.or.seller.model.vo.Cancel" alias="can"/>
 		<typeAlias type="kr.or.seller.model.vo.Payment" alias="spay"/>
 		<typeAlias type="kr.or.coupon.model.vo.Coupon" alias="po"/>
+		<typeAlias type="kr.or.payment.model.vo.Payment" alias="pay"/>
 	</typeAliases>
 </configuration>

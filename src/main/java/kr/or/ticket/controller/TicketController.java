@@ -21,6 +21,7 @@ import com.google.gson.Gson;
 
 import kr.or.ticket.model.service.TicketService;
 import kr.or.ticket.model.vo.LocalCategory;
+import kr.or.ticket.model.vo.OptionReserves;
 import kr.or.ticket.model.vo.Ticket;
 import kr.or.ticket.model.vo.TicketCategory;
 import kr.or.ticket.model.vo.TicketFile;
@@ -104,11 +105,11 @@ public class TicketController {
 		return "ticket/ticketMain";
 	}
 	
-	@RequestMapping(value="/insertTicketPage.kt")
-	public String insertTicketPage(Model model) {
+	@RequestMapping(value="/insertTicketForm.kt")
+	public String insertTicketForm(Model model) {
 		ArrayList<TicketCategory> ticketCategory = service.selectTicketCategory();
 		model.addAttribute("ticketCategory", ticketCategory);
-		return "ticket/insertTicketPage";
+		return "ticket/insertTicketForm";
 	}
 	
 	@ResponseBody
@@ -171,6 +172,10 @@ public class TicketController {
 		return "ticket/ticketView";
 	}
 	
+	@RequestMapping(value="/reserveForm.kt")
+	public String reserveForm(int ticketNo, OptionReserves optionReserves, Model model) {
+		return "ticket/reserveForm";
+	}
 	@RequestMapping(value="/insertTest.kt")
 	public String insertTest() {
 		return "ticket/test";

@@ -80,7 +80,7 @@
 							<td colspan="3">
 								<label class="test_obj">
 									<input type="radio" name="airStartPay" value="1" checked>
-									<span>50000</span>
+									<span>0</span>
 								</label>
 								
 								<label class="test_obj">
@@ -139,7 +139,7 @@
 								<td colspan="3" >
 									<label class="test_obj">
 										<input type="radio" name="airEndPay" value="1" checked>
-										<span>50000</span>
+										<span>0</span>
 									</label>
 									
 									<label class="test_obj">
@@ -931,32 +931,32 @@
 			</div>
 		</div>
 		<!-- 결제페이지 -->
-		<div class="airTableBase3">
+		<div class="airTableBase3" style="display: none;">
 			<h2 class="naviH2" style="margin-top: 100px;">항공권 정보 확인</h2>
 			<table class="table airTable4">
 				<thead>
 					<tr style="text-align: center;">
 						<th scope="col">편명</th>
 						<th scope="col">날짜</th>
-						<th scope="col" colspan="2">출발->도착</th>
+						<th scope="col" colspan="2">출발→도착</th>
 						<th scope="col">선택좌석</th>
 						<th scope="col">가격</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr style="text-align: center;">
-						<td>${airReserve.airNumberST}</td>
+						<td class="airST">${airReserve.airNumberST}</td>
 						<td>${airReserve.airDateST}</td>
-						<td>${airReserve.airStartST}->${airReserve.airArriveST}</td>
-						<td>${airReserve.airStartTimeST}->${airReserve.airEndTimeST}</td>
+						<td>${airReserve.airStartST}→${airReserve.airArriveST}</td>
+						<td>${airReserve.airStartTimeST}→${airReserve.airEndTimeST}</td>
 						<td class="addStartSeatNum"></td>
 						<td class="addStartPay">0</td>
 					</tr>
 					<tr class="comback" style="text-align: center;">
 						<td>${airReserve.airNumberED}</td>
 						<td>${airReserve.airDateED}</td>
-						<td>${airReserve.airStartED}->${airReserve.airArriveED}</td>
-						<td>${airReserve.airStartTimeED}->${airReserve.airEndTimeED}</td>
+						<td>${airReserve.airStartED}→${airReserve.airArriveED}</td>
+						<td>${airReserve.airStartTimeED}→${airReserve.airEndTimeED}</td>
 						<td class="addEndSeatNum"></td>
 						<td class="addEndPay">0</td>
 					</tr>
@@ -981,19 +981,29 @@
 						</tr>
 						<tr>
 							<th>예매 가격</th>
-							<td class="payAmount"></td>
+							<td>
+								<div class="payAmount" style="float: left;">0</div>
+								<div style="float: left;"> (원)</div>
+							</td>
 						</tr>
 						<tr>
 							<th>쿠폰 적용 할인 금액</th>
-							<td class="coupon">0 (원) 
+							<td >
+								<div class="coupon" style="float: left;">0</div>
+								<div style="float: left;"> (원)</div>
+								
 								<c:if test="${!empty m}">
-									<button class="couponSelect" data-bs-toggle="modal" data-bs-target="#selectcoupon">쿠폰선택</button>
+									<div class="memberNo" style="display: none;">${sessionScope.m.memberNo}</div>
+									<button class="couponSelect" style="float: left;" data-bs-toggle="modal" data-bs-target="#selectcoupon">쿠폰선택</button>
 								</c:if>
 							</td>
 						</tr>
 						<tr>
 							<th>총 결제 금액</th>
-							<td class="paymentAmount"></td>
+							<td>
+								<div class="paymentAmount" style="float: left;"></div>
+								<div style="float: left;"> (원)</div>
+							</td>
 						</tr>
 					</tbody>
 				</table>
@@ -1020,15 +1030,12 @@
 								</table>
 							</div>
 							<div class="modal-footer">
-								<button class="btn btn-primary" style="width: 200px; text-align: center;">쿠폰적용</button>
+								<button class="btn btn-primary selectedCoupon" style="width: 200px; text-align: center;" data-bs-dismiss="modal">쿠폰적용</button>
 							</div>
 						</div>
 					</div>
 				</div>
-
-				<form action="">
-					<input type="hidden">
-				</form>
+				<button class="btn btn-primary nextMenu3">결제</button>
 			</div>
 		</div>
 	</div>

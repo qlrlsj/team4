@@ -28,6 +28,7 @@
     <div class="div-content">
         <div class="div-content-left">
             <h2>[${ticket.getParentLocalName()}/${ticket.getLocalName()}] ${ticket.getTicketTitle()}</h2>
+            <input type="hidden" name="ticketTitle" value="${ticket.getTicketTitle()}">
             <span>${ticket.getTicketScore()}</span>
             <span>리뷰수</span>
             <table>
@@ -38,6 +39,7 @@
                     <td><img src="/resources/upload/ticket/${file.getTicketFilepath2()}" style="width: 230px ;height: 170px;"></td>
                     <td><img src="/resources/upload/ticket/${file.getTicketFilepath3()}" style="width: 230px ;height: 170px;"></td>
                     <td><img src="/resources/upload/ticket/${file.getTicketFilepath4()}" style="width: 230px ;height: 170px;"></td>
+                    <input type="hidden" name="ticketFilepath1" value="${file.getTicketFilepath1()}">
                 </tr>
             </table>
             <br>
@@ -51,16 +53,17 @@
                     <br>
                     <span class="material-icons" >event_available</span>
                     <span>유효기간 (~${ticket.getExpireDate()}) 내 사용 가능</span>
+                    <input type="hidden" name="expireDate" value="${ticket.getExpireDate()}">
                 </c:if>
                 <p>※ ${ticket.getImportantContent()}</p>
             </div>
             <div class="content-box container" style="background-color: gray; padding: 20px 20px;">
-                
+                <form action="/reserveForm.kt?ticketNo=${ticket.getTicketNo()}">
                 <c:forEach items="${optionList}" var="opt"  varStatus="status">
                     <div class="optBox row" style="background-color: yellow;">
                         <input type="hidden" id="no" value="${status.index}">
                         <div class="optBox-left col">
-                            <input type="hidden" id="optTitle" value="${opt.getOptTitle()}" readonly>
+                            <input type="hidden" namte="optTitle" id="optTitle" value="${opt.getOptTitle()}" readonly>
                             <input type="hidden" id="optContent" value="${opt.getOptContent()}" readonly>
                             <p><c:out value="${opt.getOptTitle()}"/></p>
                             <p><c:out value="${opt.getOptContent()}"/></p>
@@ -74,14 +77,11 @@
                             <p><c:out value="${opt.getOptDiscountPrice()}"/>원</p>
                         </div>
                         <div class="col">
-                            <button type="button" class="material-icons minus varyBtn">
-                                remove_circle_outline
-                            </button>
+                            <button type="button" class="material-icons minus varyBtn">remove_circle_outline</button>
                             <input type="number" class="qtt" id="optQuantity" name="optQuantity" min="0" max="${opt.getOptStock()}" value="0" readonly>
                             <input type="hidden" value="${opt.getOptStock()}">
-                            <button type="button" class="material-icons plus varyBtn addDiv">
-                                add_circle_outline
-                                </button>
+                            <button type="button" class="material-icons plus varyBtn addDiv">add_circle_outline</button>
+                            <input type="hidden" name="optNo" value="${opt.getOptNo()}">
                         </div>
                     </div>
                 </c:forEach>
@@ -104,6 +104,7 @@
                     </div>
                 </c:forEach>
                 <input type="submit" id="submitBtn" value="결제하기">
+            </form>
             </div>
             
         </div>

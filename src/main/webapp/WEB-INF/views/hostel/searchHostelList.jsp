@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"   pageEncoding="UTF-8"%>
             <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
@@ -85,7 +84,7 @@ margin-bottom: 20px;
 				<input type="text" class="form-control" name="searchKeyword" required placeholder="지역/숙소이름" style="width:22%; display: inline;" value="${searchKeyword}" >
 				<input type="text" name="startDate" class="datepicker form-control" required  id = "datepicker1" style="width:22%; display: inline;" value="${startDate}">
 				<input type="text" name="endDate" class="datepicker form-control"   required id = "datepicker2" style="width:20%; display: inline;" value="${endDate}">
-				<input type="number" name="customerNum" class="form-control" required placeholder="인원" style="width:22%; display: inline;" value="${customerNum }">
+				<input type="number" min="1" name="customerNum" class="form-control" required placeholder="인원" style="width:22%; display: inline;" value="${customerNum }">
 				<button type="submit" class="btn btn-outline-info">검색하기</button>
 			</div>
 		</div>
