@@ -26,6 +26,8 @@
 		<typeAlias type="kr.or.pck.model.vo.Pck" alias="p"/>
 		<typeAlias type="kr.or.pck.model.vo.FileVO" alias="f"/>
 		<typeAlias type="kr.or.seller.model.vo.Product" alias="pr"/>
+		<typeAlias type="kr.or.seller.model.vo.Cancel" alias="can"/>
+		<typeAlias type="kr.or.seller.model.vo.Payment" alias="spay"/>
 		<typeAlias type="kr.or.coupon.model.vo.Coupon" alias="po"/>
 	</typeAliases>
 </configuration>

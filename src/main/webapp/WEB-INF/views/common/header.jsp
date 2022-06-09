@@ -184,6 +184,7 @@ function alarmInsert(msg){
 										<li><a class="dropdown-item" href="#">쿠폰</a></li>
 										<li><a class="dropdown-item" href="#">파트너 등록하기</a></li>
 										<li><a class="dropdown-item" href="/mypage.kt">마이페이지</a></li>
+										<li><a class="dropdown-item" href="/sellerPage.kt">판매자 페이지</a></li>		
 										<li><hr class="dropdown-divider"></li>
 										<li><a class="dropdown-item" href="/logout.kt">로그아웃 </a></li>
 									</ul>
