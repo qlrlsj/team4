@@ -12,6 +12,7 @@
 		<typeAlias type="kr.or.hostel.model.vo.HostelOption" alias="ho"/>
 		<typeAlias type="kr.or.hostel.model.vo.ReservableRoom" alias="rvr"/>
 		<typeAlias type="kr.or.hostel.model.vo.ReservedRoom" alias="rdr"/>
+		<typeAlias type="kr.or.hostel.model.vo.HostelReserve" alias="hr"/>
 		<typeAlias type="kr.or.companion.model.vo.Companion" alias="co"/>
 		<typeAlias type="kr.or.report.model.vo.Report" alias="rp"/>
 		<typeAlias type="kr.or.report.model.vo.BlackList" alias="bl"/>

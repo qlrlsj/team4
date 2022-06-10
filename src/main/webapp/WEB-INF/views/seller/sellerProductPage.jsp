@@ -24,7 +24,7 @@
 			<h2>상품 관리</h2>
 			<c:choose>
 				<c:when test="${type eq 'hostel' }">
-					<button class="btn btn-primary" onclick="location.href='/insertHostelForm.kt' ">숙소 상품 등록</button>
+					<button class="btn btn-primary" onclick="location.href='/insertHostelForm1.kt' ">숙소 상품 등록</button>
 				</c:when>
 				<c:when test="${type eq 'ticket' }">
 					<button class="btn btn-primary" onclick="location.href='/insertTicketForm.kt' " >티켓 상품 등록</button>
