@@ -16,12 +16,14 @@
 	}
 	.content-box{
 		max-width: 1160px;
+		border: 1px solid #d4d4d4;
+		padding: 20px 20px;
 	}
 	.content-box>.container{
 		padding: 0;
 	}
 	.optBox{
-		background-color: lightgray;
+		background-color: #f3f3f3;
 		padding: 20px;
 		margin: 35px;
 	}
