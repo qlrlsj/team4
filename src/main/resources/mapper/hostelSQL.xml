@@ -2,135 +2,227 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="hostel">
 
-<insert id="insertHostel" parameterType="h" >
-insert into hostel values(hostel_seq.nextval,#{memberNo},#{hostelName},#{hostelAddress},#{bookStart},#{bookEnd},#{CheckinOut},#{hostelIntro},#{hostelUsage},#{roomType},#{hostelScore},#{hostelComfort},#{hostelService})
-</insert>
+	<insert id="insertHostel" parameterType="h">
+		insert into hostel
+		values(hostel_seq.nextval,#{memberNo},#{hostelName},#{hostelAddress},#{bookStart},#{bookEnd},#{CheckinOut},#{hostelIntro},#{hostelUsage},#{roomType},#{hostelScore},#{hostelComfort},#{hostelService})
+	</insert>
 
-<select id="hostelCode" resultType="int">
-select max(hostel_code) from hostel
-</select>
+	<select id="hostelCode" resultType="int">
+		select max(hostel_code) from
+		hostel
+	</select>
 
-<insert id="insertFile" parameterType="hf">
-insert into hostel_file VALUES(hostel_file_seq.nextval,#{hostelCode},#{filename},#{filepath})
-</insert>
+	<insert id="insertFile" parameterType="hf">
+		insert into hostel_file
+		VALUES(hostel_file_seq.nextval,#{hostelCode},#{filename},#{filepath})
+	</insert>
 
-<insert id="insertOption" parameterType="ho">
-insert into hostel_option values(hostel_option_seq.nextval,#{hostelCode},#{roomOption},#{hostelPrice},#{standardBooknum},#{maxBooknum},#{roomName})
-</insert>
+	<insert id="insertOption" parameterType="ho">
+		insert into
+		hostel_option
+		values(hostel_option_seq.nextval,#{hostelCode},#{roomOption},#{hostelPrice},#{standardBooknum},#{maxBooknum},#{roomName})
+	</insert>
 
-<select id="selectOptionNum" resultType="int">
-select max(OPTION_NO) from hostel_option
-</select>
+	<select id="selectOptionNum" resultType="int">
+		select max(OPTION_NO)
+		from hostel_option
+	</select>
 
-<insert id="insertHostelDate" parameterType="rvr"  >
-insert into reserveable_room values(reservable_room_seq.nextval,#{optionNo},#{reservableDate})
-</insert>
+	<insert id="insertHostelDate" parameterType="rvr">
+		insert into
+		reserveable_room
+		values(reservable_room_seq.nextval,#{optionNo},#{reservableDate})
+	</insert>
 
-<resultMap type="h" id="hostelSelect">
-<result property="hostelCode" column="HOSTEL_CODE"/>
-<result property="hostelName" column="HOSTEL_NAME"/>
-<result property="hostelAddress" column="HOSTEL_ADDRESS"/>
-<result property="hostelService" column="HOSTEL_SERVICE"/>
-<result property="hostelComfort" column="HOSTEL_COMFORT"/>
-<result property="roomType" column="ROOM_TYPE"/>
-<result property="hostelScore" column="HOSTEL_SCORE"/>
-<result property="hostelPrice" column="HOSTEL_PRICE"/>
-<result property="hostelfilepath" column="HOSTEL_FILEPATH"/>
+	<resultMap type="h" id="hostelSelect">
+		<result property="hostelCode" column="HOSTEL_CODE" />
+		<result property="hostelName" column="HOSTEL_NAME" />
+		<result property="hostelAddress" column="HOSTEL_ADDRESS" />
+		<result property="hostelService" column="HOSTEL_SERVICE" />
+		<result property="hostelComfort" column="HOSTEL_COMFORT" />
+		<result property="roomType" column="ROOM_TYPE" />
+		<result property="hostelScore" column="HOSTEL_SCORE" />
+		<result property="hostelPrice" column="HOSTEL_PRICE" />
+		<result property="hostelfilepath" column="HOSTEL_FILEPATH" />
 
-</resultMap>
+	</resultMap>
 
-<select id="searchHostelListMain" parameterType="map" resultType="h" resultMap="hostelSelect">
-select * from (
-SELECT 
-    HOSTEL_CODE, HOSTEL_NAME,HOSTEL_ADDRESS,HOSTEL_SERVICE,HOSTEL_COMFORT,room_type,HOSTEL_SCORE,
-    (SELECT MIN(HOSTEL_PRICE) FROM HOSTEL_OPTION HO WHERE HO.HOSTEL_CODE=H.HOSTEL_CODE AND HO.OPTION_NO IN 
-    (
-        SELECT OPTION_NO FROM HOSTEL_OPTION
-            WHERE
-            (HOSTEL_CODE,HOSTEL_PRICE) IN 
-            (
-            SELECT HOSTEL_CODE , MIN(HOSTEL_PRICE)
-            FROM HOSTEL_OPTION WHERE OPTION_NO NOT IN (SELECT OPTION_NO FROM RESERVED_ROOM WHERE RESERVED_DATE BETWEEN to_date(#{startDate},'yyyy-mm-dd') and to_date(#{endDate},'yyyy-mm-dd')) GROUP BY HOSTEL_CODE
-            )
-    )) AS HOSTEL_PRICE,
-    (SELECT FILEPATH FROM HOSTEL_FILE HF WHERE HF.HOSTEL_CODE = H.HOSTEL_CODE AND FILE_NO = (SELECT MIN(FILE_NO) FROM HOSTEL_FILE HF2 WHERE HF2.HOSTEL_CODE=H.HOSTEL_CODE)) AS HOSTEL_FILEPATH
-FROM HOSTEL H
-WHERE 
-    H.HOSTEL_ADDRESS LIKE '%'||#{searchKeyword}||'%' OR H.HOSTEL_NAME LIKE '%'||#{searchKeyword}||'%'
-    AND
-    H.HOSTEL_CODE IN (
-        SELECT HOSTEL_CODE FROM HOSTEL_OPTION
-        WHERE
-        (HOSTEL_CODE,HOSTEL_PRICE) IN 
-        (
-        SELECT HOSTEL_CODE , MIN(HOSTEL_PRICE)
-        FROM HOSTEL_OPTION WHERE OPTION_NO NOT IN (SELECT OPTION_NO FROM RESERVED_ROOM WHERE RESERVED_DATE BETWEEN to_date(#{startDate},'yyyy-mm-dd') and to_date(#{endDate},'yyyy-mm-dd')) GROUP BY HOSTEL_CODE
-        )
-    )
-    ) where  room_type = #{roomType}
+	<select id="searchHostelListMain" parameterType="map"
+		resultType="h" resultMap="hostelSelect">
+		select * from (
+		SELECT
+		HOSTEL_CODE,
+		HOSTEL_NAME,HOSTEL_ADDRESS,HOSTEL_SERVICE,HOSTEL_COMFORT,room_type,HOSTEL_SCORE,
+		(SELECT MIN(HOSTEL_PRICE) FROM HOSTEL_OPTION HO WHERE
+		HO.HOSTEL_CODE=H.HOSTEL_CODE AND HO.OPTION_NO IN
+		(
+		SELECT OPTION_NO FROM
+		HOSTEL_OPTION
+		WHERE
+		(HOSTEL_CODE,HOSTEL_PRICE) IN
+		(
+		SELECT HOSTEL_CODE ,
+		MIN(HOSTEL_PRICE)
+		FROM HOSTEL_OPTION WHERE OPTION_NO NOT IN (SELECT
+		OPTION_NO FROM
+		RESERVED_ROOM WHERE RESERVED_DATE BETWEEN
+		to_date(#{startDate},'yyyy-mm-dd') and
+		to_date(#{endDate},'yyyy-mm-dd')) GROUP BY HOSTEL_CODE
+		)
+		)) AS
+		HOSTEL_PRICE,
+		(SELECT FILEPATH FROM HOSTEL_FILE HF WHERE HF.HOSTEL_CODE
+		= H.HOSTEL_CODE AND
+		FILE_NO = (SELECT MIN(FILE_NO) FROM HOSTEL_FILE HF2
+		WHERE
+		HF2.HOSTEL_CODE=H.HOSTEL_CODE)) AS HOSTEL_FILEPATH
+		FROM HOSTEL H
+		WHERE
+		H.HOSTEL_ADDRESS LIKE '%'||#{searchKeyword}||'%' OR H.HOSTEL_NAME
+		LIKE
+		'%'||#{searchKeyword}||'%'
+		AND
+		H.HOSTEL_CODE IN (
+		SELECT HOSTEL_CODE
+		FROM HOSTEL_OPTION
+		WHERE
+		(HOSTEL_CODE,HOSTEL_PRICE) IN
+		(
+		SELECT
+		HOSTEL_CODE , MIN(HOSTEL_PRICE)
+		FROM HOSTEL_OPTION WHERE OPTION_NO NOT
+		IN (SELECT OPTION_NO FROM
+		RESERVED_ROOM WHERE RESERVED_DATE BETWEEN
+		to_date(#{startDate},'yyyy-mm-dd') and
+		to_date(#{endDate},'yyyy-mm-dd')) GROUP BY HOSTEL_CODE
+		)
+		)
+		) where
+		room_type = #{roomType}
 
-</select>
+	</select>
 
-<resultMap type="h" id="hostelDetail">
-<result property="hostelCode" column="HOSTEL_CODE"/>
-<result property="hostelName" column="HOSTEL_NAME"/>
-<result property="hostelAddress" column="HOSTEL_ADDRESS"/>
-<result property="checkinOut" column="CHECKIN_OUT"/>
-<result property="hostelIntro" column="HOSTEL_INTRO"/>
-<result property="hostelUsage" column="HOSTEL_USAGE"/>
-<result property="hostelService" column="HOSTEL_SERVICE"/>
-<result property="hostelComfort" column="HOSTEL_COMFORT"/>
-<result property="hostelScore" column="HOSTEL_SCORE"/>
+	<resultMap type="h" id="hostelDetail">
+		<result property="hostelCode" column="HOSTEL_CODE" />
+		<result property="hostelName" column="HOSTEL_NAME" />
+		<result property="hostelAddress" column="HOSTEL_ADDRESS" />
+		<result property="checkinOut" column="CHECKIN_OUT" />
+		<result property="hostelIntro" column="HOSTEL_INTRO" />
+		<result property="hostelUsage" column="HOSTEL_USAGE" />
+		<result property="hostelService" column="HOSTEL_SERVICE" />
+		<result property="hostelComfort" column="HOSTEL_COMFORT" />
+		<result property="hostelScore" column="HOSTEL_SCORE" />
 
-</resultMap>
+	</resultMap>
 
-<select id="selectHostelDetail" parameterType="int" resultType="h" resultMap="hostelDetail">
-select * from hostel where hostel_code = #{hostelCode}
-</select>
-
-
-<resultMap type="ho" id="hostelOptionList">
-<result property="optionNo" column="OPTION_NO" />
-<result property="hostelCode" column="HOSTEL_CODE" />
-<result property="roomOption" column="ROOM_OPTION" />
-<result property="hostelPrice" column="HOSTEL_PRICE" />
-<result property="standardBooknum" column="STANDARD_BOOKNUM" />
-<result property="maxBooknum" column="MAX_BOOKNUM" />
-<result property="roomName" column="ROOM_NAME" />
-</resultMap>
-
-<select id="selectOptionList" parameterType="map" resultType="ho" resultMap="hostelOptionList">
- SELECT *  FROM HOSTEL_OPTION WHERE hostel_code=#{hostelCode} and OPTION_NO NOT IN (SELECT OPTION_NO FROM RESERVED_ROOM WHERE RESERVED_DATE BETWEEN to_date(#{startDate},'yyyy-mm-dd') and to_date(#{endDate},'yyyy-mm-dd')) 
-
-</select>
+	<select id="selectHostelDetail" parameterType="int"
+		resultType="h" resultMap="hostelDetail">
+		select * from hostel where hostel_code =
+		#{hostelCode}
+	</select>
 
 
-<select id="searchHostelFile" parameterType="int" resultType="hf">
-select filepath from hostel_file where hostel_code=#{hostelCode}
-</select>
+	<resultMap type="ho" id="hostelOptionList">
+		<result property="optionNo" column="OPTION_NO" />
+		<result property="hostelCode" column="HOSTEL_CODE" />
+		<result property="roomOption" column="ROOM_OPTION" />
+		<result property="hostelPrice" column="HOSTEL_PRICE" />
+		<result property="standardBooknum" column="STANDARD_BOOKNUM" />
+		<result property="maxBooknum" column="MAX_BOOKNUM" />
+		<result property="roomName" column="ROOM_NAME" />
+	</resultMap>
 
-<select id="searchSelectedHostel" parameterType="int" resultType="ho">
-SELECT
- h.hostel_name as hostelName,
- ho.hostel_code as hostelCode,
-  ho.room_option as roomOption,
-   ho.hostel_price as hostelPrice
-      FROM hostel h , (select  hostel_code, room_option , hostel_price from hostel_option where option_no=#{optionNo})ho  where h.hostel_code= ho.hostel_code
+	<select id="selectOptionList" parameterType="map"		resultType="ho" resultMap="hostelOptionList">
+		SELECT * FROM HOSTEL_OPTION WHERE
+		hostel_code=#{hostelCode} and OPTION_NO
+		NOT IN (SELECT OPTION_NO FROM
+		RESERVED_ROOM WHERE RESERVED_DATE
+		BETWEEN
+		to_date(#{startDate},'yyyy-mm-dd') and
+		to_date(#{endDate},'yyyy-mm-dd'))
 
-</select>
+	</select>
 
-<insert id="insertHostelPay" parameterType="int">
-insert into payment VALUES(PAYMENT_SEQ.nextval,#{payPrice}, 0,0,0,SYSDATE,0)
-</insert>
 
-<select id="selectPayNo" resultType="int" >
-    
-select max(pay_no) from payment
+	<select id="searchHostelFile" parameterType="int"
+		resultType="hf">
+		select filepath from hostel_file where
+		hostel_code=#{hostelCode}
+	</select>
 
-</select>
+	<select id="searchSelectedHostel" parameterType="int"
+		resultType="ho">
+		SELECT
+		h.hostel_name as hostelName,
+		ho.hostel_code as
+		hostelCode,
+		ho.room_option as roomOption,
+		ho.hostel_price as hostelPrice
+		FROM hostel h , (select hostel_code, room_option , hostel_price from
+		hostel_option where option_no=#{optionNo})ho where h.hostel_code=
+		ho.hostel_code
 
-<insert id="insertHostelReserve">
-insert into hostel_reserve VALUES(HOSTEL_RESERVE_SEQ.nextval,optionNo, payNo, memberNo,to_char(sysdate,'yyyy-mm-dd'),reserveName,reserveEmail,reservePhone,reserveNum,hostelIndate,hostelOutdate )
-</insert>
+	</select>
+
+	<insert id="insertHostelPay" parameterType="int">
+		insert into payment
+		VALUES(PAYMENT_SEQ.nextval,#{payPrice}, 0,0,0,SYSDATE,0)
+	</insert>
+
+	<select id="selectPayNo" resultType="int">
+
+		select max(pay_no) from
+		payment
+
+	</select>
+
+	<insert id="insertHostelReserve" parameterType="rdr">
+		insert into
+		hostel_reserve
+		VALUES('H'||to_char(sysdate,('yymmdd'))||HOSTEL_RESERVE_SEQ.nextval,#{optionNo},
+		#{payNo},
+		#{memberNo},to_char(sysdate,'yyyy-mm-dd'),#{reserveName},#{reserveEmail},#{reservePhone},#{reserveNum},#{hostelIndate},#{hostelOutdate}
+		)
+	</insert>
+
+	<select id="selectReservationNum" resultType="String">
+
+		select
+		reservation_no from (select rownum ,reservation_no from
+		hostel_reserve
+		where rownum=1)
+
+	</select>
+
+	<insert id="insertReservedRoom" parameterType="rdr">
+		<if test="memberNo==0"><!-- 비회원값일때 -->
+			insert into reserved_room values
+			(reserved_room_seq.nextval,#{optionNo},'',#{reservationNo},#{reservedDate})
+
+		</if>
+		<if test="memberNo!=0"><!-- 비회원값일때 -->
+			insert into reserved_room values
+			(reserved_room_seq.nextval,#{optionNo},#{memberNo},#{reservationNo},#{reservedDate})
+
+		</if>
+	</insert>
+
+	<resultMap type="hr" id="selectHostelReserve">
+		<result property="reservationNo" column="RESERVATION_NO" />
+		<result property="optionNo" column="OPTION_NO" />
+		<result property="payNo" column="PAY_NO" />
+		<result property="memberNo" column="MEMBER_NO" />
+		<result property="reservationDate" column="RESERVATION_DATE" />
+		<result property="reserveName" column="RESERVE_NAME" />
+		<result property="reserveEmail" column="RESERVE_EMAILL" />
+		<result property="reservePhone" column="RESERVE_PHONE" />
+		<result property="reserveNum" column="RESERVE_NUM" />
+		<result property="hostelIndate" column="HOSTEL_INDATE" />
+		<result property="hostelOutdate" column="HOSTEL_OUTDATE" />
+	</resultMap>
+
+	<select id="selectHostelReserve" parameterType="String"		resultType="hr" resultMap="selectHostelReserve">
+		select * from hostel_reserve where reservation_no = #{recentRvNo}
+	</select>
 
 </mapper>

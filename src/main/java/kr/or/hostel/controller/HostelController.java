@@ -216,7 +216,7 @@ public class HostelController {
 	}
 	
 	@RequestMapping(value = "reserveHostel.kt")
-	public String reserveHostel(int payPrice, HostelReserve hr ) {
+	public String reserveHostel(int payPrice, HostelReserve hr ,Model model) {
 		// 결제테이블(결제금액) , 예약테이블(optionNo memberNo..), 예약된방테이블 세개 인서트 필요 
 		   //  결제테이블 - 결제금액 
         // 예약테이블 - 옵션번호, 회원번호, 주문자이름, 이메일, 번호, 인원, 입실일  ,퇴실일
@@ -225,7 +225,14 @@ public class HostelController {
 		System.out.println("결제 성공, 테이블 인서트 시작 ");
 		System.out.println("optionNo"+hr.getOptionNo());
 		System.out.println("memberNo:"+hr.getMemberNo());
-		int result = service.reserveHostel(payPrice,hr);
+		HostelReserve rvInfo = service.reserveHostel(payPrice, hr);
+//		HostelReserve hostelRVInfo =  service.reserveHostel(payPrice,hr);
+//		if(result>0) {
+//			System.out.println("예약 전과정 완료 ");
+//		}else {
+//			System.out.println("예약중 실패 "+result);
+//		}
+		model.addAttribute("rvInfo",rvInfo);
 		
 		return "hostel/reserveSuccess";
 	}
