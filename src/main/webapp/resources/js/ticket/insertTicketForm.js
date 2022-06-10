@@ -512,7 +512,27 @@ const dropFile = new DropFile("drop-file", "files");
 $(".summernote").summernote({
   height: 500,
   lang: "ko-KR",
+  callbacks:{
+    onImageUpload : function(files){
+      summerImageUpload(files[0],this);
+    }
+  }
 });
+function summerImageUpload(file,editor){
+	const form = new FormData();
+	form.append("file",file);
+	$.ajax({
+		url : "/summerUploadTicketImage.kt",
+		type : "post",
+		data : form,
+		processData : false,
+		contentType : false,
+		success : function(data){			
+			$(editor).summernote("insertImage",data);
+		}
+	});
+}
+
 
 function add_optbox() {
   let addCount = $("#count").val();
@@ -584,7 +604,6 @@ $(".rate").keyup(function () {
   const discountPrice = $(this).next().next();
   discountPrice.val(Math.ceil(price * (1 - rate / 100)));
 });
-
 
 
 
