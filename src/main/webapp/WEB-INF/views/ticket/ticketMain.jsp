@@ -82,7 +82,9 @@
 		<div class="card" style="width: 18rem;">
 			<img src="/resources/upload/ticket/서핑_1.PNG" class="card-img-top" alt="...">
 			<div class="card-body">
-			  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+			  <div>
+				  <span></span>
+			  </div>
 			</div>
 		  </div>
 	</div>
@@ -94,7 +96,7 @@
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 	<script>
 		$(document).ready(function () {
-			
+		
 		});
 	</script>
 </body>

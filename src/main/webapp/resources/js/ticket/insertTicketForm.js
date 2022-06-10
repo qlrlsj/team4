@@ -584,3 +584,7 @@ $(".rate").keyup(function () {
   const discountPrice = $(this).next().next();
   discountPrice.val(Math.ceil(price * (1 - rate / 100)));
 });
+
+
+
+
