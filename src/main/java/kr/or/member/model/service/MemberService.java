@@ -89,6 +89,14 @@ public class MemberService {
 		return null;
 	}
 
+	public int updateMemberPoint(int memberNo, int updatePoint) {
+		// TODO Auto-generated method stub
+		HashMap<Object, Object> map = new HashMap<Object, Object>();
+		map.put("memberNo", memberNo);
+		map.put("updatePoint", updatePoint);
+		return dao.updateMemberPoint(map);
+	}
+
 
 //	public Member selectOneMember1(Member m) {
 //		Member member = dao.selectOneMember1(m);

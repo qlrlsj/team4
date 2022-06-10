@@ -80,7 +80,7 @@
 							<td colspan="3">
 								<label class="test_obj">
 									<input type="radio" name="airStartPay" value="1" checked>
-									<span>0</span>
+									<span>50000</span>
 								</label>
 								
 								<label class="test_obj">
@@ -139,7 +139,7 @@
 								<td colspan="3" >
 									<label class="test_obj">
 										<input type="radio" name="airEndPay" value="1" checked>
-										<span>0</span>
+										<span>50000</span>
 									</label>
 									
 									<label class="test_obj">
@@ -803,7 +803,7 @@
 							<tbody>
 								<tr>
 									<th>예약자이름</th>
-									<td><input type="text" name="memberName" value="${sessionScope.m.memberName }" readonly></td>
+									<td><input type="text" name="bookerName" value="${sessionScope.m.memberName }" readonly></td>
 									<th>이메일</th>
 									<td><input type="text" name="memberEmail" value="${sessionScope.m.memberEmail }" readonly></td>
 									<th>휴대폰번호</th>
@@ -817,7 +817,7 @@
 							<tbody>
 								<tr>
 									<th>예약자이름</th>
-									<td><input type="text" name="memberName"></td>
+									<td><input type="text" name="bookerName"></td>
 									<th>이메일</th>
 									<td><input type="text" name="memberEmail"></td>
 									<th>휴대폰번호</th>
@@ -987,6 +987,16 @@
 							</td>
 						</tr>
 						<tr>
+							<th>포인트 사용금액</th>
+							<td>
+								<c:if test="${!empty m}">
+									<input type="text" class="pointSelect" style="float: left; margin-right: 50px;" value="0">
+									<div style="float: left; color: rgb(255, 200, 70);" class="memberPoint">${sessionScope.m.memberPoint}</div>
+									<div style="float: left; color: aquamarine;"> (원) 사용가능</div>
+								</c:if>
+							</td>
+						</tr>
+						<tr>
 							<th>쿠폰 적용 할인 금액</th>
 							<td >
 								<div class="coupon" style="float: left;">0</div>
@@ -994,6 +1004,7 @@
 								
 								<c:if test="${!empty m}">
 									<div class="memberNo" style="display: none;">${sessionScope.m.memberNo}</div>
+									<div class="memberLevel" style="display: none;">${sessionScope.m.memberLevel}</div>
 									<button class="couponSelect" style="float: left;" data-bs-toggle="modal" data-bs-target="#selectcoupon">쿠폰선택</button>
 								</c:if>
 							</td>
@@ -1036,8 +1047,21 @@
 					</div>
 				</div>
 				<button class="btn btn-primary nextMenu3">결제</button>
+				<button class="btn btn-primary payCompleteBtn">결제완료버튼(테스트용)</button>
 			</div>
 		</div>
+		<form action="/payComplete.kt">
+			<input type="hidden" name="payNo">
+			<input type="hidden" name="airName">
+			<input type="hidden" name="memberNo">
+			<input type="hidden" name="airLevel">
+			<input type="hidden" name="orderDate">
+			<input type="hidden" name="airStart">
+			<input type="hidden" name="airEnd">
+			<input type="hidden" name="airPay">
+			<input type="hidden" name="memberName">
+			<input type="hidden" name="phone">
+		</form>
 	</div>
 	<script src="/resources/js/air/airSelectGrade.js"></script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />

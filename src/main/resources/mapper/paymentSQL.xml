@@ -4,4 +4,7 @@
 	<insert id="insertMember" parameterType="pay">
  		insert into payment values(payment_seq.nextval,#{payPrice},#{pointUse},#{payCoupon},#{pointAdd},sysdate,#{payCouponCode})
  	</insert>
+ 	<select id="selectMaxPayNo" resultType="int">
+ 		select max(pay_no) from payment order by pay_no desc
+ 	</select>
 </mapper>

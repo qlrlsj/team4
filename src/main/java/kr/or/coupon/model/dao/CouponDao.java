@@ -2,6 +2,7 @@ package kr.or.coupon.model.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +20,9 @@ public class CouponDao {
 		return (ArrayList<Coupon>)list;
 	}
 
-//	public int updateCouponUse(Coupon coupon) {
-////		int result = sqlSession.update("coupon.updateCouponUse",coupon);
-////		return result;
-//	}
+	public int updateCouponUse(Map map) {
+		int result = sqlSession.update("coupon.updateCouponUse",map);
+		return result;
+	}
 	
 }

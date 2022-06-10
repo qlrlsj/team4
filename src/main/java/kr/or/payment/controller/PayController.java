@@ -23,6 +23,10 @@ public class PayController {
 	public String insertPayment(Payment pay) {
 		System.out.println(pay);
 		int result = service.insertPayment(pay);
-		return String.valueOf(result);
+		int paymentNo = 0;
+		if(result>0) {
+			paymentNo = service.selectPayNo();
+		}
+		return String.valueOf(paymentNo);
 	}
 }
