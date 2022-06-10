@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import kr.or.hostel.model.vo.Hostel;
 import kr.or.hostel.model.vo.HostelFile;
 import kr.or.hostel.model.vo.HostelOption;
+import kr.or.hostel.model.vo.HostelReserve;
 import kr.or.hostel.model.vo.ReservableRoom;
 import kr.or.hostel.model.vo.ReservedRoom;
 import kr.or.member.model.vo.Member;
@@ -107,10 +108,23 @@ public class HostelDao {
 		return rhNo;
 	}
 
-	public int insertReseredRoom(ReservedRoom rdr) {
-		int result = sqlSession.insert("hostel.insertReseredRoom",rdr);
-		return 0;
+
+
+	public String selectReservationNo() {
+		String reserveNum = sqlSession.selectOne("hostel.selectReservationNum");
+				
+		return reserveNum;
+	}
+	public int insertReservedRoom(ReservedRoom rdr) {
+		int result = sqlSession.insert("hostel.insertReservedRoom",rdr);
+		return result;
 	}
 
+	public HostelReserve selectHostelReserve(String recentRvNo) {
+
+		HostelReserve hr = sqlSession.selectOne("hostel.selectHostelReserve",recentRvNo);
+				
+		return hr;
+	}
 
 }
