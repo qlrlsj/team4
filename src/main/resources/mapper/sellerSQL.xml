@@ -40,36 +40,59 @@
 	</select>
 	<select id="selectCashInfoH" parameterType="m" resultType="spay" >
 	select 
-		pay_date as payDate,
-		hostel_code as productNo,
-		pay_no as payNo,
-		hostel_name as productName,
-		member_id as memberName,
-		pay_price as payPrice,
-		point_use as pointUse,
-		pay_coupon as couponUse,
-		point_add as pointAdd,
-		pay_couponcode as payCoupon
-	from hostel h
-	where member_no = #{memberNo}
+		p.pay_date as payDate,
+		h.hostel_code as productNo,
+		p.pay_no as payNo,
+		h.hostel_name as productName,
+		m.member_id as memberName,
+		p.pay_price as payPrice,
+		p.point_use as pointUse,
+		p.pay_coupon as couponUse,
+		p.point_add as pointAdd,
+		p.pay_couponcode as payCouponCode,
+		ho.hostel_price as productPrice
+	from payment p
+	join hostel_reserve hr on (p.pay_no = hr.pay_no)
+	join hostel_option ho on (hr.option_no = ho.option_no)
+	join hostel h on (ho.hostel_code = ho.hostel_code)
+	join member m on (hr.member_no = m.member_no)
+	where h.member_no = #{memberNo}
 	</select>
 	<select id="selectCashInfoT" parameterType="m" resultType="spay">
-	select 
+		select 
             pay_date as payDate,
 			t.ticket_no as productNo,
 			p.pay_no as payNo,
 			t.ticket_title as productName,
-			member_id as memberName,
+			m.member_id as memberName,
 			pay_price as payPrice,
 			point_use as pointUse,
 			pay_coupon as couponUse,
 			point_add as pointAdd,
-			pay_couponcode as payCoupon
+			pay_couponcode as payCouponCode
 	    from payment p
         join ticket_reserve tr on (p.pay_no = tr.pay_no)
-        join ticket t on (tr. = c2.category_id)
-        join local_category l1 on (t.local_id = l1.local_id)
-        join local_category l2 on (l1.parent_local_id = l2.local_id)
-        where ticket_no=#{ticketNo}
+        join ticket t on (tr.ticket_no = t.ticket_no)
+        join member m on (tr.member_no = m.member_no)
+        where t.member_no=#{memberNo}
+	</select>
+		<select id="selectCashInfoP" parameterType="m" resultType="spay">
+		select 
+            pay_date as payDate,
+			pc.package_no as productNo,
+			p.pay_no as payNo,
+			pc.package_title as productName,
+			m.member_id as memberName,
+			pay_price as payPrice,
+			point_use as pointUse,
+			pay_coupon as couponUse,
+			point_add as pointAdd,
+			pay_couponcode as payCouponCode,
+			pc.package_price as productPrice
+	    from payment p
+	    join package_reserve pr on (p.pay_no = pr.pay_no)
+	    join member m on(pr.member_no = m.member_no)
+        join package pc on (pr.package_no = pc.package_no)
+        where pc.member_id=#{memberId}
 	</select>
 </mapper>

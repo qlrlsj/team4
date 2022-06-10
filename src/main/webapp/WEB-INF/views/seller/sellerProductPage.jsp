@@ -33,7 +33,6 @@
 					<button class="btn btn-primary" onclick="location.href='/insertPackagePage.kt' ">패키지 상품 등록</button>
 				</c:when>
 			</c:choose>
-			<button> 상품등록 </button>
 			<table class="table table-sm">
 				<tr>
 					<th>상품 번호</th><th>상품명</th><th>평점</th><th>문의</th><th>수정 / 삭제</th>

@@ -25,22 +25,62 @@
 				<tr>
 					<th>구분</th><th>날짜</th><th>상품 번호 / 주문 번호</th><th>상품명</th><th>구매자 정보</th><th>금액</th><th>포인트</th><th>쿠폰</th><th>송금액</th>
 				</tr>
-				<c:forEach items="${list }" var="pay">
-					<tr>
-						<td>${type }</td>
-						<td><a href="#">${pay.payDate }</a></td>
-						<td>
-							<a href="#">${pay.productNo }</a><br>
-							<a href="#">${pay.payNo }</a>							
-						</td>
-						<td>${pay.productName }</td>
-						<td>${pay.memberName }</td>
-						<td>${pay.productPrice }</td>
-						<td>${pay.pointUse }</td>
-						<td>${pay.couponUse }</td>
-						<td>${pay.payPrice }</td>
-					</tr>
-				</c:forEach>			
+				<c:choose>
+					<c:when test="${type eq 'hostel' }">
+						<c:forEach items="${list }" var="pay">
+							<tr>
+								<td>${type }</td>
+								<td><a href="#">${pay.payDate }</a></td>
+								<td>
+									<a href="#">${pay.productNo }</a><br>
+									<a href="#">${pay.payNo }</a>							
+								</td>
+								<td>${pay.productName }</td>
+								<td>${pay.memberName }</td>
+								<td>${pay.productPrice }</td>
+								<td>${pay.pointUse }</td>
+								<td>${pay.couponUse }</td>
+								<td>${pay.payPrice }</td>
+							</tr>
+						</c:forEach>			
+					</c:when>
+					<c:when test="${type eq 'ticket' }">
+						<c:forEach items="${list }" var="pay">
+							<tr>
+								<td>${type }</td>
+								<td><a href="#">${pay.payDate }</a></td>
+								<td>
+									<a href="#">${pay.productNo }</a><br>
+									<a href="#">${pay.payNo }</a>							
+								</td>
+								<td>${pay.productName }</td>
+								<td>${pay.memberName }</td>
+								<td>${pay.productPrice }</td>
+								<td>${pay.pointUse }</td>
+								<td>${pay.couponUse }</td>
+								<td>${pay.payPrice }</td>
+							</tr>
+						</c:forEach>			
+					</c:when>
+					<c:when test="${type eq 'package' }">
+						<c:forEach items="${list }" var="pay">
+							<tr>
+								<td>${type }</td>
+								<td><a href="#">${pay.payDate }</a></td>
+								<td>
+									<a href="#">${pay.productNo }</a><br>
+									<a href="#">${pay.payNo }</a>							
+								</td>
+								<td>${pay.productName }</td>
+								<td>${pay.memberName }</td>
+								<td>${pay.productPrice }</td>
+								<td>${pay.pointUse }</td>
+								<td>${pay.couponUse }</td>
+								<td>${pay.payPrice }</td>
+							</tr>
+						</c:forEach>			
+					</c:when>
+				</c:choose>			
 			</table>
 			</div>
 		</div>
