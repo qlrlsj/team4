@@ -19,7 +19,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
 
+import kr.or.coupon.model.vo.Coupon;
 import kr.or.ticket.model.service.TicketService;
+import kr.or.ticket.model.vo.CouponPoint;
 import kr.or.ticket.model.vo.LocalCategory;
 import kr.or.ticket.model.vo.OptionReserves;
 import kr.or.ticket.model.vo.Ticket;
@@ -172,9 +174,25 @@ public class TicketController {
 		return "ticket/ticketView";
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="/summerUploadTicketImage.kt", produces = "application/text;charset=utf-8")	
+	public String summerUploadTicketImage(MultipartFile file[],HttpServletRequest request) {
+		ArrayList<String> files = upfile(request, file);
+		String filepath = "/resources/upload/ticket/"+files.get(0);
+		System.out.println(filepath);
+		return filepath;
+	}
+
 	@RequestMapping(value="/reserveForm.kt")
 	public String reserveForm(int ticketNo, OptionReserves optionReserves, Model model) {
 		return "ticket/reserveForm";
+	}
+	@ResponseBody
+	@RequestMapping(value="/selectAllCouponPoint.kt",produces="application/json;charset=utf-8")
+	public String selectAllCouponPoint(int memberNo) {
+		Gson gson = new Gson();
+		CouponPoint cp = service.selectAllCouponPoint(memberNo);
+		return gson.toJson(cp);
 	}
 	@RequestMapping(value="/insertTest.kt")
 	public String insertTest() {

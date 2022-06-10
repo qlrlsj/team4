@@ -115,4 +115,10 @@
 		from ticket_file
 		where ticket_No = #{ticketNo}
 	</select>
+	<select id="selectPoint" parameterType="int" resultType="int">
+		select
+			member_point as memberPoint
+		from member
+		where member_No = #{memberNo}
+	</select>
 </mapper>

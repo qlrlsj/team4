@@ -17,7 +17,7 @@
 	.content-box{
 		max-width: 1160px;
 		border: 1px solid #d4d4d4;
-		padding: 20px 20px;
+		padding: 20px 50px;
 	}
 	.content-box>.container{
 		padding: 0;
@@ -34,6 +34,10 @@
 		margin-top: 10px;
 	}
 
+	h4{
+		margin-bottom: 0;
+	}
+	
 </style>
 </head>
 <body>
@@ -49,11 +53,11 @@
 		</div>
 		
 		<div class="div-content" style="max-width: 900px;">
-			<h2 style="font-weight: 600;">티켓 상품 등록</h2>
+			<h2 style="font-weight: 600; margin: 30px 0;">티켓 상품 등록</h2>
 			<form class="row g-3" action="/insertTicket.kt" method="post" enctype="multipart/form-data">
 				<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo}">
+				<h4 style="margin-bottom:0px;">1. 카테고리</h4>
 				<div class="content-box">
-					<h4>1. 카테고리</h4>
 					<div class="col-md-4" style="margin: 0;">
 						<select id="category1" class="form-select">
 							<option value="0">1차 카테고리 선택</option>
@@ -73,7 +77,7 @@
 					<!-- 			<pre class="chk" id="categoryChk2" style="margin-top:0;">   </pre> -->
 				</div>
 	
-				<h4>2. 주소 입력</h4>
+				<h4 style="margin-bottom:0px;">2. 주소 입력</h4>
 				<div class="content-box">
 					<div class="col-md-4">
 						<select id="local1" class="form-select">
@@ -96,7 +100,7 @@
 					<pre class="chk" id="localChk2" style="margin-top:0;">   </pre>
 				</div>
 	
-				<h4>3. 상품 정보 입력</h4>
+				<h4 style="margin-bottom:0px;">3. 상품 정보 입력</h4>
 				<div class="content-box">
 					<label for="ticket-title">상품 제목</label>
 					<textarea class="form-control" type="text" name="ticketTitle"  placeholder="제목을 입력해 주세요. (50자 이내)" maxlength="50" ></textarea>
@@ -134,8 +138,7 @@
 					</div>
 				</div>
 	
-				<h4>4. 옵션 입력</h4>
-				
+				<h4 style="margin-bottom:0px;">4. 옵션 입력</h4>
 				<div class="content-box" id="opt">
 					<div class="optBox">
 						<label for="optTitle">옵션 제목</label>
@@ -155,7 +158,7 @@
 				</div>
 				<button type="button" id="optAdd" onclick="add_optbox()">추가</button>
 	
-				<h4>소요시간 입력</h4>
+				<h4 style="margin-bottom:0px;">소요시간 입력</h4>
 				<div class="content-box">
 					<div class="col-md-4">
 						<select id="hour" class="form-select">

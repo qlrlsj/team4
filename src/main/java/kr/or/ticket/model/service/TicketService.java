@@ -5,7 +5,10 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kr.or.coupon.model.dao.CouponDao;
+import kr.or.coupon.model.vo.Coupon;
 import kr.or.ticket.model.dao.TicketDao;
+import kr.or.ticket.model.vo.CouponPoint;
 import kr.or.ticket.model.vo.LocalCategory;
 import kr.or.ticket.model.vo.Ticket;
 import kr.or.ticket.model.vo.TicketCategory;
@@ -17,6 +20,8 @@ import kr.or.ticket.model.vo.TicketOptions;
 public class TicketService {
 	@Autowired
 	private TicketDao dao;
+	@Autowired
+	private CouponDao couponDao;
 
 	public ArrayList<TicketCategory> selectTicketCategory() {
 		return dao.selectTicketCategory();
@@ -83,6 +88,15 @@ public class TicketService {
 
 	public TicketFile selectTicketFile(int ticketNo) {
 		return dao.selectTicketFile(ticketNo);
+	}
+
+	public CouponPoint selectAllCouponPoint(int memberNo) {
+		ArrayList<Coupon> couponList = couponDao.selectAllCoupon(memberNo);
+		int point = dao.selectPoint(memberNo);
+		CouponPoint cp = new CouponPoint();
+		cp.setCouponList(couponList);
+		cp.setPoint(point);
+		return cp;
 	}
 	
 }
