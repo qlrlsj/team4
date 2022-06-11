@@ -86,4 +86,8 @@ public class SellerDao {
 		}
 		return -1;
 	}
+	public int insertAllReserve() {
+		int result = sqlSession.insert("seller.insertAllReserve");
+		return result;
+	}
 }
