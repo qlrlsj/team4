@@ -15,4 +15,9 @@ public class PayService {
 		// TODO Auto-generated method stub
 		return dao.insertPayment(pay);
 	}
+
+	public int selectPayNo() {
+		// TODO Auto-generated method stub
+		return dao.selectPayNo();
+	}
 }

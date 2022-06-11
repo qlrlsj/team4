@@ -67,6 +67,9 @@
 		delete member where member_no=#{memberNo}
 	</delete>
 	
+	<update id="updateMemberPoint" parameterType="Map">
+		update member set member_point = member_point + #{updatePoint} where member_no=#{memberNo}
+	</update>
 	
 <!-- 	<update id="checkedChangeLevel" parameterType="map" resultType="m"> -->
 <!-- 		update member set member_grade= -->

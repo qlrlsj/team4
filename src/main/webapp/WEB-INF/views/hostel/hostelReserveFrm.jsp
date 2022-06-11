@@ -120,7 +120,12 @@
                     <input type="hidden" name="optionNo" id="optionNo" value="${optionNo}">
                     <input type="hidden" name="hostelIndate" id="hostelIndate" value="${hostelIndate}">
                     <input type="hidden" name="hostelOutdate" id="hostelOutdate" value="${hostelOutdate}">
-                
+                    <div class="form-check"> <!--예약자정보 복사해주기 -->
+                        <input class="form-check-input" type="checkbox" value="" id="copyReserveInfo">
+                        <label class="form-check-label" for="flexCheckDefault">
+                         예약자와 같음
+                        </label>
+                      </div>
                 </div>
 			</c:otherwise>
 		</c:choose>

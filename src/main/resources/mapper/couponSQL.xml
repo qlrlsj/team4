@@ -14,4 +14,8 @@
 			t1.coupon_range as couponRange
 		from (coupon t1 inner join (select * from couponuse where member_no=#{memberNo} and coupon_state=0)t2 on t1.coupon_no=t2.coupon_no)
 	</select>
+	<update id="updateCouponUse" parameterType="Map">
+		update couponuse 
+		set coupon_state = 1 where member_no = #{userNo} and coupon_no = #{couponNo}
+	</update>
 </mapper>

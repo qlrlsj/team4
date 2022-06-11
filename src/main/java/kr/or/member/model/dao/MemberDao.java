@@ -53,6 +53,11 @@ public class MemberDao {
 		return (ArrayList<Member>)list;
 	}
 
+	public int updateMemberPoint(HashMap<Object, Object> map) {
+		int result = sqlSession.update("member.updateMemberPoint",map); 
+		return result;
+	}
+
 
 
 //	public Member selectOneMember1(Member m) {
