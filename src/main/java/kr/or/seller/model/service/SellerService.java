@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import kr.or.member.model.vo.Member;
 import kr.or.seller.model.dao.SellerDao;
 import kr.or.seller.model.vo.Cancel;
+import kr.or.seller.model.vo.ReserveData;
 
 @Service
 public class SellerService {
@@ -28,5 +29,13 @@ public class SellerService {
 
 	public List getCashList(String type, Member m) {
 		return dao.getCashList(type,m);
+	}
+
+	public List getReserveList(String type, int productNo) {
+		return dao.getReserveList(type,productNo);
+	}
+
+	public int reserveCancel(ReserveData rd) {
+		return dao.reserveCancel(rd);
 	}
 }
