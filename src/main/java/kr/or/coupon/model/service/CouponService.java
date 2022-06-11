@@ -2,6 +2,7 @@ package kr.or.coupon.model.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,8 +19,11 @@ public class CouponService {
 		return Dao.selectAllCoupon(memberNo);
 	}
 
-//	public int updateCouponUse(Coupon coupon) {
-////		return Dao.updateCouponUse(coupon);
-//	}
+	public int updateCouponUse(int couponNo, int userNo) {
+		Map map = new HashMap();
+		map.put("couponNo",couponNo);
+		map.put("userNo",userNo);
+		return Dao.updateCouponUse(map);
+	}
 	
 }

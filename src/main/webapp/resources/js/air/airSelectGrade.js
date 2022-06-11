@@ -10,9 +10,9 @@ $(function(){
 
 })
 var airStartGrade=1;
-var airStartPay = 100;
+var airStartPay = 50000;
 var airEndGrade=1;
-var airEndPay = 0;
+var airEndPay = 50000;
 var StartSeatCount=0;
 var EndSeatCount=0;
 $(".Pay").eq(0).text(airStartPay);
@@ -260,7 +260,7 @@ $(".btnIcon").eq(1).click(function(){
 })
 $(".nextMenu2").click(function(){
     if(check1&&check2){
-        if($("input[name=memberName]").val()==''||$("input[name=memberEmail]").val()==''||$("input[name=memberPhone]").val()==''){
+        if($("input[name=bookerName]").val()==''||$("input[name=memberEmail]").val()==''||$("input[name=memberPhone]").val()==''){
             alert("예약정보를 입력해주세요");
         }else if(!$("input[name=memberEmail]").val().includes('@')){
             alert("이메일 형식이 잘못됐어요");
@@ -271,7 +271,7 @@ $(".nextMenu2").click(function(){
             $(".airTableBase3").css("display","block");
             $(".Proceeding").removeClass("Proceeding");
             $(".orderDiv").eq(2).addClass("Proceeding");
-            $(".userName").text($("input[name=memberName]").val());
+            $(".userName").text($("input[name=bookerName]").val());
             $(".userEmail").text($("input[name=memberEmail]").val());
             $(".userPhone").text($("input[name=memberPhone]").val());
             $(".payAmount").text(Number($(".addStartPay").eq(1).text())+Number($(".addEndPay").eq(1).text()));
@@ -282,9 +282,8 @@ $(".nextMenu2").click(function(){
     }
 })
 var couponlist; 
+const memberNo = Number($(".memberNo").text());
 $(".couponSelect").click(function(){
-    const memberNo = Number($(".memberNo").text());
-    console.log(memberNo);
     $.ajax({
         type:"POST",
         url:"/selectAllCoupon.kt",
@@ -303,17 +302,16 @@ $(".couponSelect").click(function(){
             }else{ 
                 couponlist=list;
                 for(let i=0;i<list.length;i++){
-                    const tr = $("<tr>");
-                    console.log(tr);
-                    console.log(list[i].couponName);
-
-                    let td ="<td>"+"<input type='radio' name='index' value='"+i+"'>"+"</td>";
-                    td+='<td>' +list[i].couponName+'</td>';
-                    td+='<td>' +list[i].couponDCPrice+'</td>';
-                    td+='<td>' +list[i].couponDCRate+'</td>';
-                    td+='<td>' +list[i].conponEndDate+'</td>';
-                    tr.append(td);
-                    $(".airTable5>tbody").append(tr);
+                    if(list[i].couponRange==0||list[i].couponRange==1){
+                        const tr = $("<tr>");
+                        let td ="<td>"+"<input type='radio' name='index' value='"+i+"'>"+"</td>";
+                        td+='<td>' +list[i].couponName+'</td>';
+                        td+='<td>' +list[i].couponDCPrice+'</td>';
+                        td+='<td>' +list[i].couponDCRate+'</td>';
+                        td+='<td>' +list[i].conponEndDate+'</td>';
+                        tr.append(td);
+                        $(".airTable5>tbody").append(tr);
+                    }
                 }
             }
         },
@@ -322,16 +320,31 @@ $(".couponSelect").click(function(){
         }
     })
 })
+
+var couponNum = -1;
 $(".selectedCoupon").on("click",function(){
     // 선택한 쿠폰의 사용조건보다 예매가격이 큰경우
     if(Number(couponlist[$("input[name=index]:checked").val()].couponIf)<Number($(".addStartPay").eq(1).text())+Number($(".addEndPay").eq(1).text())){
         //쿠폰적용할인금액에 할인금액 + 예매가격*할인율
         $(".coupon").text(Number(couponlist[$("input[name=index]:checked").val()].couponDCPrice)+Number(couponlist[$("input[name=index]:checked").val()].couponDCRate)/100*(Number($(".addStartPay").eq(1).text())+Number($(".addEndPay").eq(1).text())));
-        $(".paymentAmount").text(Number($(".addStartPay").eq(1).text())+Number($(".addEndPay").eq(1).text())-Number($(".coupon").text()));
+        $(".paymentAmount").text(Number($(".addStartPay").eq(1).text())+Number($(".addEndPay").eq(1).text())-Number($(".coupon").text())-$(".pointSelect").val());
+        couponNum = couponlist[$("input[name=index]:checked").val()].couponNo;
     }
-
 })
-
+$(".pointSelect").change(function(){
+    if($(this).val() > Number($(".memberPoint").text())){
+        alert("보유 포인트보다 많이쓸수 없습니다");
+        $(this).val(0);
+    }else if($(this).val()%1000>0){
+        alert("1000원 단위로 사용가능");
+        $(this).val(0);
+    }else{
+        $(".paymentAmount").text(Number($(".addStartPay").eq(1).text())+Number($(".addEndPay").eq(1).text())-Number($(".coupon").text())-$(".pointSelect").val());
+    }
+})
+var payCheck1 = false;
+var payCheck2 = false;
+var payCheck3 = false;
 $(".nextMenu3").on("click",function(){
     //거래 고유 ID를 생성하기위해 현재 날짜를 이용해서 처리
     const d = new Date();
@@ -340,25 +353,103 @@ $(".nextMenu3").on("click",function(){
     IMP.init("imp43584751");//결재API사용을 위한 식별코드입력
     IMP.request_pay({
         merchant_uid : $(".airST").text()+"_"+date,//거래아이디
-        name:"KTRIP_PAYMENT",				//결재이름
-        amount:Number($(".paymentAmount").text()),				//결재금액
-        buyer_email:$(".userEmail").text(),	//구매자이메일
+        name:"KTRIP_PAYMENT",				            //결재이름
+        amount:Number($(".paymentAmount").text()),		//결재금액
+        buyer_email:$(".userEmail").text(),	            //구매자이메일
         buyer_name:$(".userName").text(),				//구매자이름
-        buyer_tel:$(".userPhone").text()		//구매자전번
+        buyer_tel:$(".userPhone").text()		        //구매자전번
     }),function(rsp){
         if(rsp.success){
-            $.ajax({
-                type:"POST",
-            })
-
-            console.log("결재완료");
-            console.log("고유ID:"+rsp.imp);
-            console.log("상점거래ID"+rsp.merchant_uid);
-            console.log("결재금액"+rsp.paid_amount);
-            console.log("카드승인번호"+rsp.apply_num);
-            
+            $(".btn-close").trigger("click");
         }else{
             alert("에러내용:"+rsp.err_msg);
         }
+    }
+})
+let paymentNo=0;
+$(".payCompleteBtn").click(function(){
+    $.ajax({
+        type:"POST",
+        url:"/insertPayment.kt",
+        data:{
+            payPrice:Number($(".paymentAmount").text()),
+            payCoupon:Number($(".coupon").text()),
+            pointUse:Number($(".pointSelect").val()),
+            pointAdd:Math.round(Number($(".paymentAmount").text())*(3-Number($(".memberLevel").text())))*0.01,
+            payCouponCode:couponNum
+        },
+        success: function(data){
+            if(data==0){
+                alert("결제내역등록 중 에러발생");
+            }else{
+                payCheck1=true;
+                paymentNo=data;
+            }
+        },
+        error : function(){
+            alert("결제내역등록 진입 실패");
+        }
+    });
+
+    if($(".pointSelect").val()!=0){
+        $.ajax({
+            type:"POST",
+            url:"/updateMemberPoint.kt",
+            data:{
+                updatePoint:Math.round(Number($(".paymentAmount").text())*(3-Number($(".memberLevel").text())))*0.01,
+                memberNo:memberNo
+            },
+            success: function(data){
+                if(data==0){
+                    alert("포인트 업데이트 중 에러발생")
+                }else{
+                    payCheck2=true;
+                }
+            },
+            error : function(){
+                alert("포인트 업데이트 진입 실패");
+            }
+        });
+    }else{
+        payCheck2=true;
+    }
+    if(Number($(".coupon").text())!=0){
+        $.ajax({
+            type:"POST",
+            url:"/updateCouponUse.kt",
+            data:{
+                couponNo:couponlist[$("input[name=index]:checked").val()].couponNo,
+                userNo:memberNo
+            },
+            success: function(data){
+                if(data==0){
+                    alert("쿠폰 업데이트 중 에러발생")
+                }else{
+                    payCheck3=true;
+                }
+            },
+            error : function(){
+                alert("쿠폰 업데이트 진입 실패");
+            }
+        });
+    }else{
+        payCheck3=true;
+    }
+
+    if(payCheck1&&payCheck2&&payCheck3){
+        $("input[name=payNo").val(paymentNo);
+        $("input[name=airName").val(paymentNo);
+        $("input[name=memberNo").val(paymentNo);
+        $("input[name=airLevel").val(paymentNo);
+        $("input[name=orderDate").val(paymentNo);
+        $("input[name=airStart").val(paymentNo);
+        $("input[name=airEnd").val(paymentNo);
+        $("input[name=airPay").val(paymentNo);
+        $("input[name=memberName").val(paymentNo);
+        $("input[name=phone").val(paymentNo);
+        
+    }else{
+        alert("실행중 에러발생");
+        // location.href="selectAllAir.kt";
     }
 })

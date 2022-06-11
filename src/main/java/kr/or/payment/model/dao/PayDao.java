@@ -15,4 +15,9 @@ public class PayDao {
 		int result = sqlSession.insert("payment.insertMember",pay);
 		return result;
 	}
+
+	public int selectPayNo() {
+		int payNo = sqlSession.selectOne("payment.selectMaxPayNo");
+		return payNo;
+	}
 }

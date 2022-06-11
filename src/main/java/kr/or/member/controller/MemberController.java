@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.google.gson.Gson;
+
 import kr.or.member.model.service.MemberService;
 import kr.or.member.model.vo.Member;
 import kr.or.member.model.vo.MemberPageData;
@@ -115,6 +117,12 @@ public class MemberController {
 		ArrayList<Member> list = service.checkedChangeLevel(memberNo,memberGrade);
 		model.addAttribute("list",list);
 		return "redirect:/";
+	}
+	@ResponseBody
+	@RequestMapping(value="updateMemberPoint.kt", produces = "application/json;charset=utf-8")
+	public String updateMemberPoint(int memberNo, int updatePoint) {
+		int result = service.updateMemberPoint(memberNo, updatePoint);
+		return String.valueOf(result);
 	}
 }
 

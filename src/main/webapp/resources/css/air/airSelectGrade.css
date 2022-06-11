@@ -374,4 +374,10 @@
     float: right;
     margin-top: 30px;
     width: 25%;
+    margin-right: 50px;
+}
+.payCompleteBtn{
+    float: right;
+    margin-top: 30px;
+    width: 25%;
 }
