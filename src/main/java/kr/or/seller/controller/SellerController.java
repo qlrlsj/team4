@@ -9,13 +9,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import kr.or.hostel.model.vo.Hostel;
 import kr.or.member.model.vo.Member;
-import kr.or.pck.model.vo.Pck;
+
 import kr.or.seller.model.service.SellerService;
 import kr.or.seller.model.vo.Cancel;
-import kr.or.seller.model.vo.Payment;
-import kr.or.ticket.model.vo.Ticket;
+import kr.or.seller.model.vo.ReserveData;
 
 @Controller
 public class SellerController {
@@ -32,13 +30,6 @@ public class SellerController {
 	}
 	@RequestMapping(value="/sellerProduct.kt")
 	public String sellerProduct(String type, Member m, Model model) {
-//		if(type.equals("hostel")) {
-//			ArrayList<Hostel> list = service.getSellerHostelList(type, m);
-//		}else if(type.equals("ticket")) {
-//			ArrayList<Ticket> list = service.getSellerTicketList(type, m);
-//		}else if(type.equals("package")) {
-//			ArrayList<Pck> list = service.getSellerPackageList(type, m);
-//		}
 		List list = service.getProductList(type,m); 
 		model.addAttribute("type",type);
 		model.addAttribute("list", list);
@@ -48,12 +39,7 @@ public class SellerController {
 	public String sellerCash() {
 		return "seller/sellerCashPage";
 	}
-	
-	@RequestMapping(value="/sellerReivewManage.kt")
-	public String sellerReviewManage() {
-		return "seller/sellerReviewPage";
-	}
-	
+		
 	@RequestMapping(value="/sellerReserveManage.kt")
 	public String sellerReserveManage() {
 		return "seller/sellerReservePage";
@@ -64,10 +50,6 @@ public class SellerController {
 		return "seller/sellerAccountPage";
 	}
 	
-	@RequestMapping(value="/sellerQnA.kt")
-	public String sellerQnA() {
-		return "seller/sellerQnAPage";
-	}
 	@ResponseBody
 	@RequestMapping(value="/sellerCancel.kt")
 	public String sellerCancel(int memberNo) {
@@ -96,6 +78,25 @@ public class SellerController {
 		model.addAttribute("type",type);
 		model.addAttribute("list", list);
 		return "seller/sellerCashInfo";
+	}
+	
+	@RequestMapping(value="/sellerReserve.kt")
+	public String sellerReserve(int productNo, String type , Model model) {
+		List list = service.getReserveList(type,productNo); 
+		model.addAttribute("type",type);
+		model.addAttribute("list", list);
+		return "seller/sellerReserve";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/reserveCancel.kt")
+	public String reserveCancel(ReserveData rd) {
+		int result = service.reserveCancel(rd);
+		if(result>0) {
+			return "success";			
+		}else {
+			return "fail";
+		}
 	}
 	
 }

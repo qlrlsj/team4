@@ -39,7 +39,11 @@
 </style>
 <script>
 $(function(){
-	
+	var loginCheck = ${login};
+	console.log(loginCheck);
+	if(loginCheck == true){
+		connenctAlarm();
+	}
 });
 //웹소켓 객체용 변수
 let alarmWs;

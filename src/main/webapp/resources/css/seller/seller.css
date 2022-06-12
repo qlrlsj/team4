@@ -3,6 +3,7 @@
 }
 
 .sellerWrap{
+/* 	text-align: center; */
 	display : flex;
 	justify-content: space-evenly;
 }

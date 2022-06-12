@@ -39,37 +39,142 @@
 		where member_no = #{memberNo}
 	</select>
 	<select id="selectCashInfoH" parameterType="m" resultType="spay" >
-	select 
-		pay_date as payDate,
-		hostel_code as productNo,
-		pay_no as payNo,
-		hostel_name as productName,
-		member_id as memberName,
-		pay_price as payPrice,
-		point_use as pointUse,
-		pay_coupon as couponUse,
-		point_add as pointAdd,
-		pay_couponcode as payCoupon
-	from hostel h
-	where member_no = #{memberNo}
+		select 
+			p.pay_date as payDate,
+			h.hostel_code as productNo,
+			p.pay_no as payNo,
+			h.hostel_name as productName,
+			m.member_id as memberName,
+			p.pay_price as payPrice,
+			p.point_use as pointUse,
+			p.pay_coupon as couponUse,
+			p.point_add as pointAdd,
+			p.pay_couponcode as payCouponCode,
+			ho.hostel_price as productPrice
+		from payment p
+		join hostel_reserve hr on (p.pay_no = hr.pay_no)
+		join hostel_option ho on (hr.option_no = ho.option_no)
+		join hostel h on (ho.hostel_code = h.hostel_code)
+		join member m on (hr.member_no = m.member_no)
+		where h.member_no = #{memberNo}
 	</select>
 	<select id="selectCashInfoT" parameterType="m" resultType="spay">
-	select 
+		select 
             pay_date as payDate,
 			t.ticket_no as productNo,
 			p.pay_no as payNo,
 			t.ticket_title as productName,
-			member_id as memberName,
+			m.member_id as memberName,
 			pay_price as payPrice,
 			point_use as pointUse,
 			pay_coupon as couponUse,
 			point_add as pointAdd,
-			pay_couponcode as payCoupon
+			pay_couponcode as payCouponCode
 	    from payment p
         join ticket_reserve tr on (p.pay_no = tr.pay_no)
-        join ticket t on (tr. = c2.category_id)
-        join local_category l1 on (t.local_id = l1.local_id)
-        join local_category l2 on (l1.parent_local_id = l2.local_id)
-        where ticket_no=#{ticketNo}
+        join ticket t on (tr.ticket_no = t.ticket_no)
+        join member m on (tr.member_no = m.member_no)
+        where t.member_no=#{memberNo}
 	</select>
+		<select id="selectCashInfoP" parameterType="m" resultType="spay">
+		select 
+            pay_date as payDate,
+			pc.package_no as productNo,
+			p.pay_no as payNo,
+			pc.package_title as productName,
+			m.member_id as memberName,
+			pay_price as payPrice,
+			point_use as pointUse,
+			pay_coupon as couponUse,
+			point_add as pointAdd,
+			pay_couponcode as payCouponCode,
+			pc.package_price as productPrice
+	    from payment p
+	    join package_reserve pr on (p.pay_no = pr.pay_no)
+	    join member m on(pr.member_no = m.member_no)
+        join package pc on (pr.package_no = pc.package_no)
+        where pc.member_id=#{memberId}
+	</select>
+	<select id="selectReserveH" parameterType="int" resultType="rd">
+		select
+			ar.type as type,
+			ar.reserve_date as reserveDate,
+			ho.hostel_code as productNo,
+			hr.reservation_no as reserveNo,
+			h.hostel_name as reserveName,
+			hr.reserve_name as memberId,
+			hr.reserve_phone as memberPhone,
+			h.member_no as sellerNo,
+			ho.option_no as optionNo,
+			ho.room_option as option1,
+			hr.reserve_num as option2,
+			hr.hostel_indate as option3,
+			hr.hostel_outdate as option4,
+			ho.hostel_price as reservePrice,
+			pay.pay_no as payNo
+		from hostel_option ho
+		join hostel_reserve hr on(ho.option_no = hr.option_no)
+		join all_reserve ar on (hr.reservation_no = ar.reserve_no)
+		join hostel h on(ho.hostel_code = h.hostel_code)
+		join payment pay on(hr.pay_no = pay.pay_no)
+		where hr.hostel_code = #{productNo}
+	</select>
+	<select id="selectReserveT" parameterType="int" resultType="rd">
+		select
+			ar.type as type,
+			ar.reserve_date as reserveDate,
+			t.ticket_no as productNo,
+			tr.reserve_no as reserveNo,
+			t.ticket_title  as reserveName,
+			tr.reserve_name as memberId,
+			tr.reserve_phone as memberPhone,
+			t.member_no as sellerNo,
+			or1.opt_no as optionNo,
+			or1.opt_quantity as option1,
+			to1.opt_price as reservePrice,
+			pay.pay_no as payNo
+		from ticket t
+		join ticket_reserve tr on (t.ticket_no = tr.ticket_no)
+		join option_reserve or1 on (tr.reserve_no = or1.reserve_no)
+		join ticket_option to1 on (or1.opt_no = to1.opt_no)
+		join all_reserve ar on (tr.reserve_no = ar.reserve_no)
+		join payment pay on (tr.pay_no = pay.pay_no)
+		where tr.ticket_no = #{productNo}
+	</select>
+	<select id="selectReserveP" parameterType="int" resultType="rd">
+		select
+			ar.type as type,
+			ar.reserve_date as reserveDate,
+			p.package_no as productNo,
+			pr.reserve_no as reserveNo,
+			p.package_title as reserveName,
+			m.member_id as memberId,
+			m.member_phone as memberPhone,
+			p.member_id as option1,
+			pr.package_prsnl as option2,
+			p.package_price as reservePrice,
+			pay.pay_no as payNo
+		from package p
+		join package_reserve pr on(p.package_no = pr.package_no)
+		join member m on (pr.member_no = m.member_no)
+		join all_reserve ar on (pr.reserve_no = ar.reserve_no)
+		join payment pay on(pr.pay_no = pay.pay_no)
+		where pr.package_no = #{productNo}
+	</select>
+	<delete id="reserveCancel" parameterType="rd">
+		<choose>
+			<when test="type.equals('hostel')">
+				delete from hostel_reserve where reservation_no = #{reserveNo}			
+			</when>
+			<when test="type.equals('ticket')">
+				delete from ticket_reserve where reserve_no = #{reserveNo}
+			</when>
+			<when test="type.equals('package')">
+				delete from package_reserve where reserve_no = #{reserveNo}
+			</when>
+		</choose>
+	</delete>
+	<update id="deletePayment" parameterType="rd">
+		update payment set pay_state = 1 where pay_no = #{payNo}
+	</update>
 </mapper>

@@ -13,9 +13,10 @@ public class Payment {
 	private int payNo;
 	private String productName;
 	private String memberName;
+	private int productPrice;
 	private int payPrice;
 	private int pointUse;
 	private int couponUse;
 	private int pointAdd;
-	private int payCoupon;
+	private int payCouponCode;
 }
