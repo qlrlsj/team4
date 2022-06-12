@@ -28,7 +28,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import kr.or.air.model.service.AirService;
-import kr.or.air.model.vo.Air;
+import kr.or.air.model.vo.AirPayment;
 import kr.or.air.model.vo.AirReserve;
 import kr.or.air.model.vo.AirSchedule;
 import kr.or.air.model.vo.AirSearch;
@@ -43,16 +43,16 @@ public class AirController {
 		return "air/airMain";
 	}
 	
-	@RequestMapping(value="/selectAllAir.kt")
-	public String selectAllAir(HttpSession session, Model model) {
-		ArrayList<Air> airlist = service.selectAllAir();
-		model.addAttribute("air",airlist);
+	@RequestMapping(value="/payComplete.kt")
+	public String payComplete(HttpSession session, AirReserve airReserve, AirPayment airPayment) {
+		
 		return "air/airMain";
 	}
 	
+	
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value="/airSearch.kt")
-	public String selectAllMemberId(HttpSession session, AirSearch air, Model model) {
+	public String selectAllAirAPI(HttpSession session, AirSearch air, Model model) {
 		String url = "https://api.odcloud.kr/api/15043890/v1/uddi:2ed58abb-3eb5-4dfc-a32e-a69030b1cdc4?serviceKey=sooYLNGU3ovHONF7COC4tvl8FS0QrwFu0475e%2FXjisbYjnPIBr2Y8E80D8wDI%2F0JC%2BI4IjfdTjT59jfjqMwRpA%3D%3D";
 		JsonParser parser = new JsonParser();
 		String result;

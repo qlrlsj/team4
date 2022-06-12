@@ -6,7 +6,8 @@
 	</settings>
 	<typeAliases>
 		<typeAlias type="kr.or.member.model.vo.Member" alias="m"/>
-		<typeAlias type="kr.or.air.model.vo.Air" alias="air"/>
+		<typeAlias type="kr.or.air.model.vo.AirReserveComplete" alias="ac"/>
+		<typeAlias type="kr.or.air.model.vo.AirPayment" alias="ap"/>
 		<typeAlias type="kr.or.hostel.model.vo.Hostel" alias="h"/>
 		<typeAlias type="kr.or.hostel.model.vo.HostelFile" alias="hf"/>
 		<typeAlias type="kr.or.hostel.model.vo.HostelOption" alias="ho"/>

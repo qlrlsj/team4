@@ -437,16 +437,10 @@ $(".payCompleteBtn").click(function(){
     }
 
     if(payCheck1&&payCheck2&&payCheck3){
-        $("input[name=payNo").val(paymentNo);
-        $("input[name=airName").val(paymentNo);
-        $("input[name=memberNo").val(paymentNo);
-        $("input[name=airLevel").val(paymentNo);
-        $("input[name=orderDate").val(paymentNo);
-        $("input[name=airStart").val(paymentNo);
-        $("input[name=airEnd").val(paymentNo);
-        $("input[name=airPay").val(paymentNo);
-        $("input[name=memberName").val(paymentNo);
-        $("input[name=phone").val(paymentNo);
+        $("input[name=payNo]").val(paymentNo);
+        $("input[name=memberName]").val($("input[name=bookerName]").val());
+        $("input[name=airPay]").val(Number($(".paymentAmount").text()));
+        $("input[name=phone]").val($("input[name=memberPhone]").val());
         
     }else{
         alert("실행중 에러발생");
