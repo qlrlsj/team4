@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import kr.or.pck.model.dao.PckDao;
 import kr.or.pck.model.vo.FileVO;
 import kr.or.pck.model.vo.Pck;
+import kr.or.pck.model.vo.PckReserve;
 
 @Service
 public class PckService {
@@ -44,6 +45,10 @@ public class PckService {
 
 	public ArrayList<FileVO> selectFileList(int packageNo) {
 		return dao.selectFileList(packageNo);
+	}
+
+	public int insertPackageReserve(PckReserve pckReserve) {
+		return dao.insertPackageReserve(pckReserve);
 	}
 	
 	
