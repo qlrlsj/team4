@@ -132,14 +132,26 @@
     #payBtn{
         display: none;
     }
-  
+    .pointBox{
+        text-align: right;
+    }
+    .payinfo{
+        text-align: right;
+    }
+    .payBox{
+        background-color: rgb(204, 204, 204);
+    }
+    .page2{
+        display: none;
+    }
+
 </style>
 <body>
     <jsp:include page="/WEB-INF/views/common/header.jsp" />
     <div class="div-content page1" >
         <div class="div-content-left" style="width:700px; float:left;">
             <h2 style="font-weight: 900;">[${ticket.getParentLocalName()}/${ticket.getLocalName()}] ${ticket.getTicketTitle()}</h2>
-            <input type="hidden" name="ticketTitle" value="${ticket.getTicketTitle()}">
+            <input type="hidden" value="${ticket.getTicketTitle()}">
             <c:choose>
                 <c:when test="${ticket.getTicketScore() eq 0}">
                     <img class="star" src="/resources/img/ticket/별0.png">
@@ -170,7 +182,7 @@
                         <td><img src="/resources/upload/ticket/${file.getTicketFilepath2()}" style="width: 230px ;height: 170px;"></td>
                         <td><img src="/resources/upload/ticket/${file.getTicketFilepath3()}" style="width: 230px ;height: 170px;"></td>
                         <td><img src="/resources/upload/ticket/${file.getTicketFilepath4()}" style="width: 230px ;height: 170px;"></td>
-                        <input type="hidden" name="ticketFilepath1" value="${file.getTicketFilepath1()}">
+                        <input type="hidden" value="${file.getTicketFilepath1()}">
                     </tr>
                 </table>
             
@@ -187,18 +199,28 @@
                     <br>
                     <span class="material-icons" >event_available</span>
                     <span>유효기간 (~${ticket.getExpireDate()}) 내 사용 가능</span>
-                    <input type="hidden" name="expireDate" value="${ticket.getExpireDate()}">
+                    <input type="hidden" value="${ticket.getExpireDate()}">
                 </c:if>
                 <p style="margin-top: 20px;">※ ${ticket.getImportantContent()}</p>
             </div>
             <h3 style="margin-bottom: 10px;">티켓 선택</h3>
             <div class="content-box container" style="padding: 20px 30px; background-color: #f3f3f3; margin-bottom: 10px;">
-                <form action="/reserveForm.kt?ticketNo=${ticket.getTicketNo()}">
+                <form action="/reserveTicket.kt" method="post">
+                    <input type="hidden" name="ticketNo" value="${ticket.getTicketNo()}">
+                    <c:choose>
+                        <c:when test="${!empty m}">
+                            <input type="hidden" name="memberNo" value="${sessionScope.m.memberNo}">
+                        </c:when>
+                        <c:otherwise>
+                            <input type="hidden" name="memberNo" value="0">
+                        </c:otherwise>
+                    </c:choose>
+                    
                 <c:forEach items="${optionList}" var="opt"  varStatus="status">
                     <div class="optBox row">
                         <input type="hidden" id="no" value="${status.index}">
                         <div class="optBox-1 col" style="flex-grow: 2;">
-                            <input type="hidden" namte="optTitle" id="optTitle" value="${opt.getOptTitle()}" readonly>
+                            <input type="hidden" id="optTitle" value="${opt.getOptTitle()}" readonly>
                             <input type="hidden" id="optContent" value="${opt.getOptContent()}" readonly>
                             <p style="font-weight: bold;"><c:out value="${opt.getOptTitle()}"/></p>
                             <p><c:out value="${opt.getOptContent()}"/></p>
@@ -245,13 +267,13 @@
                 <div class="totalPriceBox">
                     <span style="margin-right: 20px;">총 여행 금액</span>
                     <span class="totalPrice">000,000원</span>
-                    <input type="hidden" name="totalPrice">
+                    <input type="hidden" id="totalPrice">
                 </div>
             </div>
             
             <input type="button" class="btn btn-primary" id="payBtn" value="결제하기">
 
-        </form>
+        
             <h3 style="margin-top: 30px;">상품 정보</h3>
             <div class="content-box">
                 <c:out value="${ticket.ticketContent}" escapeXml="false"/>
@@ -313,14 +335,14 @@
             <div class="content-box">
                 <table calss="reserveInfo">
                     <tr>
-                        <th>예약자 이름 : </th>
+                        <th >예약자 이름 : </th>
                         <td>
                             <c:choose>
                                 <c:when test="${!empty m}">
-                                    <input type="text" name="reserveName" value="${sessionScope.m.memberName}">
+                                    <input class="form-control" type="text" name="reserveName" value="${sessionScope.m.memberName}">
                                 </c:when>
                                 <c:otherwise>
-                                    <input type="text" name="reserveName">
+                                    <input class="form-control"  type="text" name="reserveName" required>
                                 </c:otherwise>
                             </c:choose>
                         </td>
@@ -330,10 +352,10 @@
                         <td>
                             <c:choose>
                                 <c:when test="${!empty m}">
-                                    <input type="text" name="reserveEmail" value="${sessionScope.m.memberEmail}">
+                                    <input class="form-control"  type="text" name="reserveEmail" value="${sessionScope.m.memberEmail}">
                                 </c:when>
                                 <c:otherwise>
-                                    <input type="text" name="reserveEmail">
+                                    <input class="form-control"  type="text" name="reserveEmail" required>
                                 </c:otherwise>
                             </c:choose>
                         </td>
@@ -343,10 +365,10 @@
                         <td>
                             <c:choose>
                                 <c:when test="${!empty m}">
-                                    <input type="text" name="reservePhone" value="${sessionScope.m.memberPhone}">
+                                    <input class="form-control"  type="text" name="reservePhone" value="${sessionScope.m.memberPhone}">
                                 </c:when>
                                 <c:otherwise>
-                                    <input type="text" name="reservePhone">
+                                    <input class="form-control"  type="text" name="reservePhone" required>
                                 </c:otherwise>
                             </c:choose>
                         </td>
@@ -365,8 +387,13 @@
                 </div>
 
                 <h2>포인트</h2>
-                <input type="number" id="pointUse" name="pointUse" value="0" style="text-align: right;">
-                <span id="possiblePoint"></span><span>point 사용가능</span>
+                <input type="number" id="pointUse" value="0" class="form-control" style="text-align: right;">
+                <div class="pointBox">
+                    <span id="possiblePoint"></span><span>point 사용가능</span>
+                </div>
+            </c:if>
+            <c:if test="${empty m}">
+                <div class="memberNo" style="display: none;"></div>
             </c:if>
         </div>
         <div class="content-right">
@@ -376,19 +403,29 @@
                 <table class="payInfoBox">
                     <tr>
                         <th>주문금액</th>
-                        <td id="payInfoBox1"></td>
+                        <td></td>
+                        <td class="payinfo" id="payInfoBox1"></td>
                     </tr>
                         <th>쿠폰할인</th>
-                        <td id="payInfoBox2">0</td>
+                        <td>-</td>
+                        <td class="payinfo" id="payInfoBox2">0</td>
+                        <input type="hidden" name="payCoupon">
                     </tr>
                         <th>사용 포인트</th>
-                        <td id="payInfoBox3">0</td>
+                        <td>-</td>
+                        <td class="payinfo" id="payInfoBox3">0</td>
+                        <input type="hidden" name="pointUse">
                     </tr>
                         <th>총 결제금액</th>
-                        <td id="payInfoBox4"></td>
+                        <td></td>
+                        <td class="payinfo" id="payInfoBox4"></td>
+                        <input type="hidden" name="payPrice">
                     </tr>
+                    <input type="hidden" name="pointAdd" id="pointAdd">
                 </table>
+                <button type="button" class="btn btn-primary" id="payBtn2">결제하기</button>
             </div>
+        </form>
         </div>
     </div>
 

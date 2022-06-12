@@ -1,9 +1,12 @@
 package kr.or.ticket.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 import kr.or.coupon.model.dao.CouponDao;
 import kr.or.coupon.model.vo.Coupon;
@@ -90,8 +93,11 @@ public class TicketService {
 		return dao.selectTicketFile(ticketNo);
 	}
 
-	public CouponPoint selectAllCouponPoint(int memberNo) {
-		ArrayList<Coupon> couponList = couponDao.selectAllCoupon(memberNo);
+	public CouponPoint selectAllCouponPoint(int memberNo, int totalPrice) {
+		Map map = new HashMap();
+		map.put("memberNo",memberNo);
+		map.put("totalPrice",totalPrice);
+		ArrayList<Coupon> couponList = couponDao.selectAllCouponTicket(map);
 		int point = dao.selectPoint(memberNo);
 		CouponPoint cp = new CouponPoint();
 		cp.setCouponList(couponList);

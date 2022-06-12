@@ -1,6 +1,7 @@
 package kr.or.coupon.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,6 +24,11 @@ public class CouponDao {
 	public int updateCouponUse(Map map) {
 		int result = sqlSession.update("coupon.updateCouponUse",map);
 		return result;
+	}
+
+	public ArrayList<Coupon> selectAllCouponTicket(Map map) {
+		List list = sqlSession.selectList("coupon.selectAllCouponTicket",map);
+		return (ArrayList<Coupon>)list;
 	}
 	
 }

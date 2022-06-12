@@ -10,6 +10,9 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <link rel="stylesheet" href="/resources/css/seller/seller.css">
 <style>
+	.content-box>*{
+		font-size: 18px;
+	}
 	.chk{
 		font-size: 15px;
 		margin: 0;
@@ -17,7 +20,7 @@
 	.content-box{
 		max-width: 1160px;
 		border: 1px solid #d4d4d4;
-		padding: 20px 50px;
+		padding: 20px;
 	}
 	.content-box>.container{
 		padding: 0;
@@ -37,7 +40,12 @@
 	h4{
 		margin-bottom: 0;
 	}
-	
+	.selectBox{
+		display: flex;
+		justify-content: flex-start;
+	}
+
+
 </style>
 </head>
 <body>
@@ -53,50 +61,71 @@
 		</div>
 		
 		<div class="div-content" style="max-width: 900px;">
-			<h2 style="font-weight: 600; margin: 30px 0;">티켓 상품 등록</h2>
-			<form class="row g-3" action="/insertTicket.kt" method="post" enctype="multipart/form-data">
+			<form class="g-3" action="/insertTicket.kt" method="post" enctype="multipart/form-data">
+			<h2 style="font-weight: 600; margin-top: 40px; margin-bottom: 60px;">티켓 상품 등록</h2>
 				<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo}">
-				<h4 style="margin-bottom:0px;">1. 카테고리</h4>
+				<h4 style="margin-bottom:0px; " >1. 카테고리</h4>
 				<div class="content-box">
-					<div class="col-md-4" style="margin: 0;">
-						<select id="category1" class="form-select">
-							<option value="0">1차 카테고리 선택</option>
-						</select>
-					</div>
-					<div class="col-md-4">
-						<select id="category2" name="categoryId" class="form-select ">
-							<option value="0">2차 카테고리 선택</option>
-						</select>
+					<p>1) 필터 선택 : </p>
+					<div class="selectBox">
+						<div class="col-md-4" style="margin: 0 20px;">
+							<select id="category1" class="form-select" >
+								<option value="0">1차 카테고리 선택</option>
+							</select>
+						</div>
+						<div class="col-md-4" style="margin:0 20px;">
+							<select id="category2" name="categoryId" class="form-select ">
+								<option value="0">2차 카테고리 선택</option>
+							</select>
+						</div>
 					</div>
 					<pre class="chk" id="categoryChk1" style="margin-top:0;">   </pre>
-		
-					<label for="startDate" style="margin-top:0;"></label>
-					<input class="col-md-4 datepicker" type="hidden" id="startDate" name="startDate" placeholder="시작날짜 입력">
-					<label for="expireDate" style="margin-top:0;"></label>
-					<input class="col-md-4 datepicker" type="hidden" id="expireDate" name="expireDate" placeholder="만료날짜 입력">
-					<!-- 			<pre class="chk" id="categoryChk2" style="margin-top:0;">   </pre> -->
+					
+					<p id="dateP" style="padding-left: 10px; color: #4673d9;
+				"></p>
+					<div class="selectBox">
+						<label for="startDate" style="margin-top:0;"></label>
+						<input class=" datepicker form-control" type="hidden" id="startDate" name="startDate" placeholder="시작날짜 입력" style="width: 35%; margin:0 20px;">
+						<label for="expireDate" style="margin-top:0;"></label>
+						<input class=" datepicker form-control" type="hidden" id="expireDate" name="expireDate" placeholder="만료날짜 입력" style="width: 35%;">
+					</div>
 				</div>
 	
 				<h4 style="margin-bottom:0px;">2. 주소 입력</h4>
 				<div class="content-box">
-					<div class="col-md-4">
-						<select id="local1" class="form-select">
-							<option value="0">광역시·도</option>
-						</select>
-					</div>
-					<div class="col-md-4">
-						<select id="local2" class="form-select" name="localId">
-							<option value="0">지역명</option>
-						</select>
+					<p>1) 필터 선택 : </p>
+					<div class="selectBox">
+						<div class="col-md-4" style="margin:0 20px;">
+							<select id="local1" class="form-select">
+								<option value="0">광역시·도</option>
+							</select>
+						</div>
+						<div class="col-md-4" style="margin:0 20px;">
+							<select id="local2" class="form-select" name="localId">
+								<option value="0">지역명</option>
+							</select>
+						</div>
 					</div>
 					<pre class="chk" id="localChk1" style="margin-top: 0px;">   </pre>
-		
-					<input class="form-control" type="text" id="sample6_postcode" placeholder="우편번호" readonly> <input
-						class="btn btn-secondary" type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-					<input class="form-control" type="text" id="sample6_address" placeholder="주소" readonly><br> <input
-						class="form-control" type="text" id="sample6_detailAddress" placeholder="상세주소"> <input
-						class="form-control" type="text" id="sample6_extraAddress" placeholder="참고항목" readonly>
-					<input type="hidden" name="businessAddr">
+					<div class="selectBox">
+						<p>2) 상세 주소 입력 : </p>
+						<input
+							class="btn btn-light btn-sm" type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" style="border: 1px solid #cdcdcd;
+							margin-left: 20px;
+							padding: 0 8px;
+							height: 35px;
+						">
+					</div>
+					<div class="selectBox">
+						<input class="form-control-sm" type="text" id="sample6_postcode" placeholder="우편번호" readonly> 
+						<input class="form-control" type="text" id="sample6_address" placeholder="주소" readonly>
+					</div>
+					<div class="selectBox">
+						<input
+						   class="form-control" type="text" id="sample6_detailAddress" placeholder="상세주소"> <input
+						   class="form-control-sm" type="text" id="sample6_extraAddress" placeholder="참고항목" readonly>
+					   <input type="hidden" name="businessAddr">
+					</div>
 					<pre class="chk" id="localChk2" style="margin-top:0;">   </pre>
 				</div>
 	
@@ -118,7 +147,7 @@
 					<div class="upload-box">
 						<div id="drop-file" class="drag-file">
 							<img src="https://img.icons8.com/pastel-glyph/2x/image-file.png" alt="파일 아이콘" class="image">
-							<p class="message">Drag files to upload</p>
+							<p class="message"></p>
 							<img src="" alt="미리보기 이미지" class="preview">
 						</div>
 					</div>
@@ -158,7 +187,7 @@
 				</div>
 				<button type="button" id="optAdd" onclick="add_optbox()">추가</button>
 	
-				<h4 style="margin-bottom:0px;">소요시간 입력</h4>
+				<h4 style="margin-bottom:0px;">5. 소요시간 입력</h4>
 				<div class="content-box">
 					<div class="col-md-4">
 						<select id="hour" class="form-select">

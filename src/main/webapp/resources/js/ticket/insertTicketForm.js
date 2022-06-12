@@ -47,7 +47,7 @@ $(document).ready(function () {
 
     //카테고리1차-입장권시 유효기간 입력폼 생성
     if (categoryBox1Val == 1) {
-      $("label[for='expireDate']").text("입장권시 유효기간 필수입력 : ");
+      $("#dateP").text(" ※ 입장권시 유효기간 필수입력 ※ ");
       $("#startDate").prop("type", "text");
       $("#expireDate").prop("type", "text");
     } else {
