@@ -28,7 +28,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import kr.or.air.model.service.AirService;
-import kr.or.air.model.vo.Air;
+import kr.or.air.model.vo.AirPayment;
 import kr.or.air.model.vo.AirReserve;
 import kr.or.air.model.vo.AirSchedule;
 import kr.or.air.model.vo.AirSearch;
@@ -43,16 +43,9 @@ public class AirController {
 		return "air/airMain";
 	}
 	
-	@RequestMapping(value="/selectAllAir.kt")
-	public String selectAllAir(HttpSession session, Model model) {
-		ArrayList<Air> airlist = service.selectAllAir();
-		model.addAttribute("air",airlist);
-		return "air/airMain";
-	}
-	
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value="/airSearch.kt")
-	public String selectAllMemberId(HttpSession session, AirSearch air, Model model) {
+	public String selectAllAirAPI(HttpSession session, AirSearch air, Model model) {
 		String url = "https://api.odcloud.kr/api/15043890/v1/uddi:2ed58abb-3eb5-4dfc-a32e-a69030b1cdc4?serviceKey=sooYLNGU3ovHONF7COC4tvl8FS0QrwFu0475e%2FXjisbYjnPIBr2Y8E80D8wDI%2F0JC%2BI4IjfdTjT59jfjqMwRpA%3D%3D";
 		JsonParser parser = new JsonParser();
 		String result;
@@ -191,6 +184,33 @@ public class AirController {
 		String airArrive = oneData.get("도착공항").getAsString();
 		AirSchedule airSchedule;
 		return airSchedule = new AirSchedule(airLine,airNumber,airStartTime,airEndTime,airStart,airArrive,airDate);
+	}
+	@RequestMapping(value="/payComplete.kt")
+	public String selectAllAir(HttpSession session, Model model, AirReserve airReserve, AirPayment airPayment, String addStartSeatNum, String addEndSeatNum) {
+		System.out.println(airReserve);
+		System.out.println(airPayment);
+		
+		
+		String[] StartSeat;
+		String[] EndSeat;
+		if(addStartSeatNum!=null) {
+			StartSeat = addStartSeatNum.split(", ");
+			for(int i=0;i<StartSeat.length;i++) {
+				System.out.println(StartSeat[i]);
+			}
+		}
+		if(addEndSeatNum!=null){
+			EndSeat = addEndSeatNum.split(", ");
+			for(int i=0;i<EndSeat.length;i++) {
+				System.out.println(EndSeat[i]);
+			}
+		}
+		
+		
+		System.out.println(addStartSeatNum);
+		System.out.println(addEndSeatNum);
+		model.addAttribute("airReserve",airReserve);
+		return "air/airSelectGrade";
 	}
 	@RequestMapping(value="/airReserve.kt")
 	public String selectAllAir(HttpSession session, Model model, AirReserve airReserve) {

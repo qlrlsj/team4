@@ -15,4 +15,5 @@ public class Payment {
 	private int pointAdd;
 	private String payDate;
 	private int payCouponCode;
+	private int payState;
 }

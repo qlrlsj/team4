@@ -15,3 +15,14 @@ $(document).ready(function(){
             $("#datepicker1").datepicker( "option", "maxDate", selectedDate );
         });
             });
+            
+            
+$(document).ready(function(){
+    $(".summernote").summernote({
+            height : 300 ,
+            width : 800,
+            lang: 'ko-KR' 
+           
+            });
+
+    });

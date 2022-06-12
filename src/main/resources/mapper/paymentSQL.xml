@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="payment">
 	<insert id="insertMember" parameterType="pay">
- 		insert into payment values(payment_seq.nextval,#{payPrice},#{pointUse},#{payCoupon},#{pointAdd},sysdate,#{payCouponCode})
+ 		insert into payment values(payment_seq.nextval,#{payPrice},#{pointUse},#{payCoupon},#{pointAdd},sysdate,#{payCouponCode},0)
  	</insert>
  	<select id="selectMaxPayNo" resultType="int">
  		select max(pay_no) from payment order by pay_no desc

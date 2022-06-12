@@ -989,11 +989,16 @@
 						<tr>
 							<th>포인트 사용금액</th>
 							<td>
-								<c:if test="${!empty m}">
-									<input type="text" class="pointSelect" style="float: left; margin-right: 50px;" value="0">
-									<div style="float: left; color: rgb(255, 200, 70);" class="memberPoint">${sessionScope.m.memberPoint}</div>
-									<div style="float: left; color: aquamarine;"> (원) 사용가능</div>
-								</c:if>
+								<c:choose>
+									<c:when test="${!empty m}">
+										<input type="text" class="pointSelect" style="float: left; margin-right: 50px;" value="0">
+										<div style="float: left; color: rgb(255, 200, 70);" class="memberPoint">${sessionScope.m.memberPoint}</div>
+										<div style="float: left; color: rgb(255, 200, 70);"> (원) 사용가능</div>
+									</c:when>
+									<c:otherwise>
+										<div class="pointSelect" style="float: left; margin-right: 50px;" value="0">
+									</c:otherwise>
+								</c:choose>
 							</td>
 						</tr>
 						<tr>
@@ -1052,15 +1057,39 @@
 		</div>
 		<form action="/payComplete.kt">
 			<input type="hidden" name="payNo">
-			<input type="hidden" name="airName">
-			<input type="hidden" name="memberNo">
-			<input type="hidden" name="airLevel">
-			<input type="hidden" name="orderDate">
-			<input type="hidden" name="airStart">
-			<input type="hidden" name="airEnd">
-			<input type="hidden" name="airPay">
+			<c:choose>
+				<c:when test="${!empty m}">
+					<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo}">
+				</c:when>
+				<c:otherwise>
+					<input type="hidden" name="memberNo" value="-1">
+				</c:otherwise>
+			</c:choose>
 			<input type="hidden" name="memberName">
+			<input type="hidden" name="airPay">
 			<input type="hidden" name="phone">
+				
+			<input type="hidden" name="airLineST" value="${airReserve.airLineST}">
+			<input type="hidden" name="airNumberST" value="${airReserve.airNumberST}">
+			<input type="hidden" name="airStartTimeST" value="${airReserve.airStartTimeST}">
+			<input type="hidden" name="airEndTimeST" value="${airReserve.airEndTimeST}">
+			<input type="hidden" name="airStartST" value="${airReserve.airStartST}">
+			<input type="hidden" name="airArriveST" value="${airReserve.airArriveST}">
+			<input type="hidden" name="airDateST" value="${airReserve.airDateST}">
+			<input type="hidden" name="addStartSeatNum">
+			
+			<c:if test="${!empty airReserve.airDateED}">
+				<input type="hidden" name="airLineED" value="${airReserve.airLineED}">
+				<input type="hidden" name="airNumberED" value="${airReserve.airNumberED}">
+				<input type="hidden" name="airStartTimeED" value="${airReserve.airStartTimeED}">
+				<input type="hidden" name="airEndTimeED" value="${airReserve.airEndTimeED}">
+				<input type="hidden" name="airStartED" value="${airReserve.airStartED}">
+				<input type="hidden" name="airArriveED" value="${airReserve.airArriveED}">
+				<input type="hidden" name="airDateED" value="${airReserve.airDateED}">
+				<input type="hidden" name="addEndSeatNum">
+			</c:if>
+
+			<button type="submit" style="display: none;" class="payComplete"></button>
 		</form>
 	</div>
 	<script src="/resources/js/air/airSelectGrade.js"></script>
