@@ -43,13 +43,6 @@ public class AirController {
 		return "air/airMain";
 	}
 	
-	@RequestMapping(value="/payComplete.kt")
-	public String payComplete(HttpSession session, AirReserve airReserve, AirPayment airPayment) {
-		
-		return "air/airMain";
-	}
-	
-	
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value="/airSearch.kt")
 	public String selectAllAirAPI(HttpSession session, AirSearch air, Model model) {
@@ -191,6 +184,33 @@ public class AirController {
 		String airArrive = oneData.get("도착공항").getAsString();
 		AirSchedule airSchedule;
 		return airSchedule = new AirSchedule(airLine,airNumber,airStartTime,airEndTime,airStart,airArrive,airDate);
+	}
+	@RequestMapping(value="/payComplete.kt")
+	public String selectAllAir(HttpSession session, Model model, AirReserve airReserve, AirPayment airPayment, String addStartSeatNum, String addEndSeatNum) {
+		System.out.println(airReserve);
+		System.out.println(airPayment);
+		
+		
+		String[] StartSeat;
+		String[] EndSeat;
+		if(addStartSeatNum!=null) {
+			StartSeat = addStartSeatNum.split(", ");
+			for(int i=0;i<StartSeat.length;i++) {
+				System.out.println(StartSeat[i]);
+			}
+		}
+		if(addEndSeatNum!=null){
+			EndSeat = addEndSeatNum.split(", ");
+			for(int i=0;i<EndSeat.length;i++) {
+				System.out.println(EndSeat[i]);
+			}
+		}
+		
+		
+		System.out.println(addStartSeatNum);
+		System.out.println(addEndSeatNum);
+		model.addAttribute("airReserve",airReserve);
+		return "air/airSelectGrade";
 	}
 	@RequestMapping(value="/airReserve.kt")
 	public String selectAllAir(HttpSession session, Model model, AirReserve airReserve) {

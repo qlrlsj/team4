@@ -993,7 +993,7 @@
 									<c:when test="${!empty m}">
 										<input type="text" class="pointSelect" style="float: left; margin-right: 50px;" value="0">
 										<div style="float: left; color: rgb(255, 200, 70);" class="memberPoint">${sessionScope.m.memberPoint}</div>
-										<div style="float: left; color: aquamarine;"> (원) 사용가능</div>
+										<div style="float: left; color: rgb(255, 200, 70);"> (원) 사용가능</div>
 									</c:when>
 									<c:otherwise>
 										<div class="pointSelect" style="float: left; margin-right: 50px;" value="0">
@@ -1076,15 +1076,20 @@
 			<input type="hidden" name="airStartST" value="${airReserve.airStartST}">
 			<input type="hidden" name="airArriveST" value="${airReserve.airArriveST}">
 			<input type="hidden" name="airDateST" value="${airReserve.airDateST}">
-			<input type="hidden" name="airLineED" value="${airReserve.airLineED}">
-			<input type="hidden" name="airNumberED" value="${airReserve.airNumberED}">
-			<input type="hidden" name="airStartTimeED" value="${airReserve.airStartTimeED}">
-			<input type="hidden" name="airEndTimeED" value="${airReserve.airEndTimeED}">
-			<input type="hidden" name="airStartED" value="${airReserve.airStartED}">
-			<input type="hidden" name="airArriveED" value="${airReserve.airArriveED}">
-			<input type="hidden" name="airDateED" value="${airReserve.airDateED}">
+			<input type="hidden" name="addStartSeatNum">
 			
+			<c:if test="${!empty airReserve.airDateED}">
+				<input type="hidden" name="airLineED" value="${airReserve.airLineED}">
+				<input type="hidden" name="airNumberED" value="${airReserve.airNumberED}">
+				<input type="hidden" name="airStartTimeED" value="${airReserve.airStartTimeED}">
+				<input type="hidden" name="airEndTimeED" value="${airReserve.airEndTimeED}">
+				<input type="hidden" name="airStartED" value="${airReserve.airStartED}">
+				<input type="hidden" name="airArriveED" value="${airReserve.airArriveED}">
+				<input type="hidden" name="airDateED" value="${airReserve.airDateED}">
+				<input type="hidden" name="addEndSeatNum">
+			</c:if>
 
+			<button type="submit" style="display: none;" class="payComplete"></button>
 		</form>
 	</div>
 	<script src="/resources/js/air/airSelectGrade.js"></script>

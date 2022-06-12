@@ -233,11 +233,13 @@ $(".nextMenu").click(function(){
             text += ", "+ $(".addStartSeat>span").eq(i).text();
         }
         $(".addStartSeatNum").text(text);
+        $("input[name=addStartSeatNum]").val(text);
         let text2 = $(".addEndSeat>span").eq(0).text()
         for(i=1;i<$(".addEndSeat>span").length;i++){
             text2 += ", "+ $(".addEndSeat>span").eq(i).text();
         }
         $(".addEndSeatNum").text(text2);
+        $("input[name=addEndSeatNum]").val(text2);
     }else{
         alert("좌석을 선택해 주세요");
     }
@@ -360,7 +362,7 @@ $(".nextMenu3").on("click",function(){
         buyer_tel:$(".userPhone").text()		        //구매자전번
     }),function(rsp){
         if(rsp.success){
-            $(".btn-close").trigger("click");
+            $(".payCompleteBtn").trigger("click");
         }else{
             alert("에러내용:"+rsp.err_msg);
         }
@@ -368,6 +370,10 @@ $(".nextMenu3").on("click",function(){
 })
 let paymentNo=0;
 $(".payCompleteBtn").click(function(){
+    console.log(Number($(".paymentAmount").text()));
+    console.log(Number($(".coupon").text()));
+    console.log(Number($(".pointSelect").val()));
+    console.log(Math.round(Number($(".paymentAmount").text())*(3-Number($(".memberLevel").text())))*0.01);
     $.ajax({
         type:"POST",
         url:"/insertPayment.kt",
@@ -396,7 +402,7 @@ $(".payCompleteBtn").click(function(){
             type:"POST",
             url:"/updateMemberPoint.kt",
             data:{
-                updatePoint:Math.round(Number($(".paymentAmount").text())*(3-Number($(".memberLevel").text())))*0.01,
+                updatePoint:Math.round(Number($(".paymentAmount").text())*(3-Number($(".memberLevel").text())))*0.01 - Number($(".pointSelect").val()),
                 memberNo:memberNo
             },
             success: function(data){
@@ -435,15 +441,20 @@ $(".payCompleteBtn").click(function(){
     }else{
         payCheck3=true;
     }
-
-    if(payCheck1&&payCheck2&&payCheck3){
+    setTimeout(function(){
+        if(payCheck1&&payCheck2&&payCheck3){
         $("input[name=payNo]").val(paymentNo);
         $("input[name=memberName]").val($("input[name=bookerName]").val());
         $("input[name=airPay]").val(Number($(".paymentAmount").text()));
         $("input[name=phone]").val($("input[name=memberPhone]").val());
-        
-    }else{
-        alert("실행중 에러발생");
-        // location.href="selectAllAir.kt";
-    }
+        $(".payComplete").trigger("click");
+        }else{
+            console.log(payCheck1);
+            console.log(payCheck2);
+            console.log(payCheck3);
+            alert("실행중 에러발생");
+            // location.href="selectAllAir.kt";
+        }
+    }, 1500);
+    
 })
