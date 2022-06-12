@@ -44,4 +44,7 @@
   <select id="getAlarmCount" parameterType="int" resultType="int">
   		select count(*) from alarm where receiver_no = #{memberNo}
   </select>
+  <insert id="insertAlarm" parameterType="alarm">
+  		insert into alarm values(alarm_seq.nextval,#{roomNo},#{receiverNo}, #{senderNo}, #{sendContent},sysdate)
+  </insert>
 </mapper>

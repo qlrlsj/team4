@@ -66,4 +66,10 @@ public class ChatController {
 		model.addAttribute("memberId",memberId);
 		return "chat/chatMain";
 	}
+	@ResponseBody
+	@RequestMapping(value="/alarmCount.kt")
+	public int alarmCount(int memberNo) {
+		int result = service.alarmCount(memberNo);
+		return result;
+	}
 }

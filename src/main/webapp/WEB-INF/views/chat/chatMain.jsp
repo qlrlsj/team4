@@ -121,8 +121,7 @@ $(function(){
 		if(key.keyCode == 13){
 			sendMsg();
 		}
-	});
-	
+	});	
 	$(".messageArea").scrollTop($(".messageArea")[0].scrollHeight);
 });
 function startChat(){
@@ -147,13 +146,7 @@ function sendMsg(){
 		ws.send(JSON.stringify(data));
 		appendChat("<div class='chat right'>"+msg+"</div>");
 		$("#sendMsg").val("");
-	}
-	sendAlarm();
-	if(msg != ''){
-		const data = {type:"chatSend",msg:msg,roomNo:roomNo,memberId:memberId};
-		alarmWs.send(JSON.stringify(data));
-		appendChat("<div class='chat right'>"+msg+"</div>");
-		$("#sendMsg").val("");
+		sendAlarm();
 	}
 }
 //.messageArea에 메세지를 추가하는 함수
