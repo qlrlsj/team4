@@ -31,6 +31,7 @@
 		<typeAlias type="kr.or.seller.model.vo.Product" alias="pr"/>
 		<typeAlias type="kr.or.seller.model.vo.Cancel" alias="can"/>
 		<typeAlias type="kr.or.seller.model.vo.Payment" alias="spay"/>
+		<typeAlias type="kr.or.seller.model.vo.ReserveData" alias="rd"/>
 		<typeAlias type="kr.or.coupon.model.vo.Coupon" alias="po"/>
 		<typeAlias type="kr.or.payment.model.vo.Payment" alias="pay"/>
 	</typeAliases>

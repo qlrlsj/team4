@@ -24,13 +24,15 @@ public class MemberController {
 	private MemberService service;
 	
 	@RequestMapping(value="/login.kt")
-	public String login(Member m, HttpSession session) { //index에서 보내준 name과 네이밍이 같으면 자동으로 VO객체로 묶어줌
-		
+	public String login(Member m, HttpSession session, Model model) { //index에서 보내준 name과 네이밍이 같으면 자동으로 VO객체로 묶어줌
+		String login = "true";
 		Member member = service.selectOneMember(m);
 		if(member != null) {//조회결과가 존재하는 경우
 			session.setAttribute("m", member); //세션에 m으로 member를 저장
+			model.addAttribute("login", login);
 		}
-		return "redirect:/";
+		
+		return "member/login";
 	}
 
 	@RequestMapping(value="/logout.kt")

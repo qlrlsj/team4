@@ -33,10 +33,9 @@
 					<button class="btn btn-primary" onclick="location.href='/insertPackagePage.kt' ">패키지 상품 등록</button>
 				</c:when>
 			</c:choose>
-			<button> 상품등록 </button>
 			<table class="table table-sm">
 				<tr>
-					<th>상품 번호</th><th>상품명</th><th>평점</th><th>문의</th><th>수정 / 삭제</th>
+					<th>상품 번호</th><th>상품명</th><th>평점</th><th>문의</th><th>예약 관리</th><th>수정 / 삭제</th>
 				</tr>
 				<c:forEach items="${list }" var="pr">
 					<tr>
@@ -44,6 +43,13 @@
 						<td><a href="#">${pr.productName }</a></td>
 						<td>${pr.productScore }</td>
 						<td><button type="button" onclick="">문의 내역</button></td>
+						<td>
+							<form action="/sellerReserve.kt">
+								<input type="hidden" name="productNo" value="${pr.productNo }">
+								<input type="hidden" name="type" value="${type }">
+								<button class="btn btn-primary" type="submit">예약 관리</button>
+							</form>
+						</td>
 						<c:choose>
 							<c:when test="${type eq 'hostel' }">
 								<td><button type="button" class="btn btn-primary" onclick="">수정</button> / <button type="button" class="btn btn-primary" onclick="">삭제</button></td>

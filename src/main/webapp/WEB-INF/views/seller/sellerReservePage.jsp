@@ -20,7 +20,7 @@
 				  <a href="/sellerAcount.kt" class="list-group-item list-group-item-action">계정 관리</a>
 			</div>
 			<div class="div-content">
-				<h2>예약 관리</h2>
+				<h2>예약 관리</h2>				
 			</div>
 		</div>
 		
