@@ -1,11 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="pck">
+<mapper namespace="package">
 	<!-- select id="DAO에서 보내준 메소드명과 동일하다" -->
 	<!-- parameterType="패키지 경로를 전부 적어주어야 구분이 가능하다 mapper로 들어온 값을 의미한다" (Mybatis에서는 파라미터타입을 한개만 가능하다) -->
 	<!-- resultType="mapper에서 나가는 값을 의미한다" -->
 	<!-- <select id="selectOneMember" parameterType="kr.or.member.model.vo.Member" resultType="kr.or.member.model.vo.Member"></select> -->
+	<insert id="insertMember" parameterType="m"><!-- insert,updqte,delete의 경우 어차피 정수(int)가 나가기 때문에 resultType이 필요가 없다 -->
+		insert into member values(member_seq.nextval,#{memberId},#{memberPw},#{memberName},#{memberLevel},#{memberGrade},#{memberPhone},#{memberEmail},sysdate,#{memberPoint},#{memberIntro})
+	</insert>
 	
+	<insert id="insertPackage" parameterType="p">
+		insert into package values(package_seq.nextval,#{memberId},#{packageTitle},#{packageContent},to_char(sysdate, 'yyyy-mm-dd'),#{likeCount},#{packagePrice},#{packageScore},#{mainfile})
+	</insert>
 	
+	<select id="selectPackageNo" resultType="int">
+		select max(package_no) from package <!-- max를 쓰는 이유 insert를 하게되면 시퀀스를 통해 package_no가 들어가기에 자연스럽게 가장 큰 package_no가 최근에 insert된(방금insert된) 번호가 된다 -->
+	</select>
+	
+	<insert id="insertFile" parameterType="f">
+		insert into file_tbl values(file_seq.nextval,#{packageNo},#{filename},#{filepath})
+	</insert>
+	
+	<select id="selectAllPackage" resultType="p">
+		select
+			package_no as packageNo,
+			member_id as memberId,
+			package_title as packageTitle,
+			package_content as packageContent,
+			package_date as packageDate,
+			like_count as likeCount,
+<!-- 			to_char(package_price,'999,999,999,999,999') as packagePrice, -->
+			package_price as packagePrice,
+			package_score as packageScore,
+			main_file as mainfile
+		from package order by package_no desc
+	</select>
+	
+	<select id="selectOnePackage" parameterType="int" resultType="p">
+		select
+			package_no as packageNo,
+			member_id as memberId,
+			package_title as packageTitle,
+			package_content as packageContent,
+			package_date as packageDate,
+			like_count as likeCount,
+			package_price as packagePrice,
+			package_score as packageScore
+		from package where package_no=#{packageNo}
+	</select>
+	
+	<select id="selectFileList" parameterType="int" resultType="f">
+		select
+			file_no as fileNo,
+			package_no as packageNo,
+			filename,
+			filepath
+		from file_tbl where package_no=#{packageNo}
+	</select>
 	
 </mapper>
