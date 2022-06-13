@@ -12,7 +12,7 @@ public class ReserveData {
 	private String type;
 	private String reserveDate;
 	private int productNo;
-	private int reserveNo;
+	private String reserveNo;
 	private String reserveName;
 	private String memberId;
 	private String memberPhone;

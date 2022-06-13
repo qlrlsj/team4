@@ -61,10 +61,19 @@ public class SellerDao {
 		List list = new ArrayList<ReserveData>();
 		if(type.equals("hostel")) {
 			list = sqlSession.selectList("seller.selectReserveH",productNo);
+			for (ReserveData rd : (ArrayList<ReserveData>)list) {
+				rd.setType("hostel");
+			}
 		}else if(type.equals("ticket")) {
 			list = sqlSession.selectList("seller.selectReserveT",productNo);
+			for (ReserveData rd : (ArrayList<ReserveData>)list) {
+				rd.setType("ticket");
+			}
 		}else if(type.equals("package")) {
 			list = sqlSession.selectList("seller.selectReserveP",productNo);
+			for (ReserveData rd : (ArrayList<ReserveData>)list) {
+				rd.setType("package");
+			}
 		}
 		return (ArrayList<ReserveData>) list;			
 		
@@ -86,8 +95,5 @@ public class SellerDao {
 		}
 		return -1;
 	}
-	public int insertAllReserve() {
-		int result = sqlSession.insert("seller.insertAllReserve");
-		return result;
-	}
+	
 }

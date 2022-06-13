@@ -17,6 +17,8 @@ import com.google.gson.Gson;
 import kr.or.member.model.service.MemberService;
 import kr.or.member.model.vo.Member;
 import kr.or.member.model.vo.MemberPageData;
+import kr.or.report.model.vo.Report;
+import kr.or.seller.model.vo.ReserveData;
 
 @Controller
 public class MemberController {
@@ -125,6 +127,23 @@ public class MemberController {
 	public String updateMemberPoint(int memberNo, int updatePoint) {
 		int result = service.updateMemberPoint(memberNo, updatePoint);
 		return String.valueOf(result);
+	}
+	@RequestMapping(value="/allReserveFrm.kt")
+	public String reserveFrm() {
+		return "member/allReserveFrm";
+	}
+	@RequestMapping(value="/allReserve.kt")
+	public String reserveAll(Member m, String type, Model model) {
+		ArrayList<ReserveData> rd = service.allReserve(m,type);
+		model.addAttribute("list", rd);
+		model.addAttribute("type", type);
+		return "member/allReserve";
+	}
+	@RequestMapping(value="/blackListFrm.kt")
+	public String blackListFrm(Model model) {
+		ArrayList<Report> list = service.selectAllReport();
+		model.addAttribute("list", list);
+		return "member/blackList";
 	}
 }
 

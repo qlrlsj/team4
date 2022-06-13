@@ -93,6 +93,7 @@
 <!-- 부트스트랩 -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <script src="/resources/js/chat/chatHeader.js"></script>
+<script src="/resources/js/chat/alarm.js"></script>
 <script>
 //웹소켓 객체용 변수
 let ws;
@@ -104,7 +105,7 @@ let roomNo;
 let memberId;
 //채팅을 시작하는 함수
 $(function(){		
-	memberNo = ${sessionScope.m.memberNo };
+	memberNo = '${sessionScope.m.memberNo }';
 	roomNo = ${room.roomNo};
 	memberId = $("#hiddenId").val();
 	//웹소켓 연결 시도
@@ -121,8 +122,7 @@ $(function(){
 		if(key.keyCode == 13){
 			sendMsg();
 		}
-	});
-	
+	});	
 	$(".messageArea").scrollTop($(".messageArea")[0].scrollHeight);
 });
 function startChat(){
@@ -147,13 +147,7 @@ function sendMsg(){
 		ws.send(JSON.stringify(data));
 		appendChat("<div class='chat right'>"+msg+"</div>");
 		$("#sendMsg").val("");
-	}
-	sendAlarm();
-	if(msg != ''){
-		const data = {type:"chatSend",msg:msg,roomNo:roomNo,memberId:memberId};
-		alarmWs.send(JSON.stringify(data));
-		appendChat("<div class='chat right'>"+msg+"</div>");
-		$("#sendMsg").val("");
+		sendAlarm();
 	}
 }
 //.messageArea에 메세지를 추가하는 함수

@@ -1,5 +1,4 @@
 package kr.or.pck.controller;
-
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -15,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import kr.or.pck.model.service.PckService;
 import kr.or.pck.model.vo.FileVO;
 import kr.or.pck.model.vo.Pck;
+import kr.or.pck.model.vo.PckReserve;
 
 @Controller
 public class PckController {
@@ -48,6 +48,14 @@ public class PckController {
 	public String insertPackagePage(Pck pck) {
 		return "pck/insertPackagePage";
 	}
+	
+	@RequestMapping(value="/payment.kt")
+	public String payMent(PckReserve pckReserve) {
+//		System.out.println("컨트롤러로 들어온 결제정보 : "+pckReserve);
+		int result = service.insertPackageReserve(pckReserve);
+		return "redirect:/packageMain.kt";
+	}
+	
 	
 	@RequestMapping(value="/insertPackage.kt")
 	public String insertPackage(Pck p, MultipartFile[] upfile, MultipartFile mainfile3, HttpServletRequest request) { //파일에 대한건 MultipartFile[]로 , 나머지는 Pck 로 들어온다

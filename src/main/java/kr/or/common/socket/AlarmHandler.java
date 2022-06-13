@@ -43,16 +43,10 @@ public class AlarmHandler extends TextWebSocketHandler {
 		//전송데이터 구분을위한 값인 type값 확인
 		String type = element.getAsJsonObject().get("type").getAsString();
 		if(type.equals("enter")) {
-			int memberNo = element.getAsJsonObject().get("msg").getAsInt();			
-			sessionList.put(memberNo, session);				
+			int memberNo = element.getAsJsonObject().get("memberNo").getAsInt();
+			System.out.println("senderNo받고");
+			sessionList.put(memberNo, session);
 			System.out.println("enter");
-			//최초 접속인 경우 읽지않은 쪽지 수를 조회해서 리턴
-			int amCount = chatService.alarmCount(memberNo);
-			WebSocketSession s = sessionList.get(memberNo);
-			if(s != null) {
-				TextMessage tm = new TextMessage(String.valueOf(amCount));
-				s.sendMessage(tm);				
-			}
 		}else if(type.equals("chatSend")) {
 			int roomNo = element.getAsJsonObject().get("roomNo").getAsInt();
 			int senderNo = element.getAsJsonObject().get("senderNo").getAsInt();
@@ -67,7 +61,7 @@ public class AlarmHandler extends TextWebSocketHandler {
 			if(result != -1) {
 				WebSocketSession receiverSession = sessionList.get(receiverNo);
 				if(receiverSession!=null) {
-					TextMessage tm = new TextMessage("<span id=\"senderNo\">"+senderNo+"</span><hr>\r\n"+"<span id=\"sendContent\">"+sendContent+"</span>");
+					TextMessage tm = new TextMessage("<span id='senderNo'>"+senderNo+"</span><hr>"+"<span id='sendContent'>"+sendContent+"</span>");
 					receiverSession.sendMessage(tm);					
 				}				
 			}
