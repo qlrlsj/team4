@@ -13,20 +13,27 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
 
+import kr.or.coupon.model.vo.Coupon;
+import kr.or.payment.model.vo.Payment;
 import kr.or.ticket.model.service.TicketService;
+import kr.or.ticket.model.vo.CouponPoint;
 import kr.or.ticket.model.vo.LocalCategory;
 import kr.or.ticket.model.vo.OptionReserves;
+import kr.or.ticket.model.vo.Reserve;
 import kr.or.ticket.model.vo.Ticket;
 import kr.or.ticket.model.vo.TicketCategory;
 import kr.or.ticket.model.vo.TicketFile;
 import kr.or.ticket.model.vo.TicketOption;
 import kr.or.ticket.model.vo.TicketOptions;
+import kr.or.ticket.model.vo.TicketReserve;
 
 @Controller
 public class TicketController {
@@ -172,10 +179,41 @@ public class TicketController {
 		return "ticket/ticketView";
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="/summerUploadTicketImage.kt", produces = "application/text;charset=utf-8")	
+	public String summerUploadTicketImage(MultipartFile file[],HttpServletRequest request) {
+		ArrayList<String> files = upfile(request, file);
+		String filepath = "/resources/upload/ticket/"+files.get(0);
+		System.out.println(filepath);
+		return filepath;
+	}
+
 	@RequestMapping(value="/reserveForm.kt")
 	public String reserveForm(int ticketNo, OptionReserves optionReserves, Model model) {
 		return "ticket/reserveForm";
 	}
+	@ResponseBody
+	@RequestMapping(value="/selectAllCouponPoint.kt",produces="application/json;charset=utf-8")
+	public String selectAllCouponPoint(int memberNo,int totalPrice) {
+		System.out.println(totalPrice);
+		Gson gson = new Gson();
+		CouponPoint cp = service.selectAllCouponPoint(memberNo,totalPrice);
+		return gson.toJson(cp);
+	}
+	
+	@PostMapping ("/reserveTicket.kt")
+	public String reserveTicket(Reserve reserve) {
+		System.out.println(reserve);
+//		System.out.println("ticketNo"+ticketNo);
+//		System.out.println("memberNo"+memberNo);
+//		System.out.println("payPrice"+payPrice);
+//		System.out.println("pointUse"+pointUse);
+//		System.out.println("payCoupon"+payCoupon);
+//		System.out.println("pointAdd"+pointAdd);
+//		System.out.println("payCouponCode"+payCouponCode);
+		return "ticket/ticketMain";
+	}
+	
 	@RequestMapping(value="/insertTest.kt")
 	public String insertTest() {
 		return "ticket/test";
@@ -185,6 +223,7 @@ public class TicketController {
 		int result = service.insertOptTest(options);
 		return "ticket/test";
 	}
+	
 	
 	
 }
