@@ -30,6 +30,8 @@
 <link rel="stylesheet" href="/resources/css/file.css">
 <!-- 채팅 리스트 js -->
 <link rel="stylesheet" href="/resources/css/chat/chatHeader.css">
+<!--티켓등록폼 css-->
+<link rel="stylesheet" href="/resources/css/ticket/insertTicketForm.css">
 <script src="/resources/js/chat/chatHeader.js"></script>
 <title>Insert title here</title>
 <style>
