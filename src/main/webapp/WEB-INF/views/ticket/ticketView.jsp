@@ -139,7 +139,7 @@
         text-align: right;
     }
     .payBox{
-        background-color: rgb(204, 204, 204);
+        background-color: rgb(245 245 245);
     }
     .page2{
         display: none;
