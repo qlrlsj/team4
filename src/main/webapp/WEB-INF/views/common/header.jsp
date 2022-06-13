@@ -128,7 +128,7 @@ $(".bell").on("click",function(){
 								<li><a href="#" class="nav-link px-2 link-dark">위시리스트</a></li>
 								<li><a href="#" class="nav-link px-2 link-dark">내 여행</a></li>
 								<li><a href="/questionList.kt?reqPage=1" class="nav-link px-2 link-dark">문의하기</a></li>
-								<li><a href="/allMember.kt?reqPage=1" class="nav-link px-2 link-dark">회원관리</a></li><!-- 관리자만 보이는 버튼 -->
+								<li><a href="/allMember.kt" class="nav-link px-2 link-dark">회원관리</a></li><!-- 관리자만 보이는 버튼 -->
 								<li><span class="material-symbols-outlined bell">notifications</span><span id="alarmCount"></span></li>
 							</ul>
 								<div class="dropdown">

@@ -94,12 +94,6 @@ public class MemberService {
 	}
 
 
-	public int changeGrade(int memberNo, int memberGrade) {
-		HashMap<Object, Object> map = new HashMap<Object, Object>();
-		map.put("memberNo", memberNo);
-		map.put("memberGrade", memberGrade);
-		return dao.changeGrade(map);
-	}
 
 	public ArrayList<ReserveData> allReserve(Member m, String type) {
 		return dao.allReserve(m,type);
@@ -112,5 +106,9 @@ public class MemberService {
 //		Member member = dao.selectOneMember1(m);
 //		return member;
 //	}
+
+	public int changeGrade(Member m) {
+		return dao.changeGrade(m);
+	}
 
 }

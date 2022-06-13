@@ -61,10 +61,6 @@ public class MemberDao {
 	}
 
 
-	public int changeGrade(HashMap<Object, Object> map) {
-		int result = sqlSession.update("member.changeGrade",map);
-		return result;
-	}
 
 	public ArrayList<ReserveData> allReserve(Member m, String type) {
 		List list = new ArrayList<ReserveData>();
@@ -90,6 +86,11 @@ public class MemberDao {
 	public ArrayList<Report> selectAllReport() {
 		List list = sqlSession.selectList("member.selectBlack");
 		return (ArrayList<Report>) list;
+	}
+
+	public int changeGrade(Member m) {
+		int result = sqlSession.update("member.changeGrade",m);
+		return result;
 	}
 
 

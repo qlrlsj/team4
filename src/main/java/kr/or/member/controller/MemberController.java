@@ -80,7 +80,7 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "/allMember.kt")
-	public String allMember(int reqPage, Model model) {
+	public String allMember(Model model) {
 //		MemberPageData mpd = service.selectMemberList(reqPage);
 		ArrayList<Member> list = service.selectAllMember();
 		model.addAttribute("list", list);
@@ -128,8 +128,8 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/changeGrade.kt")
-	public String changeGrade(int memberNo, int memberGrade) {
-		int result = service.changeGrade(memberNo, memberGrade);
+	public String changeGrade(Member m) {
+		int result = service.changeGrade(m);
 		
 		return "redirect:/allMember.kt";
 	}

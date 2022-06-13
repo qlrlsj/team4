@@ -71,8 +71,8 @@
 		update member set member_point = member_point + #{updatePoint} where member_no=#{memberNo}
 	</update>
 	
-	<update id="changeGrade" parameterType="map">
-		update member set member_grade = #{memberGrade} where member_no=#{memberNo}
+	<update id="changeGrade" parameterType="m">
+		update member set member_Grade = #{memberGrade} where member_no=#{memberNo}
 	</update>
 	
 <!-- 	<update id="checkedChangeLevel" parameterType="map"> -->
