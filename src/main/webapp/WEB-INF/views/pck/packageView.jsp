@@ -37,7 +37,7 @@
 		font-weight: bold;
 		width: 150px;
 		height: 50px;
-		display: none;
+/* 		display: none; */
 	}
 	.form-control{
 		width: 200px;
@@ -72,7 +72,7 @@
 				</div>
 				<!--인원수선택 -->
 				<div class="col">
-					<input type="number" name="packageAmount" class="form-control amount" placeholder="인원수" min=1 max="20">						
+					<input type="number" name="packagePrsnl" class="form-control amount" placeholder="인원수" min=1 max="20">						
 				</div>
 			</ul>
 		</div>
@@ -85,15 +85,20 @@
 		<input type="text" id="totalPrice" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
 	</div>
 	<form action="/payment.kt">
-		<input type="hidden" value="${p.packageNo }"/>
-		<input type="hidden" value="${p.memberId }"/>
-		<input type="hidden" name="packageDate"/>
-		<input type="hidden" name=""/> <!-- 총인원 -->
-		<input type="hidden" name=""/> <!-- 금액 -->
+		<input type="hidden" name="memberId" value="${sessionScope.m.memberId }"/>
+		<input type="hidden" name="packagePrsnl"/>
+		<input type="hidden" name="packageStart"/>
+		<input type="hidden" name="packageNo" value="${p.packageNo }"/>
+		<input type="hidden" name="reservePrice"/>
+		<!-- 두 테이블 db에 등록이 다 되도록 데이터를 다 보내고 싹다 회원정보 session에서꺼내던 어떻게든해서 다보내고 -->
 		<div class="input-group mb-3">
-			<button type="button" class="btn btn-primary" id="paymentButton">구매하기</button>
+			<button type="submit" class="btn btn-primary" id="paymentButton">구매하기</button> <!-- 나중에 상단 style에서 주석풀것. -->
 		</div>
 	</form>
+		<!-- 결제하기 버튼 -->
+		<div class="input-group mb-3">
+			<button style="display: none" type="button" class="btn btn-primary" id="paymentButton2">결제하기</button>
+		</div>
 
 	<div class="img-box">
 		<c:forEach items="${f }" var="file">
@@ -115,35 +120,33 @@
 	
 	$(".calc").click(function(){
 		var amount = $('.amount').val();
+		console.log(amount);
 		var packagePrice =  ${p.packagePrice };
 		var totalPrice = (amount * packagePrice);
-		let result = totalPrice.toLocaleString();
-		let result1 = result+"원";
-		$('#totalPrice').val(result1);
+		let result = totalPrice;
+		$('#totalPrice').val(result);
+		var packagePrsnl = $('.amount').val();
+		$("[name=packagePrsnl]").val(packagePrsnl);
+		$("[name=reservePrice]").val(totalPrice);
 	});
 	
 	$("#datepicker1").change(function(){
 		var datepicker = $("#datepicker1").val();
 		console.log(datepicker);
-		$("[name=packageDate]").val(datepicker);
-		
+		$("[name=packageStart]").val(datepicker);
 		let test11 = '${sessionScope.m.memberId}';
 		console.log(test11);
-// 		sessionStorage.setItem("memberId",memberId);
-// 		sessionStorage.getItem("memberId");
-// 		const test11 = $(session.m.memberId);
-// 		consoel.log(test11);
-		
 		$('#dateChk').text("여행 출발일 : "+datepicker);
 	});
 	
 	$("#sumButton").click(function(){
-		$('#paymentButton').show();
+		$('#paymentButton2').show();
 	});
 	
 	//결제부분 처리(아임포트 라이브러리)
-	$("#paymentButton").click(function(){
-		const price = $("#totalPrice").text();
+	$("#paymentButton2").click(function(){
+		const price = $("#totalPrice").val();
+		console.log(price);
 		//거래 고유ID생성을 위해 현재 결제 날짜를 이용해서 처리
 		const d = new Date();
 		const date = d.getFullYear()+""+(d.getMonth()+1)+""+d.getDate()+""+d.getHours()+""+d.getMinutes()+""+d.getSeconds();
@@ -151,14 +154,11 @@
 		IMP.init("imp25949733");	//결제 API 사용을 위한 식별코드입력
 		IMP.request_pay({//결제 정보
 			merchant_uid : "상품코드_"+date, 		//거래 ID(위에서 초단위까지 만들어놓았던 겹치지 않는 date)
-			name : "KTRIP 패키지 구매",					//결제이름
+			name : "KTRIP",					//결제이름
 			amount : price,							//결제금액
-			buyer_email : "email@email.com",	//구매자 email 주소
-			buyer_name : "이름",//$(sessionScope.m.memberName),				//구매자 이름
-			buyer_tel : "010-3333-2222",//$(sessionScope.m.memberPhone),		//구매자 전화번호
-			buyer_addr : "서울시 영등포구 당산동", 	//구매자 주소
-			buyer_postcode : "12345"			//구매자 우편번호
-			
+			buyer_email : "email@email.com",	//'${sessionScope.m.memberEmail}',구매자 email 주소
+			buyer_name : '${sessionScope.m.memberName}',				//구매자 이름
+			buyer_tel : '${sessionScope.m.memberPhone}',		//구매자 전화번호
 		},function(rsp){//처리할 함수
 			if(rsp.success){
 				console.log("결제가 완료되었습니다.");
@@ -166,11 +166,15 @@
 				console.log("상점거래ID : "+rsp.merchant_uid);
 				console.log("결제 금액 : "+rsp.paid_amount);
 				console.log("카드승인번호 : "+rsp.apply_num);
-				//추가 DB작업이 필요한 경우 이 부분에 결제내역을 DB에 저장하는 코드 작성을 하면 된다 (ajax로 보내던지, form태그로 전송해주던지)
+			    $("#paymentButton").trigger('click');//여기요
 			}else{
 				alert("에러내용 : "+rsp.err_msg);
 			}
 		});
+	});
+	
+	$("#paymentButton").click(function(){
+		alert("해당 패키지 상품의 결제가 완료 되었습니다.")
 	});
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />

@@ -34,5 +34,6 @@
 		<typeAlias type="kr.or.seller.model.vo.ReserveData" alias="rd"/>
 		<typeAlias type="kr.or.coupon.model.vo.Coupon" alias="po"/>
 		<typeAlias type="kr.or.payment.model.vo.Payment" alias="pay"/>
+		<typeAlias type="kr.or.pck.model.vo.PckReserve" alias="pc"/>
 	</typeAliases>
 </configuration>
