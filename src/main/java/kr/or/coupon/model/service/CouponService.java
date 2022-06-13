@@ -25,5 +25,10 @@ public class CouponService {
 		map.put("userNo",userNo);
 		return Dao.updateCouponUse(map);
 	}
+
+	public int couponMake(Coupon coupon) {
+		// TODO Auto-generated method stub
+		return Dao.couponMake(coupon);
+	}
 	
 }
