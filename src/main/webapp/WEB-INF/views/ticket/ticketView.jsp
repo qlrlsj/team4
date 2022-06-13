@@ -295,9 +295,9 @@
                     <input type="hidden" id="totalPrice">
                 </div>
             </div>
-            
-            <input type="button" class="btn btn-primary" id="payBtn" value="결제하기">
-
+            <div class="btnBox" style="text-align: center; margin-top: 20px;">
+                <input type="button" class="btn btn-primary" id="payBtn" value="결제하기" style="display: none; width: 30%; margin-right: 10px; height: 50px;">
+            </div>
         
             <h3 style="margin-top: 30px;">상품 정보</h3>
             <div class="content-box">
@@ -423,34 +423,39 @@
                 </c:if>
             </div>
             <div class="content-right">
-                <div class="payBox">
-                    <h3>결제정보</h3>
+                <div class="payBox" style="padding: 10px; text-align: center;margin-top: 50px;">
+                    <h3 style="text-align: center;">결제정보</h3>
                     <hr>
-                    <table class="payInfoBox">
+                    <table class="payInfoBox" style="padding-left: 25px;">
                         <tr>
                             <th>주문금액</th>
                             <td></td>
                             <td class="payinfo" id="payInfoBox1"></td>
+                            <td>원</td>
                         </tr>
                             <th>쿠폰할인</th>
                             <td>-</td>
                             <td class="payinfo" id="payInfoBox2">0</td>
                             <input type="hidden" name="payCoupon">
+                            <td>원</td>
                         </tr>
                             <th>사용 포인트</th>
                             <td>-</td>
                             <td class="payinfo" id="payInfoBox3">0</td>
                             <input type="hidden" name="pointUse">
+                            <td>원</td>
                         </tr>
                             <th>총 결제금액</th>
                             <td></td>
                             <td class="payinfo" id="payInfoBox4"></td>
+                            <td>원</td>
                             <input type="hidden" name="payPrice">
                         </tr>
                         <input type="hidden" name="pointAdd" id="pointAdd">
                     </table>
+                    <hr>
                     <button type="button" class="btn btn-primary" id="payBtn2">결제하기</button>
-                    <input type="button" id="payBtn3" value="결제test"></input>
+                    <input type="button" class="btn btn-secondary" id="payBtn3" value="결제test" style="color: rgb(55, 55, 55);"></input>
                 </div>
             </form>
             </div>

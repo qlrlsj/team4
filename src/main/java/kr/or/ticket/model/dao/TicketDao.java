@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.or.payment.model.vo.Payment;
 import kr.or.ticket.model.vo.LocalCategory;
+import kr.or.ticket.model.vo.MainTicket;
 import kr.or.ticket.model.vo.OptionInfo;
 import kr.or.ticket.model.vo.OptionReserve;
 import kr.or.ticket.model.vo.ReserveInfo;
@@ -95,6 +96,15 @@ public class TicketDao {
 	public ArrayList<OptionInfo> selectOptionInfo(String reserveNo) {
 		List list = sqlSession.selectList("ticket.selectOptionInfo",reserveNo);
 		return (ArrayList<OptionInfo>)list;
+	}
+
+	public ArrayList<MainTicket> selectAllTicketOrderRate(int readNo) {
+		List list = sqlSession.selectList("ticket.AllTicketOrderRate",readNo);
+		return (ArrayList<MainTicket>)list;
+	}
+
+	public String selectOneFilepath1(int ticketNo) {
+		return sqlSession.selectOne("ticket.selectOneFilepath1", ticketNo);
 	}
 	
 }

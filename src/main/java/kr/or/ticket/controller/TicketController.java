@@ -26,6 +26,7 @@ import kr.or.payment.model.vo.Payment;
 import kr.or.ticket.model.service.TicketService;
 import kr.or.ticket.model.vo.CouponPoint;
 import kr.or.ticket.model.vo.LocalCategory;
+import kr.or.ticket.model.vo.MainTicket;
 import kr.or.ticket.model.vo.OptionReserves;
 import kr.or.ticket.model.vo.Reserve;
 import kr.or.ticket.model.vo.ReserveInfo;
@@ -109,7 +110,9 @@ public class TicketController {
 	}
 		
 	@RequestMapping(value="/ticketMain.kt")
-	public String TicketMain() {
+	public String TicketMain(Model model) {
+		ArrayList<MainTicket> mTicket = service.selectAllTicketOrderRate();
+		model.addAttribute("mTicket", mTicket);
 		return "ticket/ticketMain";
 	}
 	
@@ -220,9 +223,9 @@ public class TicketController {
 		return gson.toJson(ri);
 	}
 	
-	@RequestMapping(value="/insertTest.kt")
-	public String insertTest() {
-		return "ticket/reserveSuccess";
+	@RequestMapping(value="/searchTicket.kt")
+	public String searchTicket() {
+		return "ticket/searchTicket";
 	}
 	@RequestMapping(value="/ticketTest.kt")
 	public String ticketTest(TicketOptions options) {

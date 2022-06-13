@@ -15,6 +15,7 @@ import kr.or.payment.model.vo.Payment;
 import kr.or.ticket.model.dao.TicketDao;
 import kr.or.ticket.model.vo.CouponPoint;
 import kr.or.ticket.model.vo.LocalCategory;
+import kr.or.ticket.model.vo.MainTicket;
 import kr.or.ticket.model.vo.OptionInfo;
 import kr.or.ticket.model.vo.OptionReserve;
 import kr.or.ticket.model.vo.OptionReserves;
@@ -168,6 +169,18 @@ public class TicketService {
 		ri.setReserveNo(optionInfo.get(0).getReserveNo());
 		ri.setOptionInfo(optionInfo);
 		return ri;
+	}
+
+	public ArrayList<MainTicket> selectAllTicketOrderRate() {
+		//가져올 개수
+		int readNo = 16;
+		ArrayList<MainTicket> ticket= dao.selectAllTicketOrderRate(readNo);
+		for(int i=0; i<ticket.size();i++) {
+			int ticketNo = ticket.get(i).getTicketNo();
+			String ticketFilepath1 = dao.selectOneFilepath1(ticketNo);
+			ticket.get(i).setTicketFilepath1(ticketFilepath1);
+		}
+		return ticket;
 	}
 	
 }
