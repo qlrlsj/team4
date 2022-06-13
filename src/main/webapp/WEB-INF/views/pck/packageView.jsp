@@ -166,7 +166,7 @@
 				console.log("상점거래ID : "+rsp.merchant_uid);
 				console.log("결제 금액 : "+rsp.paid_amount);
 				console.log("카드승인번호 : "+rsp.apply_num);
-			    $("#paymentButton").trigger('click'); 
+			    $("#paymentButton").trigger('click');//여기요
 			}else{
 				alert("에러내용 : "+rsp.err_msg);
 			}
