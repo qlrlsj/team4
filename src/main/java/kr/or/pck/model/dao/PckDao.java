@@ -49,9 +49,11 @@ public class PckDao {
 
 	public int insertPackageReserve(PckReserve pckReserve) {
 		System.out.println("맵퍼 가기전에 dao에서 보낼 pckReserve 값 : "+pckReserve);
-		int result = sqlSession.insert("package.insertPackageReserve",pckReserve);
+		int result = sqlSession.insert("package.insertPayment",pckReserve);
 		if(result == 1) {
-			int result2 = sqlSession.insert("package.insertPayment",pckReserve);
+			int paymentNo = sqlSession.selectOne("package.paymentNo");
+			pckReserve.setPayNo(paymentNo);
+			int result2 = sqlSession.insert("package.insertPackageReserve",pckReserve);
 			if(result2 == 1) {
 				System.out.println("패키지결제 테이블, 예약테이블 모두 insert 완료");
 			}else {
@@ -62,6 +64,6 @@ public class PckDao {
 		}
 		return result;
 	}
-
+	
 	
 }
