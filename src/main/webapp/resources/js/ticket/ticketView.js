@@ -7,6 +7,9 @@ $(".minus").on("click", function () {
     } else {
         $(this).next().val(optQtt-1);
     }
+    if(optQtt==1&&!$(".priceBox").hasClass("optPriceBox")){
+        $(".totalPriceBox").css("display","none");
+    }
 });
 
 $(".plus").on("click", function () {
@@ -16,8 +19,12 @@ $(".plus").on("click", function () {
     if (optQtt < stock) {
         $(this).prev().prev().val(optQtt+1);
     }
-});
 
+    if(!$(".priceBox").hasClass("optPriceBox")){
+        $(".totalPriceBox").css("display","block");
+    }
+});
+let totalPrice = 0;
 $(".varyBtn").on("click",function(){
     const optQtt = Number($(this).parent().children().eq(1).val());
     const dPrice = Number($(this).parent().parent().children().eq(2).children().eq(2).val())
@@ -29,14 +36,129 @@ $(".varyBtn").on("click",function(){
     $(".optQtt"+i).val(optQtt);
     $(".dPrice"+i).val(optQtt*dPrice);
     if(optQtt==0){
-        $(".optQtt"+i).parent().parent().parent().css("display","none");
-        
+        $(".optQtt"+i).parent().parent().parent().removeClass("optPriceBox");
     }else{
-        $(".optQtt"+i).parent().parent().parent().css("display","block");
+        $(".optQtt"+i).parent().parent().parent().addClass("optPriceBox");
     }
 
+    const price = $(".optDiscountPrice");
+    
+    const qtt = $(".qtt");
+    console.log(price,qtt);
+    totalPrice=0;
+    for(let i=0;i<price.length;i++){
+        totalPrice += price.eq(i).val()*qtt.eq(i).val();
+    }
+    if(totalPrice==0){
+        $(".totalPriceBox").css("display","none");
+        $("#payBtn").css("display","none");
+    }else{
+        $("#payBtn").css("display","block");
+    }
+    $(".totalPrice").text(totalPrice.toLocaleString()+"원");
+    $("#totalPrice").val(totalPrice);
+    $("#payInfoBox1").text(Number(totalPrice));
 });
 
 
+//쿠폰 불러오기
+$("#payBtn").on("click",function(){
+    const memberNo = Number($(".memberNo").text());
+    const coupon = $("#coupon");
+    console.log(totalPrice);
+    console.log("memberNo :"+ memberNo);
+    if(memberNo!=0){
+        $.ajax({
+            type:"POST",
+            url:"/selectAllCouponPoint.kt",
+            data:{memberNo:memberNo,totalPrice:totalPrice},
+            success: function (cp) {
+                coupon.append("<option value='0'>쿠폰을 선택해주세요.</option>");
+              if(cp.couponList.length == 0){
+                coupon.append("<option value='0'>사용 가능한 쿠폰이 없습니다.</option>");
+              }else{
+                  for(let i=0;i<cp.couponList.length;i++){
+                    const option = $("<option></option>");
+                    option.val(cp.couponList[i].couponNo);
+                    option.text(cp.couponList[i].couponName);
+                    option.attr("couponDCPrice",cp.couponList[i].couponDCPrice);
+                    option.attr("couponDCRate",cp.couponList[i].couponDCRate);
+                    coupon.append(option);
+    
+                    // if(totalPrice>=cp.couponList[i].couponIf){
+                    //     coupon.append("<option value='"+cp.couponList[i].couponNo+"'>"+cp.couponList[i].couponName+"</option>");
+                    // }
+                  }
+              }
+              $("#possiblePoint").text(cp.point);
+              
+            }
+          });
+        }
+        
+    calcPrice();
+    $(".page1").css("display","none");
+    $(".page2").css("display","block");
+    
+});
 
+$("#coupon").on("change",function(){
+    const option = $("#coupon>option:selected");
+    let dcPrice = 0;
+    let dcRate = 0;
+    if(option.val()!=0){
+        dcPrice = Number(option.attr("couponDCPrice"));
+        dcRate =Number(option.attr("couponDCRate"));
+    }
+    
+    console.log(dcPrice,dcRate);
+    const dc = (totalPrice*dcRate/100)+dcPrice;
+    console.log(dc);
+    $("#payInfoBox2").text(dc);
+    $("#pointUse").val(0);
+    $("#payInfoBox3").text($("#pointUse").val());
+    calcPrice();
 
+});
+
+$("#pointUse").on("change",function(){
+    const po = $("#pointUse").val();
+    const possiblePoint =Number($("#possiblePoint").text());
+    //유효성검사
+    if(po>possiblePoint){
+        $("#pointUse").val(possiblePoint);
+    }
+    //결제금액 변경
+    $("#payInfoBox3").text(Number($("#pointUse").val()));
+    calcPrice();
+});
+
+function calcPrice(){
+   const coupon = Number($("#payInfoBox2").text());
+   const point = Number($("#payInfoBox3").text());
+   let lastTotal = totalPrice-coupon-point;
+   if(lastTotal<0){
+    $("#pointUse").val(0);
+    $("#payInfoBox3").text($("#pointUse").val());
+    lastTotal = totalPrice - coupon;
+   }
+   $("#payInfoBox4").text(Number(lastTotal));
+}
+
+$("#payBtn2").on("click",function(){
+    const payPrice = Number($("#payInfoBox4").text());
+    const pointUse = Number($("#payInfoBox3").text());
+    const payCoupon = Number($("#payInfoBox2").text());
+    $("input[name=payPrice]").val(payPrice);
+    $("input[name=pointUse]").val(pointUse);
+    $("input[name=payCoupon]").val(payCoupon);
+
+    //적립금계산
+    const pointRate = 0.1;
+    $("#pointAdd").val(payPrice * pointRate);
+    
+    $(this).attr("type","submit");
+    $(this).trigger("click");
+
+    
+});

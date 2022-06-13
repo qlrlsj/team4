@@ -53,5 +53,9 @@ public class TicketDao {
 	public TicketFile selectTicketFile(int ticketNo) {
 		return sqlSession.selectOne("ticket.selectTicketFile", ticketNo);
 	}
+
+	public int selectPoint(int memberNo) {
+		return sqlSession.selectOne("ticket.selectPoint", memberNo);
+	}
 	
 }

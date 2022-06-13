@@ -14,6 +14,18 @@
 			t1.coupon_range as couponRange
 		from (coupon t1 inner join (select * from couponuse where member_no=#{memberNo} and coupon_state=0)t2 on t1.coupon_no=t2.coupon_no)
 	</select>
+	<select id="selectAllCouponTicket" parameterType="Map" resultType="po">
+		select 
+			t1.coupon_no as couponNo,
+			t1.coupon_name as couponName,
+			t1.coupon_date as couponDate,
+			t1.coupon_enddate as conponEndDate,
+			t1.coupon_dcprice as couponDCPrice,
+			t1.coupon_dcrate as couponDCRate,
+			t1.coupon_if as couponIf,
+			t1.coupon_range as couponRange
+		from (coupon t1 inner join (select * from couponuse where member_no=#{memberNo} and coupon_state=0)t2 on t1.coupon_no=t2.coupon_no) where t1.coupon_if <![CDATA[<]]> #{totalPrice}
+	</select>
 	<update id="updateCouponUse" parameterType="Map">
 		update couponuse 
 		set coupon_state = 1 where member_no = #{userNo} and coupon_no = #{couponNo}
