@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 @Data
 public class Report {
 	private int reporter;
+	private String reporterId;
 	private int reported;
+	private String reportedId;
 	private String reportContent;
 }

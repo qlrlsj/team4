@@ -1,6 +1,9 @@
 function openList() {
 		  document.myChat.submit();
 }
+function openReserve() {
+		  document.allReserve.submit();
+}
 
 //화면 로딩 후 실행
 //채팅을 시작하는 함수

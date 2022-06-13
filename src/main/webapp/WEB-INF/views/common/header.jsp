@@ -139,7 +139,8 @@ $(".bell").on("click",function(){
 										<li><a class="dropdown-item" href="#">쿠폰</a></li>
 										<li><a class="dropdown-item" href="#">파트너 등록하기</a></li>
 										<li><a class="dropdown-item" href="/mypage.kt">마이페이지</a></li>
-										<li><a class="dropdown-item" href="/sellerPage.kt">판매자 페이지</a></li>		
+										<li><a class="dropdown-item" href="/sellerPage.kt">판매자 페이지</a></li>	
+										<li><a class="dropdown-item" href="/blackListFrm.kt">블랙리스트 관리</a></li>		
 										<li><hr class="dropdown-divider"></li>
 										<li><a class="dropdown-item" href="/logout.kt">로그아웃 </a></li>
 									</ul>
@@ -161,7 +162,10 @@ $(".bell").on("click",function(){
 										<li><a class="dropdown-item active" href="#">포인트</a></li>
 										<li><a class="dropdown-item" href="#">쿠폰</a></li>
 										<li><a class="dropdown-item" href="#">파트너 등록하기</a></li>
-										<li><a class="dropdown-item" href="/mypage.kt">마이페이지</a></li>	
+										<li><a class="dropdown-item" href="/mypage.kt">마이페이지</a></li>
+										<li>
+											<a class="dropdown-item" href="/allReserveFrm.kt" >예약 내역 확인</a>
+										</li>
 										<c:if test="${grade eq '1' }">
 											<li><a class="dropdown-item" href="/sellerPage.kt">판매자 페이지</a></li>										
 										</c:if>
@@ -189,7 +193,7 @@ $(".bell").on("click",function(){
 		<div class="container-fluid">
 			<div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample08">
 				<ul class="navbar-nav">
-					<li class="nav-item"><a class="nav-link active"	href="/selectAllAir.kt">항공편</a></li>
+					<li class="nav-item"><a class="nav-link active"	href="/AirMain.kt">항공편</a></li>
 					<li class="nav-item"><a class="nav-link active" href="/hostelMain.kt">숙소</a></li>
 					<li class="nav-item"><a class="nav-link active" href="/ticketMain.kt">티켓</a></li>
 					<li class="nav-item"><a class="nav-link active" href="/packageMain.kt">패키지</a></li>
