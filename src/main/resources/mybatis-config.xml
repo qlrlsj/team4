@@ -24,6 +24,10 @@
 		<typeAlias type="kr.or.ticket.model.vo.LocalCategory" alias="lc"/>
 		<typeAlias type="kr.or.ticket.model.vo.TicketOption" alias="to"/>
 		<typeAlias type="kr.or.ticket.model.vo.TicketFile" alias="tf"/>
+		<typeAlias type="kr.or.ticket.model.vo.TicketReserve" alias="tr"/>
+		<typeAlias type="kr.or.ticket.model.vo.OptionReserve" alias="or"/>
+		<typeAlias type="kr.or.ticket.model.vo.ReserveInfo" alias="ri"/>
+		<typeAlias type="kr.or.ticket.model.vo.OptionInfo" alias="oi"/>
 		<typeAlias type="kr.or.question.model.vo.Question" alias="q"/>
 		<typeAlias type="kr.or.comment.model.vo.Comment" alias="c"/>
 		<typeAlias type="kr.or.pck.model.vo.Pck" alias="p"/>
