@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
@@ -187,13 +188,15 @@ public class AirController {
 		return airSchedule = new AirSchedule(airLine,airNumber,airStartTime,airEndTime,airStart,airArrive,airDate);
 	}
 	@RequestMapping(value="/payComplete.kt")
-	public String selectAllAir(HttpSession session, Model model, AirReserve airReserve, AirPayment airPayment, String addStartSeatNum, String addEndSeatNum, int airLevelST, int airLevelED) {
+	public String selectAllAir(HttpSession session, Model model, AirReserve airReserve, AirPayment airPayment, String addStartSeatNum, String addEndSeatNum, int airLevelST, int airLevelED, int airPay) {
 		System.out.println(airReserve);
 		System.out.println(airPayment);
-		AirReserveComplete airEndComplete = null;
-		AirReserveComplete airStartComplete = null;
+		AirReserveComplete airEndComplete = new AirReserveComplete();
+		AirReserveComplete airStartComplete = new AirReserveComplete();
 		
 		int result = service.insertAirReserve(airPayment);
+		int result3 = 0;
+		int result4 = 0;
 		if(result>0) {
 			String ReserveNo = service.selectReserveNo();
 			if(addStartSeatNum!=null) {
@@ -206,11 +209,17 @@ public class AirController {
 				airStartComplete.setAir_level(airLevelST);
 				int result2 = service.insertAir(airStartComplete);
 				String[] StartSeat = addStartSeatNum.split(", ");
-				for(int i=0;i<StartSeat.length;i++) {
-					
-					System.out.println(StartSeat[i]);
+				if(result2>0) {
+					for(int i=0;i<StartSeat.length;i++) {
+						HashMap<String, String> map = new HashMap<String, String>();
+						map.put("seat", StartSeat[i]);
+						map.put("airName", airReserve.getAirNumberST());
+						map.put("date", airReserve.getAirDateST());
+						result3 = service.insertAirSeat(map);
+					}					
 				}
 			}
+			System.out.println(addEndSeatNum);
 			if(addEndSeatNum!=null){
 				airEndComplete.setAir_name(airReserve.getAirNumberED());
 				airEndComplete.setAir_line(airReserve.getAirLineED());
@@ -219,20 +228,46 @@ public class AirController {
 				airEndComplete.setAir_date(airReserve.getAirDateED());
 				airEndComplete.setReserve_no(ReserveNo);
 				airEndComplete.setAir_level(airLevelED);
-				int result3 = service.insertAir(airEndComplete);
+				int result2 = service.insertAir(airEndComplete);
 				String[] EndSeat = addEndSeatNum.split(", ");
-				for(int i=0;i<EndSeat.length;i++) {
+				if(result3>0) {
+					for(int i=0;i<EndSeat.length;i++) {						
+						HashMap<String, String> map = new HashMap<String, String>();
+						map.put("seat", EndSeat[i]);
+						map.put("airName", airReserve.getAirNumberED());
+						map.put("date", airReserve.getAirDateED());
+						result3 = service.insertAirSeat(map);
+					}
 					
-					System.out.println(EndSeat[i]);
 				}
 			}
 		}
 		model.addAttribute("airReserve",airReserve);
-		return "air/airSelectGrade";
+		model.addAttribute("airPayment", airPayment);
+		model.addAttribute("addStartSeatNum", addStartSeatNum);
+		model.addAttribute("addEndSeatNum", addEndSeatNum);
+		model.addAttribute("airPay",airPay);
+		return "air/airReserveComplete";
 	}
 	@RequestMapping(value="/airReserve.kt")
 	public String selectAllAir(HttpSession session, Model model, AirReserve airReserve) {
 		model.addAttribute("airReserve",airReserve);
 		return "air/airSelectGrade";
 	}
+	@RequestMapping(value="/test.kt")
+	public String test(HttpSession session) {
+		
+		return "air/airReserveComplete";
+	}
+	@ResponseBody
+	@RequestMapping(value="/findSeat.kt", produces = "application/json;charset=utf-8")
+	public String findSeat(HttpSession session, String StartNumberST, String date) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("NumberST", StartNumberST);
+		map.put("date", date);
+		ArrayList<String> list = service.findSeat(map);
+		System.out.println(list);
+		return new Gson().toJson(list);
+	}
+	
 }

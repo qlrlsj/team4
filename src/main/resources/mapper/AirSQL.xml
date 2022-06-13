@@ -7,10 +7,18 @@
 
 	</insert>
 	
-	<select id="selectReserveNo">
+	<select id="selectReserveNo" resultType="String">
 		select max(reserve_no) from air_payment order by pay_no desc
 	</select>
-	<insert id="AirReserveComplete">
-		insert into air_reserve values(air_seq.nextval(),#{air_name},#{air_level},#{air_date},#{air_start},#{air_end},#{reserve_no},#{air_line})
+	<insert id="AirReserveComplete" parameterType = "ac">
+		insert into air_reserve values(air_seq.nextval,#{air_name},#{air_level},#{air_date},#{air_start},#{air_end},#{reserve_no},#{air_line})
 	</insert>
+	
+	<insert id="insertAirSeat" parameterType="Map">
+		insert into air_seat values(air_seat_seq.nextval,#{seat},#{airName},#{date})
+	</insert>
+	
+	<select id="findSeat" parameterType="Map" resultType="string">
+		select seat_No from air_seat where air_name = #{NumberST} and air_date = #{date}
+	</select>
 </mapper>

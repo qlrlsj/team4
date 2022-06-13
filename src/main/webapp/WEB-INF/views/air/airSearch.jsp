@@ -296,7 +296,7 @@
 			</c:if>
 		</div>
 		<div style="text-align:center; margin-top:20px;">
-			<form action="airReserve.kt">
+			<form action="airReserve.kt" method="post">
 				<input type="hidden" name="airLineST">
 				<input type="hidden" name="airNumberST">
 				<input type="hidden" name="airStartTimeST">

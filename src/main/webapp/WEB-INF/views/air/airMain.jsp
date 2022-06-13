@@ -14,7 +14,7 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="div-content">
 		
-		<div class="p-3 mb-5" style="background-color:#FAC5B0">
+		<div class="p-3 mb-5" style="background-color:#FAC5B0;">
 			<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
 				<input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" onclick="howtoway(0)">
 				<label class="btn btn-outline-success" for="btnradio1">편도</label>

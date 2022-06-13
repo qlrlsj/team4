@@ -137,6 +137,13 @@
     width: calc(100% - 160px);
     height: 100%;
 }
+.VipDisable{
+    width: 80px;
+    height: 100px;
+    float: left;
+    content: url(/resources/upload/air/air_icon_3.png);
+    cursor: pointer;
+}
 .Front{
     width: 50%;
     height: 40px;
@@ -182,6 +189,13 @@
     content: url(/resources/upload/air/air_icon3.png);
     cursor: pointer;
 }
+.BusinessDisable{
+    width: 40px;
+    height: 50px;
+    float: left;
+    content: url(/resources/upload/air/air_icon3-3.png);
+    cursor: pointer;
+}
 .Service_Img{
     content: url(/resources/upload/air/airService_Img.png);
     width: 100%;
@@ -203,6 +217,13 @@
     content: url(/resources/upload/air/air_icon2.png);
     cursor: pointer;
 
+}
+.EconomyDisable{
+    width: 35px;
+    height: 100%;
+    float: left;
+    content: url(/resources/upload/air/air_icon2_3.png);
+    cursor: pointer;
 }
 .EconomyLastBlock{
     padding-left: 30px;

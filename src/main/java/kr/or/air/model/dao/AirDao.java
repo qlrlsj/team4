@@ -1,6 +1,7 @@
 package kr.or.air.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -29,6 +30,19 @@ public class AirDao {
 	public int insertAir(AirReserveComplete air) {
 		int result = sqlSession.insert("Air.AirReserveComplete",air);
 		return result;
+	}
+
+	public int insertAirSeat(HashMap<String, String> map) {
+		System.out.println(map);
+		int result = sqlSession.insert("Air.insertAirSeat",map);
+		return result;
+	}
+
+	public ArrayList<String> findSeat(HashMap<String, String> map) {
+		System.out.println(map);
+		List list = sqlSession.selectList("Air.findSeat",map);
+		System.out.println(list);
+		return (ArrayList<String>)list;
 	}
 
 }

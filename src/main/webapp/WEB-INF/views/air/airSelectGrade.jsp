@@ -1055,7 +1055,7 @@
 				<button class="btn btn-primary payCompleteBtn">결제완료버튼(테스트용)</button>
 			</div>
 		</div>
-		<form action="/payComplete.kt">
+		<form action="/payComplete.kt" method="post">
 			<input type="hidden" name="payNo">
 			<c:choose>
 				<c:when test="${!empty m}">
@@ -1088,9 +1088,8 @@
 				<input type="hidden" name="airArriveED" value="${airReserve.airArriveED}">
 				<input type="hidden" name="airDateED" value="${airReserve.airDateED}">
 				<input type="hidden" name="addEndSeatNum">
-				<input type="hidden" name="airLevelED">
 			</c:if>
-
+			<input type="hidden" name="airLevelED" value="0">
 			<button type="submit" style="display: none;" class="payComplete"></button>
 		</form>
 	</div>

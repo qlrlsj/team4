@@ -1,6 +1,7 @@
 package kr.or.air.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,16 @@ public class AirService {
 	public int insertAir(AirReserveComplete air) {
 		// TODO Auto-generated method stub
 		return dao.insertAir(air);
+	}
+
+	public int insertAirSeat(HashMap<String, String> map) {
+		// TODO Auto-generated method stub
+		return dao.insertAirSeat(map);
+	}
+
+	public ArrayList<String> findSeat(HashMap<String, String> map) {
+		// TODO Auto-generated method stub
+		return dao.findSeat(map);
 	}
 
 	

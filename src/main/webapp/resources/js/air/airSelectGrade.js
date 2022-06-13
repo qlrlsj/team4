@@ -1,3 +1,10 @@
+var airStartGrade=1;
+var airStartPay = 50000;
+var airEndGrade=1;
+var airEndPay = 50000;
+var StartSeatCount=0;
+var EndSeatCount=0;
+
 $(function(){
     //편도일경우
     if($(".edCheck").text()==''){
@@ -5,16 +12,136 @@ $(function(){
         $(".EndSelectSeat").css("display","none");
         $(".SelectSeatMenu").css("height","250px");
         $(".comback").css("display","none");
-    }
-    
+        $(".SelectSeatMenu").css("margin-top","200px");
+        console.log($("input[name=airNumberST]").val());
+        $.ajax({
+            type:"POST",
+            url:"/findSeat.kt",
+            data:{
+                StartNumberST : $("input[name=airNumberST]").val(),
+                date :  $("input[name=airDateST]").val()
+            },
+            success: function(list){
+                if(list.length==0){
+                    console.log("예약좌석없음");
+                }else{
+                    for(let i=0;i<list.length;i++){
+                        for(let j=0;j<$(".modal1 .VipSeat").length;j++){
+                            if($(".modal1 .VipSeat").eq(j).text()==list[i]){
+                                $(".modal1 .VipSeat").eq(j).attr('onclick', '').unbind('click');
+                                $(".modal1 .VipSeat").eq(j).addClass("VipDisable");
+                                $(".modal1 .VipSeat").eq(j).removeClass("VipSeat");
+                            }
+                        }
+                        for(let j=0;j<$(".BusinessSeat").length;j++){
+                            if($(".modal1 .BusinessSeat").eq(j).text()==list[i]){
+                                $(".modal1 .BusinessSeat").eq(j).attr('onclick', '').unbind('click');
+                                $(".modal1 .BusinessSeat").eq(j).addClass("BusinessDisable");
+                                $(".modal1 .BusinessSeat").eq(j).removeClass("BusinessSeat");
+                            }
+                        }
+                        for(let j=0;j<$(".EconomySeat").length;j++){
+                            if($(".modal1 .EconomySeat").eq(j).text()==list[i]){
+                                $(".modal1 .EconomySeat").eq(j).attr('onclick', '').unbind('click');
+                                $(".modal1 .EconomySeat").eq(j).addClass("EconomyDisable");
+                                $(".modal1 .EconomySeat").eq(j).removeClass("EconomySeat");
+                            }
+                        }
+                        console.log(list[i]);
+                    }
+                }
+            },
+            error : function(){
+                alert("결제내역등록 진입 실패");
+            }
+        });
 
+    }else{
+        $.ajax({
+            type:"POST",
+            url:"/findSeat.kt",
+            data:{
+                StartNumberST : $("input[name=airNumberST]").val(),
+                date :  $("input[name=airDateST]").val()
+            },
+            success: function(list){
+                if(list.length==0){
+                    console.log("예약좌석없음");
+                }else{
+                    for(let i=0;i<list.length;i++){
+                        for(let j=0;j<$(".modal1 .VipSeat").length;j++){
+                            if($(".modal1 .VipSeat").eq(j).text()==list[i]){
+                                $(".modal1 .VipSeat").eq(j).attr('onclick', '').unbind('click');
+                                $(".modal1 .VipSeat").eq(j).addClass("VipDisable");
+                                $(".modal1 .VipSeat").eq(j).removeClass("VipSeat");
+                            }
+                        }
+                        for(let j=0;j<$(".BusinessSeat").length;j++){
+                            if($(".modal1 .BusinessSeat").eq(j).text()==list[i]){
+                                $(".modal1 .BusinessSeat").eq(j).attr('onclick', '').unbind('click');
+                                $(".modal1 .BusinessSeat").eq(j).addClass("BusinessDisable");
+                                $(".modal1 .BusinessSeat").eq(j).removeClass("BusinessSeat");
+                            }
+                        }
+                        for(let j=0;j<$(".EconomySeat").length;j++){
+                            if($(".modal1 .EconomySeat").eq(j).text()==list[i]){
+                                $(".modal1 .EconomySeat").eq(j).attr('onclick', '').unbind('click');
+                                $(".modal1 .EconomySeat").eq(j).addClass("EconomyDisable");
+                                $(".modal1 .EconomySeat").eq(j).removeClass("EconomySeat");
+                            }
+                        }
+                        console.log(list[i]);
+                    }
+                }
+            },
+            error : function(){
+                alert("결제내역등록 진입 실패");
+            }
+        });
+        $.ajax({
+            type:"POST",
+            url:"/findSeat.kt",
+            data:{
+                StartNumberST : $("input[name=airNumberED]").val(),
+                date :  $("input[name=airDateED]").val()
+            },
+            success: function(list){
+                if(list.length==0){
+                    console.log("예약좌석없음");
+                }else{
+                    for(let i=0;i<list.length;i++){
+                        for(let j=0;j<$(".modal2 .VipSeat").length;j++){
+                            if($(".modal2 .VipSeat").eq(j).text()==list[i]){
+                                $(".modal2 .VipSeat").eq(j).attr('onclick', '').unbind('click');
+                                $(".modal2 .VipSeat").eq(j).addClass("VipDisable");
+                                $(".modal2 .VipSeat").eq(j).removeClass("VipSeat");
+                            }
+                        }
+                        for(let j=0;j<$(".BusinessSeat").length;j++){
+                            if($(".modal2 .BusinessSeat").eq(j).text()==list[i]){
+                                $(".modal2 .BusinessSeat").eq(j).attr('onclick', '').unbind('click');
+                                $(".modal2 .BusinessSeat").eq(j).addClass("BusinessDisable");
+                                $(".modal2 .BusinessSeat").eq(j).removeClass("BusinessSeat");
+                            }
+                        }
+                        for(let j=0;j<$(".EconomySeat").length;j++){
+                            if($(".modal2 .EconomySeat").eq(j).text()==list[i]){
+                                $(".modal2 .EconomySeat").eq(j).attr('onclick', '').unbind('click');
+                                $(".modal2 .EconomySeat").eq(j).addClass("EconomyDisable");
+                                $(".modal2 .EconomySeat").eq(j).removeClass("EconomySeat");
+                            }
+                        }
+                        console.log(list[i]);
+                    }
+                }
+            },
+            error : function(){
+                alert("결제내역등록 진입 실패");
+            }
+        });
+    }
 })
-var airStartGrade=1;
-var airStartPay = 50000;
-var airEndGrade=1;
-var airEndPay = 50000;
-var StartSeatCount=0;
-var EndSeatCount=0;
+
 $(".Pay").eq(0).text(airStartPay);
 $(".Pay").eq(1).text(airEndPay);
 $("input[name=airStartPay]").change(function(){
@@ -417,6 +544,7 @@ $(".payCompleteBtn").click(function(){
             }
         });
     }else{
+        console.log("패스");
         payCheck2=true;
     }
     if(Number($(".coupon").text())!=0){
@@ -439,17 +567,20 @@ $(".payCompleteBtn").click(function(){
             }
         });
     }else{
+        console.log("패스");
         payCheck3=true;
     }
     setTimeout(function(){
         if(payCheck1&&payCheck2&&payCheck3){
-        $("input[name=payNo]").val(paymentNo);
-        $("input[name=memberName]").val($("input[name=bookerName]").val());
-        $("input[name=airPay]").val(Number($(".paymentAmount").text()));
-        $("input[name=phone]").val($("input[name=memberPhone]").val());
-        $("input[name=airLevelST]").val(Number($("input[name=airStartPay]").val()));
-        $("input[name=airLevelED]").val(Number($("input[name=airEndPay]").val()));
-        $(".payComplete").trigger("click");
+            $("input[name=payNo]").val(paymentNo);
+            $("input[name=memberName]").val($("input[name=bookerName]").val());
+            $("input[name=airPay]").val(Number($(".paymentAmount").text()));
+            $("input[name=phone]").val($("input[name=memberPhone]").val());
+            $("input[name=airLevelST]").val(Number($("input[name=airStartPay]").val()));
+            if($(".edCheck").text()!=''){
+                $("input[name=airLevelED]").val(Number($("input[name=airEndPay]").val()));
+            }
+            $(".payComplete").trigger("click");
         }else{
             console.log(payCheck1);
             console.log(payCheck2);
@@ -457,6 +588,6 @@ $(".payCompleteBtn").click(function(){
             alert("실행중 에러발생");
             // location.href="selectAllAir.kt";
         }
-    }, 1500);
+    }, 2000);
     
 })
