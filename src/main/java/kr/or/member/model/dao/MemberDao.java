@@ -58,6 +58,11 @@ public class MemberDao {
 		return result;
 	}
 
+	public int changeGrade(HashMap<Object, Object> map) {
+		int result = sqlSession.update("member.changeGrade",map);
+		return result;
+	}
+
 
 
 //	public Member selectOneMember1(Member m) {

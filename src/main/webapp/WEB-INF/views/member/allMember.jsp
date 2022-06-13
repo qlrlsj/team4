@@ -34,11 +34,11 @@
 			<form action="#">
 				<table border="1" class="table table-hover">
 					<tr>
-						<th>선택</th><th>번호</th><th>아이디</th><th>이름</th><th>회원레벨</th><th>등급</th><th>연락처</th><th>이메일</th><th>가입일</th><th>포인트</th><th>추방</th>
+						<th>번호</th><th>아이디</th><th>이름</th><th>회원레벨</th><th>등급</th><th>변경</th><th>연락처</th><th>이메일</th><th>가입일</th><th>포인트</th><th>추방</th>
 					</tr>
 					<c:forEach items="${list }" var="m">
 						<tr>
-							<td><input type="checkbox" class="chk form-check-input"></td>
+<!-- 							<td><input type="checkbox" class="chk form-check-input"></td> -->
 							<td align="center">${m.memberNo }</td>
 							<td align="center">${m.memberId }</td>
 							<td align="center">${m.memberName }</td>
@@ -66,6 +66,9 @@
 										</select>
 									</c:if>
 							</td>
+							<td>
+								<button type="button" class="btn btn-primary changeGrade">등급변경</button>
+							</td>
 							<td align="center">${m.memberPhone }</td>
 							<td>${m.memberEmail }</td>
 							<td align="center">${m.enrollDate }</td>
@@ -75,15 +78,26 @@
 							</td>
 						</tr>
 					</c:forEach>
-					<tr>
-						<th colspan="12">
-							<button class="btn btn-primary btn-lg checkedChangeLevel" style="width:100%">선택회원 등급변경</button>
-						</th>
-					</tr>
+<!-- 					<tr> -->
+<!-- 						<th colspan="12"> -->
+<!-- 							<button class="btn btn-primary btn-lg checkedChangeLevel" style="width:100%">선택회원 등급변경</button> -->
+<!-- 						</th> -->
+<!-- 					</tr> -->
 			</table>
 		</form>
 	</div>
+<!-- 	<button type="button" class="btn btn-danger testButton">콘솔출력 테스트 버튼</button> -->
 	<script>
+		//등급변경
+		$(".changeGrade").on("click",function(){
+				const memberGrade = $(this).parent().prev().children().val();
+				const memberNo = $(this).parent().parent().children().eq(0).text();
+				console.log(memberNo, memberGrade);
+				//컨트롤러로 값 주면서 페이지 이동
+				location.href="/changeGrade.kt?memberNo="+memberNo+"&memberGrade="+memberGrade;
+		});
+		
+		
 		//회원추방 기능
 		$(".exileMember").on("click",function(){
 			var result = confirm('해당 회원을 정말 추방 하시겠습니까?');
