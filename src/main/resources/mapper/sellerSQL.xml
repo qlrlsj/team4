@@ -40,7 +40,7 @@
 	</select>
 	<select id="selectCashInfoH" parameterType="m" resultType="spay" >
 		select 
-			p.pay_date as payDate,
+			TO_CHAR(p.pay_date, 'YYYY/MM/DD') as payDate,
 			h.hostel_code as productNo,
 			p.pay_no as payNo,
 			h.hostel_name as productName,
@@ -60,7 +60,7 @@
 	</select>
 	<select id="selectCashInfoT" parameterType="m" resultType="spay">
 		select 
-            pay_date as payDate,
+            TO_CHAR(p.pay_date, 'YYYY/MM/DD') as payDate,
 			t.ticket_no as productNo,
 			p.pay_no as payNo,
 			t.ticket_title as productName,
@@ -78,7 +78,7 @@
 	</select>
 		<select id="selectCashInfoP" parameterType="m" resultType="spay">
 		select 
-            pay_date as payDate,
+            TO_CHAR(p.pay_date, 'YYYY/MM/DD') as payDate,
 			pc.package_no as productNo,
 			p.pay_no as payNo,
 			pc.package_title as productName,
@@ -91,14 +91,13 @@
 			pc.package_price as productPrice
 	    from payment p
 	    join package_reserve pr on (p.pay_no = pr.pay_no)
-	    join member m on(pr.member_no = m.member_no)
+	    join member m on(pr.member_id = m.member_id)
         join package pc on (pr.package_no = pc.package_no)
         where pc.member_id=#{memberId}
 	</select>
 	<select id="selectReserveH" parameterType="int" resultType="rd">
 		select
-			ar.type as type,
-			ar.reserve_date as reserveDate,
+			TO_CHAR(hr.reservation_date, 'YYYY/MM/DD')as reserveDate,
 			ho.hostel_code as productNo,
 			hr.reservation_no as reserveNo,
 			h.hostel_name as reserveName,
@@ -114,15 +113,14 @@
 			pay.pay_no as payNo
 		from hostel_option ho
 		join hostel_reserve hr on(ho.option_no = hr.option_no)
-		join all_reserve ar on (hr.reservation_no = ar.reserve_no)
 		join hostel h on(ho.hostel_code = h.hostel_code)
 		join payment pay on(hr.pay_no = pay.pay_no)
-		where hr.hostel_code = #{productNo}
+		where ho.hostel_code = #{productNo}
+		ORDER BY reserveDate DESC
 	</select>
 	<select id="selectReserveT" parameterType="int" resultType="rd">
 		select
-			ar.type as type,
-			ar.reserve_date as reserveDate,
+			TO_CHAR(pay.pay_date, 'YYYY/MM/DD')as reserveDate,
 			t.ticket_no as productNo,
 			tr.reserve_no as reserveNo,
 			t.ticket_title  as reserveName,
@@ -137,14 +135,13 @@
 		join ticket_reserve tr on (t.ticket_no = tr.ticket_no)
 		join option_reserve or1 on (tr.reserve_no = or1.reserve_no)
 		join ticket_option to1 on (or1.opt_no = to1.opt_no)
-		join all_reserve ar on (tr.reserve_no = ar.reserve_no)
 		join payment pay on (tr.pay_no = pay.pay_no)
 		where tr.ticket_no = #{productNo}
+		ORDER BY reserveDate DESC
 	</select>
 	<select id="selectReserveP" parameterType="int" resultType="rd">
 		select
-			ar.type as type,
-			ar.reserve_date as reserveDate,
+			TO_CHAR(pay.pay_date, 'YYYY/MM/DD')as reserveDate,
 			p.package_no as productNo,
 			pr.reserve_no as reserveNo,
 			p.package_title as reserveName,
@@ -156,10 +153,10 @@
 			pay.pay_no as payNo
 		from package p
 		join package_reserve pr on(p.package_no = pr.package_no)
-		join member m on (pr.member_no = m.member_no)
-		join all_reserve ar on (pr.reserve_no = ar.reserve_no)
+		join member m on (pr.member_id = m.member_id)
 		join payment pay on(pr.pay_no = pay.pay_no)
 		where pr.package_no = #{productNo}
+		ORDER BY reserveDate DESC
 	</select>
 	<delete id="reserveCancel" parameterType="rd">
 		<choose>

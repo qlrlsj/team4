@@ -133,4 +133,7 @@ public class MemberController {
 		
 		return "redirect:/allMember.kt";
 	}
+	
+	
+	
 }

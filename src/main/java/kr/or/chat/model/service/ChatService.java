@@ -42,11 +42,6 @@ public class ChatService {
 
 	public int insertDm(Alarm am) {
 		int result = dao.insertAlarm(am);
-		if(result > 0) {
-			result = dao.getAlarmCount(am.getReceiverNo());
-		}else {
-			result = -1;
-		}
 		return result;
 	}
 }

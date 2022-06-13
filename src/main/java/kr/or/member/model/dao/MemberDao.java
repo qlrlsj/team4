@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.or.member.model.vo.Member;
+import kr.or.report.model.vo.Report;
+import kr.or.seller.model.vo.ReserveData;
 
 @Repository
 public class MemberDao {
@@ -58,10 +60,38 @@ public class MemberDao {
 		return result;
 	}
 
+
 	public int changeGrade(HashMap<Object, Object> map) {
 		int result = sqlSession.update("member.changeGrade",map);
 		return result;
 	}
+
+	public ArrayList<ReserveData> allReserve(Member m, String type) {
+		List list = new ArrayList<ReserveData>();
+		if(type.equals("hostel")) {
+			list = sqlSession.selectList("member.selectReserveListH", m);
+			for (ReserveData rd : (ArrayList<ReserveData>)list) {
+				rd.setType("hostel");
+			}
+		}else if(type.equals("ticket")) {
+			list = sqlSession.selectList("member.selectReserveListT", m);
+			for (ReserveData rd : (ArrayList<ReserveData>)list) {
+				rd.setType("ticket");
+			}
+		}else if(type.equals("package")) {
+			list = sqlSession.selectList("member.selectReserveListP", m);
+			for (ReserveData rd : (ArrayList<ReserveData>)list) {
+				rd.setType("package");
+			}
+		}
+		return (ArrayList<ReserveData>) list;
+	}
+
+	public ArrayList<Report> selectAllReport() {
+		List list = sqlSession.selectList("member.selectBlack");
+		return (ArrayList<Report>) list;
+	}
+
 
 
 

@@ -157,8 +157,45 @@ $("#payBtn2").on("click",function(){
     const pointRate = 0.1;
     $("#pointAdd").val(payPrice * pointRate);
     
-    $(this).attr("type","submit");
-    $(this).trigger("click");
+    //결제 API
+    var IMP = window.IMP; //생략가능
+    //거래 고유 ID를 생성하기위해 현재 날짜를 이용해서 처리
+    const d = new Date();
+    //date 값 생성시 ""를 더하지 않으면 숫자 + 연산이 되므로 문자 덧샘을 추가
+    const date = d.getFullYear()+""+(d.getMonth()+1)+""+d.getDate()+""+d.getHours()+""+d.getMinutes()+""+d.getSeconds();
+    IMP.init("imp32461786");//결제API사용을 위한 식별코드입력
+    IMP.request_pay({
+        merchant_uid : "T_"+date,//거래아이디
+        name:"KTRIP_PAYMENT",	 //결제이름
+        amount:payPrice,		//결제금액
+        buyer_email:$("input[name=reserveEmail]").val(),	            //구매자이메일
+        buyer_name:$("input[name=reserveName]").val(),				//구매자이름
+        buyer_tel:$("input[name=reservePhone]").val()		        //구매자전번
+    },function(rsp){
+        if(rsp.success){
+            console.log("결제성공");
+            $($("#payBtn3")).attr("type","submit");
+            $($("#payBtn3")).trigger("click");
+        }else{
+            alert("에러내용:"+rsp.err_msg);
+        }
+    });
+    
 
     
+});
+
+$("#payBtn3").on("click",function(){
+    const payPrice = Number($("#payInfoBox4").text());
+    const pointUse = Number($("#payInfoBox3").text());
+    const payCoupon = Number($("#payInfoBox2").text());
+    $("input[name=payPrice]").val(payPrice);
+    $("input[name=pointUse]").val(pointUse);
+    $("input[name=payCoupon]").val(payCoupon);
+
+    //적립금계산
+    const pointRate = 0.1;
+    $("#pointAdd").val(payPrice * pointRate);
+    $($("#payBtn3")).attr("type","submit");
+    $($("#payBtn3")).trigger("click");
 });

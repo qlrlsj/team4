@@ -28,6 +28,7 @@ import kr.or.ticket.model.vo.CouponPoint;
 import kr.or.ticket.model.vo.LocalCategory;
 import kr.or.ticket.model.vo.OptionReserves;
 import kr.or.ticket.model.vo.Reserve;
+import kr.or.ticket.model.vo.ReserveInfo;
 import kr.or.ticket.model.vo.Ticket;
 import kr.or.ticket.model.vo.TicketCategory;
 import kr.or.ticket.model.vo.TicketFile;
@@ -188,10 +189,6 @@ public class TicketController {
 		return filepath;
 	}
 
-	@RequestMapping(value="/reserveForm.kt")
-	public String reserveForm(int ticketNo, OptionReserves optionReserves, Model model) {
-		return "ticket/reserveForm";
-	}
 	@ResponseBody
 	@RequestMapping(value="/selectAllCouponPoint.kt",produces="application/json;charset=utf-8")
 	public String selectAllCouponPoint(int memberNo,int totalPrice) {
@@ -202,21 +199,30 @@ public class TicketController {
 	}
 	
 	@PostMapping ("/reserveTicket.kt")
-	public String reserveTicket(Reserve reserve) {
-		System.out.println(reserve);
-//		System.out.println("ticketNo"+ticketNo);
-//		System.out.println("memberNo"+memberNo);
-//		System.out.println("payPrice"+payPrice);
-//		System.out.println("pointUse"+pointUse);
-//		System.out.println("payCoupon"+payCoupon);
-//		System.out.println("pointAdd"+pointAdd);
-//		System.out.println("payCouponCode"+payCouponCode);
-		return "ticket/ticketMain";
+	public String reserveTicket(TicketReserve ticketR, OptionReserves optionRs, Payment payment,Model model) {
+		int result = service.insertReserve(ticketR, optionRs, payment);
+		System.out.println(ticketR);
+		System.out.println(optionRs);
+		System.out.println(payment);
+		model.addAttribute("ticketR", ticketR);
+		model.addAttribute("optionRs", optionRs);
+		model.addAttribute("payment", payment);
+		
+		return "ticket/reserveSuccess";
+	}
+	@ResponseBody
+	@RequestMapping(value="/selectReserveInfo.kt",produces="application/json;charset=utf-8")
+	public String selectReserveInfo(int ticketNo, String reserveNo) {
+		System.out.println("ticketNo : "+ticketNo+", reserveNo : "+reserveNo);
+		Gson gson = new Gson();
+		ReserveInfo ri = service.selectOneReserveInfo(ticketNo,reserveNo);
+		System.out.println(ri);
+		return gson.toJson(ri);
 	}
 	
 	@RequestMapping(value="/insertTest.kt")
 	public String insertTest() {
-		return "ticket/test";
+		return "ticket/reserveSuccess";
 	}
 	@RequestMapping(value="/ticketTest.kt")
 	public String ticketTest(TicketOptions options) {

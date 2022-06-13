@@ -12,6 +12,7 @@ public class PayDao {
 	private SqlSessionTemplate sqlSession;
 
 	public int insertPayment(Payment pay) {
+		System.out.println(pay);
 		int result = sqlSession.insert("payment.insertMember",pay);
 		return result;
 	}

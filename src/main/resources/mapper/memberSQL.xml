@@ -84,5 +84,79 @@
 <!-- 	<update id="updateMember" parameterType="m"> -->
 <!-- 		update member_tbl set phone=#{phone}, email=#{email} where member_no=#{memberNo} -->
 <!-- 	</update> -->
+		<select id="selectReserveListH" parameterType="m" resultType="rd">
+		select
+			TO_CHAR(hr.reservation_date, 'YYYY/MM/DD')as reserveDate,
+			ho.hostel_code as productNo,
+			hr.reservation_no as reserveNo,
+			h.hostel_name as reserveName,
+			hr.reserve_name as memberId,
+			hr.reserve_phone as memberPhone,
+			h.member_no as sellerNo,
+			ho.option_no as optionNo,
+			ho.room_option as option1,
+			hr.reserve_num as option2,
+			hr.hostel_indate as option3,
+			hr.hostel_outdate as option4,
+			ho.hostel_price as reservePrice,
+			pay.pay_no as payNo
+		from hostel_option ho
+		join hostel_reserve hr on(ho.option_no = hr.option_no)
+		join hostel h on(ho.hostel_code = h.hostel_code)
+		join payment pay on(hr.pay_no = pay.pay_no)
+		where hr.member_no = #{memberNo}
+		ORDER BY reserveDate DESC
+	</select>
+	<select id="selectReserveListT" parameterType="m" resultType="rd">
+		select
+			TO_CHAR(pay.pay_date, 'YYYY/MM/DD')as reserveDate,
+			t.ticket_no as productNo,
+			tr.reserve_no as reserveNo,
+			t.ticket_title  as reserveName,
+			tr.reserve_name as memberId,
+			tr.reserve_phone as memberPhone,
+			t.member_no as sellerNo,
+			or1.opt_no as optionNo,
+			or1.opt_quantity as option1,
+			to1.opt_price as reservePrice,
+			pay.pay_no as payNo
+		from ticket t
+		join ticket_reserve tr on (t.ticket_no = tr.ticket_no)
+		join option_reserve or1 on (tr.reserve_no = or1.reserve_no)
+		join ticket_option to1 on (or1.opt_no = to1.opt_no)
+		join payment pay on (tr.pay_no = pay.pay_no)
+		where tr.member_no = #{memberNo}
+		ORDER BY reserveDate DESC
+	</select>
+	<select id="selectReserveListP" parameterType="m" resultType="rd">
+		select
+			TO_CHAR(pay.pay_date, 'YYYY/MM/DD')as reserveDate,
+			p.package_no as productNo,
+			pr.reserve_no as reserveNo,
+			p.package_title as reserveName,
+			m.member_id as memberId,
+			m.member_phone as memberPhone,
+			p.member_id as option1,
+			pr.package_prsnl as option2,
+			p.package_price as reservePrice,
+			pay.pay_no as payNo
+		from package p
+		join package_reserve pr on(p.package_no = pr.package_no)
+		join member m on (pr.member_id = m.member_id)
+		join payment pay on(pr.pay_no = pay.pay_no)
+		where pr.member_id = #{memberId}
+		ORDER BY reserveDate DESC
+	</select>
+	<select id="selectBlack" resultType="rp">
+	select
+		r.reporter as reporter
+		m1.member_id as reporterId
+		r.reported as reported
+		m2.member_id as reportedId
+		r.report_content as reportContent
+	from report r
+	join member m1 on (r.reporter = m1.member_no)
+	join member m2 on (r.reported = m2.member_no)
+	</select>
 	
 </mapper>

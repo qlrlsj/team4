@@ -93,6 +93,10 @@
 		<a href="/insertTicketForm.kt">티켓상품 등록하기</button>
 		<a href="/ticketView.kt?ticketNo=1">티켓 상세보기</a>
 		<a href="/insertTest.kt">test</a>
+
+	
+
+
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 	<script>
 		$(document).ready(function () {

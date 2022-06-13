@@ -139,13 +139,38 @@
         text-align: right;
     }
     .payBox{
-        background-color: rgb(204, 204, 204);
+        background-color: rgb(245 245 245);
     }
     .page2{
         display: none;
     }
-
+    .flexBox{
+        display: flex;
+    }
+    .payInfoBox{
+    border-collapse: separate;
+    border-spacing: 0 10px;
+    }
+    .payBox{
+        width: 100%;
+        margin-left: 50px;
+    }
+    .content-lfet{
+        width: 700px;
+        margin: 0;
+        display: inline;
+    }
+    .content-right{
+        width: 250px;
+        margin: 0;
+        display: inline;
+    }
+    .reserveInfo{
+        width: 400px;
+    }
 </style>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <body>
     <jsp:include page="/WEB-INF/views/common/header.jsp" />
     <div class="div-content page1" >
@@ -299,141 +324,143 @@
     </div>
 
     <div class="div-content page2">
-        <div class="content-left" style="width:700px;">
-            <h2>상품정보</h2>
-            <div class="content-box">
-                <div class="infoTop" style="display: flex; flex-direction: center; margin-bottom: 20px;">
-                    <img src="/resources/upload/ticket/${file.getTicketFilepath1()}" style="width: 100px; height: 100px;" >
-                    <p style="font-size:20px; margin-left:20px;">${ticket.getTicketTitle()}</p>
-                </div>
-                <div class="infoBottom">
-                    <c:forEach var="opt" items="${optionList}"  varStatus="status">
-                            <div class="priceBox">
-                                <div class='row'>
-                                    <div class='col optTitle' style="text-align: left;">
-                                        <span><c:out value="${opt.getOptTitle()}"/></span>
-                                    </div>
-                                    <div class='col'>
-                                        <input class="optQtt${status.index} InputText" value="0" style="background-color: #fff;">
-                                        <span><c:out value=" x ${opt.getOptDiscountPrice()}"></c:out></span>
-                                    </div>
-                                    <div class="col">
-                                        <input class="dPrice${status.index}  InputText" value="0" style="border: none; background-color: #fff;">
-                                        <span>원</span>
+        <div class="flexBox">
+            <div class="content-left" style="width:700px;">
+                <h2>상품정보</h2>
+                <div class="content-box">
+                    <div class="infoTop" style="display: flex; flex-direction: center; margin-bottom: 20px;">
+                        <img src="/resources/upload/ticket/${file.getTicketFilepath1()}" style="width: 100px; height: 100px;" >
+                        <p style="font-size:20px; margin-left:20px;">${ticket.getTicketTitle()}</p>
+                    </div>
+                    <div class="infoBottom">
+                        <c:forEach var="opt" items="${optionList}"  varStatus="status">
+                                <div class="priceBox">
+                                    <div class='row'>
+                                        <div class='col optTitle' style="text-align: left;">
+                                            <span><c:out value="${opt.getOptTitle()}"/></span>
+                                        </div>
+                                        <div class='col'>
+                                            <input class="optQtt${status.index} InputText" value="0" style="background-color: #fff;">
+                                            <span><c:out value=" x ${opt.getOptDiscountPrice()}"></c:out></span>
+                                        </div>
+                                        <div class="col">
+                                            <input class="dPrice${status.index}  InputText" value="0" style="border: none; background-color: #fff;">
+                                            <span>원</span>
+                                        </div>
                                     </div>
                                 </div>
+                            </c:forEach>
+                            <div class="totalPriceBox">
+                                <span style="margin-right: 20px;">총 여행 금액</span>
+                                <span class="totalPrice">000,000원</span>
                             </div>
-                        </c:forEach>
-                        <div class="totalPriceBox">
-                            <span style="margin-right: 20px;">총 여행 금액</span>
-                            <span class="totalPrice">000,000원</span>
-                        </div>
+                    </div>
                 </div>
-            </div>
-
-            <h2>예약자 정보</h2>
-            <div class="content-box">
-                <table calss="reserveInfo">
-                    <tr>
-                        <th >예약자 이름 : </th>
-                        <td>
-                            <c:choose>
-                                <c:when test="${!empty m}">
-                                    <input class="form-control" type="text" name="reserveName" value="${sessionScope.m.memberName}">
-                                </c:when>
-                                <c:otherwise>
-                                    <input class="form-control"  type="text" name="reserveName" required>
-                                </c:otherwise>
-                            </c:choose>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>이메일 주소 : </th>
-                        <td>
-                            <c:choose>
-                                <c:when test="${!empty m}">
-                                    <input class="form-control"  type="text" name="reserveEmail" value="${sessionScope.m.memberEmail}">
-                                </c:when>
-                                <c:otherwise>
-                                    <input class="form-control"  type="text" name="reserveEmail" required>
-                                </c:otherwise>
-                            </c:choose>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>전화번호 : </th>
-                        <td>
-                            <c:choose>
-                                <c:when test="${!empty m}">
-                                    <input class="form-control"  type="text" name="reservePhone" value="${sessionScope.m.memberPhone}">
-                                </c:when>
-                                <c:otherwise>
-                                    <input class="form-control"  type="text" name="reservePhone" required>
-                                </c:otherwise>
-                            </c:choose>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-
-
-            <c:if test="${!empty m}">
-                <h2>쿠폰할인</h2>
+    
+                <h2>예약자 정보</h2>
                 <div class="content-box">
-                    <select id="coupon" name="payCouponCode" class="form-select"></select>
+                    <table calss="reserveInfo" style="width: 400px;">
+                        <tr>
+                            <th >예약자 이름  :  </th>
+                            <td>
+                                <c:choose>
+                                    <c:when test="${!empty m}">
+                                        <input class="form-control" type="text" name="reserveName" value="${sessionScope.m.memberName}">
+                                    </c:when>
+                                    <c:otherwise>
+                                        <input class="form-control"  type="text" name="reserveName" required>
+                                    </c:otherwise>
+                                </c:choose>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>이메일 주소  :  </th>
+                            <td>
+                                <c:choose>
+                                    <c:when test="${!empty m}">
+                                        <input class="form-control"  type="text" name="reserveEmail" value="${sessionScope.m.memberEmail}">
+                                    </c:when>
+                                    <c:otherwise>
+                                        <input class="form-control"  type="text" name="reserveEmail" required>
+                                    </c:otherwise>
+                                </c:choose>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>전화번호  :  </th>
+                            <td>
+                                <c:choose>
+                                    <c:when test="${!empty m}">
+                                        <input class="form-control"  type="text" name="reservePhone" value="${sessionScope.m.memberPhone}">
+                                    </c:when>
+                                    <c:otherwise>
+                                        <input class="form-control"  type="text" name="reservePhone" required>
+                                    </c:otherwise>
+                                </c:choose>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
-                <div class="memberNo" style="display: none;">
-                    ${sessionScope.m.memberNo}
-                </div>
-
-                <h2>포인트</h2>
-                <input type="number" id="pointUse" value="0" class="form-control" style="text-align: right;">
-                <div class="pointBox">
-                    <span id="possiblePoint"></span><span>point 사용가능</span>
-                </div>
-            </c:if>
-            <c:if test="${empty m}">
-                <div class="memberNo" style="display: none;"></div>
-            </c:if>
-        </div>
-        <div class="content-right">
-            <div class="payBox">
-                <h3>결제정보</h3>
-                <hr>
-                <table class="payInfoBox">
-                    <tr>
-                        <th>주문금액</th>
-                        <td></td>
-                        <td class="payinfo" id="payInfoBox1"></td>
-                    </tr>
-                        <th>쿠폰할인</th>
-                        <td>-</td>
-                        <td class="payinfo" id="payInfoBox2">0</td>
-                        <input type="hidden" name="payCoupon">
-                    </tr>
-                        <th>사용 포인트</th>
-                        <td>-</td>
-                        <td class="payinfo" id="payInfoBox3">0</td>
-                        <input type="hidden" name="pointUse">
-                    </tr>
-                        <th>총 결제금액</th>
-                        <td></td>
-                        <td class="payinfo" id="payInfoBox4"></td>
-                        <input type="hidden" name="payPrice">
-                    </tr>
-                    <input type="hidden" name="pointAdd" id="pointAdd">
-                </table>
-                <button type="button" class="btn btn-primary" id="payBtn2">결제하기</button>
+    
+    
+                <c:if test="${!empty m}">
+                    <h2>쿠폰할인</h2>
+                    <div class="content-box">
+                        <select id="coupon" name="payCouponCode" class="form-select"></select>
+                    </div>
+                    <div class="memberNo" style="display: none;">
+                        ${sessionScope.m.memberNo}
+                    </div>
+    
+                    <h2>포인트</h2>
+                    <input type="number" id="pointUse" value="0" class="form-control" style="text-align: right;">
+                    <div class="pointBox">
+                        <span id="possiblePoint"></span><span>point 사용가능</span>
+                    </div>
+                </c:if>
+                <c:if test="${empty m}">
+                    <div class="memberNo" style="display: none;"></div>
+                </c:if>
             </div>
-        </form>
+            <div class="content-right">
+                <div class="payBox">
+                    <h3>결제정보</h3>
+                    <hr>
+                    <table class="payInfoBox">
+                        <tr>
+                            <th>주문금액</th>
+                            <td></td>
+                            <td class="payinfo" id="payInfoBox1"></td>
+                        </tr>
+                            <th>쿠폰할인</th>
+                            <td>-</td>
+                            <td class="payinfo" id="payInfoBox2">0</td>
+                            <input type="hidden" name="payCoupon">
+                        </tr>
+                            <th>사용 포인트</th>
+                            <td>-</td>
+                            <td class="payinfo" id="payInfoBox3">0</td>
+                            <input type="hidden" name="pointUse">
+                        </tr>
+                            <th>총 결제금액</th>
+                            <td></td>
+                            <td class="payinfo" id="payInfoBox4"></td>
+                            <input type="hidden" name="payPrice">
+                        </tr>
+                        <input type="hidden" name="pointAdd" id="pointAdd">
+                    </table>
+                    <button type="button" class="btn btn-primary" id="payBtn2">결제하기</button>
+                    <input type="button" id="payBtn3" value="결제test"></input>
+                </div>
+            </form>
+            </div>
+            
         </div>
     </div>
 
 
     <jsp:include page="/WEB-INF/views/common/footer.jsp" />
-    <script>
-       
-    </script>
+
     <script src="/resources/js/ticket/ticketView.js"></script>
 </body>
 </html>
