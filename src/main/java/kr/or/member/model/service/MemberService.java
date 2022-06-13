@@ -10,6 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 import kr.or.member.model.dao.MemberDao;
 import kr.or.member.model.vo.Member;
 import kr.or.member.model.vo.MemberPageData;
+import kr.or.report.model.vo.Report;
+import kr.or.seller.model.vo.ReserveData;
 
 @Service
 public class MemberService {
@@ -95,6 +97,14 @@ public class MemberService {
 		map.put("memberNo", memberNo);
 		map.put("updatePoint", updatePoint);
 		return dao.updateMemberPoint(map);
+	}
+
+	public ArrayList<ReserveData> allReserve(Member m, String type) {
+		return dao.allReserve(m,type);
+	}
+
+	public ArrayList<Report> selectAllReport() {
+		return dao.selectAllReport();
 	}
 
 

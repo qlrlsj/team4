@@ -32,8 +32,7 @@
 								<td>${type }</td>
 								<td><a href="#">${pay.payDate }</a></td>
 								<td>
-									<a href="#">${pay.productNo }</a><br>
-									<a href="#">${pay.payNo }</a>							
+									<a href="#">${pay.productNo }</a> / <a href="#">${pay.payNo }</a>							
 								</td>
 								<td>${pay.productName }</td>
 								<td>${pay.memberName }</td>
@@ -50,8 +49,7 @@
 								<td>${type }</td>
 								<td><a href="#">${pay.payDate }</a></td>
 								<td>
-									<a href="#">${pay.productNo }</a><br>
-									<a href="#">${pay.payNo }</a>							
+									<a href="#">${pay.productNo }</a> / <a href="#">${pay.payNo }</a>							
 								</td>
 								<td>${pay.productName }</td>
 								<td>${pay.memberName }</td>
@@ -68,8 +66,7 @@
 								<td>${type }</td>
 								<td><a href="#">${pay.payDate }</a></td>
 								<td>
-									<a href="#">${pay.productNo }</a><br>
-									<a href="#">${pay.payNo }</a>							
+									<a href="#">${pay.productNo }</a> / <a href="#">${pay.payNo }</a>							
 								</td>
 								<td>${pay.productName }</td>
 								<td>${pay.memberName }</td>

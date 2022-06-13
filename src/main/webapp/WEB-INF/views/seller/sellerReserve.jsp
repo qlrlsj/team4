@@ -42,15 +42,14 @@ function reserveCancel(reserveNo,payNo ){
 				<c:choose>
 					<c:when test="${type eq 'hostel' }">
 						<tr>
-							<th>구분</th><th>날짜</th><th>상품 번호 / 예약 번호</th><th>상품명</th><th>구매자 정보</th><th>연락처</th><th>옵션</th><th>인원</th><th>체크인</th><th>체크아웃</th><th>가격</th><th>결제번호</th>
+							<th>구분</th><th>날짜</th><th>상품 번호 / 예약 번호</th><th>상품명</th><th>구매자 정보</th><th>연락처</th><th>옵션</th><th>인원</th><th>체크인</th><th>체크아웃</th><th>가격</th><th>결제번호</th><th>결제 취소</th>
 						</tr>
 						<c:forEach items="${list }" var="r">
 							<tr id="${r.reserveNo }">
 								<td>${r.type }</td>
 								<td>${r.reserveDate }</td>
 								<td>
-									<a href="#">${r.productNo }</a><br>
-									<a href="#">${r.reserveNo }</a>							
+									<a href="#">${r.productNo }</a> / <a href="#">${r.reserveNo }</a>							
 								</td>
 								<td>${r.reserveName }</td>
 								<td>${r.memberId }</td>
@@ -73,15 +72,14 @@ function reserveCancel(reserveNo,payNo ){
 					</c:when>	
 					<c:when test="${type eq 'ticket' }">
 						<tr>
-							<th>구분</th><th>날짜</th><th>상품 번호 / 예약 번호</th><th>상품명</th><th>구매자 정보</th><th>연락처</th><th>수량</th><th>가격</th><th>결제번호</th>
+							<th>구분</th><th>날짜</th><th>상품 번호 / 예약 번호</th><th>상품명</th><th>구매자 정보</th><th>연락처</th><th>수량</th><th>가격</th><th>결제번호</th><th>결제 취소</th>
 						</tr>
 						<c:forEach items="${list }" var="r">
 							<tr id="${r.reserveNo }">
 								<td>${r.type }</td>
 								<td>${r.reserveDate }</td>
 								<td>
-									<a href="#">${r.productNo }</a><br>
-									<a href="#">${r.reserveNo }</a>							
+									<a href="#">${r.productNo }</a> / <a href="#">${r.reserveNo }</a>							
 								</td>
 								<td>${r.reserveName }</td>
 								<td>${r.memberId }</td>
@@ -105,8 +103,7 @@ function reserveCancel(reserveNo,payNo ){
 								<td>${r.type }</td>
 								<td><a href="#">${r.reserveDate }</a></td>
 								<td>
-									<a href="#">${r.productNo }</a><br>
-									<a href="#">${r.reserveNo }</a>							
+									<a href="#">${r.productNo }</a> / <a href="#">${r.reserveNo }</a>							
 								</td>
 								<td>${r.reserveName }</td>
 								<td>${r.memberId }</td>

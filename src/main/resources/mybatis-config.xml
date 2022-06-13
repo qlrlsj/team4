@@ -16,9 +16,9 @@
 		<typeAlias type="kr.or.hostel.model.vo.HostelReserve" alias="hr"/>
 		<typeAlias type="kr.or.companion.model.vo.Companion" alias="co"/>
 		<typeAlias type="kr.or.report.model.vo.Report" alias="rp"/>
-		<typeAlias type="kr.or.report.model.vo.BlackList" alias="bl"/>
 		<typeAlias type="kr.or.chat.model.vo.ChatRoom" alias="cr"/>
 		<typeAlias type="kr.or.chat.model.vo.Chat" alias="ch"/>
+		<typeAlias type="kr.or.chat.model.vo.Alarm" alias="alarm"/>
 		<typeAlias type="kr.or.ticket.model.vo.Ticket" alias="t"/>
 		<typeAlias type="kr.or.ticket.model.vo.TicketCategory" alias="tc"/>
 		<typeAlias type="kr.or.ticket.model.vo.LocalCategory" alias="lc"/>
@@ -38,5 +38,6 @@
 		<typeAlias type="kr.or.seller.model.vo.ReserveData" alias="rd"/>
 		<typeAlias type="kr.or.coupon.model.vo.Coupon" alias="po"/>
 		<typeAlias type="kr.or.payment.model.vo.Payment" alias="pay"/>
+		<typeAlias type="kr.or.pck.model.vo.PckReserve" alias="pc"/>
 	</typeAliases>
 </configuration>

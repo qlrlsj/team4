@@ -25,19 +25,19 @@
 				<input type="hidden" name="type" value="hostel">
 				<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
 				<input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
-				<button type="submit" >호스텔 상품 조회</button>
+				<button class="btn btn-primary" type="submit" >호스텔 상품 조회</button>
 			</form>
-			<form action="/sellerProduct.kt">
+			<form action="/sellerProduct.kt" method="post">
 				<input type="hidden" name="type" value="ticket">
 				<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
 				<input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
-				<button type="submit">티켓 상품 조회</button>
+				<button class="btn btn-primary" type="submit">티켓 상품 조회</button>
 			</form>
-			<form action="/sellerProduct.kt">
+			<form action="/sellerProduct.kt" method="post">
 				<input type="hidden" name="type" value="package">
 				<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
 				<input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
-				<button type="submit" >패키지 상품 조회</button>
+				<button class="btn btn-primary" type="submit" >패키지 상품 조회</button>
 			</form>				
 		</div>
 	</div>

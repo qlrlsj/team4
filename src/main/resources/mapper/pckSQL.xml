@@ -58,4 +58,12 @@
 		from file_tbl where package_no=#{packageNo}
 	</select>
 	
+	<insert id="insertPackageReserve" parameterType="pc">
+		insert into package_reserve values(reserve_seq.nextval,#{packagePrsnl},#{packageStart},#{packageNo},reserve_seq_2.nextval,#{memberId},#{reservePrice})
+	</insert>
+	
+	<insert id="insertPayment" parameterType="pc">
+		insert into payment values(payment_seq.nextval,#{reservePrice},0,0,0,#{packageStart},0,0)
+	</insert>
+	
 </mapper>

@@ -54,6 +54,10 @@ function call()	{
         $(".comDate").val("");
     }
 }
+let gobackcheck = false;
+$(".btn-check").click(function(){
+    gobackcheck = !gobackcheck;
+})
 function sizeAdd(){
     
     const airTable = document.querySelector('.airTable');
@@ -183,7 +187,7 @@ $(".airSubmitBtn").click(function(){
         alert("출발일입력");
         return false;
     }
-    if($(".comDate").val()=='' && $(".comDate").css("display") !="none"){
+    if($(".comDate").val()=='' && !gobackcheck){
         alert("도착일입력");
         return false;
     }
