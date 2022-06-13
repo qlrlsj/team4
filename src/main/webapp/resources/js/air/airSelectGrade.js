@@ -447,6 +447,8 @@ $(".payCompleteBtn").click(function(){
         $("input[name=memberName]").val($("input[name=bookerName]").val());
         $("input[name=airPay]").val(Number($(".paymentAmount").text()));
         $("input[name=phone]").val($("input[name=memberPhone]").val());
+        $("input[name=airLevelST]").val(Number($("input[name=airStartPay]").val()));
+        $("input[name=airLevelED]").val(Number($("input[name=airEndPay]").val()));
         $(".payComplete").trigger("click");
         }else{
             console.log(payCheck1);

@@ -30,6 +30,7 @@ import com.google.gson.JsonParser;
 import kr.or.air.model.service.AirService;
 import kr.or.air.model.vo.AirPayment;
 import kr.or.air.model.vo.AirReserve;
+import kr.or.air.model.vo.AirReserveComplete;
 import kr.or.air.model.vo.AirSchedule;
 import kr.or.air.model.vo.AirSearch;
 
@@ -186,29 +187,46 @@ public class AirController {
 		return airSchedule = new AirSchedule(airLine,airNumber,airStartTime,airEndTime,airStart,airArrive,airDate);
 	}
 	@RequestMapping(value="/payComplete.kt")
-	public String selectAllAir(HttpSession session, Model model, AirReserve airReserve, AirPayment airPayment, String addStartSeatNum, String addEndSeatNum) {
+	public String selectAllAir(HttpSession session, Model model, AirReserve airReserve, AirPayment airPayment, String addStartSeatNum, String addEndSeatNum, int airLevelST, int airLevelED) {
 		System.out.println(airReserve);
 		System.out.println(airPayment);
+		AirReserveComplete airEndComplete = null;
+		AirReserveComplete airStartComplete = null;
 		
-		
-		String[] StartSeat;
-		String[] EndSeat;
-		if(addStartSeatNum!=null) {
-			StartSeat = addStartSeatNum.split(", ");
-			for(int i=0;i<StartSeat.length;i++) {
-				System.out.println(StartSeat[i]);
+		int result = service.insertAirReserve(airPayment);
+		if(result>0) {
+			String ReserveNo = service.selectReserveNo();
+			if(addStartSeatNum!=null) {
+				airStartComplete.setAir_name(airReserve.getAirNumberST());
+				airStartComplete.setAir_line(airReserve.getAirLineST());
+				airStartComplete.setAir_start(airReserve.getAirStartTimeST());
+				airStartComplete.setAir_end(airReserve.getAirEndTimeST());
+				airStartComplete.setAir_date(airReserve.getAirDateST());
+				airStartComplete.setReserve_no(ReserveNo);
+				airStartComplete.setAir_level(airLevelST);
+				int result2 = service.insertAir(airStartComplete);
+				String[] StartSeat = addStartSeatNum.split(", ");
+				for(int i=0;i<StartSeat.length;i++) {
+					
+					System.out.println(StartSeat[i]);
+				}
+			}
+			if(addEndSeatNum!=null){
+				airEndComplete.setAir_name(airReserve.getAirNumberED());
+				airEndComplete.setAir_line(airReserve.getAirLineED());
+				airEndComplete.setAir_start(airReserve.getAirStartTimeED());
+				airEndComplete.setAir_end(airReserve.getAirEndTimeED());
+				airEndComplete.setAir_date(airReserve.getAirDateED());
+				airEndComplete.setReserve_no(ReserveNo);
+				airEndComplete.setAir_level(airLevelED);
+				int result3 = service.insertAir(airEndComplete);
+				String[] EndSeat = addEndSeatNum.split(", ");
+				for(int i=0;i<EndSeat.length;i++) {
+					
+					System.out.println(EndSeat[i]);
+				}
 			}
 		}
-		if(addEndSeatNum!=null){
-			EndSeat = addEndSeatNum.split(", ");
-			for(int i=0;i<EndSeat.length;i++) {
-				System.out.println(EndSeat[i]);
-			}
-		}
-		
-		
-		System.out.println(addStartSeatNum);
-		System.out.println(addEndSeatNum);
 		model.addAttribute("airReserve",airReserve);
 		return "air/airSelectGrade";
 	}

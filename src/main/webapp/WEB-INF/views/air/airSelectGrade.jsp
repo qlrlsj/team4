@@ -1077,6 +1077,7 @@
 			<input type="hidden" name="airArriveST" value="${airReserve.airArriveST}">
 			<input type="hidden" name="airDateST" value="${airReserve.airDateST}">
 			<input type="hidden" name="addStartSeatNum">
+			<input type="hidden" name="airLevelST">
 			
 			<c:if test="${!empty airReserve.airDateED}">
 				<input type="hidden" name="airLineED" value="${airReserve.airLineED}">
@@ -1087,6 +1088,7 @@
 				<input type="hidden" name="airArriveED" value="${airReserve.airArriveED}">
 				<input type="hidden" name="airDateED" value="${airReserve.airDateED}">
 				<input type="hidden" name="addEndSeatNum">
+				<input type="hidden" name="airLevelED">
 			</c:if>
 
 			<button type="submit" style="display: none;" class="payComplete"></button>
