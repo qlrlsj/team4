@@ -105,7 +105,6 @@
 		</div>
 		</div>
 	</div>
-	<script src="/resources/js/air/airReserveComplete.js"></script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
 
