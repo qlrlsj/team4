@@ -12,7 +12,6 @@
         height: 100vh;
         height: 400px;
         line-height: 400px;
-        
         background-repeat: no-repeat;
         background-size : cover;
         color:#fff;
@@ -67,22 +66,25 @@
         text-align: center;
         margin-bottom: 20px;
     }
-    .filterBox>button{
-        font-size: 20px;
+    .filterBox>a{
         margin: 0 20px;
         padding: 0;
     }
-    #highDiscount{
-        font-weight: bold;
-    }
+
 </style>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
     <div class="div-content">
         <c:choose>
             <c:when test="${ticket.size() eq 0}">
-                <h2> '${searchStr}' 검색결과</h2>
-                <h2>검색 결과가 없습니다.</h2>
+                <div class="localImg">
+                    ${parentLocalName}
+                </div>
+                <div class="searchStrBox">
+                    '${searchStr}' 검색결과
+                </div>
+                <h3 style="text-align: Center;">검색 결과가 없습니다.</h3>
+                <input type="hidden" id="parentLocalName" value="${parentLocalName}">
             </c:when>
             <c:otherwise>
                 <div class="localImg">
@@ -92,9 +94,10 @@
                     '${searchStr}' 검색결과
                 </div>
                 <div class="filterBox">
-                    <a href="/searchTicket.kt?searchStr=${searchStr}&type=optdiscountrate" class="btn" id="highDiscount">▶ 할인율 높은순</a>
-                    <a href="/searchTicket.kt?searchStr=${searchStr}&type=optdiscountpricelow"  class="btn" id="lowPrice">▶ 금액 낮은순</a>
-                    <a href="/searchTicket.kt?searchStr=${searchStr}&type=optdiscountpricehigh"  class="btn" id="highPrice">▶ 금액 높은순</a>
+                    <a href="/searchTicket.kt?searchStr=${searchStr}&type=optdiscountrate" class="btn" id="rate">▶ 할인율 높은순</a>
+                    <a href="/searchTicket.kt?searchStr=${searchStr}&type=optdiscountpricelow"  class="btn" id="priceLow">▶ 금액 낮은순</a>
+                    <a href="/searchTicket.kt?searchStr=${searchStr}&type=optdiscountpricehigh"  class="btn" id="priceHigh">▶ 금액 높은순</a>
+                    <input type="hidden" id="type" value="${type}">
                 </div>
                 <div class="album py-5 bg-light">
                     <div class="container">
@@ -151,9 +154,29 @@
     <jsp:include page="/WEB-INF/views/common/footer.jsp" />
     <script>
         $(document).ready(function(){
-            if(ticketSize!=0){
-                const parentLocalName = $("#parentLocalName").val();
+            let parentLocalName = $("#parentLocalName").val();
+            
+            let ticketSize = $("#ticketSize").val();
+            if(ticketSize != 0){
                 $(".localImg").css("background-image","url(/resources/img/ticket/"+parentLocalName+".png)");
+            }else if(parentLocalName!=""){
+                console.log("부모이름이 null이 아니면");
+                console.log(parentLocalName);
+                $(".localImg").css("background-image","url(/resources/img/ticket/"+parentLocalName+".png)");
+            }else{
+                $(".localImg").css("display","none");
+            }
+
+            const type = $("#type").val();
+            if(type == 'optdiscountrate'){
+                $("#rate").css("font-weight","bold");
+                $("#rate").css("font-size","1.1rem");
+            }else if(type == 'optdiscountpricelow'){
+                $("#priceLow").css("font-weight","bold");
+                $("#priceLow").css("font-size","1.1rem");
+            }else if(type == 'optdiscountpricehigh'){
+                $("#priceHigh").css("font-weight","bold");
+                $("#priceHigh").css("font-size","1.1rem");
             }
         });
     </script>
