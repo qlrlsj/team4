@@ -34,7 +34,7 @@
 			<form action="#">
 				<table border="1" class="table table-hover">
 					<tr>
-						<th>번호</th><th>아이디</th><th>이름</th><th>회원레벨</th><th>등급</th><th>변경</th><th>연락처</th><th>이메일</th><th>가입일</th><th>포인트</th><th>추방</th>
+						<th>번호</th><th>아이디</th><th>이름</th><th>등급</th><th>변경</th><th>연락처</th><th>이메일</th><th>가입일</th><th>포인트</th><th>추방</th>
 					</tr>
 					<c:forEach items="${list }" var="m">
 						<tr>
@@ -42,7 +42,7 @@
 							<td align="center">${m.memberNo }</td>
 							<td align="center">${m.memberId }</td>
 							<td align="center">${m.memberName }</td>
-							<td align="center">${m.memberLevel }</td>
+<%-- 							<td align="center">${m.memberLevel }</td> --%>
 							<td>
 									<c:if test="${m.memberGrade == 0 }">
 										<select class="form-select">

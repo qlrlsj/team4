@@ -112,6 +112,46 @@
 				</button>
 			</div>
 		</div>
+		
+		<!--  -->
+		
+		<div class="MainDiv" style="background-color: lavenderblush;">
+			<div class="MainLogo">
+				<h2 class="MainH2">먹고자고놀고 한번에 !</h2>
+				<div class="ShortcutDiv">
+					<div class="Shortcut">
+						패키지 바로가기
+					</div>
+					<div class="material-symbols-outlined ShortcutIcon" type="button">
+						arrow_circle_right
+					</div>
+				</div>
+			</div>
+			<div id="packageExampleControls" class="carousel slide ImgBox" data-bs-ride="carousel">
+				<div class="carousel-inner">
+					<div class="carousel-item active">
+						<img src="/resources/upload/package/flower1.png" class="d-block w-100 ImgSize" alt="프로모션1">
+					</div>
+					<div class="carousel-item">
+						<img src="/resources/upload/package/flower2.png" class="d-block w-100 ImgSize" alt="프로모션2">
+					</div>
+					<div class="carousel-item">
+						<img src="/resources/upload/package/flower3.png" class="d-block w-100 ImgSize" alt="프로모션3">
+					</div>
+				</div>
+				<button class="carousel-control-prev" type="button"	data-bs-target="#packageExampleControls" data-bs-slide="prev">
+					<span class="carousel-control-prev-icon" aria-hidden="true"></span> 
+					<span class="visually-hidden">Previous</span>
+				</button>
+				<button class="carousel-control-next" type="button" data-bs-target="#packageExampleControls" data-bs-slide="next">
+					<span class="carousel-control-next-icon" aria-hidden="true"></span> 
+					<span class="visually-hidden">Next</span>
+				</button>
+			</div>
+		</div>
+		
+		<!--  -->
+		
 	</div>
 	
 	<script src="/resources/js/index.js"></script>

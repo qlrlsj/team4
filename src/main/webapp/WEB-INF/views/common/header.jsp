@@ -51,32 +51,38 @@
 .alarm {
 	display: none;
 }
+
 .navbarsExample08 {
 	min-width: 500px;
 	min-height: 50px;
 }
+
 .headerNav {
 	width: 100%;
 	min-width: 300px;
 }
-.headerDiv{
+
+.headerDiv {
 	margin-left: 10%;
 	width: 80%;
 	padding: 0;
 }
-.headerUi{
+
+.headerUi {
 	width: 100%;
 	min-height: 40px;
 	min-width: 200px;
 	padding: 0;
 }
-.headerLi{
+
+.headerLi {
 	width: 20%;
 	min-height: 40px;
 	min-width: 60px;
 	padding: 0;
 }
-.headerA{
+
+.headerA {
 	width: 100%;
 	height: 20px;
 	min-height: 40px;
@@ -85,6 +91,9 @@
 	text-align: center;
 	line-height: 40px;
 	padding: 0;
+}
+.close1{
+	color: black;
 }
 </style>
 <script>
@@ -147,8 +156,8 @@
 				</a>
 				<form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 ms-lg-5"
 					style="width: 27%;">
-<!-- 					<input type="search" class="form-control" placeholder="Search..." -->
-<!-- 						aria-label="Search"> -->
+					<!-- 					<input type="search" class="form-control" placeholder="Search..." -->
+					<!-- 						aria-label="Search"> -->
 				</form>
 				<c:choose>
 					<c:when test="${empty sessionScope.m }">
@@ -163,22 +172,21 @@
 							<div class="modal-dialog">
 								<div class="modal-content">
 									<div class="modal-header">
-										<h5 class="modal-title" id="exampleModalLabel">로그인</h5>
+										<h5 class="modal-title" id="exampleModalLabel">Login</h5>
 										<button type="button" class="btn-close"
 											data-bs-dismiss="modal" aria-label="Close"></button>
 									</div>
 									<form action="/login.kt" method="post">
 										<div class="modal-body">
 											<fieldset>
-												<legend>로그인</legend>
-												아이디:<input type="text" name="memberId"><br> 비번:<input
-													type="password" name="memberPw"><br>
+												ID:<input type="text" name="memberId" class="form-control"><br> Password:<input
+													type="password" name="memberPw" class="form-control"><br>
 											</fieldset>
 										</div>
 										<div class="modal-footer">
-											<button type="submit" class="btn btn-primary">로그인</button>
-											<button type="button" class="btn btn-secondary"
-												data-bs-dismiss="modal">닫기</button>
+											<button type="submit" class="btn btn-primary">Login</button>
+											<button type="button" class="btn btn-secondary close1"
+												data-bs-dismiss="modal">Close</button>
 										</div>
 									</form>
 								</div>
@@ -193,8 +201,8 @@
 								<!-- <!-- 관리자 로그인 -->
 								<ul
 									class="nav col-12 col-lg-auto ms-lg-auto mb-2 justify-content-center mb-md-0 me-lg-5">
-<!-- 									<li><a href="#" class="nav-link px-2 link-dark">위시리스트</a></li> -->
-									<li><a href="#" class="nav-link px-2 link-dark">내 여행</a></li>
+									<!-- 									<li><a href="#" class="nav-link px-2 link-dark">위시리스트</a></li> -->
+									<!-- 									<li><a href="#" class="nav-link px-2 link-dark">내 여행</a></li> -->
 									<li><a href="/questionList.kt?reqPage=1"
 										class="nav-link px-2 link-dark">문의하기</a></li>
 									<li><a href="/allMember.kt"
@@ -209,8 +217,9 @@
 										aria-expanded="false">내정보</button>
 									<ul class="dropdown-menu dropdown-menu-dark"
 										aria-labelledby="dropdownMenuButton2">
-										<li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#pointmodal">포인트</a></li>
-										
+										<li><a class="dropdown-item" href="#"
+											data-bs-toggle="modal" data-bs-target="#pointmodal">포인트</a></li>
+
 										<li><a class="dropdown-item" href="/insertCoupon.kt">쿠폰</a></li>
 										<li><a class="dropdown-item" href="/mypage.kt">마이페이지</a></li>
 										<li><a class="dropdown-item" href="/sellerPage.kt">판매자
@@ -226,8 +235,8 @@
 								<!-- 판매자,구매자 로그인 -->
 								<ul
 									class="nav col-12 col-lg-auto ms-lg-auto mb-2 justify-content-center mb-md-0 me-lg-5">
-									<li><a href="#" class="nav-link px-2 link-dark">위시리스트</a></li>
-									<li><a href="#" class="nav-link px-2 link-dark">내 여행</a></li>
+									<!-- 									<li><a href="#" class="nav-link px-2 link-dark">위시리스트</a></li> -->
+									<!-- 									<li><a href="#" class="nav-link px-2 link-dark">내 여행</a></li> -->
 									<li><a href="/questionList.kt?reqPage=1"
 										class="nav-link px-2 link-dark">문의하기</a></li>
 									<li><span class="material-symbols-outlined bell">notifications</span><span
@@ -239,8 +248,9 @@
 										aria-expanded="false">내정보</button>
 									<ul class="dropdown-menu dropdown-menu-dark"
 										aria-labelledby="dropdownMenuButton2">
-										<li><a class="dropdown-item active" href="#" data-bs-toggle="modal" data-bs-target="#pointmodal">포인트</a></li>
-										
+										<li><a class="dropdown-item" href="#"
+											data-bs-toggle="modal" data-bs-target="#pointmodal">포인트</a></li>
+
 										<li><a class="dropdown-item" href="/myCoupon.kt">내 쿠폰</a></li>
 										<c:if test="${grade eq '2' }">
 											<li><a class="dropdown-item" href="#">파트너 등록하기</a></li>
@@ -271,47 +281,54 @@
 				</c:choose>
 			</div>
 		</div>
-		<div class="modal fade" id="pointmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal fade" id="pointmodal" tabindex="-1"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">내 보유 포인트</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
-				<div class="modal-body">
-					<div class="selectmenu">
-						<div style="float: left; margin-left: 20%;  width: 30%; font-size: 20px; text-align: center; line-height: 50px; border: 1px solid black;">
-							잔여포인트
-						</div>
-						<div class="col" style="width: 30%; height: 50px; float:left; margin: 0px 5px auto; color: red; text-align: center; font-size: 30px;">
-							${sessionScope.m.memberPoint }			
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">내 보유 포인트</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<div class="selectmenu">
+							<div
+								style="float: left; margin-left: 20%; width: 30%; font-size: 20px; text-align: center; line-height: 50px; border: 1px solid black;">
+								잔여포인트</div>
+							<div class="col"
+								style="width: 30%; height: 50px; float: left; margin: 0px 5px auto; color: red; text-align: center; font-size: 30px;">
+								${sessionScope.m.memberPoint }</div>
 						</div>
 					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary">Save changes</button>
-				</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-bs-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-primary">Save
+							changes</button>
+					</div>
 				</div>
 			</div>
 		</div>
 	</header>
-	<nav class="navbar navbar-expand-lg navbar-light bg-light" 
-		aria-label="Tenth navbar example" style="min-width:1000px; min-height:40px">
-		<div class="container-fluid headerDiv" style="min-height:40px">
-			<div class="collapse navbar-collapse justify-content-md-center navbarsExample08"
-				id="navbarsExample08" style="min-width:1000px; min-height:40px">
+	<nav class="navbar navbar-expand-lg navbar-light bg-light"
+		aria-label="Tenth navbar example"
+		style="min-width: 1000px; min-height: 40px">
+		<div class="container-fluid headerDiv" style="min-height: 40px">
+			<div
+				class="collapse navbar-collapse justify-content-md-center navbarsExample08"
+				id="navbarsExample08" style="min-width: 1000px; min-height: 40px">
 				<ul class="navbar-nav headerUi">
-					<li class="nav-item headerLi"><a class="nav-link active headerA"
-						href="/AirMain.kt">항공편</a></li>
-					<li class="nav-item headerLi"><a class="nav-link active headerA"
-						href="/hostelMain.kt">숙소</a></li>
-					<li class="nav-item headerLi"><a class="nav-link active headerA"
-						href="/ticketMain.kt">티켓</a></li>
-					<li class="nav-item headerLi"><a class="nav-link active headerA"
-						href="/packageMain.kt">패키지</a></li>
-					<li class="nav-item headerLi"><a class="nav-link active headerA"
-						href="/companionMain.kt?reqPage=1">동행자 모집</a></li>
+					<li class="nav-item headerLi"><a
+						class="nav-link active headerA" href="/AirMain.kt">항공편</a></li>
+					<li class="nav-item headerLi"><a
+						class="nav-link active headerA" href="/hostelMain.kt">숙소</a></li>
+					<li class="nav-item headerLi"><a
+						class="nav-link active headerA" href="/ticketMain.kt">티켓</a></li>
+					<li class="nav-item headerLi"><a
+						class="nav-link active headerA" href="/packageMain.kt">패키지</a></li>
+					<li class="nav-item headerLi"><a
+						class="nav-link active headerA" href="/companionMain.kt?reqPage=1">동행자
+							모집</a></li>
 				</ul>
 			</div>
 		</div>
