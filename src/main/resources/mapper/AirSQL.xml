@@ -21,4 +21,41 @@
 	<select id="findSeat" parameterType="Map" resultType="string">
 		select seat_No from air_seat where air_name = #{NumberST} and air_date = #{date}
 	</select>
+	
+	<select id="airCheck" parameterType="Map" resultType="ap">
+		select 
+			 reserve_no as reserveNo,
+			 pay_no as payNo,
+			 member_No as memberNo,
+			 order_date as orderDate,
+			 air_pay as airPay,
+			 member_name as memberName,
+			 Phone as phone,
+			 Reserve_state as reserveState
+		from air_Payment where member_name = #{name} and phone = #{phone}
+	</select>
+	<select id="airPayReserve" parameterType="String" resultType="ap">
+		select 
+			 reserve_no as reserveNo,
+			 pay_no as payNo,
+			 member_No as memberNo,
+			 order_date as orderDate,
+			 air_pay as airPay,
+			 member_name as memberName,
+			 Phone as phone,
+			 Reserve_state as reserveState
+		from air_Payment where reserve_no = #{airNumber}
+	</select>
+	<select id="airCompleteReserve" parameterType="String" resultType="ac">
+		select 
+			air_no as air_no,
+			air_name as air_name,
+			air_level as air_level,
+			air_date as air_date,
+			air_start as air_start,
+			air_end as air_end,
+			reserve_No as reserve_no,
+			air_line as air_line
+		from air_Reserve where reserve_No=#{airNumber}	
+	</select>
 </mapper>

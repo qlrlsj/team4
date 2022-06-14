@@ -10,8 +10,27 @@
     align-self: center;
     color: blue;
 }
+.selectmenu>*:first-child{
+    margin-left: 50px;
+}
 .col .mu1{
-    width: 40%;
+    width: 35%;
+    margin:  0px 5px auto;
     height: 50px;
     float:left;
+}
+
+.airCheckBtn{
+    width: 20%;
+    height: 50px;
+    float: left;
+    margin-left: 40%;
+}
+.space{
+    float: left; 
+    width: 10%; 
+    font-size: 20px; 
+    text-align: center; 
+    line-height: 50px; 
+    border: 1px solid black;
 }

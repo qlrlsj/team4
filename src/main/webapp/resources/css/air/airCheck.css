@@ -1,0 +1,21 @@
+.tableTBL{
+    width: 100%;
+    text-align: center;
+    margin-top: 50px;
+}
+.tableHead{
+    width: 100%;
+    height: 80px;
+    background-color: peachpuff;
+    font-size: 20px;
+    color: darkorange;
+}
+.tableBody{
+    background-color: azure;
+}
+.searchBtn{
+    width: 60%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}

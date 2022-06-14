@@ -74,7 +74,7 @@
         width: 30%;
         max-width: 200px;
         height: 200px;
-        background-color: burlywood;
+
     }
     .search-list-one-info{
         display: flex;
@@ -94,7 +94,6 @@
         color: steelblue;
     }
     .search-list-one-address{
-
         margin-bottom: 30px;
 
     }
