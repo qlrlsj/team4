@@ -61,21 +61,20 @@ $(".type-filter>a").on("click",function(){
                 //    console.log(startDate+"/"+endDate);
     
                     const ListDiv= "<div class='search-list-one'>";
-                   
                     const imgDiv = "<div class='search-list-one-img'><img src='/resources/upload/hostel/"+list[i].hostelfilepath+"'style='width: 200px; height: 200px;' ></div>";
                     const infoDiv = "<div class='search-list-one-info'>";
                    
                     const titleDiv = "<div class='search-list-one-title'><h5><a  href='/hostelDetail.kt?hostelCode="+list[i].hostelCode+"&startDate="+startDate+"&endDate="+endDate+"&customerNum="+customerNum+"'>"+list[i].hostelName+"</a></h5></div>";
                     const addrDiv = "<div class='search-list-one-address'>"+list[i].hostelAddress+"</div>";
                     const priceDiv = "<div class='search-list-one-price'>"+list[i].hostelPrice+"<span>원</span></div>";
-              //     console.log(typeof(infoDiv));
-                    
-              infoDiv.append(titleDiv);
-              infoDiv.append(addrDiv);
-              infoDiv.append(priceDiv);
-              ListDiv.append(imgDiv);
-              ListDiv.append(infoDiv);
-              ListDiv.append("</div></div>");
+                  console.log(infoDiv);
+                  console.log(infoDiv+titleDiv+addrDiv+priceDiv+'</div>');
+            //   infoDiv.append(titleDiv);
+            //   infoDiv.append(addrDiv);
+            //   infoDiv.append(priceDiv);
+            //   ListDiv.append(imgDiv);
+            //   ListDiv.append(infoDiv);
+            //   ListDiv.append("</div></div>");
 
               searchListDiv.append(ListDiv);
 

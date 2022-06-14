@@ -25,3 +25,35 @@ $(function(){
 $("input[btnradio]").click(function(){
     $("input[name=couponRange]").val($(this).val());
 })
+
+$(".submitBtn").click(function(){
+    if($("input[name=conponEndDate]").val()==''){
+        alert("유효기간입력");
+        return false;
+    }
+    if($("input[name=couponName]").val()==''){
+        alert("쿠폰이름입력");
+        return false;
+    }
+    if($("input[name=couponIf]").val()==''){
+        alert("쿠폰 사용 조건입력");
+        return false;
+    }
+    if($("input[name=couponDCPrice]").val()==''){
+        alert("할인가격 입력(없으면 0 입력)");
+        return false;
+    }
+    if($("input[name=couponDCPrice]").val()<0){
+        alert("할인가격 입력오류");
+        return false;
+    }
+    if($("input[name=couponDCRate]").val()==''){
+        alert("할인율 입력(없으면 0 입력");
+        return false;
+    }
+    if($("input[name=couponDCRate]").val()>79 || $("input[name=couponDCRate]").val()<0){
+        alert("할인율 입력오류");
+        return false;
+    }
+    $(".gosubmit").click();
+})
