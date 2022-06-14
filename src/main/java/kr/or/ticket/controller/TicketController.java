@@ -224,7 +224,12 @@ public class TicketController {
 	}
 	
 	@RequestMapping(value="/searchTicket.kt")
-	public String searchTicket() {
+	public String searchTicket(String searchStr,Model model) {
+		System.out.println("searchStr : "+searchStr);
+		ArrayList<MainTicket> ticket = service.selectSearchTicket(searchStr);
+		System.out.println(ticket);
+		model.addAttribute("searchStr", searchStr);
+		model.addAttribute("ticket",ticket);
 		return "ticket/searchTicket";
 	}
 	@RequestMapping(value="/ticketTest.kt")

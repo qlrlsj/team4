@@ -20,4 +20,5 @@ public class MainTicket {
 	private int optDiscountRate;
 	private int optDiscountPrice;
 	private String ticketFilepath1;
+	private String localFilepath;
 }

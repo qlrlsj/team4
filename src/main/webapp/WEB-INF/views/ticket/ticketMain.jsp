@@ -79,15 +79,15 @@
 	
 
 	<div class="div-content">
-		<form class="search" style="width:35%;">
-			<input type="search" class="form-control " placeholder="도시나 상품을 검색해보세요" aria-label="Search" style="height: 55px;border-radius: 10px; padding-left: 95px; border: 2px solid rgb(94, 169, 235);">
+		<form action="/searchTicket.kt" class="search" style="width:35%;">
+			<input type="text" class="form-control " name="searchStr" placeholder="도시나 상품을 검색해보세요" aria-label="Search" style="height: 55px;border-radius: 10px; padding-left: 95px; border: 2px solid rgb(94, 169, 235);">
 		</form>
 
 		<ul class="imgBox">
-			<li class="localImg"><a href="/searchTicket.kt?searchStr=제주도"><img src="/resources/img/ticket/제주도1.png"></a></li>
+			<li class="localImg"><a href="/searchTicket.kt?searchStr=제주"><img src="/resources/img/ticket/제주도1.png"></a></li>
 			<li class="localImg"><a href="/searchTicket.kt?searchStr=부산"><img src="/resources/img/ticket/부산1.png"></a></li>
 			<li class="localImg"><a href="/searchTicket.kt?searchStr=서울"><img src="/resources/img/ticket/서울1.png"></a></li>
-			<li class="localImg"><a href="/searchTicket.kt?searchStr=강원도"><img src="/resources/img/ticket/강원도1.png"></a></li>
+			<li class="localImg"><a href="/searchTicket.kt?searchStr=강원"><img src="/resources/img/ticket/강원도1.png"></a></li>
 			<li class="localImg"><a href="/searchTicket.kt?searchStr=인천"><img src="/resources/img/ticket/인천1.png"></a></li>
 		</ul>
 

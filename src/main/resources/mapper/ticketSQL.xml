@@ -217,4 +217,43 @@
 	<select id="selectOneFilepath1" parameterType="int" resultType="String">
 		select ticket_filepath1 as ticketFilepath1 from ticket_file where ticket_no = #{ticketNo}
 	</select>
+	
+	
+	<select id="selectSearchTicket" parameterType="String" resultType="mt">
+	        
+	select * from 
+		(select 
+            c2.category_name as parentCategoryName,
+            l1.local_name as localName,
+            l2.local_name as parentLocalName,
+			ticket_no as ticketNo,
+			ticket_title as ticketTitle,
+			required_time as requiredTime,
+			ticket_score as ticketScore
+        from ticket t
+        join ticket_Category c1 on (t.category_id = c1.category_id)
+        join ticket_category c2 on (c1.parent_category_id = c2.category_id)
+        join local_category l1 on (t.local_id = l1.local_id)
+        join local_category l2 on (l1.parent_local_id = l2.local_id))tinfo 
+        join (select ticket_no as ticketNo,
+        opt_title as optTitle,
+        opt_price as optPrice,
+        opt_discount_rate as optDiscountRate,
+        opt_discount_price as optDiscountPrice from    
+    (SELECT * FROM (
+        SELECT 
+            ticket_no,
+            opt_title,
+            opt_price,
+            opt_discount_rate,
+            opt_discount_price,
+            ROW_NUMBER() OVER(PARTITION BY ticket_no ORDER BY opt_discount_rate DESC) AS rn
+        FROM ticket_option
+    )
+    WHERE rn = 1 order by opt_discount_price desc))odr on (tinfo.ticketNo = odr.ticketNo) 
+    where localName LIKE '%'||#{searchStr}||'%' or parentLocalName like '%'||#{searchStr}||'%' or ticketTitle like '%'||#{searchStr}||'%'
+	</select>
+	<select id="selectSearchLocalFilepath" parameterType="String" resultType="String">
+		select local_filepath as localFilepath from local_category where local_name=#{parentLocalName}
+	</select>
 </mapper>

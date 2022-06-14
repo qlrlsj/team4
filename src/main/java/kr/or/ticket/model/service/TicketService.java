@@ -182,5 +182,14 @@ public class TicketService {
 		}
 		return ticket;
 	}
+
+	public ArrayList<MainTicket> selectSearchTicket(String searchStr) {
+		ArrayList<MainTicket> ticket= dao.selectSearchTicket(searchStr);
+		for(int i=0; i<ticket.size();i++) {
+			String localFilepath = dao.selectSearchLocalFilepath(ticket.get(i).getParentLocalName());
+			ticket.get(i).setLocalFilepath(localFilepath);
+		}
+		return ticket;
+	}
 	
 }
