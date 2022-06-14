@@ -11,7 +11,7 @@
 <body>
     <jsp:include page="/WEB-INF/views/common/header.jsp" />
     <div class="div-content">
-
+        <h3 style="margin-top: 40px; margin-bottom: 30px;">쿠폰 생성</h3>
         <div class="p-3 mb-5" style="background-color:#FAC5B0;">
             <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                 <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" value="1">
@@ -76,6 +76,40 @@
                     </div>
                 </fieldset>
             </form>
+        </div>
+        <div class="selectcoupon">
+            <h3 style="margin-bottom: 30px;">쿠폰 선택</h3>
+            <div>
+                <table class="table couponTable">
+                    <thead>
+                        <tr style="text-align: center;">
+                            <th scope="col"><span class="material-symbols-outlined">done</span></th>
+                            <th scope="col">쿠폰 이름</th>
+                            <th scope="col">할인가격</th>
+                            <th scope="col">할인율</th>
+                            <th scope="col">적용조건</th>
+                            <th scope="col">유효기간</th>
+                        </tr>
+                    </thead>
+                    <tbody style="text-align: center;">
+
+                    </tbody>
+                </table>
+            </div>
+            <h3 style="margin-bottom: 30px; margin-top: 40px;">쿠폰 발급</h3>
+            <div>
+                <div class="selectmenu">
+                    <div style="float: left; width: 30%; font-size: 20px; text-align: center; line-height: 50px; color: rgb(67, 67, 67);">
+                        발급할 아이디 :
+                    </div>
+                    <div class="col">
+                        <input type="text" name="Id" class=" form-control mu1">						
+                    </div>
+                    <div class="col">
+                        <button type="button" class="couponSend btn-primary" style="width:100px; height:50px; font-size:20px;">발급</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 	<script src="/resources/js/air/insertcoupon.js"></script>

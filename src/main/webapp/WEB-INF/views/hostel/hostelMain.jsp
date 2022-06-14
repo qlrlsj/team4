@@ -12,16 +12,20 @@ width: 100%;
 .search-box{
 	width: 80%;
 	height: 150px;
-	background-color: rgba(228, 222, 215, 0.808);
+	background-color: rgba(241, 243, 248, 0.808);
 	margin: 0 auto;
+	border-radius: 10px;
+	margin-top: 5px;
 }
 .type-btn{
+	min-width: 1200px;
 	padding-top: 20px;
 	padding-left: 20px;
 	
 }
 .search-content{
 	margin: 20px; 
+	min-width: 810px;
 }
 .Hostel-List{
 	width: 80%;
@@ -46,13 +50,13 @@ height: 400px;
 	<form class="form-inline" action="/searchHostelList.kt" method="post">
 	<div class=" type-btn search-box  " style="min-width: 850px;">
 		<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-			<input type="radio" class="btn-check" name="roomType" id="btnradio1" value="1" autocomplete="off" checked="">
+			<input type="radio" class="btn-check" name="roomType" id="btnradio1" value="1" required autocomplete="off" checked="">
 			<label class="btn btn-outline-primary" for="btnradio1">호텔</label>
-			<input type="radio" class="btn-check" name="roomType" id="btnradio2"  value="2" autocomplete="off" checked="">
+			<input type="radio" class="btn-check" name="roomType" id="btnradio2"  value="2" required autocomplete="off" checked="">
 			<label class="btn btn-outline-primary" for="btnradio2">게스트하우스</label>
-			<input type="radio" class="btn-check" name="roomType" id="btnradio3"   value="3" autocomplete="off" checked="">
+			<input type="radio" class="btn-check" name="roomType" id="btnradio3"   value="3" required autocomplete="off" checked="">
 			<label class="btn btn-outline-primary" for="btnradio3">펜션</label>
-			<input type="radio" class="btn-check" name="roomType" id="btnradio3"  value="4" autocomplete="off" checked="">
+			<input type="radio" class="btn-check" name="roomType" id="btnradio3"  value="4" required autocomplete="off" checked="">
 			<label class="btn btn-outline-primary" for="btnradio4">풀빌라</label>
 		  </div>
 

@@ -30,5 +30,15 @@ public class CouponService {
 		// TODO Auto-generated method stub
 		return Dao.couponMake(coupon);
 	}
+
+	public ArrayList<Coupon> selectCoupon() {
+		// TODO Auto-generated method stub
+		return Dao.selectCoupon();
+	}
+
+	public int couponSend(int couponNo, String id) {
+		// TODO Auto-generated method stub
+		return Dao.couponSend(couponNo, id);
+	}
 	
 }

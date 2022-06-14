@@ -13,7 +13,7 @@
 		<form class="form-inline" action="/searchHostelList.kt" method="post">
 		<div class=" type-btn search-box  " style="min-width: 850px;">
 			<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-				<input type="radio" class="btn-check" name="roomType" required id="btnradio1" value="1" checked >
+				<input type="radio" class="btn-check" name="roomType" required id="btnradio1" value="1" >
 				<label class="btn btn-outline-primary" for="btnradio1">호텔</label>
 				<input type="radio" class="btn-check" name="roomType" required id="btnradio2"  value="2"  >
 				<label class="btn btn-outline-primary" for="btnradio2">게스트하우스</label>
@@ -21,6 +21,7 @@
 				<label class="btn btn-outline-primary" for="btnradio3">펜션</label>
 				<input type="radio" class="btn-check" name="roomType"required  id="btnradio4"  value="4"  >
 				<label class="btn btn-outline-primary" for="btnradio4">풀빌라</label>
+				<input type="hidden" value="${roolTypeCheck}" id="roolTypeCheck">
 			  </div>
 	
 			<div class="search-content ">
@@ -41,14 +42,14 @@
 	<div class="filter-wrap">
 		<div class="typeSelectWrap">
 			<nav class="nav flex-column type-filter">
-				<a class="nav-link" href="javascript:void(0);" >전체</a>
-				<a class="nav-link" href="javascript:void(0);">가격높은순</a>
-				<a class="nav-link" href="javascript:void(0);">가격낮은순</a>
-				<a class="nav-link" href="javascript:void(0);">평점순</a>
+				<a class="nav-link lineUp" href="javascript:void(0);" >#전체</a>
+				<a class="nav-link lineUp" href="javascript:void(0);">#가격높은순</a>
+				<a class="nav-link lineUp" href="javascript:void(0);">#가격낮은순</a>
+				<a class="nav-link lineUp" href="javascript:void(0);">#평점순</a>
 		
 			</nav>
 		</div>
-		<div class="col facility ">	<h4>시설</h4>
+		<div class="col chkfilter facility">	<h4>시설</h4>
 			<input class="form-check-input hostel-comfort" name="comfortCheck"  type="checkbox" value="수영장" id="swim">
 			<label class="form-check-label" for="swim">수영장</label><br>
   
@@ -79,7 +80,7 @@
 			  <!-- 서블렛으로 합쳐서에 넘길거 -->
 				<input type="hidden" name="hostelComfort" id="hostelComfort">
 			</div>
-			<div class="col facility"><h4>서비스</h4>
+			<div class="col chkfilter service"><h4>서비스</h4>
 				<input class="form-check-input hostel-Service" name="serviceCheck" type="checkbox" value="라운지" id="bar">
 				<label class="form-check-label" for="bar">라운지</label><br>
 		
@@ -135,6 +136,36 @@
 		</div>
 
 </div>
+<script>
+
+var roolTypeCheck = $("#roolTypeCheck").val();
+	console.log("로드시 룸타입 : "+roolTypeCheck);
+
+$(document).ready(function(){
+/*
+	if(roolTypeCheck==1){
+	$("input:radio[name=roomType]:checkbox[value='1']").prop('checked', true);  
+}else if(roolTypeCheck==2){
+	$("input:radio[name=roomType]:checkbox[value='2']").prop('checked', true);
+}else if(roolTypeCheck==3){
+	$("input:radio[name=roomType]:checkbox[value='3']").prop('checked', true);
+}else if(roolTypeCheck==4){
+	$("input:radio[name=roomType]:checkbox[value='4']").prop('checked', true);
+}
+*/
+if(roolTypeCheck==1){
+    $("input:radio[name=roomType]").eq(0).click();
+}else if(roolTypeCheck==2){
+    $("input:radio[name=roomType]").eq(1).click();
+}else if(roolTypeCheck==3){
+    $("input:radio[name=roomType]").eq(2).click();
+}else if(roolTypeCheck==4){
+    $("input:radio[name=roomType]").eq(3).click();
+}
+});
+
+
+</script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 	<script src="/resources/js/hostel/searchHostelList.js"></script>
 

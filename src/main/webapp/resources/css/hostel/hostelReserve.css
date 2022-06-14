@@ -1,0 +1,19 @@
+.content-wrap{
+    width: 1200px;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+.content-header{
+    background-color: antiquewhite;
+}
+.pay-btn{
+width: 70%;
+margin: 0 auto;
+}
+.coupon-check{
+margin-bottom: 20px;
+}
+.point-check{
+width: 50%;
+margin-bottom: 50px;
+}

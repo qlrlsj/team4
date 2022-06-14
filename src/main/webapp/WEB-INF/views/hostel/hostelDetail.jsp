@@ -7,72 +7,9 @@
       <title>Insert title here</title>
       <style>
 
-        .content-wrap {
-          width: 1200px;
-          margin: 0 auto;
-          padding-top: 100px;
-          background-color: antiquewhite;
-        }
-        .hostel-optionList{
-
-          margin:  0 auto;
-          background-color: rgb(250, 215, 247);
-
-        }
-        .hostel-header{
-          margin-bottom: 10px;
-        }
-        .search-optionbox{
-          display: flex;
-
-          justify-content: center;
-
-          width: 80%;
-          margin:  0 auto;
-          margin-top: 10px;
-          margin-bottom: 10px;
-        }
-        .optionList-box{
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-
-          width: 80%;
-          margin:  0 auto;
-        }
-        .optionList{
-          display: flex;
-     
-          border: 1px solid grey;
-          margin-bottom: 10px;
-        }
-        .hostel-info{
-        
-          margin: 0 auto;
-          min-height: 400px;
-          background-color: wheat;
-        }
-        .option-img{
-          width: 30%;
-        }
-        .option-text{
-          display: flex;
-          width: 50%;
-          flex-direction: column;
-          justify-content: center;
-        }
-        .option-text > div{
-        }
-        .option-btn{
-          display: flex;
-          width: 20%;
-          justify-content: center;
-          align-items: center;
-
-        }
-        
       </style>
     </head>
+    <link rel="stylesheet" href="/resources/css/hostel/hostelDetail.css">
 
     <body>
       <jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -80,15 +17,14 @@
         <div class="hostel-content">
           <div class="hostel-header">
             <h2>${hostel.hostelName }</h2>
-            ${hostel.hostelScore }
-            <hr>
-            <span>${hostel.hostelAddress }</span><span>체크인/체크아웃 : ${hostel.checkinOut }</span>
-
+            <span style="color: grey;">평점  ${hostel.hostelScore }</span>
+            <hr style="color: rgb(171, 180, 202);">
+            <div class="detailIntro">
+             <div>${hostel.hostelAddress }</div> <div class="checkIn">체크인/체크아웃 : ${hostel.checkinOut }</div>
+            </div>
           </div>
           <div class="hostel-img">
-            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-
-
+            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" style="width: 1000px; margin: 0 auto;">
               <div class="carousel-inner">
                 <div class="carousel-item active">
                   <img src="/resources/upload/hostel/${fileList[0].filepath }" class="d-block w-100" width="800" height="600" alt="...">
@@ -119,7 +55,7 @@
           <input type="text" id="datepicker1" name="startDate" class="datepicker form-control" required  id = "datepicker1" style="width:20%; display: inline;" value="${startDate }">
             <input type="text" id="datepicker2" name="endDate" class="datepicker form-control"   required id = "datepicker2" style="width:20%; display: inline;" value="${endDate}">
             <input type="number" id="customerNum" min="1" name="customerNum" class="form-control" required  style="width:22%; display: inline;"  value="${customerNum}">
-            <button type="button" id="reSearch"  class="btn btn-outline-info">재검색하기</button><!--아작스처리-->
+            <button type="button" id="reSearch"  class="btn btn-outline-secondary">재검색하기</button><!--아작스처리-->
         </div>
       
         <div class="optionList-box">
@@ -129,16 +65,23 @@
       </div>
       <div class="hostel-info">
         <div class="hostel-intro">     
-           소개 : ${hostel.hostelIntro }
+          <div class="hostel-intro-title"><h3>소개</h3></div>
+          <div class="hostel-intro-content">${hostel.hostelIntro }</div>
             </div>
         <div class="hostel-usage">
-          안내 : ${hostel.hostelUsage }
+          <div class="hostel-usage-title"><h3>안내</h3></div>
+          <div class="hostel-usage-content">${hostel.hostelUsage }</div>
         </div>
         <div class="hostel-comfort">
-          <span><h4>편의시설</h4> </span><span>${hostel.hostelComfort }</span></div>
-        <div class="hostel-service"><span><h4>서비스</h4></span><span> ${hostel.hostelService }</span></div>
+          <div><h4>편의시설</h4> </div>
+          <div>${hostel.hostelComfort }</div>
+        </div>
+        <div class="hostel-service">
+          <div><h4>서비스</h4></div>
+          <div> ${hostel.hostelService }</div>
+        </div>
       </div>
-      <div class="hostel-review"><h3>리뷰탭</h3></div>
+     <!-- <div class="hostel-review"><h3>리뷰탭</h3></div>-->
       </div>
     </div>
 

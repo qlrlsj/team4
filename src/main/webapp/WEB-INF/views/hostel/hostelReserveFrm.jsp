@@ -7,25 +7,6 @@
 <meta charset="UTF-8">
 <title>Hostel Resere Form</title>
 <style>
-    .content-wrap{
-        width: 1200px;
-        margin: 0 auto;
-        margin-top: 50px;
-    }
-    .content-header{
-        background-color: antiquewhite;
-    }
-.pay-btn{
-    width: 70%;
-    margin: 0 auto;
-}
-.coupon-check{
- margin-bottom: 20px;
-}
-.point-check{
-    width: 50%;
-    margin-bottom: 50px;
-}
 
 
 </style>
@@ -35,6 +16,7 @@
   <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
   
 </head>
+<link rel="stylesheet" href="/resources/css/hostel/hostelReserve.css">
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 
