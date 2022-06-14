@@ -1,5 +1,5 @@
 .selectmenu{
-    height:100px;
+    height:80px;
 }
 .selectmenu>*{
     align-self: center;
@@ -16,4 +16,51 @@ td{
 .modal>.modal-dialog{
     width:600px;
     max-width:600px;
+}
+.airImgSize{
+    width: 100%;
+    height: 800px;
+}
+.airCheckPage{
+    width: 100%;
+    height: 250px;
+    background-color: rgb(102, 184, 255);
+    margin-bottom: 50px;
+}
+.col .mu1{
+    width: 35%;
+    height: 50px;
+    float:left;
+    margin:  0px 5px auto;
+}
+.selectmenu>*:first-child{
+    margin-left: 50px;
+}
+.myAirCheck{
+    width: 100%;
+    height: 50px;
+    padding-top: 25px;
+    margin-bottom: 50px;
+    text-align: center;
+}
+.airCheckBtn{
+    width: 20%;
+    height: 50px;
+    float: left;
+    margin-left: 40%;
+}
+.space{
+    float: left; 
+    width: 10%; 
+    font-size: 20px; 
+    text-align: center; 
+    line-height: 50px; 
+    border: 1px solid black;
+}
+.searchBtn{
+    width: 100%;
+}
+.searchBtn>span{
+    font-size: 30px;
+    
 }

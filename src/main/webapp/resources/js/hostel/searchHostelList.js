@@ -43,43 +43,49 @@ $(".type-filter>a").on("click",function(){
             url: "/filterHostelList.kt",
             data : {roomType:roomType, startDate:startDate, endDate:endDate, customerNum:customerNum,keyWord:keyWord,checkedComfortList:checkedComfortList,checkedServiceList:checkedServiceList,filterIidx:filterIidx},
             success : function(data){
-         //       var startDate = data.startDate;
-            //    var endDate = data.endDate;
-           //     var customerNum = data.customerNum;
+                var startDate = data.startDate;
+                var endDate = data.endDate;
+                var customerNum = data.customerNum;
                 var list = data.list;
 
-                var searchListDiv = $(".list-searched");
+                // console.log("옵션리스트 호출");
+                const searchListDiv = $(".list-searched");
+               // const searchListOne= $(".search-list-one");
                 searchListDiv.empty(); // 비우기 
+         //       searchListOne.remove();
+              //  console.log(list.length);
+                
+
                 for(let i=0;i<list.length;i++){
                 //    console.log(list[i].hostelName);
                 //    console.log(startDate+"/"+endDate);
     
-                    var ListDiv= "<div class='search-list-one'>";
-                
-                    var imgDiv = "<div class='search-list-one-img'><img src='/resources/upload/hostel/"+list[i].hostelfilepath+"'style='width: 200px; height: 200px;' ></div>";
-                    var infoDiv = "<div class='search-list-one-info'>";
-                
-                    var titleDiv = "<div class='search-list-one-title'><h5><a  href='/hostelDetail.kt?hostelCode="+list[i].hostelCode+"&startDate="+startDate+"&endDate="+endDate+"&customerNum="+customerNum+"'>"+list[i].hostelName+"</a></h5></div>";
-                    var addrDiv = "<div class='search-list-one-address'>"+list[i].hostelAddress+"</div>";
-                    var priceDiv = "<div class='search-list-one-price'>"+list[i].hostelPrice+"<span>원</span></div>";
-        //            console.log(typeof(infoDiv));
-           //         console.log("입실일"+startDate+"/퇴실"+endDate);
-        //            console.log("입실인원"+customerNum);
-                    
-             /* infoDiv.appendChild(titleDiv);
-            infoDiv.append(addrDiv);
-            infoDiv.append(priceDiv);
-            ListDiv.append(imgDiv);
-            ListDiv.append(infoDiv);
-            ListDiv.append("</div></div>");
-            $(".list-searched").append(ListDiv);
-*/
-                    infoDiv += titleDiv+addrDiv+priceDiv;
-                    ListDiv += imgDiv+infoDiv;
-                    $(".list-searched").append(ListDiv);
+                    const ListDiv= "<div class='search-list-one'>";
+                    const imgDiv = "<div class='search-list-one-img'><img src='/resources/upload/hostel/"+list[i].hostelfilepath+"'style='width: 200px; height: 200px;' ></div>";
+                    const infoDiv = "<div class='search-list-one-info'>";
+                   
+                    const titleDiv = "<div class='search-list-one-title'><h5><a  href='/hostelDetail.kt?hostelCode="+list[i].hostelCode+"&startDate="+startDate+"&endDate="+endDate+"&customerNum="+customerNum+"'>"+list[i].hostelName+"</a></h5></div>";
+                    const addrDiv = "<div class='search-list-one-address'>"+list[i].hostelAddress+"</div>";
+                    const priceDiv = "<div class='search-list-one-price'>"+list[i].hostelPrice+"<span>원</span></div>";
+                  console.log(infoDiv);
+                  console.log(infoDiv+titleDiv+addrDiv+priceDiv+'</div>');
+            //   infoDiv.append(titleDiv);
+            //   infoDiv.append(addrDiv);
+            //   infoDiv.append(priceDiv);
+            //   ListDiv.append(imgDiv);
+            //   ListDiv.append(infoDiv);
+            //   ListDiv.append("</div></div>");
 
+              searchListDiv.append(ListDiv);
 
+                /*    infoDiv.append(titleDiv);
+                    infoDiv.append(addrDiv);
+                    infoDiv.append(priceDiv);
+                    ListDiv.append(imgDiv);
+                    ListDiv.append(infoDiv);
+                    ListDiv.append("</div></div>");
 
+                    searchListDiv.append(ListDiv);*/
                 }
 
                 }
@@ -108,6 +114,12 @@ $("[name=serviceCheck]").change(function(){
             $("input:checkbox[name=serviceCheck]:checked").each(function(){
                 checkedService.push($(this).val());
             //    console.log(checkedService);
+                 checkedServiceList = checkedService.join("%");
+                console.log(checkedServiceList);
+                $("[name=hostelService]").val(checkedServiceList);
+            });
+        });
+                //    console.log(checkedService);
                  checkedServiceList = checkedService.join("%");
                 console.log(checkedServiceList);
                 $("[name=hostelService]").val(checkedServiceList);

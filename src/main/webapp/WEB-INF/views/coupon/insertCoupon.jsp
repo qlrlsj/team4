@@ -27,13 +27,13 @@
                 <fieldset>
                     <input type="hidden" name="couponRange">
                     <div class="selectmenu">
-                        <div style="float: left; width: 10%; font-size: 20px; text-align: center;">
+                        <div class="space">
                             발급날짜
                         </div>
                         <div class="col">
                             <input type="text" name="couponDate" class=" form-control mu1" readonly>						
                         </div>
-                        <div style="float: left; width: 10%; font-size: 20px; text-align: center;">
+                        <div class="space">
                             유효기간
                         </div>
                         <div class="col">
@@ -41,13 +41,13 @@
                         </div>
                     </div>
                     <div class="selectmenu">
-                        <div style="float: left; width: 10%; font-size: 20px; text-align: center;">
+                        <div class="space">
                             쿠폰이름
                         </div>
                         <div class="col">
                             <input type="text" name="couponName" class="form-control mu1" placeholder="쿠폰이름">
                         </div>
-                        <div style="float: left; width: 10%; font-size: 20px; text-align: center;">
+                        <div class="space">
                             적용조건
                         </div>
                         <div class="col">
@@ -55,13 +55,13 @@
                         </div>
                     </div>
                     <div  class="selectmenu">
-                        <div style="float: left; width: 10%; font-size: 20px; text-align: center;">
+                        <div class="space">
                             할인 가격
                         </div>
                         <div class="col">
                             <input type="text" name="couponDCPrice" class="form-control mu1" placeholder="할인 가격">
                         </div>
-                        <div style="float: left; width: 10%; font-size: 20px; text-align: center;">
+                        <div class="space">
                             할인율
                         </div>
                         <div class="col">
@@ -69,9 +69,10 @@
                         </div>
                     </div>
                     <div class="col">
-                        <button type="submit" class="btn btn-primary submitBtn" style="float:right">
+                        <button type="button" class="btn btn-primary submitBtn" style="float:right">
                             <span class="material-icons">file_upload</span>
                         </button>
+                        <button type="submit" class="gosubmit" style="display: none;"></button>
                     </div>
                 </fieldset>
             </form>

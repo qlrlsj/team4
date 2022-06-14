@@ -130,6 +130,70 @@
 			</form>
 		</div>
 		
+		<div class="airCheckPage">
+			<div class="myAirCheck">
+				<h3>내 예약 내역확인</h3>
+			</div>
+			<c:choose>
+				<c:when test="${empty sessionScope.m}">
+					<form action="airCheck.kt" method="post">
+						<fieldset>
+							<input type="hidden" name="couponRange">
+							<div class="selectmenu">
+								<div class="space">
+									이름
+								</div>
+								<div class="col">
+									<input type="text" name="name" class=" form-control mu1" placeholder="이름 입력">						
+								</div>
+								<div class="space">
+									전화번호
+								</div>
+								<div class="col">
+									<input type="text" name="phone" class="form-control mu1" placeholder="휴대폰 번호 입력">						
+								</div>
+							</div>
+							<div class="col airCheckBtn">
+								<button type="button" class="btn btn-primary searchBtn">
+									<span class="material-icons">manage_search</span>
+								</button>
+								<button type="submit" class="gosubmit" style="display: none;"></button>
+							</div>
+						</fieldset>
+					</form>
+				</c:when>
+				<c:otherwise>
+					<form action="airCheck.kt" method="post">
+						<fieldset>
+							<input type="hidden" name="couponRange">
+							<div class="selectmenu">
+								<div class="space">
+									이름
+								</div>
+								<div class="col">
+									<input type="text" name="name" class=" form-control mu1" value="${sessionScope.m.memberName }">						
+								</div>
+								<div class="space">
+									전화번호
+								</div>
+								<div class="col">
+									<input type="text" name="phone" class="form-control mu1" value="${sessionScope.m.memberPhone }">						
+								</div>
+							</div>
+							<div class="col airCheckBtn">
+								<button type="button" class="btn btn-primary searchBtn">
+									<span class="material-icons">manage_search</span>
+								</button>
+								<button type="submit" class="gosubmit" style="display: none;"></button>
+							</div>
+						</fieldset>
+					</form>
+				</c:otherwise>
+			</c:choose>
+
+			
+		</div>
+
 		<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
 			<div class="carousel-inner">
 				<div class="carousel-item active">
