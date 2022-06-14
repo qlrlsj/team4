@@ -1,0 +1,56 @@
+
+.airTableBase{
+    background-color: rgb(199, 199, 199);
+    width: 80%;
+    height: 600px;
+    margin-top: 50px;
+    margin-left: 10%;
+}
+.comment{
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 100px;
+    text-align: center;
+}
+
+.payTable{
+    width: 80%;
+    height: 600px;
+    text-align: center;
+    margin-left: 10%;
+    display: block;
+}
+.payTable>tbody{
+    width: 650px;
+    height: 100%;
+    margin: 0 auto;
+}
+.payTable tr>th{
+    width: 200px;
+    height: 45px;
+    background-color: #eeeeee;
+    border: 1px solid #444444;
+    font-size: 20px;
+    color: rgb(52, 52, 52);
+}
+.payTable tr>td{
+    width: 150px;
+    height: 45px;
+    background-color: #eeeeee;
+    border: 1px solid #444444;
+    font-size: 20px;
+    color: rgb(52, 52, 52);
+}
+.airPlace{
+    width: 50%;
+    height: 75px;
+    margin-left: 25%;
+    color: white;
+    font-size: 40px;
+    text-align: center;
+    padding-top: 20px;
+    margin-bottom: 20px;
+}
+.payTable tr>td{
+    color: #9a6932;
+}

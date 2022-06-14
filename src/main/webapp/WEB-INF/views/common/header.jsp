@@ -209,7 +209,8 @@
 										aria-expanded="false">내정보</button>
 									<ul class="dropdown-menu dropdown-menu-dark"
 										aria-labelledby="dropdownMenuButton2">
-										<li><a class="dropdown-item active" href="#">포인트</a></li>
+										<li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#pointmodal">포인트</a></li>
+										
 										<li><a class="dropdown-item" href="/insertCoupon.kt">쿠폰</a></li>
 										<li><a class="dropdown-item" href="/mypage.kt">마이페이지</a></li>
 										<li><a class="dropdown-item" href="/sellerPage.kt">판매자
@@ -238,8 +239,7 @@
 										aria-expanded="false">내정보</button>
 									<ul class="dropdown-menu dropdown-menu-dark"
 										aria-labelledby="dropdownMenuButton2">
-										<li><a class="dropdown-item active" href="#">포인트</a></li>
-
+										<li><a class="dropdown-item active" href="#" data-bs-toggle="modal" data-bs-target="#pointmodal">포인트</a></li>
 										
 										<li><a class="dropdown-item" href="/myCoupon.kt">내 쿠폰</a></li>
 										<c:if test="${grade eq '2' }">
@@ -269,6 +269,30 @@
 
 					</c:otherwise>
 				</c:choose>
+			</div>
+		</div>
+		<div class="modal fade" id="pointmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">내 보유 포인트</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div class="selectmenu">
+						<div style="float: left; margin-left: 20%;  width: 30%; font-size: 20px; text-align: center; line-height: 50px; border: 1px solid black;">
+							잔여포인트
+						</div>
+						<div class="col" style="width: 30%; height: 50px; float:left; margin: 0px 5px auto; color: red; text-align: center; font-size: 30px;">
+							${sessionScope.m.memberPoint }			
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary">Save changes</button>
+				</div>
+				</div>
 			</div>
 		</div>
 	</header>
