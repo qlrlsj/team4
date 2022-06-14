@@ -46,15 +46,17 @@ let alarmWs;
 let senderNo;
 $(function(){
 	senderNo = $("[name=memberNo]").val();
-	$.ajax({
-		url : "/alarmCount.kt",
-		type: "post",
-		data : {"memberNo":senderNo},
-		success : function(data) {
-			$("#alarmCount").empty();
-			$("#alarmCount").append(data);
-		}
-	});
+	if(senderNo != null){
+		$.ajax({
+			url : "/alarmCount.kt",
+			type: "post",
+			data : {"memberNo":senderNo},
+			success : function(data) {
+				$("#alarmCount").empty();
+				$("#alarmCount").append(data);
+			}
+		});		
+	}
 	//로그인 했는지 체크
 	var loginCheck = $("#loginCheck").val();
 	console.log(loginCheck);
