@@ -106,5 +106,14 @@ public class TicketDao {
 	public String selectOneFilepath1(int ticketNo) {
 		return sqlSession.selectOne("ticket.selectOneFilepath1", ticketNo);
 	}
+
+	public ArrayList<MainTicket> selectSearchTicket(String searchStr) {
+		List list = sqlSession.selectList("ticket.selectSearchTicket",searchStr);
+		return (ArrayList<MainTicket>)list;
+	}
+
+	public String selectSearchLocalFilepath(String parentLocalName) {
+		return sqlSession.selectOne("ticket.selectSearchLocalFilepath", parentLocalName);
+	}
 	
 }

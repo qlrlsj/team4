@@ -151,6 +151,10 @@
     border-collapse: separate;
     border-spacing: 0 10px;
     }
+    .payInfoBox>tbody>tr>th{
+        text-align: left;
+    }
+
     .payBox{
         width: 100%;
         margin-left: 50px;
@@ -167,6 +171,17 @@
     }
     .reserveInfo{
         width: 400px;
+    }
+    .sideBox{
+        width: 300px; 
+        height: 250px; 
+        position: fixed; 
+        top: 350px; left: 60%;
+        background-color: #fff;
+        border-radius: 2px;
+        box-shadow: 0 2px 4px 0 rgb(0 0 0 / 10%), 0 0 0 1px #e9ecef;
+        box-sizing: border-box;
+        padding: 24px 24px 8px;
     }
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
@@ -197,11 +212,11 @@
                     <img class="star" src="/resources/img/ticket/별5.png">
                 </c:when>
             </c:choose>
-            <span>리뷰수</span>
+            <span>(0)</span>
             
                 <table style="margin-top:20px; ">
                     <tr>
-                        <td colspan="3"><img src="/resources/upload/ticket/${file.getTicketFilepath1()}" style="width: 700px ;height: 450px;"></td>
+                        <td colspan="3"><img src="/resources/upload/ticket/${file.getTicketFilepath1()}" style="width: 694px ;height: 510px;"></td>
                     </tr>
                     <tr>
                         <td><img src="/resources/upload/ticket/${file.getTicketFilepath2()}" style="width: 230px ;height: 170px;"></td>
@@ -216,7 +231,7 @@
                 <div style="line-height: 100%;">
                     <span class="material-icons">info_outline</span>
                     <span class="material-icons" style="color: #FB8C00;">local_fire_department</span>
-                    <span style="display: inline-block;">예약 전 필독</span>
+                    <span id="ticketSpan" style="display: inline-block;">예약 전 필독</span>
                     <span class="material-icons" style="color: #FB8C00;">local_fire_department</span>
                     <span>꼭 확인해주세요!</span>
                 </div>
@@ -320,7 +335,16 @@
                 <p>유효기간 내 취소시 100% 환불됩니다.</p>
             </div>
         </div>
-
+        <div class="sideBox">
+            <div class="sideBox-top">
+                <span style="font-size:20px; font-weight: bold;">${optionList.get(0).getOptDiscountPrice()}원</span>
+                <span> 부터~</span>
+                <br>
+                <br>
+            </div>
+            <hr>
+            <button type="button" class="btn btn-primary" id="ticketBtn" style="width:100%;">티켓 선택</button>
+        </div>
     </div>
 
     <div class="div-content page2">
@@ -429,24 +453,24 @@
                     <table class="payInfoBox" style="padding-left: 25px;">
                         <tr>
                             <th>주문금액</th>
-                            <td></td>
+                            <td style="width: 15px;"></td>
                             <td class="payinfo" id="payInfoBox1"></td>
                             <td>원</td>
                         </tr>
                             <th>쿠폰할인</th>
-                            <td>-</td>
+                            <td style="width: 15px;">-</td>
                             <td class="payinfo" id="payInfoBox2">0</td>
                             <input type="hidden" name="payCoupon">
                             <td>원</td>
                         </tr>
                             <th>사용 포인트</th>
-                            <td>-</td>
+                            <td style="width: 15px;">-</td>
                             <td class="payinfo" id="payInfoBox3">0</td>
                             <input type="hidden" name="pointUse">
                             <td>원</td>
                         </tr>
                             <th>총 결제금액</th>
-                            <td></td>
+                            <td style="width: 15px;"></td>
                             <td class="payinfo" id="payInfoBox4"></td>
                             <td>원</td>
                             <input type="hidden" name="payPrice">
@@ -463,9 +487,28 @@
         </div>
     </div>
 
-
+    
     <jsp:include page="/WEB-INF/views/common/footer.jsp" />
+    <script>
+        $(document).ready(function(){
+    $("#ticketBtn").on("click",function(event){
+        var offset = $("#ticketSpan").offset();
+        $("html,body").animate({scrollTop:offset.top},100);
+    });
 
+    $(window).resize(function (){
+  // width값을 가져오기
+  var width_size = window.outerWidth;
+  
+  // 800 이하인지 if문으로 확인
+  if (width_size <= 1270) {
+    $(".sideBox").css("display","none");
+  }else{
+    $(".sideBox").css("display","block");
+  }
+})
+});
+    </script>
     <script src="/resources/js/ticket/ticketView.js"></script>
 </body>
 </html>

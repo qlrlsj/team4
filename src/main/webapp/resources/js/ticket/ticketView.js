@@ -190,3 +190,4 @@ $("#payBtn3").on("click",function(){
     $($("#payBtn3")).attr("type","submit");
     $($("#payBtn3")).trigger("click");
 });
+
