@@ -14,6 +14,19 @@
 			t1.coupon_range as couponRange
 		from (coupon t1 inner join (select * from couponuse where member_no=#{memberNo} and coupon_state=0)t2 on t1.coupon_no=t2.coupon_no)
 	</select>
+	<select id="selectCoupon" resultType="po">
+		select 
+			coupon_no as couponNo,
+			coupon_name as couponName,
+			coupon_date as couponDate,
+			coupon_enddate as conponEndDate,
+			coupon_dcprice as couponDCPrice,
+			coupon_dcrate as couponDCRate,
+			coupon_if as couponIf,
+			coupon_range as couponRange
+		from coupon
+	</select>
+	
 	<select id="selectAllCouponTicket" parameterType="Map" resultType="po">
 		select 
 			t1.coupon_no as couponNo,
@@ -32,5 +45,11 @@
 	</update>
 	<insert id="couponMake" parameterType="po">
 		insert into coupon values(coupon_seq.nextval, #{couponName}, sysdate, #{conponEndDate}, #{couponDCPrice}, #{couponDCRate}, #{couponIf}, #{couponRange})
+	</insert>
+	<select id="findMemberNo" parameterType="string" resultType="int">
+		select member_No as memberNo from member where member_Id = #{Id}
+	</select>
+	<insert id="couponSend" parameterType="map">
+		insert into couponuse values(#{memberNo},#{couponNo},0)
 	</insert>
 </mapper>
