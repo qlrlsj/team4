@@ -59,13 +59,25 @@ public class CouponController {
 	}
 	@RequestMapping(value="/couponSend.kt")
 	public String couponSend(HttpSession session, int couponNo, String Id) {
-//		String[] endDate = coupon.getConponEndDate().split("-");
-//		System.out.println(endDate[0].substring(2,4));
-//		coupon.setConponEndDate(endDate[0].substring(1,3) +"/"+ endDate[1] +"/"+ endDate[2]);
-//		int result = service.couponMake(coupon);
+		System.out.println(couponNo);
+		System.out.println(Id);
+		
 		
 		int result = service.couponSend(couponNo,Id);
 		
 		return "coupon/insertCoupon";
+	}
+	@RequestMapping(value="/myCoupon.kt")
+	public String myCoupon(HttpSession session) {
+		
+		return "coupon/myCoupon";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="findCouponUse.kt", produces = "application/json;charset=utf-8")
+	public String findCouponUse(int userNo) {
+		System.out.println(userNo);
+		ArrayList<Coupon> couponlist = service.findCouponUse(userNo);
+		return new Gson().toJson(couponlist);
 	}
 }

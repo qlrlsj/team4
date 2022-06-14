@@ -45,12 +45,18 @@ public class CouponDao {
 	public int couponSend(int couponNo, String id) {
 		// TODO Auto-generated method stub
 		int memberNo = sqlSession.selectOne("coupon.findMemberNo",id);
+		System.out.println(memberNo);
 		HashMap<Object, Object> map = new HashMap<Object, Object>();
 		map.put("memberNo", memberNo);
 		map.put("couponNo", couponNo);
 		int result = sqlSession.insert("coupon.couponSend",map);
 		
-		return 0;
+		return result;
+	}
+
+	public ArrayList<Coupon> findCouponUse(int userNo) {
+		List list = sqlSession.selectList("findCouponUse",userNo);
+		return (ArrayList<Coupon>) list;
 	}
 	
 }

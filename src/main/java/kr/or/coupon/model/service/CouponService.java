@@ -40,5 +40,10 @@ public class CouponService {
 		// TODO Auto-generated method stub
 		return Dao.couponSend(couponNo, id);
 	}
+
+	public ArrayList<Coupon> findCouponUse(int userNo) {
+		// TODO Auto-generated method stub
+		return Dao.findCouponUse(userNo);
+	}
 	
 }
