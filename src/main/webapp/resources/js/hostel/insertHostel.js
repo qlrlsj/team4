@@ -78,29 +78,31 @@
                       fullAddr = (addr+" "+addrAd); // 검색한주소 + 한칸공백 + 세부주소 
                     
                    
-                    console.log("전체주소:"+fullAddr);
+             //       console.log("전체주소:"+fullAddr);
  
                     $("#hostelAddress").val(fullAddr); // 히든인풋에 값 바꿔주기 
                 }
         
         
-            $("#hostelType").on("change",function(){ // 숙소 타입에 따라 옵션창 바꿔주기 
-                $( '#hostel-option1 > tbody').empty(); // 바뀔때마다 테이블비우기
-                const hostelType = $(this).val();  // 선택한 숙소타입번호 
+        $(document).on("change","#hostelType",function(){
+            $( '.hostel-option > tbody').empty(); // 바뀔때마다 테이블비우기
+            const hostelType = $(this).val();  // 선택한 숙소타입번호 
+            
+            //    console.log(hostelType);
+            $(".select-option").hide();	// 다 숨기고 선택한 옵션에 해당하는거만 보여주기 
+            if(hostelType==1){
+                $("#select-option1").show(); //호텔 
+            }else if(hostelType==2){
+                $("#select-option2").show(); //게하
+            }else if(hostelType==3){
+                $("#select-option3").show(); //펜션 
+            }else if(hostelType==4){
+                $("#select-option4").show(); //풀빌라
+            }
+    
+                });
+
                 
-                //    console.log(hostelType);
-                $(".select-option").hide();	// 다 숨기고 선택한 옵션에 해당하는거만 보여주기 
-                if(hostelType==1){
-                    $("#select-option1").show(); //호텔 
-                }else if(hostelType==2){
-                    $("#select-option2").show(); //게하
-                }else if(hostelType==3){
-                    $("#select-option3").show(); //펜션 
-                }else if(hostelType==4){
-                    $("#select-option4").show(); //풀빌라
-                }
-        
-            });
 
             $("#addroom").on("click",function(){
                 const hostelType = $("#hostelType").val();
@@ -121,8 +123,7 @@
                 const newCell4 = newRow.insertCell(3);
                 //추가한 셀에 내용추가 
                 newCell1.innerHTML = "<input type='text' placeholder='객실명'  name='roomNames' class='form-control' style='width: 70%;' >";
-            /*    let inputTest = "<input type='text' placeholder='객실명' class='form-control' style='width: 70%;' required>";
-                inputTest += "<input type='text' placeholder='객실명' class='form-control' style='width: 70%;' required>";*/
+
                 let insertcell2 = "<select class='form-select' id='bedType' name='bedType' aria-label='Default select example' required>";
                 insertcell2 += "  <option selected disabled>침대타입</option>";
                 insertcell2 += " <option value='싱글'>싱글</option><option value='더블'>더블</option> <option value='트윈'>트윈</option <option value='트리플'>트리플</option><option value='스위트'>스위트</option><option value='기타'>기타</option> </select>";
@@ -137,8 +138,8 @@
             }
 
             if(hostelType==2){//게스트하우스객실추가
-                var table = document.getElementById('hostel-option2');
-                const newRow = table.insertRow();
+                const tbodyRef = document.getElementById('hostel-option2').getElementsByTagName('tbody')[0];
+                const newRow = tbodyRef.insertRow();
                 const newCell1 = newRow.insertCell(0);
                 const newCell2 = newRow.insertCell(1);
                 const newCell3 = newRow.insertCell(2);
@@ -154,8 +155,8 @@
             }
 
             if(hostelType==3){//펜션객실추가
-                var table = document.getElementById('hostel-option3');
-                const newRow = table.insertRow();
+                const tbodyRef = document.getElementById('hostel-option3').getElementsByTagName('tbody')[0];
+                const newRow = tbodyRef.insertRow();
                 const newCell1 = newRow.insertCell(0);
                 const newCell2 = newRow.insertCell(1);
                 const newCell3 = newRow.insertCell(2);
@@ -172,8 +173,8 @@
             }
 
             if(hostelType==4){//풀빌라객실추가
-                var table = document.getElementById('hostel-option4');
-                const newRow = table.insertRow();
+                const tbodyRef = document.getElementById('hostel-option4').getElementsByTagName('tbody')[0];
+                const newRow = tbodyRef.insertRow();
                 const newCell1 = newRow.insertCell(0);
                 const newCell2 = newRow.insertCell(1);
                 const newCell3 = newRow.insertCell(2);
@@ -258,7 +259,7 @@
         });
        //  console.log("test", bedType[idx], roomType[idx], roomView[idx]);
         const roomOption = (bedType[idx]+"/"+roomType[idx]+"/"+roomView[idx]);
-        console.log(roomOption);
+ //       console.log(roomOption);
 
         $("[name=roomOptions]").eq(idx).val(roomOption);
         
@@ -273,7 +274,7 @@
         });
   //      console.log("test", bedType[idx], roomType[idx], roomView[idx]);
             const roomOption = (bedType[idx]+"/"+roomType[idx]+"/"+roomView[idx]);
-            console.log(roomOption);
+      //      console.log(roomOption);
    
             $("[name=roomOptions]").eq(idx).val(roomOption);
     });
@@ -287,7 +288,7 @@
         });
    //      console.log("test", bedType[idx], roomType[idx], roomView[idx]);
         const roomOption = (bedType[idx]+"/"+roomType[idx]+"/"+roomView[idx]);
-        console.log(roomOption);
+    //    console.log(roomOption);
         $("[name=roomOptions]").eq(idx).val(roomOption);
     //    $("[name=roomOption]").eq(idx).attr("value",roomOption);
     });

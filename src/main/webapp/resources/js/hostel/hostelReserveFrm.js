@@ -12,13 +12,7 @@ var hostelOutdate = $("#hostelOutdate").val();
 var hostelName = $("#hostelName").val();
 var payPrice = $("#payPrice").val();
 
-$("#chin").on("click",function(){
-console.log(reserveName);
-console.log(reserveEmail);
-console.log(reservePhone);
-console.log("입실일:"+hostelOutdate)
 
-});
 
  $("#reserveEmail").on("change",function(){
     reserveEmail  = $("#reserveEmail").val();
@@ -68,7 +62,7 @@ var IMP = window.IMP; // 생략 가능
 IMP.init("imp64234357"); 
 
 $("#payBtn").on("click",function(){
-    console.log("콘솔");
+  //  console.log("콘솔");
   // IMP.request_pay(param, callback) 결제창 호출
   const d = new Date(); // 거래 고유 ID생성을 위해 현재 결제날짜 이용하여 처리 
   //date값 생성시 공백을 주지않으면 각 결과가 +연산처리된다 

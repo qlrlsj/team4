@@ -6,7 +6,9 @@
       <meta charset="UTF-8">
       <title>Insert title here</title>
       <style>
-
+#submitBtn{
+  display: none;
+}
       </style>
     </head>
     <link rel="stylesheet" href="/resources/css/hostel/hostelDetail.css">
@@ -14,6 +16,8 @@
     <body>
       <jsp:include page="/WEB-INF/views/common/header.jsp" />
       <div class="content-wrap">
+        <input type="hidden" value="${sessionScope.m.memberNo}" id="memberchk">
+
         <div class="hostel-content">
           <div class="hostel-header">
             <h2>${hostel.hostelName }</h2>

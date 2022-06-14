@@ -1,14 +1,21 @@
+
+
 .content-wrap{
-    width: 1200px;
+    width: 90%;
     margin: 0 auto;
     margin-top: 50px;
+    margin-left: 300px;
+  
+    
 }
+
 .content-header{
-    background-color: antiquewhite;
+ margin-bottom: 50px;
 }
 .pay-btn{
-width: 70%;
+width: 50%;
 margin: 0 auto;
+margin-left: 5px;
 }
 .coupon-check{
 margin-bottom: 20px;
@@ -16,4 +23,53 @@ margin-bottom: 20px;
 .point-check{
 width: 50%;
 margin-bottom: 50px;
+}
+.hostel-info {
+    margin-bottom: 30px;
+}
+.hostel-info div{
+ margin-bottom: 10px;
+ margin-left: 15x;
+}
+.info-content{
+    width: 50%;
+
+    padding: 10px;
+}
+.hostel-name{
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+.optionName{
+    color: slategray;
+}
+.Reservation-period{
+    color: slategray;
+}
+.detailInfo{
+    width: 80%;
+    background-color: rgb(241, 244, 250);
+    border-radius: 15px;
+    padding-top: 20px;
+    padding-bottom: 15px;
+    padding-left: 10px;
+    margin-top: 20px;
+}
+.reserve-info-input input{
+ margin-bottom: 10px;
+}
+.reserve-info-ex-input input{
+    margin-bottom: 10px;
+}
+.reserveTable tr td{
+    padding: 4px;
+}
+.reserve-info{
+    margin-bottom: 20px;
+}
+.reserve-info-ex{
+    margin-bottom: 20px;
+}
+.pay-info{
+    margin-bottom: 20px;
 }

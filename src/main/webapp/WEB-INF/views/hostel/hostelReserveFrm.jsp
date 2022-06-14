@@ -23,21 +23,24 @@
 	<div class="content-wrap">
         <form action="">
 		<div class="content-header">
-			<h3>예약하기</h3>
+			<h3 style="font-weight: bold;">예약하기</h3>
 		</div>
 		<div class="hostel-info">
             <h4>상품정보</h4>
             <hr style="width: 50%">
-            <div class="hostel-name"> ${hostel.hostelName} </div>
+            <div class="info-content">
+            <div class="hostel-name" > ${hostel.hostelName} </div>
+                <div class="detailInfo">
             <div class="optionName">${hostel.roomOption} - ${reserveNum}인 </div>
-            <div class="Reservation period">${hostelIndate} ~ ${hostelOutdate}</div>
-            <div class="hostel-Price-info">숙소 가격: ${hostel.hostelPrice}원</div>
-
+            <div class="Reservation-period">숙박기간 : ${hostelIndate} ~ ${hostelOutdate}</div>
+            <div class="hostel-Price-info">금액: ${hostel.hostelPrice}원</div>
+                 </div>
+        </div>
         </div>
 		<div class="coupon-check">
             <h4>쿠폰</h4>
             <hr style="width: 50%">
-            <select class="form-select" aria-label="Default select example" style="width:50%;">
+            <select class="form-select" aria-label="Default select example" style="width:40%;">
                 <option selected disabled class="select-coupon" >쿠폰</option>
                 <option value="1">쿠폰1</option>
                 <option value="2">쿠폰2</option>
@@ -47,13 +50,13 @@
 		<div class="point-check">
             <h4>포인트</h4>
             <hr style="">
-                <div class="mb-3 input-group">
-                    <input type="text" class="form-control" id="myPoint" aria-describedby="button-addon2">
-                    <button class="btn btn-outline-secondary" type="button" id="myPointbtn">내포인트 조회</button>
+                <div class="mb-3 input-group" style="width:80%;">
+                    <input type="text" class="form-control" id="myPoint" readonly aria-describedby="button-addon2" >
+                    <button class="btn btn-outline-secondary" type="button"   id="myPointbtn">내포인트 조회</button>
                 </div>
-                <div >
+                <div  style="width:80%;" >
                     <label for="useMyPoint" class="form-label"></label>
-                    <input type="number" class="form-control" id="useMyPoint" placeholder="사용할 포인트 입력">
+                    <input type="number" class="form-control" id="useMyPoint" readonly placeholder="사용할 포인트 입력">
                 </div>
             
         </div>
@@ -61,16 +64,44 @@
 			<c:when test="${empty sessionScope.m }"><!--비회원주문-->
 				<div class="reserve-info">
                     <h4>비회원예약정보</h4>
+                    <hr style="width: 50%;">
+                    <div class="reserve-info-input">
+                        <table class="reserveTable">
+                            <tr>
+                                <td>예약자 이름 :</td>
+                                <td><input type="text" id="guestName" class="form-control" required  ></td>
+                            </tr>
+                            <tr>
+                                <td>예약자 이메일 :</td>
+                                <td> <input type="email" id="guestEmail"  class="form-control" required></td>
+                            </tr>
+                            <tr>
+                                <td>예약자 전화번호 :</td>
+                                <td> <input type="tel" id="guestPhone" class="form-control" required></td>
+                            </tr>
+                        </table>
                     <input type="hidden" name="memberNo" id="memberNo" value="0"><!--비회원일때..null확인 ) -->
-                    예약자 이름 : <input type="text" id="guestName" required  ><br>
-                    예약자 이메일 : <input type="email" id="guestEmail" required><br>
-                    예약자 전화번호 : <input type="tel" id="guestPhone" required><br>
+                    </div>
                 </div>
-                <div class="reserve-info-ex"><h4>예약 추가 정보</h4></div> <!--예약테이블에 들어갈부분! 위에는 그냥 예약자 -->
-                투숙객 이름 : <input type="text" name="reserveName" id="reserveName" required><br>
-                투숙객 이메일 : <input type="email" name="reserveEmail" id="reserveEmail" required><br>
-                투숙객 전화번호 : <input type="tel" name="reservePhone" id="reservePhone" required><br>
-             
+                <div class="reserve-info-ex"><h4>예약 추가 정보</h4> <!--예약테이블에 들어갈부분! 위에는 그냥 예약자 -->
+                    <hr style="width: 50%;">
+
+                    <div class="reserve-info-ex-input">
+                        <table class="reserveTable">
+                            <tr>
+                                <td>투숙객 이름 :</td>
+                                <td><input type="text" name="reserveName" id="reserveName" class="form-control" required></td>
+                            </tr>
+                            <tr>
+                                <td>투숙객 이메일 :</td>
+                                <td> <input type="email" name="reserveEmail" id="reserveEmail" class="form-control" required></td>
+                            </tr>
+                            <tr>
+                                <td>투숙객 전화번호 :</td>
+                                <td> <input type="tel" name="reservePhone" id="reservePhone" class="form-control" required></td>
+                            </tr>
+                        </table>
+               
                 <input type="hidden" name="reserveNum" id="reserveNum" value="${reserveNum}">
                 <input type="hidden" name="optionNo" id="optionNo" value="${optionNo}">
                 <input type="hidden" name="hostelIndate" id="hostelIndate" value="${hostelIndate}">
@@ -80,7 +111,9 @@
                     <label class="form-check-label" for="flexCheckDefault">
                      예약자와 같음
                     </label>
+                </div>
                   </div>
+                </div>
 
 			</c:when>
  
@@ -88,16 +121,45 @@
 				[${sessionScope.m.memberName }]님 주문정보 
 			    <div class="reserve-info">
                     <h4>회원 예약 정보</h4>
+                    <hr style="width: 50%;">
+
+                    <div class="reserve-info-input">
+                        <table class="reserveTable">
+                            <tr>
+                                <td>예약자 이름 :</td>
+                                <td><input type="text"  id="guestName" value="${sessionScope.m.memberName }"  class="form-control" readonly placeholder="${sessionScope.m.memberName }" ></td>
+                            </tr>
+                            <tr>
+                                <td>예약자 이메일 :</td>
+                                <td> <input type="email"   id="guestEmail" value="${sessionScope.m.memberEmail }" class="form-control" placeholder="${sessionScope.m.memberEmail }" readonly ></td>
+                            </tr>
+                            <tr>
+                                <td>예약자 전화번호 :</td>
+                                <td> <input type="tel"  id="guestPhone"  value="${sessionScope.m.memberPhone }" class="form-control" placeholder="${sessionScope.m.memberPhone }" readonly ></td>
+                            </tr>
+                        </table>
                     <input type="hidden" name="memberNo" id="memberNo" value="${sessionScope.m.memberNo}"><!--sessionScope.m.memberNo-->
-                    예약자 이름 : <input type="text"  id="guestName" value="${sessionScope.m.memberName }" readonly placeholder="${sessionScope.m.memberName }" ><br> <!--value 세션에서 가져오기 -->
-                    예약자 이메일 : <input type="email"   id="guestEmail" value="${sessionScope.m.memberEmail }" placeholder="${sessionScope.m.memberEmail }" readonly ><br>
-                    예약자 전화번호 : <input type="tel"  id="guestPhone"  value="${sessionScope.m.memberPhone }" placeholder="${sessionScope.m.memberPhone }" readonly ><br>
+                    </div>
                 </div>
                 <div class="reserve-info-ex">
                     <h4>예약 추가 정보</h4>
-                    투숙객 이름 : <input type="text" name="reserveName" id="reserveName" required><br>
-                    투숙객 이메일 : <input type="email" name="reserveEmail" id="reserveEmail" required><br>
-                    투숙객 전화번호 : <input type="tel" name="reservePhone" id="reservePhone" required><br>
+                    <hr style="width: 50%;">
+
+                    <div class="reserve-info-ex-input">
+                        <table class="reserveTable">
+                            <tr>
+                                <td>예약자 이름 :</td>
+                                <td><input type="text" name="reserveName" id="reserveName" class="form-control" required></td>
+                            </tr>
+                            <tr>
+                                <td>예약자 이메일 :</td>
+                                <td> <input type="email" name="reserveEmail" id="reserveEmail" class="form-control" required></td>
+                            </tr>
+                            <tr>
+                                <td>예약자 전화번호 :</td>
+                                <td><input type="tel" name="reservePhone" id="reservePhone"class="form-control"  required></td>
+                            </tr>
+                        </table>
                     <input type="hidden" name="reserveNum" id="reserveNum" value="${reserveNum}">
                     <input type="hidden" name="optionNo" id="optionNo" value="${optionNo}">
                     <input type="hidden" name="hostelIndate" id="hostelIndate" value="${hostelIndate}">
@@ -107,23 +169,25 @@
                         <label class="form-check-label" for="flexCheckDefault">
                          예약자와 같음
                         </label>
+                        </div>
                       </div>
                 </div>
 			</c:otherwise>
 		</c:choose>
         <div class="pay-info">
             <h4>결제정보</h4>
-            <hr>
+            <hr style="width: 50%;">
             주문금액 : <span>${hostel.hostelPrice}</span>원<br>
-            할인<br>
-            포인트 <br>
-            <br><br>
-            총결제금액 :<span id="totalPrice"> ${hostel.hostelPrice}</span> 원 
+            할인 : 0원<br>
+            포인트: 0원 <br>
+            <br>
+            <div style="font-weight: bold; font-size: 20px;">총결제금액 :<span id="totalPrice"> ${hostel.hostelPrice}</span> 원 </div>
             <input type="hidden" id="hostelName" value="${hostel.hostelName}">
             <input type="hidden" id="payPrice" name="payPrice" value="${hostel.hostelPrice}" ><!--스크립트로 위 text value 바꿔주기 -->
         </div>
-        <div class="pay-btn"><button type="button" id="chin">값체크 </button>
-            <div class="d-grid gap-2"><button type="button" id="payBtn"  class="payBtn btn btn-lg btn-outline-primary">결제하기</button>
+        <div class="pay-btn">
+            <div class="d-grid gap-2">
+                <button type="button" id="payBtn"  class="payBtn btn btn-lg btn-outline-primary">결제하기</button>
             </div>
         </div>
     </form>
