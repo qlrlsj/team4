@@ -56,7 +56,7 @@ public class HostelController {
 
 	@RequestMapping(value = "/insertHostel.kt")
 	public String insertHostel(Hostel h, MultipartFile[] upfile, HttpServletRequest request, String[] roomOptions,
-			String[] hostelPrices, String[] standardBooknums, String[] maxBooknums, String[] roomNames) {
+			String[] hostelPrices, String[] standardBooknums, String[] maxBooknums, String[] roomNames,Model model) {
 		System.out.println("1");
 
 		// 파일처리
@@ -139,14 +139,18 @@ public class HostelController {
 
 		}//if else종료 
 		// System.out.println("파일업로드 : "+fileList);
-		int result = service.insertHostel(h,fileList, roomOptions, hostelPrices, standardBooknums, maxBooknums, roomNames);
+		int result = service.insertHostel(h,fileList, roomOptions, hostelPrices, standardBooknums, maxBooknums, roomNames );
+
+		model.addAttribute("url","sellerProductOption.kt");
 		if (result > 0) {
 			System.out.println("호스텔인서트 완료");
+			model.addAttribute("msg","등록완료");
 		} else {
-			
+			model.addAttribute("msg","등록실패 - 관리자에게 문의하세요");
 			System.out.println("인서트 실패");
 		}
-		return "redirect:/insertHostelForm1.kt";
+		return "hostel/insertResult";
+		//	return "redirect:/insertHostelForm1.kt";
 	}
 	
 	@RequestMapping(value = "searchHostelList.kt")
@@ -170,6 +174,7 @@ public class HostelController {
 		model.addAttribute("endDate",endDate);
 		model.addAttribute("searchKeyword",searchKeyword);
 		model.addAttribute("customerNum",customerNum);
+		model.addAttribute("roolTypeCheck",roomType);
 		return "hostel/searchHostelList";
 	}
 	
@@ -251,6 +256,7 @@ public class HostelController {
 		map.put("startDate", startDate);
 		map.put("endDate", endDate);
 		map.put("customerNum", customerNum);
+		map.put("roolTypeCheck", roomType);
 		System.out.println(list);
 		return  new Gson().toJson(map);
 	}
