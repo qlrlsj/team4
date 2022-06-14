@@ -254,6 +254,6 @@
     where localName LIKE '%'||#{searchStr}||'%' or parentLocalName like '%'||#{searchStr}||'%' or ticketTitle like '%'||#{searchStr}||'%'
 	</select>
 	<select id="selectSearchLocalFilepath" parameterType="String" resultType="String">
-		select local_filepath as localFilepath from local_category where local_name=#{parentLocalName}
+		select local_filepath as localFilepath from local_category where local_name=#{parentLocalName} AND NOT local_filepath IS NULL
 	</select>
 </mapper>
