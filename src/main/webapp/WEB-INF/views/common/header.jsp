@@ -56,11 +56,35 @@
 	min-height: 50px;
 }
 .headerNav {
+	width: 100%;
 	min-width: 300px;
 }
-.mainNav{
+.headerDiv{
+	margin-left: 10%;
+	width: 80%;
+	padding: 0;
+}
+.headerUi{
+	width: 100%;
+	min-height: 40px;
+	min-width: 200px;
+	padding: 0;
+}
+.headerLi{
+	width: 20%;
 	min-height: 40px;
 	min-width: 60px;
+	padding: 0;
+}
+.headerA{
+	width: 100%;
+	height: 20px;
+	min-height: 40px;
+	min-width: 60px;
+	font-size: 20px;
+	text-align: center;
+	line-height: 40px;
+	padding: 0;
 }
 </style>
 <script>
@@ -186,7 +210,7 @@
 									<ul class="dropdown-menu dropdown-menu-dark"
 										aria-labelledby="dropdownMenuButton2">
 										<li><a class="dropdown-item active" href="#">포인트</a></li>
-										<li><a class="dropdown-item" href="#">쿠폰</a></li>
+										<li><a class="dropdown-item" href="/insertCoupon.kt">쿠폰</a></li>
 										<li><a class="dropdown-item" href="/mypage.kt">마이페이지</a></li>
 										<li><a class="dropdown-item" href="/sellerPage.kt">판매자
 												페이지</a></li>
@@ -215,7 +239,9 @@
 									<ul class="dropdown-menu dropdown-menu-dark"
 										aria-labelledby="dropdownMenuButton2">
 										<li><a class="dropdown-item active" href="#">포인트</a></li>
-										<li><a class="dropdown-item" href="#">쿠폰</a></li>
+
+										
+										<li><a class="dropdown-item" href="/myCoupon.kt">내 쿠폰</a></li>
 										<c:if test="${grade eq '2' }">
 											<li><a class="dropdown-item" href="#">파트너 등록하기</a></li>
 										</c:if>
@@ -248,20 +274,19 @@
 	</header>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light" 
 		aria-label="Tenth navbar example" style="min-width:1000px; min-height:40px">
-		<div class="container-fluid" style="min-height:40px">
-			<div
-				class="collapse navbar-collapse justify-content-md-center navbarsExample08"
+		<div class="container-fluid headerDiv" style="min-height:40px">
+			<div class="collapse navbar-collapse justify-content-md-center navbarsExample08"
 				id="navbarsExample08" style="min-width:1000px; min-height:40px">
-				<ul class="navbar-nav">
-					<li class="nav-item"><a class="nav-link active mainNav"
+				<ul class="navbar-nav headerUi">
+					<li class="nav-item headerLi"><a class="nav-link active headerA"
 						href="/AirMain.kt">항공편</a></li>
-					<li class="nav-item mainNav"><a class="nav-link active"
+					<li class="nav-item headerLi"><a class="nav-link active headerA"
 						href="/hostelMain.kt">숙소</a></li>
-					<li class="nav-item mainNav"><a class="nav-link active"
+					<li class="nav-item headerLi"><a class="nav-link active headerA"
 						href="/ticketMain.kt">티켓</a></li>
-					<li class="nav-item mainNav"><a class="nav-link active"
+					<li class="nav-item headerLi"><a class="nav-link active headerA"
 						href="/packageMain.kt">패키지</a></li>
-					<li class="nav-item mainNav"><a class="nav-link active"
+					<li class="nav-item headerLi"><a class="nav-link active headerA"
 						href="/companionMain.kt?reqPage=1">동행자 모집</a></li>
 				</ul>
 			</div>

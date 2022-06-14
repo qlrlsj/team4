@@ -312,6 +312,6 @@ public class AirController {
 		model.addAttribute("SeatListST",SeatListST);
 		model.addAttribute("SeatListED",SeatListED);
 		
-		return "air/airCheck";
+		return "air/myAirPage";
 	}
 }

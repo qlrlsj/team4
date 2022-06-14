@@ -24,9 +24,13 @@
             <tbody class="tableBody">
                 <c:choose>
                     <c:when test="${empty list}">
-                        <div style="width: 100%; height:100%; text-align:center;">
-                            조회 결과가 없습니다.
-                        </div>
+                        <tr class="forTable" style="height:60px">
+                            <td colspan="4">
+                                <div style="width: 100%; height:100%; text-align:center; font-size: 30px;">
+                                    조회 결과가 없습니다.
+                                </div>
+                            </td>
+                        </tr>
                     </c:when>
                     <c:otherwise>
                         <c:forEach var="reserve" items="${list}" varStatus="">
