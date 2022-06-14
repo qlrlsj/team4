@@ -45,18 +45,19 @@ let alarmWs;
 //접속회원 아이디용 변수
 let senderNo;
 $(function(){
-// 	senderNo = '${sessionScope.m.memberNo}';
-// 	$.ajax({
-// 		url : "/alarmCount.kt",
-// 		type: "post",
-// 		data : {"memberNo":senderNo},
-// 		success : function(data) {
-// 			$("#alarmCount").empty();
-// 			$("#alarmCount").append(data);
-// 		}
-// 	});
+	senderNo = $("[name=memberNo]").val();
+	$.ajax({
+		url : "/alarmCount.kt",
+		type: "post",
+		data : {"memberNo":senderNo},
+		success : function(data) {
+			$("#alarmCount").empty();
+			$("#alarmCount").append(data);
+		}
+	});
 	//로그인 했는지 체크
 	var loginCheck = $("#loginCheck").val();
+	console.log(loginCheck);
 	if(loginCheck == true){
 		connenctAlarm();
 	}
@@ -104,7 +105,7 @@ $(".bell").on("click",function(){
 										<h5 class="modal-title" id="exampleModalLabel">로그인</h5>
 										<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 									</div>
-									<form action="/login.kt" method="post" onsubmit="return blackCheck();">
+									<form action="/login.kt" method="post">
 										<div class="modal-body">
 											<fieldset>
 												<legend>로그인</legend>
@@ -140,7 +141,6 @@ $(".bell").on("click",function(){
 										aria-labelledby="dropdownMenuButton2">
 										<li><a class="dropdown-item active" href="#">포인트</a></li>
 										<li><a class="dropdown-item" href="#">쿠폰</a></li>
-										<li><a class="dropdown-item" href="#">파트너 등록하기</a></li>
 										<li><a class="dropdown-item" href="/mypage.kt">마이페이지</a></li>
 										<li><a class="dropdown-item" href="/sellerPage.kt">판매자 페이지</a></li>	
 										<li><a class="dropdown-item" href="/blackListFrm.kt">블랙리스트 관리</a></li>		
@@ -164,7 +164,9 @@ $(".bell").on("click",function(){
 										aria-labelledby="dropdownMenuButton2">
 										<li><a class="dropdown-item active" href="#">포인트</a></li>
 										<li><a class="dropdown-item" href="#">쿠폰</a></li>
-										<li><a class="dropdown-item" href="#">파트너 등록하기</a></li>
+										<c:if test="${grade eq '2' }">
+											<li><a class="dropdown-item" href="#">파트너 등록하기</a></li>
+										</c:if>
 										<li><a class="dropdown-item" href="/mypage.kt">마이페이지</a></li>
 										<li>
 											<a class="dropdown-item" href="/allReserveFrm.kt" >예약 내역 확인</a>
@@ -205,27 +207,6 @@ $(".bell").on("click",function(){
 			</div>
 		</div>
 	</nav>
-	<script>
-	function blackCheck(){
-		alert("ee");
-		const memberId = $("[name=memberId]").val();
-		console.log(memberId);
-		$.ajax({
-			url : "/blackCheck.kt",
-			type : post,
-			data : {"memberId":memberId},
-			success : function(data) {
-				console.log(data);
-				if(data == "yes"){
-					return true;
-				}else{
-					alert("블랙리스트에 올라가셨습니다.");
-					return false;
-				}
-			}
-		});
-	}
-	</script>
 	
 </body>
 </html>

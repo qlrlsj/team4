@@ -1,7 +1,10 @@
 package kr.or.report.controller;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -39,17 +42,10 @@ public class ReportController {
 		}
 	}
 	
-	@ResponseBody
-	@RequestMapping(value="/blackCheck.kt", produces = "application/json;charset=utf-8")
-	public String blackCheck(Member m) {
-		System.out.println(m);
-		Report r = service.blackCheck(m);
-		System.out.println(r);
-		if(r!=null) {
-			return new Gson().toJson("yes");				
-		}else {
-			return new Gson().toJson("no");		
-		}
-	
+	@RequestMapping(value="/blackListFrm.kt")
+	public String blackListFrm(Model model) {
+		ArrayList<Report> list = service.getBlackList();
+		model.addAttribute("list", list);
+		return "member/blackList";
 	}
 }

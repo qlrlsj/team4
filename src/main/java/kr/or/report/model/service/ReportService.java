@@ -1,5 +1,7 @@
 package kr.or.report.model.service;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +27,12 @@ public class ReportService {
 		return delete;
 	}
 
-	public Report blackCheck(Member m) {
-		return dao.blackCheck(m);
+	public Report blackCheck(Member member) {
+//		Report r = dao.blackCheck(member);
+		return null;
+	}
+
+	public ArrayList<Report> getBlackList() {
+		return dao.getBlackList();
 	}
 }

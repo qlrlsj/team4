@@ -1,5 +1,8 @@
 package kr.or.report.model.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -25,6 +28,12 @@ public class ReportDao {
 	}
 
 	public Report blackCheck(Member m) {
-		return sqlSession.selectOne("report,blackCheck",m);
+		System.out.println("dao");
+		return sqlSession.selectOne("report.blackCheck",m);
+	}
+
+	public ArrayList<Report> getBlackList() {
+		List list = sqlSession.selectList("member.selectBlack");
+		return (ArrayList<Report>) list;
 	}
 }
