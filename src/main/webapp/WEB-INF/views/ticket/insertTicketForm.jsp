@@ -62,6 +62,8 @@
 		
 		<div class="div-content" style="max-width: 900px; margin-right: 200px;">
 			<form class="g-3" action="/insertTicket.kt" method="post" enctype="multipart/form-data">
+				<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
+				<input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
 			<h2 style="font-weight: 600; margin-top: 40px; margin-bottom: 60px;">티켓 상품 등록</h2>
 				<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo}">
 				<h4 class="h4">1. 카테고리</h4>

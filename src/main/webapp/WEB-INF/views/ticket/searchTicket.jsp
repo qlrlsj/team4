@@ -12,7 +12,7 @@
         height: 100vh;
         height: 400px;
         line-height: 400px;
-        background-image: url(../../../resources/img/ticket/강원도.png);
+        
         background-repeat: no-repeat;
         background-size : cover;
         color:#fff;
@@ -81,6 +81,7 @@
     <div class="div-content">
         <c:choose>
             <c:when test="${ticket.size() eq 0}">
+                <h2> '${searchStr}' 검색결과</h2>
                 <h2>검색 결과가 없습니다.</h2>
             </c:when>
             <c:otherwise>
@@ -91,9 +92,9 @@
                     '${searchStr}' 검색결과
                 </div>
                 <div class="filterBox">
-                    <button class="btn" id="highDiscount">▶ 할인율 높은순</button>
-                    <button class="btn" id="rowPrice">▶ 금액 낮은순</button>
-                    <button class="btn" id="highPrice">▶ 금액 높은순</button>
+                    <a href="/searchTicket.kt?searchStr=${searchStr}&type=optdiscountrate" class="btn" id="highDiscount">▶ 할인율 높은순</a>
+                    <a href="/searchTicket.kt?searchStr=${searchStr}&type=optdiscountpricelow"  class="btn" id="lowPrice">▶ 금액 낮은순</a>
+                    <a href="/searchTicket.kt?searchStr=${searchStr}&type=optdiscountpricehigh"  class="btn" id="highPrice">▶ 금액 높은순</a>
                 </div>
                 <div class="album py-5 bg-light">
                     <div class="container">
@@ -142,9 +143,19 @@
                         </div>
                     </div>
                 </div>
+                <input type="hidden" id="parentLocalName" value="${ticket.get(0).getParentLocalName()}">
             </c:otherwise>
         </c:choose>
     </div>
+    <input type="hidden" id="ticketSize" value="${ticket.size()}">
     <jsp:include page="/WEB-INF/views/common/footer.jsp" />
+    <script>
+        $(document).ready(function(){
+            if(ticketSize!=0){
+                const parentLocalName = $("#parentLocalName").val();
+                $(".localImg").css("background-image","url(/resources/img/ticket/"+parentLocalName+".png)");
+            }
+        });
+    </script>
 </body>
 </html>
