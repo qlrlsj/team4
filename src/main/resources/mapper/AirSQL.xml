@@ -1,16 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="air">
-<!-- 	<select id="selectAllAir" parameterType="ac" resultType="ac"> -->
-<!-- 	select  -->
-<!-- 		reserve_no as reserveNo, -->
-<!-- 		pay_no as payNo, -->
-<!-- 		member_no as memberNo, -->
-<!-- 		order_date as orderDate, -->
-<!-- 		air_pay as airPay, -->
-<!-- 		member_name as memberName, -->
-<!-- 		phone, -->
-<!-- 		reserve_state as reserveState -->
-<!-- 	from air_reserve -->
-<!-- 	</select> -->
+<mapper namespace="Air">
+	
+	<insert id="insertAirReserve" parameterType = "ap">
+		insert into air_payment values('A'||to_char(sysdate,'yymmdd')||RESERVE_SEQ.nextval, #{payNo}, #{memberNo}, sysdate, #{airPay}, #{memberName}, #{phone}, 0)
+
+	</insert>
+	
+	<select id="selectReserveNo" resultType="String">
+		select max(reserve_no) from air_payment order by pay_no desc
+	</select>
+	<insert id="AirReserveComplete" parameterType = "ac">
+		insert into air_reserve values(air_seq.nextval,#{air_name},#{air_level},#{air_date},#{air_start},#{air_end},#{reserve_no},#{air_line})
+	</insert>
+	
+	<insert id="insertAirSeat" parameterType="Map">
+		insert into air_seat values(air_seat_seq.nextval,#{seat},#{airName},#{date})
+	</insert>
+	
+	<select id="findSeat" parameterType="Map" resultType="string">
+		select seat_No from air_seat where air_name = #{NumberST} and air_date = #{date}
+	</select>
 </mapper>

@@ -60,6 +60,8 @@ public class MemberDao {
 		return result;
 	}
 
+
+
 	public ArrayList<ReserveData> allReserve(Member m, String type) {
 		List list = new ArrayList<ReserveData>();
 		if(type.equals("hostel")) {
@@ -85,6 +87,16 @@ public class MemberDao {
 		List list = sqlSession.selectList("member.selectBlack");
 		return (ArrayList<Report>) list;
 	}
+
+	public int changeGrade(Member m) {
+		int result = sqlSession.update("member.changeGrade",m);
+		return result;
+	}
+
+	public Report blackCheck(Member member) {
+		return sqlSession.selectOne("report.blackCheck",member);
+	}
+
 
 
 

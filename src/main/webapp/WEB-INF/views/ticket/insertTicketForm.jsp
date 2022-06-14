@@ -29,6 +29,7 @@
 		background-color: #f3f3f3;
 		padding: 20px;
 		margin: 35px;
+		border: 1px solid #c9c9c9;
 	}
 	.delOptBtn{
 		float: right;
@@ -44,9 +45,8 @@
 		display: flex;
 		justify-content: flex-start;
 	}
-
-
 </style>
+
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -60,11 +60,11 @@
 			  <a href="/sellerAcount.kt" class="list-group-item list-group-item-action">계정 관리</a>
 		</div>
 		
-		<div class="div-content" style="max-width: 900px;">
+		<div class="div-content" style="max-width: 900px; margin-right: 200px;">
 			<form class="g-3" action="/insertTicket.kt" method="post" enctype="multipart/form-data">
 			<h2 style="font-weight: 600; margin-top: 40px; margin-bottom: 60px;">티켓 상품 등록</h2>
 				<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo}">
-				<h4 style="margin-bottom:0px; " >1. 카테고리</h4>
+				<h4 class="h4">1. 카테고리</h4>
 				<div class="content-box">
 					<p>1) 필터 선택 : </p>
 					<div class="selectBox">
@@ -91,7 +91,7 @@
 					</div>
 				</div>
 	
-				<h4 style="margin-bottom:0px;">2. 주소 입력</h4>
+				<h4 class="h4">2. 주소 입력</h4>
 				<div class="content-box">
 					<p>1) 필터 선택 : </p>
 					<div class="selectBox">
@@ -110,39 +110,40 @@
 					<div class="selectBox">
 						<p>2) 상세 주소 입력 : </p>
 						<input
-							class="btn btn-light btn-sm" type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" style="border: 1px solid #cdcdcd;
+							class="btn btn-light btn-sm ticketBtn" type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" style="border: 1px solid #cdcdcd;
 							margin-left: 20px;
 							padding: 0 8px;
 							height: 35px;
 						">
 					</div>
 					<div class="selectBox">
-						<input class="form-control-sm" type="text" id="sample6_postcode" placeholder="우편번호" readonly> 
-						<input class="form-control" type="text" id="sample6_address" placeholder="주소" readonly>
+						<input class="form-control-sm addrForm" type="text" id="sample6_postcode" placeholder="우편번호" readonly> 
+						<input class="form-control addrForm" type="text" id="sample6_address" placeholder="주소" readonly>
 					</div>
 					<div class="selectBox">
 						<input
-						   class="form-control" type="text" id="sample6_detailAddress" placeholder="상세주소"> <input
-						   class="form-control-sm" type="text" id="sample6_extraAddress" placeholder="참고항목" readonly>
+						   class="form-control addrForm" type="text" id="sample6_detailAddress" placeholder="상세주소"> <input
+						   class="form-control-sm addrForm" type="text" id="sample6_extraAddress" placeholder="참고항목" readonly>
 					   <input type="hidden" name="businessAddr">
 					</div>
 					<pre class="chk" id="localChk2" style="margin-top:0;">   </pre>
 				</div>
 	
-				<h4 style="margin-bottom:0px;">3. 상품 정보 입력</h4>
+				<h4 class="h4">3. 상품 정보 입력</h4>
 				<div class="content-box">
-					<label for="ticket-title">상품 제목</label>
+					<label for="ticket-title">1) 상품 제목</label>
 					<textarea class="form-control" type="text" name="ticketTitle"  placeholder="제목을 입력해 주세요. (50자 이내)" maxlength="50" ></textarea>
-					<label for="important-content">중요 정보</label>
+					<label for="important-content">2) 중요 정보</label>
 					<textarea class="form-control" type="text" name="importantContent"
 						placeholder="강조하고 싶은 내용을 적어주세요. (100자 이내)" maxlength="100"></textarea>
-					<label for="business-time">이용 시간</label>
+					<label for="business-time">3) 이용 시간</label>
 					<textarea class="form-control" type="text" name="businessTime"
 						placeholder="영업시간 안내 (100자 이내)" maxlength="100"></textarea>
-					<label for="chooseFile">입구 사진</label>
-					<p>만나는 장소를 알 수 있는 위치 사진을 올려주세요.</p> 
+					<label for="chooseFile">4) 입구 사진</label>
+					<label class="ticketBtn" for="chooseFile" style="font-weight: 200;">파일 선택</label>
+					<br>
+					<span>( 만나는 장소를 알 수 있는 위치 사진을 올려주세요. )</span> 
 					<p class="chk" id="placeChk"> </p>
-					<label class="file-label" for="chooseFile">Choose File</label>
 					<p> </p>
 					<div class="upload-box">
 						<div id="drop-file" class="drag-file">
@@ -153,61 +154,66 @@
 					</div>
 					<input class="file" id="chooseFile" name="file1" type="file" onchange="dropFile.handleFiles(this.files)"
 						accept="image/png, image/jpeg, image/gif">
-					<label class="file-label" for="btnAtt">상품 사진</label>
-					<p>첫번째 사진이 대표 사진이 됩니다. (4장 필수) </p>
+					<label>5) 상품사진</label>
+					<label class="ticketBtn" for="btnAtt" style="font-weight: 200;">파일 선택</label>
+					<br>
+					<span>( 첫번째 사진이 대표 사진이 됩니다. )</span><span style="color:red;"> - 4장 필수</span>
+					<br>
 					<p class="chk" id="productChk"> </p>
 	
 					<div id='image_preview'>
 						<input class="file" type='file' id='btnAtt' name="file2" multiple='multiple' accept="image/png, image/jpeg, image/gif" onchange="addFile(this);"/>
-						<div id='att_zone' data-placeholder='파일을 첨부 하려면 파일 선택 버튼을 클릭하거나 파일을 드래그앤드롭 하세요'></div>
+						<div id='att_zone' data-placeholder='파일을 첨부 하려면 파일 선택 버튼을 클릭하세요'></div>
 					</div>
-					<label for="ticket-content">상품 설명</label>
+					<label for="ticket-content">6) 상품 설명</label>
 					<div class="container">
 						<textarea class="summernote" id="ticket-content" name="ticketContent"></textarea>    
 					</div>
 				</div>
 	
-				<h4 style="margin-bottom:0px;">4. 옵션 입력</h4>
-				<div class="content-box" id="opt">
-					<div class="optBox">
-						<label for="optTitle">옵션 제목</label>
-						<input class="form-control" type="text" id="optTitle" name="optTitles" placeholder="제목을 입력해 주세요. (30자 이내)" maxlength="30">
-						<label for="optContent">옵션 설명</label>
-						<input class="form-control" type="text" id="optContent" name="optContents" placeholder="내용을 입력해 주세요. (100자 이내)" maxlength="100">
-						<label for="optPrice">가격</label>
-						<input class="form-control price" type="number" id="optPrice" name="optPrices" min="100">
-						<label for="optDiscountRate">할인율</label><span>퍼센트(%)</span>
-						<input class="form-control rate" type="number" id="optDiscountRate" name="optDiscountRates" min="0" max="100" value="0">
-						<label for="optDiscountPrice">할인된 가격</label>
-						<input class="form-control" type="number" id="optDiscountPrice" name="optDiscountPrices" min="100">
-						<label for="optStock">재고</label>
-						<input class="form-control" type="number" id="optStock" name="optStocks" value="10" min="0">
-						<input type="hidden" id="count" name="count" value="1">
+				<h4 class="h4">4. 옵션 입력</h4>
+				<div class="content-box">
+					<div class="content-box" id="opt" style="border: none; padding: 0;">
+						<div class="optBox">
+							<label for="optTitle">옵션 제목</label>
+							<input class="form-control" type="text" id="optTitle" name="optTitles" placeholder="제목을 입력해 주세요. (30자 이내)" maxlength="30">
+							<label for="optContent">옵션 설명</label>
+							<input class="form-control" type="text" id="optContent" name="optContents" placeholder="내용을 입력해 주세요. (100자 이내)" maxlength="100">
+							<label for="optPrice">가격</label>
+							<input class="form-control price" type="number" id="optPrice" name="optPrices" min="100">
+							<label for="optDiscountRate">할인율</label><span>(%)</span>
+							<input class="form-control rate" type="number" id="optDiscountRate" name="optDiscountRates" min="0" max="100" value="0">
+							<label for="optDiscountPrice">할인된 가격</label>
+							<input class="form-control" type="number" id="optDiscountPrice" name="optDiscountPrices" min="100">
+							<label for="optStock">재고</label>
+							<input class="form-control" type="number" id="optStock" name="optStocks" value="10" min="0">
+							<input type="hidden" id="count" name="count" value="1">
+						</div>
+					</div>
+					<div class="addBtnBox">
+						<button type="button" class="btn btn-secondary" id="optAdd" onclick="add_optbox()">추가</button>
 					</div>
 				</div>
-				<button type="button" id="optAdd" onclick="add_optbox()">추가</button>
 	
-				<h4 style="margin-bottom:0px;">5. 소요시간 입력</h4>
+				<h4 class="h4">5. 소요시간 입력</h4>
 				<div class="content-box">
-					<div class="col-md-4">
-						<select id="hour" class="form-select">
+					<div style="display: flex;">
+						<select id="hour" class="form-select" style="width: 20%;">
 							<c:forEach var="i" begin="1" end="24">
 								<option value="${i}">${i}</option>
 							</c:forEach>
 						</select>
-						<span>시간</span>
-					</div>	
-					<div class="col-md-4">
-						<select id="minute" class="form-select">
+						<span style="margin-left:5px ;margin-right:30px ; line-height: 35px;">시간</span>
+						<select id="minute" class="form-select" style="width: 20%;">
 							<option value="0">00</option>
 							<option value="30">30</option>
 						</select>
-						<span>분 소요</span>
+						<span style="margin-left:5px ;margin-right:20px ; line-height: 35px;">분 소요</span>
 					</div>	
 					<input type="hidden" name="requiredTime">
 				</div>
 	
-				<button type="button" id="insertBtn">제출</button>
+				<button type="button" class="btn btn-info" id="insertBtn">제출</button>
 			</form>
 		</div>
 	</div>

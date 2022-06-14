@@ -30,6 +30,8 @@
 <link rel="stylesheet" href="/resources/css/file.css">
 <!-- 채팅 리스트 js -->
 <link rel="stylesheet" href="/resources/css/chat/chatHeader.css">
+<!--티켓등록폼 css-->
+<link rel="stylesheet" href="/resources/css/ticket/insertTicketForm.css">
 <script src="/resources/js/chat/chatHeader.js"></script>
 <title>Insert title here</title>
 <style>
@@ -43,7 +45,7 @@ let alarmWs;
 //접속회원 아이디용 변수
 let senderNo;
 $(function(){
-	senderNo = '${sessionScope.m.memberNo}';
+	senderNo = $("[name=memberNo]").val();
 	$.ajax({
 		url : "/alarmCount.kt",
 		type: "post",
@@ -54,7 +56,8 @@ $(function(){
 		}
 	});
 	//로그인 했는지 체크
-	var loginCheck = ${login};
+	var loginCheck = $("#loginCheck").val();
+	console.log(loginCheck);
 	if(loginCheck == true){
 		connenctAlarm();
 	}
@@ -75,6 +78,7 @@ $(".bell").on("click",function(){
 </head>
 <body>
 	<header class="p-3 border-bottom">
+	<input type="hidden" value="${login }" id="loginCheck">
 	<div class="alarm">
 		<span id="senderNo">senderNo</span><hr>
 		<span id="sendContent">안녕하세요</span>
@@ -126,7 +130,7 @@ $(".bell").on("click",function(){
 								<li><a href="#" class="nav-link px-2 link-dark">위시리스트</a></li>
 								<li><a href="#" class="nav-link px-2 link-dark">내 여행</a></li>
 								<li><a href="/questionList.kt?reqPage=1" class="nav-link px-2 link-dark">문의하기</a></li>
-								<li><a href="/allMember.kt?reqPage=1" class="nav-link px-2 link-dark">회원관리</a></li><!-- 관리자만 보이는 버튼 -->
+								<li><a href="/allMember.kt" class="nav-link px-2 link-dark">회원관리</a></li><!-- 관리자만 보이는 버튼 -->
 								<li><span class="material-symbols-outlined bell">notifications</span><span id="alarmCount"></span></li>
 							</ul>
 								<div class="dropdown">
@@ -137,7 +141,6 @@ $(".bell").on("click",function(){
 										aria-labelledby="dropdownMenuButton2">
 										<li><a class="dropdown-item active" href="#">포인트</a></li>
 										<li><a class="dropdown-item" href="#">쿠폰</a></li>
-										<li><a class="dropdown-item" href="#">파트너 등록하기</a></li>
 										<li><a class="dropdown-item" href="/mypage.kt">마이페이지</a></li>
 										<li><a class="dropdown-item" href="/sellerPage.kt">판매자 페이지</a></li>	
 										<li><a class="dropdown-item" href="/blackListFrm.kt">블랙리스트 관리</a></li>		
@@ -161,7 +164,9 @@ $(".bell").on("click",function(){
 										aria-labelledby="dropdownMenuButton2">
 										<li><a class="dropdown-item active" href="#">포인트</a></li>
 										<li><a class="dropdown-item" href="#">쿠폰</a></li>
-										<li><a class="dropdown-item" href="#">파트너 등록하기</a></li>
+										<c:if test="${grade eq '2' }">
+											<li><a class="dropdown-item" href="#">파트너 등록하기</a></li>
+										</c:if>
 										<li><a class="dropdown-item" href="/mypage.kt">마이페이지</a></li>
 										<li>
 											<a class="dropdown-item" href="/allReserveFrm.kt" >예약 내역 확인</a>

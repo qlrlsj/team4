@@ -146,6 +146,9 @@
 	//결제부분 처리(아임포트 라이브러리)
 	$("#paymentButton2").click(function(){
 		const price = $("#totalPrice").val();
+// 		const email = $()
+// 		const name
+// 		const phone
 		console.log(price);
 		//거래 고유ID생성을 위해 현재 결제 날짜를 이용해서 처리
 		const d = new Date();
@@ -156,9 +159,9 @@
 			merchant_uid : "상품코드_"+date, 		//거래 ID(위에서 초단위까지 만들어놓았던 겹치지 않는 date)
 			name : "KTRIP",					//결제이름
 			amount : price,							//결제금액
-			buyer_email : "email@email.com",	//'${sessionScope.m.memberEmail}',구매자 email 주소
+			buyer_email : '${sessionScope.m.memberEmail}',
 			buyer_name : '${sessionScope.m.memberName}',				//구매자 이름
-			buyer_tel : '${sessionScope.m.memberPhone}',		//구매자 전화번호
+			buyer_tel : '${sessionScope.m.memberPhone}'		//구매자 전화번호
 		},function(rsp){//처리할 함수
 			if(rsp.success){
 				console.log("결제가 완료되었습니다.");

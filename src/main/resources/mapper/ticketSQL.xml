@@ -121,4 +121,100 @@
 		from member
 		where member_No = #{memberNo}
 	</select>
+	<insert id="insertPayment" parameterType="pay">
+		insert into payment values
+		(payment_seq.nextval
+		,#{payPrice}
+		,#{pointUse}
+		,#{payCoupon}
+		,#{pointAdd}
+		,sysdate
+		,#{payCouponCode},0)
+		<selectKey resultType="int" order="AFTER" keyProperty="payNo">
+			select max(pay_no) from payment
+		</selectKey>
+	</insert>
+	<insert id="insertReserveTicket" parameterType="tr">
+		insert into ticket_reserve values
+		('T'||to_char(sysdate,'yymmdd')||reserve_seq.nextval
+		,#{ticketNo}
+		,#{memberNo}
+		,#{reserveName}
+		,#{reservePhone}
+		,#{reserveEmail}
+		,#{payNo}
+		,0)
+	</insert>
+	<select id="selectReserveNo" parameterType="int" resultType="String">
+		select
+			reserve_no as reserveNo
+		from ticket_reserve
+		where pay_No = #{payNo}
+	</select>
+	<insert id="insertReserveOption" parameterType="or">
+		insert into option_reserve values
+		(#{reserveNo}
+		,#{optNo}
+		,#{optQuantity})
+	</insert>
+	<update id="updateMemberPoint" parameterType="map">
+		update member set member_point=#{updatePoint} where member_no=#{memberNo}
+	</update>
+	<update id="updatCouponuse" parameterType="map">
+		update couponuse set coupon_state=1 where member_no=#{memberNo} and coupon_no=#{couponNo}
+	</update>
+	<select id="selectTicketInfo" parameterType="int" resultType="ri">
+		select 
+	    t.ticket_no as ticketNo, 
+	    ticket_title as ticketTitle , 
+	    ticket_filepath1 as ticketFilepath1 
+		from ticket t 
+		join ticket_file f on (t.ticket_no = f.ticket_no) 
+		where t.ticket_No = #{ticketNo}
+	</select>
+	<select  id="selectOptionInfo" parameterType="String" resultType="oi">
+		select 
+	    a.reserve_no as reserveNo, 
+	    a.opt_no as optNo, 
+	    opt_quantity as optQuantity, 
+	    op.opt_title as optTitle, 
+	    op.opt_price as optPrice 
+		from (select * from option_reserve where reserve_no = #{reserveNo})a 
+		join ticket_option op on (a.opt_no = op.opt_no)
+	</select>
+	<select id="AllTicketOrderRate" parameterType="int" resultType="mt">
+        select * from 
+		(select 
+            c2.category_name as parentCategoryName,
+            l1.local_name as localName,
+            l2.local_name as parentLocalName,
+			ticket_no as ticketNo,
+			ticket_title as ticketTitle,
+			required_time as requiredTime,
+			ticket_score as ticketScore
+        from ticket t
+        join ticket_Category c1 on (t.category_id = c1.category_id)
+        join ticket_category c2 on (c1.parent_category_id = c2.category_id)
+        join local_category l1 on (t.local_id = l1.local_id)
+        join local_category l2 on (l1.parent_local_id = l2.local_id))tinfo 
+        join (select ticket_no as ticketNo,
+        opt_title as optTitle,
+        opt_price as optPrice,
+        opt_discount_rate as optDiscountRate,
+        opt_discount_price as optDiscountPrice from    
+    (SELECT * FROM (
+        SELECT 
+            ticket_no,
+            opt_title,
+            opt_price,
+            opt_discount_rate,
+            opt_discount_price,
+            ROW_NUMBER() OVER(PARTITION BY ticket_no ORDER BY opt_discount_rate DESC) AS rn
+        FROM ticket_option
+    )
+    WHERE rn = 1 order by opt_discount_price desc) where rownum <![CDATA[<=]]> #{readNo} )odr on (tinfo.ticketNo = odr.ticketNo)
+	</select>
+	<select id="selectOneFilepath1" parameterType="int" resultType="String">
+		select ticket_filepath1 as ticketFilepath1 from ticket_file where ticket_no = #{ticketNo}
+	</select>
 </mapper>

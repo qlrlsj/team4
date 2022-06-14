@@ -29,10 +29,6 @@ $(".varyBtn").on("click",function(){
     const optQtt = Number($(this).parent().children().eq(1).val());
     const dPrice = Number($(this).parent().parent().children().eq(2).children().eq(2).val())
     const i = $(this).parent().parent().children().eq(0).val();
-    console.log("i : "+i);
-    console.log("optQtt : "+optQtt);
-    console.log("dPrice : "+dPrice);
-    console.log("optQtt*dPrice : "+optQtt*dPrice);
     $(".optQtt"+i).val(optQtt);
     $(".dPrice"+i).val(optQtt*dPrice);
     if(optQtt==0){
@@ -44,7 +40,6 @@ $(".varyBtn").on("click",function(){
     const price = $(".optDiscountPrice");
     
     const qtt = $(".qtt");
-    console.log(price,qtt);
     totalPrice=0;
     for(let i=0;i<price.length;i++){
         totalPrice += price.eq(i).val()*qtt.eq(i).val();
@@ -54,6 +49,7 @@ $(".varyBtn").on("click",function(){
         $("#payBtn").css("display","none");
     }else{
         $("#payBtn").css("display","block");
+        $("#payBtn").css("display","inline");
     }
     $(".totalPrice").text(totalPrice.toLocaleString()+"원");
     $("#totalPrice").val(totalPrice);
@@ -65,8 +61,6 @@ $(".varyBtn").on("click",function(){
 $("#payBtn").on("click",function(){
     const memberNo = Number($(".memberNo").text());
     const coupon = $("#coupon");
-    console.log(totalPrice);
-    console.log("memberNo :"+ memberNo);
     if(memberNo!=0){
         $.ajax({
             type:"POST",
@@ -111,9 +105,7 @@ $("#coupon").on("change",function(){
         dcRate =Number(option.attr("couponDCRate"));
     }
     
-    console.log(dcPrice,dcRate);
     const dc = (totalPrice*dcRate/100)+dcPrice;
-    console.log(dc);
     $("#payInfoBox2").text(dc);
     $("#pointUse").val(0);
     $("#payInfoBox3").text($("#pointUse").val());
@@ -157,8 +149,44 @@ $("#payBtn2").on("click",function(){
     const pointRate = 0.1;
     $("#pointAdd").val(payPrice * pointRate);
     
-    $(this).attr("type","submit");
-    $(this).trigger("click");
+    //결제 API
+    var IMP = window.IMP; //생략가능
+    //거래 고유 ID를 생성하기위해 현재 날짜를 이용해서 처리
+    const d = new Date();
+    //date 값 생성시 ""를 더하지 않으면 숫자 + 연산이 되므로 문자 덧샘을 추가
+    const date = d.getFullYear()+""+(d.getMonth()+1)+""+d.getDate()+""+d.getHours()+""+d.getMinutes()+""+d.getSeconds();
+    IMP.init("imp32461786");//결제API사용을 위한 식별코드입력
+    IMP.request_pay({
+        merchant_uid : "T_"+date,//거래아이디
+        name:"KTRIP_PAYMENT",	 //결제이름
+        amount:payPrice,		//결제금액
+        buyer_email:$("input[name=reserveEmail]").val(),	            //구매자이메일
+        buyer_name:$("input[name=reserveName]").val(),				//구매자이름
+        buyer_tel:$("input[name=reservePhone]").val()		        //구매자전번
+    },function(rsp){
+        if(rsp.success){
+            $($("#payBtn3")).attr("type","submit");
+            $($("#payBtn3")).trigger("click");
+        }else{
+            alert("에러내용:"+rsp.err_msg);
+        }
+    });
+    
 
     
+});
+
+$("#payBtn3").on("click",function(){
+    const payPrice = Number($("#payInfoBox4").text());
+    const pointUse = Number($("#payInfoBox3").text());
+    const payCoupon = Number($("#payInfoBox2").text());
+    $("input[name=payPrice]").val(payPrice);
+    $("input[name=pointUse]").val(pointUse);
+    $("input[name=payCoupon]").val(payCoupon);
+
+    //적립금계산
+    const pointRate = 0.1;
+    $("#pointAdd").val(payPrice * pointRate);
+    $($("#payBtn3")).attr("type","submit");
+    $($("#payBtn3")).trigger("click");
 });

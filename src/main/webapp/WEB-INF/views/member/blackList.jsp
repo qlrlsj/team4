@@ -37,12 +37,12 @@
 						<th>신고자</th><th>범인</th><th>신고 내용</th><th>블랙리스트로 변환</th>
 					</tr>
 					<c:forEach items="${list }" var="rp">
-						<tr>
+						<tr class="${rp.reported }">
 							<td align="center">${rp.reporterId }</td>
 							<td align="center">${rp.reportedId }</td>
 							<td align="center">${rp.reportContent }</td>
-							<td>
-								<button type="button" class="btn btn-danger blackMember">블랙리스트로 변경</button>
+							<td align="center">
+								<button type="button" class="btn btn-danger" onclick="blackMember('${rp.reported}', '${rp.reportContent }');">블랙리스트로 변경</button>
 							</td>
 						</tr>
 					</c:forEach>
@@ -50,19 +50,20 @@
 		</form>
 	</div>
 	<script>
-		//회원추방 기능
-		$(".black").on("click",function(){
-			var result = confirm('해당 회원을 블랙리스트로 변경하시겠습니까?');
-			//확인 alert출력
+		//회원 블랙
+		function blackMember(reported,reportContent){
+			var result = confirm("회원을 블랙리스트로 변경하시겠습니까?");
 			if(result){
-				var memberNo = $(this).parent().parent().children().eq(1).text();
-				//컨트롤러로 값 주면서 페이지 이동
-				console.log(memberNo);
-				location.href="/exileMember.kt?memberNo="+memberNo;
-			}else{
-				
+				$.ajax({
+					url : "/insertBlack.kt",
+					type: "post",
+					data : {"reported":reported,"reportContent":reportContent},
+					success : function(data) {
+						location.reload();
+					}
+				});
 			}
-		});
+		}
 	</script>
 	
 	

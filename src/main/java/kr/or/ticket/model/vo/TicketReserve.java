@@ -8,9 +8,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TicketReserve {
-	private int reserveNo;
+	private String reserveNo;
 	private int ticketNo;
 	private int memberNo;
+	private int payNo;
 	private String reserveName;
 	private String reservePhone;
 	private String reserveEmail;
