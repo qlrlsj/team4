@@ -52,4 +52,16 @@
 	<insert id="couponSend" parameterType="map">
 		insert into couponuse values(#{memberNo},#{couponNo},0)
 	</insert>
+	<select id="findCouponUse" parameterType="int" resultType="po">
+		select 
+			t1.coupon_no as couponNo,
+			t1.coupon_name as couponName,
+			t1.coupon_date as couponDate,
+			t1.coupon_enddate as conponEndDate,
+			t1.coupon_dcprice as couponDCPrice,
+			t1.coupon_dcrate as couponDCRate,
+			t1.coupon_if as couponIf,
+			t1.coupon_range as couponRange
+		from (coupon t1 inner join (select * from couponuse where member_no=#{userNo})t2 on t1.coupon_no=t2.coupon_no)
+	</select>
 </mapper>
