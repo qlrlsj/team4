@@ -232,9 +232,14 @@ public class TicketController {
 		System.out.println("type : "+type);
 		
 		ArrayList<MainTicket> ticket = service.selectSearchTicket(searchStr,type);
+		if(ticket.size()==0) {
+			String parentLocalName = service.searchParentLocalName(searchStr);
+			model.addAttribute("parentLocalName", parentLocalName);
+		}
 		System.out.println(ticket);
 		model.addAttribute("searchStr", searchStr);
 		model.addAttribute("ticket",ticket);
+		model.addAttribute("type",type);
 		return "ticket/searchTicket";
 	}
 	@RequestMapping(value="/ticketTest.kt")

@@ -115,5 +115,9 @@ public class TicketDao {
 	public String selectSearchLocalFilepath(String parentLocalName) {
 		return sqlSession.selectOne("ticket.selectSearchLocalFilepath", parentLocalName);
 	}
+
+	public String searchParentLocalName(String searchStr) {
+		return sqlSession.selectOne("ticket.searchParentLocalName", searchStr);
+	}
 	
 }

@@ -173,7 +173,7 @@ public class TicketService {
 
 	public ArrayList<MainTicket> selectAllTicketOrderRate() {
 		//가져올 개수
-		int readNo = 16;
+		int readNo = 12;
 		ArrayList<MainTicket> ticket= dao.selectAllTicketOrderRate(readNo);
 		for(int i=0; i<ticket.size();i++) {
 			int ticketNo = ticket.get(i).getTicketNo();
@@ -197,6 +197,10 @@ public class TicketService {
 			ticket.get(i).setTicketFilepath1(ticketFilepath1);
 		}
 		return ticket;
+	}
+
+	public String searchParentLocalName(String searchStr) {
+		return dao.searchParentLocalName(searchStr);
 	}
 	
 }

@@ -257,9 +257,17 @@
 			<if test="type == 'optdiscountpricelow'"> optdiscountprice asc</if>
 			<if test="type == 'optdiscountpricehigh'"> optdiscountprice desc</if>
 		</trim>
-
 	</select>
+	
 	<select id="selectSearchLocalFilepath" parameterType="String" resultType="String">
 		select local_filepath as localFilepath from local_category where local_name=#{parentLocalName} AND NOT local_filepath IS NULL
 	</select>
+	
+	<select id="searchParentLocalName" parameterType="String" resultType="String">
+	    select distinct l2.local_name as parentLocalName 
+	    from local_category l1
+	    join local_category l2 on(l1.parent_local_id = l2.local_id)
+	    where l1.local_Name like '%'||#{searchStr}||'%' or l2.Local_Name like '%'||#{searchStr}||'%'
+	</select>
+	
 </mapper>
