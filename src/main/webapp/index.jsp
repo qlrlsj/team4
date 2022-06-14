@@ -93,13 +93,13 @@
 			<div id="ticketExampleControls" class="carousel slide ImgBox" data-bs-ride="carousel">
 				<div class="carousel-inner">
 					<div class="carousel-item active">
-						<img src="/resources/upload/air/air_p1.png" class="d-block w-100 ImgSize" alt="프로모션1">
+						<img src="/resources/upload/ticket/가평2_1.PNG" class="d-block w-100 ImgSize" alt="프로모션1">
 					</div>
 					<div class="carousel-item">
-						<img src="/resources/upload/air/air_p2.png" class="d-block w-100 ImgSize" alt="프로모션2">
+						<img src="/resources/upload/ticket/서핑_1.PNG" class="d-block w-100 ImgSize" alt="프로모션2">
 					</div>
 					<div class="carousel-item">
-						<img src="/resources/upload/air/air_p3.png" class="d-block w-100 ImgSize" alt="프로모션3">
+						<img src="/resources/upload/ticket/가평_2.PNG" class="d-block w-100 ImgSize" alt="프로모션3">
 					</div>
 				</div>
 				<button class="carousel-control-prev" type="button"	data-bs-target="#ticketExampleControls" data-bs-slide="prev">

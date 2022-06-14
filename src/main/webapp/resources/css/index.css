@@ -5,7 +5,7 @@
 }
 .ImgSize{
     width: 60%;
-    height: 400px;
+    height: 450px;
 }
 .MainLogo{
     height: 50px;
@@ -32,7 +32,8 @@
 .ImgBox{
     margin-left: 20%;
     margin-right: 20%;
-    margin-top: 50px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 .ShortcutIcon{
     height: 50px;
