@@ -133,7 +133,7 @@
 	</resultMap>
 
 	<select id="selectOptionList" parameterType="map"		resultType="ho" resultMap="hostelOptionList">
-		SELECT * FROM HOSTEL_OPTION WHERE
+		SELECT * FROM HOSTEL_OPTION WHERE max_booknum <![CDATA[>=]]> #{customerNum} and
 		hostel_code=#{hostelCode} and OPTION_NO
 		NOT IN (SELECT OPTION_NO FROM
 		RESERVED_ROOM WHERE RESERVED_DATE

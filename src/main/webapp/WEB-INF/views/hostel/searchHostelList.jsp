@@ -142,9 +142,9 @@ var roolTypeCheck = $("#roolTypeCheck").val();
 	console.log("로드시 룸타입 : "+roolTypeCheck);
 
 $(document).ready(function(){
-
-		if(roolTypeCheck==1){
-		$("input:radio[name=roomType]:checkbox[value='1']").prop('checked', true);  
+/*
+	if(roolTypeCheck==1){
+	$("input:radio[name=roomType]:checkbox[value='1']").prop('checked', true);  
 }else if(roolTypeCheck==2){
 	$("input:radio[name=roomType]:checkbox[value='2']").prop('checked', true);
 }else if(roolTypeCheck==3){
@@ -152,7 +152,16 @@ $(document).ready(function(){
 }else if(roolTypeCheck==4){
 	$("input:radio[name=roomType]:checkbox[value='4']").prop('checked', true);
 }
-
+*/
+if(roolTypeCheck==1){
+    $("input:radio[name=roomType]").eq(0).click();
+}else if(roolTypeCheck==2){
+    $("input:radio[name=roomType]").eq(1).click();
+}else if(roolTypeCheck==3){
+    $("input:radio[name=roomType]").eq(2).click();
+}else if(roolTypeCheck==4){
+    $("input:radio[name=roomType]").eq(3).click();
+}
 });
 
 
