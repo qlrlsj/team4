@@ -58,8 +58,14 @@
 		from file_tbl where package_no=#{packageNo}
 	</select>
 	
+	<select id="paymentNo" resultType="int">
+		select
+			max(pay_no)
+		from payment
+	</select>
+	
 	<insert id="insertPackageReserve" parameterType="pc">
-		insert into package_reserve values(reserve_seq.nextval,#{packagePrsnl},#{packageStart},#{packageNo},reserve_seq_2.nextval,#{memberId},#{reservePrice})
+		insert into package_reserve values(reserve_seq.nextval,#{packagePrsnl},#{packageStart},#{packageNo},#{payNo},#{memberId},#{reservePrice})
 	</insert>
 	
 	<insert id="insertPayment" parameterType="pc">

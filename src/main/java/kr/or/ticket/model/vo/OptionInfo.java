@@ -1,15 +1,16 @@
 package kr.or.ticket.model.vo;
 
-import java.util.ArrayList;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
-public class OptionReserves {
-	private int[] optNo;
-	private int[] optQuantity;
+public class OptionInfo {
+	private String reserveNo;
+	private int optNo;
+	private int optQuantity;
+	private String optTitle;
+	private int optPrice;
 }

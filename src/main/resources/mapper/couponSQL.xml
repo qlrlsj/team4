@@ -30,4 +30,7 @@
 		update couponuse 
 		set coupon_state = 1 where member_no = #{userNo} and coupon_no = #{couponNo}
 	</update>
+	<insert id="couponMake" parameterType="po">
+		insert into coupon values(coupon_seq.nextval, #{couponName}, sysdate, #{conponEndDate}, #{couponDCPrice}, #{couponDCRate}, #{couponIf}, #{couponRange})
+	</insert>
 </mapper>

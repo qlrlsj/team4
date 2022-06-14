@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class AirReserveComplete {
 	private int air_no;
+	private String air_line;
 	private	String air_name;
 	private int air_level;
 	private String air_date;
