@@ -70,7 +70,9 @@
         margin: 0 20px;
         padding: 0;
     }
-
+    .mainBtn{
+        color: #383d40;
+    }
 </style>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -80,10 +82,13 @@
                 <div class="localImg">
                     ${parentLocalName}
                 </div>
-                <div class="searchStrBox">
-                    '${searchStr}' 검색결과
+                <div class="text-box">
+                    <div class="searchStrBox">
+                        '${searchStr}' 검색결과
+                    </div>
+                    <h3 style="text-align: Center;">검색 결과가 없습니다.</h3>
+                    <h3 style="text-align: Center; "><a href="/ticketMain.kt" class="btn btn-secondary mainBtn" style="margin-top:30px; height:40px; line-height:40px; color: #383d40; box-sizing: content-box;">티켓메인으로 돌아가기</a></h3>
                 </div>
-                <h3 style="text-align: Center;">검색 결과가 없습니다.</h3>
                 <input type="hidden" id="parentLocalName" value="${parentLocalName}">
             </c:when>
             <c:otherwise>
@@ -160,11 +165,10 @@
             if(ticketSize != 0){
                 $(".localImg").css("background-image","url(/resources/img/ticket/"+parentLocalName+".png)");
             }else if(parentLocalName!=""){
-                console.log("부모이름이 null이 아니면");
-                console.log(parentLocalName);
                 $(".localImg").css("background-image","url(/resources/img/ticket/"+parentLocalName+".png)");
             }else{
                 $(".localImg").css("display","none");
+                $(".text-box").css("margin","300px 0");
             }
 
             const type = $("#type").val();
