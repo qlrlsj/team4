@@ -78,7 +78,7 @@ $(".type-filter>a").on("click",function(){
                     ListDiv += imgDiv+infoDiv;
                     $(".list-searched").append(ListDiv);
 
-
+// 테스트
 
                 }
 
