@@ -27,8 +27,29 @@
 select option[value=""][disabled] {
 	display: none;
 }
-
-
+	.pageNavi>*{
+		margin: 5px;
+		text-align: center;
+	}
+	
+	div>a{
+		text-decoration: none;
+		font-size: 20px;
+	}
+	
+	tr>th{
+		text-align: center;
+	}
+	
+	tr>td{
+		text-align: center;
+	}
+	tr>td>a{
+		text-decoration: none;
+	}
+	tr>th>a{
+		text-decoration: none;
+	}
 </style>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
@@ -71,8 +92,9 @@ select option[value=""][disabled] {
  		location.href= "/companionSearch.kt?companionField="+companionField+"&companionTheme="+companionTheme+"&companionProgress="+companionProgress+"&travleStart="+travleStart+"&reqPage="+reqPage;		
 	}
 	</script>
-		
-		<h2>동행자 모집</h2>
+		<div class="div-content">
+			<h2>동행자 모집</h2>		
+		</div>
 		<div class="div-content p-3 mb-5 bg-secondary row">
 			<!-- 지역 검색 -->
 			<select class="form-select col comS" name="companionField" id="field">
@@ -131,7 +153,7 @@ select option[value=""][disabled] {
 				</tr>
 				</c:forEach>
 				<tr>
-					<th colspan="7">${pageNavi }</th>
+					<th class="page-item pageNavi" colspan="7">${pageNavi }</th>
 				</tr>
 		</table>
 	</div>
