@@ -7,3 +7,6 @@ $(".ShortcutIcon").eq(1).click(function(){
 $(".ShortcutIcon").eq(2).click(function(){
     location.href="/ticketMain.kt";
 })
+$(".ShortcutIcon").eq(3).click(function(){
+    location.href="/packageMain.kt";
+})

@@ -31,7 +31,7 @@
 		    <div class="row py-lg-5">
 		      <div class="col-lg-6 col-md-8 mx-auto">
 		        <h1 class="fw-light">Package product</h1>
-		        <p class="lead text-muted">Plan your trip at a cheaper price by using package products!</p>
+		        <p class="lead text-muted">패키지 상품을 이용하여 알뜰하게 여행을 계획해 보세요!</p>
 		        <p>
 		        <c:if test="${not empty sessionScope.m }"> <!-- 현재 로그인이 되어있는지(세션에 있는 값이 null인지 아닌지 검사 -->
 		          <a href="/insertPackagePage.kt" class="btn btn-primary my-2">Product registration</a>
@@ -61,10 +61,21 @@
 			            <div class="card-body">
 			              <p class="card-text">${p.packageTitle }</p>
 			              <div class="d-flex justify-content-between align-items-center">
-			                <div class="btn-group">
-			                  <a class="btn btn-sm btn-outline-secondary" href="/packageView.kt?packageNo=${p.packageNo }">View</a>
-			                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-			                </div>
+			                	<c:choose>
+			                		<c:when  test="${empty sessionScope.m.memberNo}">
+			                			<div class="btn-group">
+			         						<a class="btn btn-sm btn-outline-secondary" id="loginPlease">View</a>
+		         						</div>
+			                		</c:when>
+			                		<c:otherwise>
+				                		<div class="btn-group">
+				                			<a class="btn btn-sm btn-outline-secondary" href="/packageView.kt?packageNo=${p.packageNo }">View</a>
+		                			  	</div>
+			                		</c:otherwise>
+			                	</c:choose>
+			                	
+<!-- 			                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button> -->
+			              
 			                <small class="text-muted"><fmt:formatNumber value="${p.packagePrice}" pattern="#,###,###,###"/>원 / 1인</small>
 			              </div>
 			            </div>
@@ -76,7 +87,14 @@
 	  </div>
 	</div>
 		
-	
+	<script>
+		$("#loginPlease").click(function(){
+			alert("로그인이 필요한 서비스 입니다.")
+		});
+		$("#loginPlease1").click(function(){
+			alert("로그인이 필요한 서비스 입니다.")
+		});
+	</script>
 	
 	
 	

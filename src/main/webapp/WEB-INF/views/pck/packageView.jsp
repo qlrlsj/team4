@@ -37,7 +37,7 @@
 		font-weight: bold;
 		width: 150px;
 		height: 50px;
-/* 		display: none; */
+ 		display: none;
 	}
 	.form-control{
 		width: 200px;
@@ -90,6 +90,11 @@
 		<input type="hidden" name="packageStart"/>
 		<input type="hidden" name="packageNo" value="${p.packageNo }"/>
 		<input type="hidden" name="reservePrice"/>
+		<input type="hidden" name="packageTitle" value="${p.packageTitle }"/>
+		<input type="hidden" name="packageContent" value="${p.packageContent }"/>
+		<input type="hidden" name="memberEmail" value="${sessionScope.m.memberEmail }"/>
+		<input type="hidden" name="memberPhone" value="${sessionScope.m.memberPhone }"/>
+		<input type="hidden" name="memberName" value="${sessionScope.m.memberName }"/>
 		<!-- 두 테이블 db에 등록이 다 되도록 데이터를 다 보내고 싹다 회원정보 session에서꺼내던 어떻게든해서 다보내고 -->
 		<div class="input-group mb-3">
 			<button type="submit" class="btn btn-primary" id="paymentButton">구매하기</button> <!-- 나중에 상단 style에서 주석풀것. -->

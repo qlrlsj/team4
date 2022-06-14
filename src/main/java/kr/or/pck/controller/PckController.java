@@ -50,13 +50,14 @@ public class PckController {
 	}
 	
 	@RequestMapping(value="/payment.kt")
-	public String payMent(PckReserve pckReserve) {
+	public String payMent(PckReserve pckReserve, Model model) {
 //		System.out.println("컨트롤러로 들어온 결제정보 : "+pckReserve);
 		int result = service.insertPackageReserve(pckReserve);
-		return "redirect:/packageMain.kt";
+//		return "redirect:/packageMain.kt";
+		model.addAttribute("pc", pckReserve);
+		return "pck/reserveConfirm";
 	}
-	
-	
+		
 	@RequestMapping(value="/insertPackage.kt")
 	public String insertPackage(Pck p, MultipartFile[] upfile, MultipartFile mainfile3, HttpServletRequest request) { //파일에 대한건 MultipartFile[]로 , 나머지는 Pck 로 들어온다
 //		System.out.println(p);

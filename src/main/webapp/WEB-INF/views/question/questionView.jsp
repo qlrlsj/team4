@@ -11,6 +11,26 @@
 	.table-light{
 		width: 100px;
 		text-align: center;
+		background-color: #ecedee;
+		border-color: #ecedee;
+	}
+	.table-light2{
+		text-align: left;
+		background-color: #ecedee;
+		border-color: #ecedee;
+	}
+	#table-light2{
+		text-align: left;
+		background-color: #f8f9fa;
+		border-color: #ecedee;
+	}
+	#table-light{
+		background-color: #ecedee;
+		border-color: #ecedee;
+	}
+	#bobobo{
+		background-color: #f8f9fa;
+		border-color: #ecedee;
 	}
 	.content-title{
 		text-align: center;
@@ -20,10 +40,12 @@
 	}
 	#table-content{
 		height: 500px;
+		background-color: #ecedee;
 	}
-/* 	.noticeListbtn{ */
-/* 		text-align: left; */
-/* 	} */
+	#contentleft{
+ 		background-color: #f8f9fa;
+		border-color: #ecedee;
+	}
 	.formClass{
 		display: flex;
 		flex-direction: row;
@@ -61,10 +83,10 @@
 								<input type="hidden" name="questionNo" value='${q.questionNo }'>
 								<input type="hidden" name="questionTitle" value='${q.questionTitle }'>
 								<input type="hidden" name="questionContent" value='${q.questionContent }'>
-								<button class="btn btn-primary" type="submit" id="uuu">수정</button>
-								<button class="btn btn-secondary" onclick="questionDelete(${q.questionNo});" id="ddd">삭제</button>
+								<button class="btn btn-primary" type="submit" id="uuu">Update</button>
+								<button class="btn btn-primary" onclick="questionDelete(${q.questionNo});" id="ddd">Delete</button>
 								<div class="noticeListbtn">
-									<button class="btn btn-light" id="noticeListbtn" onclick="noticeList1()" type="button">처음으로</button>
+									<button class="btn btn-light" id="noticeListbtn" onclick="noticeList1()" type="button">뒤로</button>
 								</div>
 							</form>
 						</th>
@@ -96,13 +118,13 @@
 			<table class="table tabel-hover" id="noticeView">
 				<tr class="table-success">
 					<th class="table-light" style="min-width: 100px;" id="table-light">제목</th>
-					<td colspan="7">${q.questionTitle}</td>
+					<td colspan="7" id="bobobo">${q.questionTitle}</td>
 				</tr>
 				<tr class="table-success">
 					<th class="table-light" id="table-light">작성자</th>
-					<td>${q.memberId }</td>
+					<td class="table-light">${q.memberId }</td>
 					<th class="table-light" id="table-light">작성일</th>
-					<td>${q.questionDate }</td>
+					<td class="table-light2" id="table-light2">${q.questionDate }</td>
 				</tr>
 				<tr class="table-success">
 					<th class="table-light" id="table-content">내용</th>
@@ -120,10 +142,10 @@
 						<form method="post" action="/insertComment.kt">
 		        <div class="qcqc">
 		            <img src="/resources/img/logo.png" height="100px" class="logo">
-		            <textarea rows="5" cols="158" name="qcComment"></textarea>
+		            <textarea class="form-control" id="form-control" rows="5" cols="158" name="qcComment"></textarea>
 		            <input type="hidden" name="questionNo" value="${q.questionNo }"/>
 		        </div>
-	    		<button type="submit">답글작성</button>
+	    		<button class="btn btn-primary" type="submit">답글작성</button>
 			</form>
 		</c:when>
 		<c:when test="${c eq null}"> <!-- K-TRIP의 답변이 아직 달리지 않은 상태 -->
@@ -132,7 +154,7 @@
 		<c:otherwise>
 			<div class="qcqc">
             	<img src="/resources/img/logo.png" height="100px" class="logo">
-            	<textarea rows="5" cols="158" name="qcComment" readonly>${c.qcComment }</textarea>
+            	<textarea class="form-control" rows="5" cols="158" name="qcComment" readonly>${c.qcComment }</textarea>
 			</div>
 		</c:otherwise>
 	</c:choose>

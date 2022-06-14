@@ -17,4 +17,9 @@ public class PckReserve {
 	private int payNo;
 	private String memberId;
 	private int reservePrice;
+	private String packageTitle;
+	private String packageContent;
+	private String memberEmail;
+	private String memberName;
+	private String memberPhone;
 }
