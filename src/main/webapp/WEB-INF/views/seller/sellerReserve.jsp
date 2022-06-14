@@ -8,6 +8,12 @@
 <title>Insert title here</title>
 </head>
 <link rel="stylesheet" href="/resources/css/seller/seller.css">
+<style>
+.table{
+	font-size: 15px;
+	text-align: center;
+}
+</style>
 <body>		
 		<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 <script>
@@ -30,14 +36,15 @@ function reserveCancel(reserveNo,payNo ){
 		<hr>
 		<div class="sellerWrap">
 			<div class="list-group list-style">
-				  <a href="/sellerPage.kt" class="list-group-item list-group-item-action" > 내 정보 </a>
 				  <a href="/sellerProductOption.kt" class="list-group-item list-group-item-action">상품 관리</a>
 				  <a href="/sellerCash.kt" class="list-group-item list-group-item-action"  >정산 관리</a>
 				  <a href="/sellerReserveManage.kt" class="list-group-item list-group-item-action active" aria-current="true">예약 관리</a>
 				  <a href="/sellerAcount.kt" class="list-group-item list-group-item-action">계정 관리</a>
 			</div>
 			<div class="div-content">
-				<h2>선택 상품 예약 관리</h2>
+				<div class="mb-3">
+					<div class="content-title">예약 상세</div>
+				</div>
 				<table class="table table-sm">
 				<c:choose>
 					<c:when test="${type eq 'hostel' }">

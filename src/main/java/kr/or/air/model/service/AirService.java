@@ -45,7 +45,7 @@ public class AirService {
 		return dao.airCheck(map);
 	}
 
-	public ArrayList<AirPayment> airPayReserve(String airNumber) {
+	public AirPayment airPayReserve(String airNumber) {
 		// TODO Auto-generated method stub
 		return dao.airPayReserve(airNumber);
 	}

@@ -14,6 +14,17 @@
 select option[value=""][disabled] {
 	display: none;
 }
+.center{
+	margin : 10px auto;
+}
+.ex{
+	align-content:center;
+}
+.sbm{
+ 	margin-top : 20px;  
+ 	float: right; 
+ 	width: 150px; 
+}
 </style>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
@@ -58,18 +69,45 @@ select option[value=""][disabled] {
 	     $('[name=travleStart]').val('${com.travleStart}');
 	     $('[name=travleEnd]').val('${com.travleEnd}');
    	});
+    
+    function checkForm(){
+		if($('#companionTitle').val() == ''){
+			alert("제목을 입력해주세요!");
+			return false;
+		}
+		if($('#companionField').val() == null){
+			alert("여행 지역을 입력해주세요!");
+			return false;
+		}
+		if($('#datepicker1').val() == ''){
+			alert("여행 시작 예정일을 입력해주세요!");
+			return false;
+		}
+		if($('#datepicker2').val() == ''){
+			alert("여행 시작 예정일을 입력해주세요!");
+			return false;
+		}
+		if($('#theme').val() == null){
+			alert("여행 테마를 입력해주세요!");
+			return false;
+		}
+		if($('#summernote').val() == ''){
+			alert("글 내용을 입력해주세요!");
+			return false;
+		}
+    }
 	</script>
 	<h2>동행자 모집 글 수정</h2>
 	<div class="div-content">
-	<form method="post" action="/companionUpdate.kt">	
+	<form method="post" action="/companionUpdate.kt" onsubmit="return checkForm()">	
 		  <div class="mb-3">
-		    <label for="companionTitle" class="form-label">제목</label>
+		    <label for="companionTitle" class="form-label">글 제목</label>
 		    <input type="text" class="form-control" name="companionTitle" id="companionTitle" value="${com.companionTitle }">
 		  </div>
 		  <input type="hidden" name="companionNo" value="${com.companionNo }">
 		  <input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
 		  <input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
-		<div class="div-content p-3 mb-5 bg-secondary row">
+		<div class="div-content p-3 mb-5 row">
 			<select class="form-select col comS" name="companionField">
 				<option value="" disabled selected>지역</option>
 				<option value="선택 안함">선택 안함</option>

@@ -48,6 +48,6 @@ public class CouponController {
 		System.out.println(endDate[0].substring(2,4));
 		coupon.setConponEndDate(endDate[0].substring(1,3) +"/"+ endDate[1] +"/"+ endDate[2]);
 		int result = service.couponMake(coupon);
-		return "coupon/insertCoupon";
+		return "air/airMain";
 	}
 }

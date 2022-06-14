@@ -19,11 +19,11 @@ import kr.or.seller.model.vo.ReserveData;
 public class SellerController {
 	@Autowired
 	SellerService service;
-	
-	@RequestMapping (value="/sellerPage.kt")
-	public String sellerMain() {		
-		return "seller/sellerMain";
+	@RequestMapping(value="/sellerPage.kt")
+	public String sellerPage() {
+		return "seller/sellerAccountPage";
 	}
+	
 	@RequestMapping(value="sellerProductOption.kt")
 	public String sellerProductOptionFrm() {
 		return "seller/sellerProductOption";

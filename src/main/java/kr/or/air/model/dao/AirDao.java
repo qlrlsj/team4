@@ -51,10 +51,10 @@ public class AirDao {
 		return (ArrayList<AirPayment>)list;
 	}
 
-	public ArrayList<AirPayment> airPayReserve(String airNumber) {
-		List list = sqlSession.selectList("Air.airPayReserve",airNumber);
-		System.out.println(list);
-		return (ArrayList<AirPayment>)list;
+	public AirPayment airPayReserve(String airNumber) {
+		AirPayment airPayment = sqlSession.selectOne("Air.airPayReserve",airNumber);
+		System.out.println(airPayment);
+		return (AirPayment)airPayment;
 	}
 
 	public ArrayList<AirReserveComplete> airCompleteReserve(String airNumber) {

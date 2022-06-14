@@ -1068,6 +1068,8 @@
 			<input type="hidden" name="memberName">
 			<input type="hidden" name="airPay">
 			<input type="hidden" name="phone">
+			<input type="hidden" name="airStart" value="${airReserve.airStartST}">
+			<input type="hidden" name="airEnd" value="${airReserve.airArriveST}">
 				
 			<input type="hidden" name="airLineST" value="${airReserve.airLineST}">
 			<input type="hidden" name="airNumberST" value="${airReserve.airNumberST}">

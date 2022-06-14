@@ -277,7 +277,7 @@ public class AirController {
 	@RequestMapping(value="/myAirPage.kt")
 	public String myAirPage(HttpSession session, Model model, String airNumber) {
 		
-		ArrayList<AirPayment> AP = service.airPayReserve(airNumber);
+		AirPayment AP = service.airPayReserve(airNumber);
 		ArrayList<AirReserveComplete>  AClist = service.airCompleteReserve(airNumber);
 		AirReserveComplete ac1 = new AirReserveComplete();
 		AirReserveComplete ac2 = new AirReserveComplete();
@@ -312,6 +312,6 @@ public class AirController {
 		model.addAttribute("SeatListST",SeatListST);
 		model.addAttribute("SeatListED",SeatListED);
 		
-		return "air/airCheck";
+		return "air/myAirPage";
 	}
 }
