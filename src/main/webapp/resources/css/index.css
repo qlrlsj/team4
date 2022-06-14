@@ -1,0 +1,42 @@
+.MainDiv{
+    margin-top: 80px;
+    width: 100%;
+    height: 500px;
+}
+.ImgSize{
+    width: 60%;
+    height: 400px;
+}
+.MainLogo{
+    height: 50px;
+    background-color: cornsilk;
+}
+.MainH2{
+    width: 50%;
+    height: 50px;
+    float: left;
+    margin: 0 auto;
+}
+.ShortcutDiv{
+    float: right; 
+    width: 40%;
+    height: 50px;
+}
+.Shortcut{
+    float: left;
+    margin-left: 35%;
+    width: 50%;
+    height: 100%;
+    font-size: 30px;
+}
+.ImgBox{
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-top: 50px;
+}
+.ShortcutIcon{
+    height: 50px;
+    float: right;
+    font-size: 40px !important;
+    margin-top: 5px;
+}
