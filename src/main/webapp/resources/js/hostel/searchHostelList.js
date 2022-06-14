@@ -32,15 +32,15 @@ var customerNum =  $("[name=customerNum]").val();
 
 
 $(".type-filter>a").on("click",function(){
-    console.log("roolTypeCheck"+roolTypeCheck);
+    //console.log("roolTypeCheck"+roolTypeCheck);
         //      $(".lineUp").css("color","red");
-        console.log("인덱스:"+filterIidx);
+    //    console.log("인덱스:"+filterIidx);
    
-        console.log("방타입:"+roomType);
-        console.log("서치키워드"+keyWord);
-        console.log("시설:"+checkedComfortList);
-        console.log("서비스"+checkedServiceList);
-        console.log("입실일 :"+startDate+"퇴실일"+endDate);
+    //    console.log("방타입:"+roomType);
+    //    console.log("서치키워드"+keyWord);
+    //    console.log("시설:"+checkedComfortList);
+    //    console.log("서비스"+checkedServiceList);
+   //     console.log("입실일 :"+startDate+"퇴실일"+endDate);
 
         filterIidx = $(this).index();
         roomType= $("input[name=roomType]:checked").val();
@@ -91,7 +91,7 @@ $(".type-filter>a").on("click",function(){
          //       var startDate = data.startDate;
             //    var endDate = data.endDate;
            //     var customerNum = data.customerNum;
-           console.log("아작스처리 후roomType"+roomType);
+      //     console.log("아작스처리 후roomType"+roomType);
                 var list = data.list;
 
                 var searchListDiv = $(".list-searched");
