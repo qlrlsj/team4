@@ -93,6 +93,10 @@ public class MemberDao {
 		return result;
 	}
 
+	public Report blackCheck(Member member) {
+		return sqlSession.selectOne("report.blackCheck",member);
+	}
+
 
 
 

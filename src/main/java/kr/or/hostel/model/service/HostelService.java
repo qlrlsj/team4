@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.StringTokenizer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -152,7 +153,7 @@ public class HostelService {
 
 		// 파일
 		ArrayList<HostelFile> fileList = dao.searchHostelFile(hostelCode);
-		System.out.println("서비스hostel값 : " + hostel);
+	//	System.out.println("서비스hostel값 : " + hostel);
 		HostelDetailList hdl = new HostelDetailList(hostel, optionList, fileList);
 
 		return hdl;
@@ -206,7 +207,7 @@ public class HostelService {
 				String startDate = hr.getHostelIndate();
 				String endDate = hr.getHostelOutdate();
 
-				System.out.println("예약시작일:" + startDate + "/종료일:" + endDate);
+				//System.out.println("예약시작일:" + startDate + "/종료일:" + endDate);
 				int sYear = Integer.parseInt(startDate.split("-")[0]);
 				int sMon = Integer.parseInt(startDate.split("-")[1]);
 				int sDate = Integer.parseInt(startDate.split("-")[2]);
@@ -221,7 +222,7 @@ public class HostelService {
 				cal.set(sYear, sMon - 1, sDate);
 				String sDay = sdf.format(cal.getTime());
 
-				System.out.println("데이트 포맷-시작일:" + sDay + "종료일" + eDay);
+				//System.out.println("데이트 포맷-시작일:" + sDay + "종료일" + eDay);
 
 				ArrayList<String> date = new ArrayList<String>();
 
@@ -233,7 +234,7 @@ public class HostelService {
 				}
 
 				// date.add(eDay); // 검색/예약할땐 eday넣을지말지 주의 여기선 퇴실일 제외
-				System.out.println("예약가능일:" + date);
+				//System.out.println("예약가능일:" + date);
 //				System.out.println("날짜 length"+date.size());
 				int dateResult = 0;
 				String reservationNo = dao.selectReservationNo(); // 가장최근 예약번호 
@@ -245,7 +246,7 @@ public class HostelService {
 					rdr.setReservedDate(rv);
 					rdr.setReservationNo(reservationNo);
 
-					System.out.println("리스트 포문테스트:" + rv);
+				//	System.out.println("리스트 포문테스트:" + rv);
 					dateResult = dao.insertReservedRoom(rdr);
 					dateResult++;
 				} // 예약가능일자 인서트 종료
@@ -268,6 +269,26 @@ public class HostelService {
 		HostelReserve hrInfo = dao.selectHostelReserve(recentRvNo);
 
 		return hrInfo;
+	}
+
+
+
+	public ArrayList<Hostel> filterHostelList(String checkedComfortList, String checkedServiceList, String keyWord,
+			String startDate, String endDate, int roomType, int customerNum, int filterIidx) {
+		 
+		 HashMap<String, Object> map = new HashMap<String, Object>();
+		 map.put("checkedComfortList",checkedComfortList);
+		 map.put("checkedServiceList",checkedServiceList);
+		 map.put("searchKeyword",keyWord);
+		 map.put("startDate",startDate);
+		 map.put("endDate",endDate);
+		 map.put("roomType",roomType);
+		 map.put("customerNum",customerNum);
+		 map.put("filterIidx",filterIidx);
+		 
+		 ArrayList<Hostel> list = dao.filterHostelList(map);
+
+		return list;
 	}
 
 }

@@ -111,4 +111,8 @@ public class MemberService {
 		return dao.changeGrade(m);
 	}
 
+	public Report blackCheck(Member member) {
+		return dao.blackCheck(member);
+	}
+
 }

@@ -4,4 +4,18 @@
  <insert id="insertReport" parameterType="rp">
  	insert into report values(#{reporter},#{reported},#{reportContent})
  </insert>
+ <insert id="insertBlack" parameterType="rp">
+ 	insert into blacklist values(#{reported},#{reportContent})
+ </insert>
+ <delete id="deleteReport" parameterType="rp">
+ 	delete from report where reported = #{reported}
+ </delete>
+ <select id="blackCheck" parameterType="m" resultType="rp">
+ 	select
+ 		b.member_no as reported,
+ 		reason as reportContent
+ 	from blacklist b
+ 	join member m on (b.member_no = m.member_no)
+ 	where m.member_id = #{memberId}
+ </select>
 </mapper>

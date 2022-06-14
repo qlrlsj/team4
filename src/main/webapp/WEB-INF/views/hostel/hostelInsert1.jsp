@@ -24,7 +24,7 @@
 	<div class="insert-form-wrap div-content">
         <form action="/insertHostel.kt" method="post" enctype="multipart/form-data">
       <!--    <input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }" >-->
-      <input type="hidden" name="memberNo" value="2" >
+      <input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }" >
         <div class="container">
             <div class="row">
               <div class="col-sm hostel-type">	<h3>분류</h3> 

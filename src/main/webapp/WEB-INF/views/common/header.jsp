@@ -45,18 +45,21 @@ let alarmWs;
 //접속회원 아이디용 변수
 let senderNo;
 $(function(){
-	senderNo = '${sessionScope.m.memberNo}';
-	$.ajax({
-		url : "/alarmCount.kt",
-		type: "post",
-		data : {"memberNo":senderNo},
-		success : function(data) {
-			$("#alarmCount").empty();
-			$("#alarmCount").append(data);
-		}
-	});
+	senderNo = $("[name=memberNo]").val();
+	if(senderNo != null){
+		$.ajax({
+			url : "/alarmCount.kt",
+			type: "post",
+			data : {"memberNo":senderNo},
+			success : function(data) {
+				$("#alarmCount").empty();
+				$("#alarmCount").append(data);
+			}
+		});		
+	}
 	//로그인 했는지 체크
-	var loginCheck = ${login};
+	var loginCheck = $("#loginCheck").val();
+	console.log(loginCheck);
 	if(loginCheck == true){
 		connenctAlarm();
 	}
@@ -77,6 +80,7 @@ $(".bell").on("click",function(){
 </head>
 <body>
 	<header class="p-3 border-bottom">
+	<input type="hidden" value="${login }" id="loginCheck">
 	<div class="alarm">
 		<span id="senderNo">senderNo</span><hr>
 		<span id="sendContent">안녕하세요</span>
@@ -139,7 +143,6 @@ $(".bell").on("click",function(){
 										aria-labelledby="dropdownMenuButton2">
 										<li><a class="dropdown-item active" href="#">포인트</a></li>
 										<li><a class="dropdown-item" href="#">쿠폰</a></li>
-										<li><a class="dropdown-item" href="#">파트너 등록하기</a></li>
 										<li><a class="dropdown-item" href="/mypage.kt">마이페이지</a></li>
 										<li><a class="dropdown-item" href="/sellerPage.kt">판매자 페이지</a></li>	
 										<li><a class="dropdown-item" href="/blackListFrm.kt">블랙리스트 관리</a></li>		
@@ -163,7 +166,9 @@ $(".bell").on("click",function(){
 										aria-labelledby="dropdownMenuButton2">
 										<li><a class="dropdown-item active" href="#">포인트</a></li>
 										<li><a class="dropdown-item" href="#">쿠폰</a></li>
-										<li><a class="dropdown-item" href="#">파트너 등록하기</a></li>
+										<c:if test="${grade eq '2' }">
+											<li><a class="dropdown-item" href="#">파트너 등록하기</a></li>
+										</c:if>
 										<li><a class="dropdown-item" href="/mypage.kt">마이페이지</a></li>
 										<li>
 											<a class="dropdown-item" href="/allReserveFrm.kt" >예약 내역 확인</a>

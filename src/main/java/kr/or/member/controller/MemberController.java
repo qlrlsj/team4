@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
@@ -17,6 +18,9 @@ import com.google.gson.Gson;
 import kr.or.member.model.service.MemberService;
 import kr.or.member.model.vo.Member;
 import kr.or.member.model.vo.MemberPageData;
+import kr.or.report.model.service.ReportService;
+import kr.or.report.model.vo.Report;
+import kr.or.seller.model.vo.ReserveData;
 
 @Controller
 public class MemberController {
@@ -28,10 +32,14 @@ public class MemberController {
 		String login = "true";
 		Member member = service.selectOneMember(m);
 		if (member != null) {// 조회결과가 존재하는 경우
-			session.setAttribute("m", member); // 세션에 m으로 member를 저장
-			model.addAttribute("login", login);
+			Report r = service.blackCheck(member);
+			if(r!=null) {
+				return "member/youAreBlack";
+			}else {
+				session.setAttribute("m", member); // 세션에 m으로 member를 저장
+				model.addAttribute("login", login);
+			}			
 		}
-
 		return "member/login";
 	}
 
@@ -132,6 +140,19 @@ public class MemberController {
 		int result = service.changeGrade(m);
 		
 		return "redirect:/allMember.kt";
+	}
+	
+	@RequestMapping(value="/allReserveFrm.kt")
+	public String allReserveFrm() {
+		return "member/allReserveFrm";
+	}
+	
+	@RequestMapping(value="/allReserve.kt")
+	public String allReserve(Member m, String type, Model model) {
+		ArrayList<ReserveData> list = service.allReserve(m, type);
+		model.addAttribute("list", list);
+		model.addAttribute("type", type);
+		return "member/allReserve";
 	}
 	
 	

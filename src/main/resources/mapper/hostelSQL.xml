@@ -4,7 +4,7 @@
 
 	<insert id="insertHostel" parameterType="h">
 		insert into hostel
-		values(hostel_seq.nextval,#{memberNo},#{hostelName},#{hostelAddress},#{bookStart},#{bookEnd},#{CheckinOut},#{hostelIntro},#{hostelUsage},#{roomType},#{hostelScore},#{hostelComfort},#{hostelService})
+		values(hostel_seq.nextval,#{memberNo},#{hostelName},#{hostelAddress},#{bookStart},#{bookEnd},#{checkinOut},#{hostelIntro},#{hostelUsage},#{roomType},#{hostelScore},#{hostelComfort},#{hostelService})
 	</insert>
 
 	<select id="hostelCode" resultType="int">
@@ -166,7 +166,7 @@
 
 	<insert id="insertHostelPay" parameterType="int">
 		insert into payment
-		VALUES(PAYMENT_SEQ.nextval,#{payPrice}, 0,0,0,SYSDATE,0)
+		VALUES(PAYMENT_SEQ.nextval,#{payPrice}, 0,0,0,SYSDATE,0,0)
 	</insert>
 
 	<select id="selectPayNo" resultType="int">
@@ -200,7 +200,7 @@
 			(reserved_room_seq.nextval,#{optionNo},'',#{reservationNo},#{reservedDate})
 
 		</if>
-		<if test="memberNo!=0"><!-- 비회원값일때 -->
+		<if test="memberNo!=0"><!-- 회원일때 -->
 			insert into reserved_room values
 			(reserved_room_seq.nextval,#{optionNo},#{memberNo},#{reservationNo},#{reservedDate})
 
@@ -224,5 +224,73 @@
 	<select id="selectHostelReserve" parameterType="String"		resultType="hr" resultMap="selectHostelReserve">
 		select * from hostel_reserve where reservation_no = #{recentRvNo}
 	</select>
+
+<select id="selectHostelFilter" parameterType="map" resultType="h" resultMap="hostelSelect">
+select * from (
+		SELECT
+		HOSTEL_CODE,
+		HOSTEL_NAME,HOSTEL_ADDRESS,HOSTEL_SERVICE,HOSTEL_COMFORT,room_type,HOSTEL_SCORE,
+		(SELECT MIN(HOSTEL_PRICE) FROM HOSTEL_OPTION HO WHERE
+		HO.HOSTEL_CODE=H.HOSTEL_CODE AND HO.OPTION_NO IN
+		(
+		SELECT OPTION_NO FROM
+		HOSTEL_OPTION
+		WHERE
+		(HOSTEL_CODE,HOSTEL_PRICE) IN
+		(
+		SELECT HOSTEL_CODE ,
+		MIN(HOSTEL_PRICE)
+		FROM HOSTEL_OPTION WHERE OPTION_NO NOT IN (SELECT
+		OPTION_NO FROM
+		RESERVED_ROOM WHERE RESERVED_DATE BETWEEN
+		to_date(#{startDate},'yyyy-mm-dd') and
+		to_date(#{endDate},'yyyy-mm-dd')) GROUP BY HOSTEL_CODE
+		)
+		)) AS
+		HOSTEL_PRICE,
+		(SELECT FILEPATH FROM HOSTEL_FILE HF WHERE HF.HOSTEL_CODE
+		= H.HOSTEL_CODE AND
+		FILE_NO = (SELECT MIN(FILE_NO) FROM HOSTEL_FILE HF2
+		WHERE
+		HF2.HOSTEL_CODE=H.HOSTEL_CODE)) AS HOSTEL_FILEPATH
+		FROM HOSTEL H
+		WHERE
+		H.HOSTEL_ADDRESS LIKE '%'||#{searchKeyword}||'%' OR H.HOSTEL_NAME
+		LIKE
+		'%'||#{searchKeyword}||'%'
+		AND
+		H.HOSTEL_CODE IN (
+		SELECT HOSTEL_CODE
+		FROM HOSTEL_OPTION
+		WHERE
+		(HOSTEL_CODE,HOSTEL_PRICE) IN
+		(
+		SELECT
+		HOSTEL_CODE , MIN(HOSTEL_PRICE)
+		FROM HOSTEL_OPTION WHERE OPTION_NO NOT
+		IN (SELECT OPTION_NO FROM
+		RESERVED_ROOM WHERE RESERVED_DATE BETWEEN
+		to_date(#{startDate},'yyyy-mm-dd') and
+		to_date(#{endDate},'yyyy-mm-dd')) GROUP BY HOSTEL_CODE
+		)
+		)
+		) where
+		room_type = #{roomType}
+		<if test="!checkedComfortList.equals('')">
+		and hostel_comfort like '%'||#{checkedComfortList}||'%'
+		</if>
+		<if test="!checkedServiceList.equals('')">
+		and hostel_service like '%'||#{checkedServiceList}||'%'
+		</if>
+		<if test="filterIidx == 1">
+		order by 8  desc
+		</if>
+		<if test="filterIidx == 2">
+		order by 8  
+		</if>
+		<if test="filterIidx == 0 || filterIidx == 3 ">
+		order by 6 
+		</if>
+</select>
 
 </mapper>
