@@ -21,7 +21,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
 
+
 import kr.or.coupon.model.vo.Coupon;
+import kr.or.member.model.vo.Member;
 import kr.or.payment.model.vo.Payment;
 import kr.or.ticket.model.service.TicketService;
 import kr.or.ticket.model.vo.CouponPoint;
@@ -140,7 +142,7 @@ public class TicketController {
 	
 	//티겟등록
 	@RequestMapping(value="/insertTicket.kt")
-	public String insertTicket(Ticket ticket,MultipartFile[] file1, MultipartFile[] file2, TicketOptions options,HttpServletRequest request) {
+	public String insertTicket(Member m,Ticket ticket,MultipartFile[] file1, MultipartFile[] file2, TicketOptions options,Model model,HttpServletRequest request) {
 //		System.out.println("memberNo : "+ticket.getMemberNo());
 //		System.out.println("categoryId : "+ticket.getCategoryId());
 //		System.out.println("localId : "+ticket.getLocalId());
@@ -165,9 +167,10 @@ public class TicketController {
 		ticketFile.setTicketFilepath4(ticketFilepath.get(3));
 		
 		int result = service.insertTicket(ticket,options,ticketFile);
-		
-		
-		return "ticket/ticketMain";
+		System.out.println("m : "+m);
+		model.addAttribute("m",m);
+		model.addAttribute("type","ticket");
+		return "redirect:/sellerProduct.kt";
 	}
 	
 	@RequestMapping(value="/ticketView.kt")
@@ -224,9 +227,11 @@ public class TicketController {
 	}
 	
 	@RequestMapping(value="/searchTicket.kt")
-	public String searchTicket(String searchStr,Model model) {
+	public String searchTicket(String searchStr,String type, Model model) {
 		System.out.println("searchStr : "+searchStr);
-		ArrayList<MainTicket> ticket = service.selectSearchTicket(searchStr);
+		System.out.println("type : "+type);
+		
+		ArrayList<MainTicket> ticket = service.selectSearchTicket(searchStr,type);
 		System.out.println(ticket);
 		model.addAttribute("searchStr", searchStr);
 		model.addAttribute("ticket",ticket);

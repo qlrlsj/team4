@@ -107,8 +107,8 @@ public class TicketDao {
 		return sqlSession.selectOne("ticket.selectOneFilepath1", ticketNo);
 	}
 
-	public ArrayList<MainTicket> selectSearchTicket(String searchStr) {
-		List list = sqlSession.selectList("ticket.selectSearchTicket",searchStr);
+	public ArrayList<MainTicket> selectSearchTicket(Map map) {
+		List list = sqlSession.selectList("ticket.selectSearchTicket",map);
 		return (ArrayList<MainTicket>)list;
 	}
 

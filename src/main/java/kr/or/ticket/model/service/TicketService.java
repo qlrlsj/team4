@@ -183,8 +183,11 @@ public class TicketService {
 		return ticket;
 	}
 
-	public ArrayList<MainTicket> selectSearchTicket(String searchStr) {
-		ArrayList<MainTicket> ticket= dao.selectSearchTicket(searchStr);
+	public ArrayList<MainTicket> selectSearchTicket(String searchStr, String type) {
+		Map map = new HashMap();
+		map.put("searchStr",searchStr);
+		map.put("type",type);
+		ArrayList<MainTicket> ticket= dao.selectSearchTicket(map);
 		for(int i=0; i<ticket.size();i++) {
 			System.out.println("ticket.get(i).getParentLocalName() : "+ticket.get(i).getParentLocalName());
 			String localFilepath = dao.selectSearchLocalFilepath(ticket.get(i).getParentLocalName());
