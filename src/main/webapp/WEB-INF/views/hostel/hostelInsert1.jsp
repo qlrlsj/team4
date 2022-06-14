@@ -16,7 +16,9 @@
 .body div{
   margin: 20px;!important
 }
-
+.hostel-content input {
+  margin-bottom: 5px;
+}
 
 </style>
 <body>
