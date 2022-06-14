@@ -1,0 +1,9 @@
+$(".ShortcutIcon").eq(0).click(function(){
+    location.href="/AirMain.kt";
+})
+$(".ShortcutIcon").eq(1).click(function(){
+    location.href="/hostelMain.kt";
+})
+$(".ShortcutIcon").eq(2).click(function(){
+    location.href="/ticketMain.kt";
+})
