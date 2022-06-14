@@ -127,4 +127,11 @@ public class HostelDao {
 		return hr;
 	}
 
+	public ArrayList<Hostel> filterHostelList(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("hostel.selectHostelFilter",map);
+		return (ArrayList<Hostel>)list;
+	}
+
+
+
 }

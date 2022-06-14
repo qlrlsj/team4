@@ -1,0 +1,103 @@
+.content-wrap{
+    width: 100%;
+    min-width: 1100px;
+        }
+    .search-box{
+        width: 80%;
+        height: 150px;
+        background-color: rgba(228, 222, 215, 0.808);
+        margin: 0 auto;
+    }
+    .type-btn{
+        padding-top: 20px;
+        padding-left: 20px;
+        
+    }
+    .search-content{
+        margin: 20px; 
+    }
+    
+    .contentDiv{
+
+     width: 80%;
+     height: 1200px;
+     background-color: antiquewhite;
+     margin: 0 auto;
+    }
+    .filter-wrap{
+    width: 25%;
+    height: 1000px;
+    background-color: rgb(218, 167, 100);
+    padding-top: 20px;
+    float: left;
+    min-width: 220px;
+    }
+    .search-list{
+        width: 75%;
+        background-color: rgb(247, 164, 164);
+        height: 1000px;
+        float: left;
+    }
+    
+    .typeSelectWrap{
+        width: 80%;
+    margin: 0 auto;
+    padding-top: 10PX;
+    margin-bottom: 20px;
+    }
+    .selectType{
+        width: 100%;
+    }
+    .typeSelectWrap{
+    
+        height: 200px;
+        background-color: antiquewhite;
+    }
+    .facility{
+        background-color: rgb(152, 185, 247);
+        margin-left: 10px;
+    }
+    .list-searched{
+        width: 100%; 
+        min-width: 880px;
+        background-color: azure;
+    }
+    .search-list{
+
+    }
+    .search-list-one{
+        display: flex;
+        border-bottom: 1px solid  rgb(177, 195, 245);
+    }
+    .search-list-one-img{
+        display: flex;
+        width: 30%;
+        max-width: 200px;
+        height: 200px;
+        background-color: burlywood;
+    }
+    .search-list-one-info{
+        display: flex;
+        width: 70%;
+        flex-direction: column;
+        justify-content: center;
+        margin-left: 10px;
+
+    } 
+    .search-list-one-title{
+        margin-bottom: 10px;
+        text-decoration: none;
+
+    }
+    .search-list-one-title>h5>a{
+        text-decoration: none;
+        color: steelblue;
+    }
+    .search-list-one-address{
+
+        margin-bottom: 30px;
+
+    }
+    .search-list-one-price{
+    
+    }

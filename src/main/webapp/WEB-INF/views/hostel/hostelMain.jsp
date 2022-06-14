@@ -41,7 +41,7 @@ height: 400px;
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
-<div>	<a href="/insertHostelForm1.kt">숙소 등록하기 </a></div>
+<!--<div>	<a href="/insertHostelForm1.kt">숙소 등록하기 </a></div>-->
 <div class="content-wrap">
 	<form class="form-inline" action="/searchHostelList.kt" method="post">
 	<div class=" type-btn search-box  " style="min-width: 850px;">

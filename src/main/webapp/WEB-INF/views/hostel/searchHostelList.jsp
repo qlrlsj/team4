@@ -5,78 +5,21 @@
 <head>
 <meta charset="UTF-8">
 <title>조회결과</title>
-<style>
-.content-wrap{
-width: 100%;
-	}
-.search-box{
-	width: 80%;
-	height: 150px;
-	background-color: rgba(228, 222, 215, 0.808);
-	margin: 0 auto;
-}
-.type-btn{
-	padding-top: 20px;
-	padding-left: 20px;
-	
-}
-.search-content{
-	margin: 20px; 
-}
-
-.contentDiv{
- width: 80%;
- height: 1200px;
- background-color: antiquewhite;
- margin: 0 auto;
-}
-.filter-wrap{
-width: 25%;
-height: 1000px;
-background-color: rgb(218, 167, 100);
-padding-top: 20px;
-float: left;
-}
-.search-list{
-	width: 75%;
-	background-color: rgb(247, 164, 164);
-	height: 1000px;
-	float: left;
-}
-
-.typeSelectWrap{
-	width: 80%;
-margin: 0 auto;
-padding-top: 10PX;
-margin-bottom: 20px;
-}
-.selectType{
-	width: 100%;
-}
-.typeSelectWrap{
-
-	height: 200px;
-	background-color: antiquewhite;
-}
-.facility{
-	background-color: rgb(152, 185, 247);
-	margin-left: 10px;
-}
-</style>
 </head>
+<link rel="stylesheet" href="/resources/css/hostel/searchHostelList.css">
 <body>	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
 	<div class="content-wrap">
 		<form class="form-inline" action="/searchHostelList.kt" method="post">
 		<div class=" type-btn search-box  " style="min-width: 850px;">
 			<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-				<input type="radio" class="btn-check" name="roomType" id="btnradio1" value="1" autocomplete="off" checked="">
+				<input type="radio" class="btn-check" name="roomType" required id="btnradio1" value="1" checked >
 				<label class="btn btn-outline-primary" for="btnradio1">호텔</label>
-				<input type="radio" class="btn-check" name="roomType" id="btnradio2"  value="2" autocomplete="off" checked="">
+				<input type="radio" class="btn-check" name="roomType" required id="btnradio2"  value="2"  >
 				<label class="btn btn-outline-primary" for="btnradio2">게스트하우스</label>
-				<input type="radio" class="btn-check" name="roomType" id="btnradio3"   value="3" autocomplete="off" checked="">
+				<input type="radio" class="btn-check" name="roomType" required id="btnradio3"  value="3"  >
 				<label class="btn btn-outline-primary" for="btnradio3">펜션</label>
-				<input type="radio" class="btn-check" name="roomType" id="btnradio3"  value="4" autocomplete="off" checked="">
+				<input type="radio" class="btn-check" name="roomType"required  id="btnradio4"  value="4"  >
 				<label class="btn btn-outline-primary" for="btnradio4">풀빌라</label>
 			  </div>
 	
@@ -97,12 +40,12 @@ margin-bottom: 20px;
 <div class="contentDiv">
 	<div class="filter-wrap">
 		<div class="typeSelectWrap">
-			<nav class="nav flex-column">
-				<a class="nav-link active" href="#">전체</a>
-				<a class="nav-link" href="#">호텔</a>
-				<a class="nav-link" href="#">게스트하우스</a>
-				<a class="nav-link" href="#">펜션</a>
-				<a class="nav-link" href="#">풀빌라</a>
+			<nav class="nav flex-column type-filter">
+				<a class="nav-link" href="javascript:void(0);" >전체</a>
+				<a class="nav-link" href="javascript:void(0);">가격높은순</a>
+				<a class="nav-link" href="javascript:void(0);">가격낮은순</a>
+				<a class="nav-link" href="javascript:void(0);">평점순</a>
+		
 			</nav>
 		</div>
 		<div class="col facility ">	<h4>시설</h4>
@@ -176,42 +119,21 @@ margin-bottom: 20px;
 
 
 	</div>
-	<div class="range">
-		<div class="form-check form-check-inline">
-			<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-			<label class="form-check-label" for="inlineRadio1">가격순</label>
-		  </div>
-		  <div class="form-check form-check-inline">
-			<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-			<label class="form-check-label" for="inlineRadio2">평점순</label>
-		  </div>
-		  <div class="form-check form-check-inline">
-			<input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3" >
-			<label class="form-check-label" for="inlineRadio3">3 (disabled)</label>
-		  </div>
-	</div>
 	
-	<div class="search-list">
-		<div>
-			<table border="1">
-				<tr>
-					<th>번호</th><th>제목</th><th>주소/가격</th><th>평점</th><th>파일</th>
-				</tr>
-				<c:forEach items="${list }" var="hostel">
-				
-				<tr>
-					<td>${hostel.hostelCode }</td><!--히든-->
-					<td><a href="/hostelDetail.kt?hostelCode=${hostel.hostelCode }&startDate=${startDate}&endDate=${endDate}&customerNum=${customerNum}">${hostel.hostelName }</a></td>
-					<td>주소 : ${hostel.hostelAddress }<br>
-					가격 : ${hostel.hostelPrice}</td>
-					<td>${hostel.hostelScore }</td>
-					<td><img src="/resources/upload/hostel/${hostel.hostelfilepath }" style="width: 200px; height: 200px;" ></td>
-				</tr>	
-				</c:forEach>
-			</table>
-		
+
+		<div class="list-searched"> <!--//height걸어둔거 나중에 삭제 -->
+			<c:forEach items="${list }" var="hostel">
+			<div class="search-list-one">
+				<div class="search-list-one-img"><img src="/resources/upload/hostel/${hostel.hostelfilepath }" style="width: 200px; height: 200px;" ></div>
+				<div class="search-list-one-info">
+					<div class="search-list-one-title"><h5><a  href="/hostelDetail.kt?hostelCode=${hostel.hostelCode }&startDate=${startDate}&endDate=${endDate}&customerNum=${customerNum}">${hostel.hostelName }</a></h5></div>
+					<div class="search-list-one-address"> ${hostel.hostelAddress }</div>
+					<div class="search-list-one-price"> ${hostel.hostelPrice}<span>원</span></div>
+				</div>				
+			</div>
+			</c:forEach>
 		</div>
-	</div>
+
 </div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 	<script src="/resources/js/hostel/searchHostelList.js"></script>

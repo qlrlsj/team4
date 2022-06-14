@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -237,5 +238,21 @@ public class HostelController {
 		return "hostel/reserveSuccess";
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = "filterHostelList.kt",produces = "application/json;charset=utf-8")
+	public String filterHostelList(String checkedComfortList, String checkedServiceList,String keyWord , String startDate, String endDate, int roomType, int customerNum, int filterIidx  ) {
+		System.out.println("jsp에서 넘어오는값: 서비스-"+checkedServiceList+"/컴포트:-"+checkedComfortList+"/키워드-"+keyWord+"/인덱스-"+filterIidx);
+		
+		ArrayList<Hostel> list = service.filterHostelList(checkedComfortList, checkedServiceList, keyWord, startDate, endDate, roomType, customerNum, filterIidx);
+
+		// 추가로 넘겨줄값  String startDate, String endDate,int customerNum,
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("list", list);
+		map.put("startDate", startDate);
+		map.put("endDate", endDate);
+		map.put("customerNum", customerNum);
+		System.out.println(list);
+		return  new Gson().toJson(map);
+	}
 
 }
