@@ -37,14 +37,8 @@
 		
 		<div class="comment">
 			<h1>예약이 완료되었습니다</h1>
-			<c:choose>
-				<c:when test="${!empty sessionScope.m}">
-					<h3>예약내역은 마이페이지에서 확인할 수 있습니다</h3>
-				</c:when>
-				<c:otherwise>
-					<h5>예약내역은 항공권>예약내역확인>이름,휴대폰입력으로 확인할 수 있습니다</h5>
-				</c:otherwise>
-			</c:choose>
+			<h5>예약내역은 항공권>예약내역확인>이름,휴대폰입력으로 확인할 수 있습니다</h5>
+			
 		</div>
 		<div class="airTableBase" >
 			<div class="airPlace">

@@ -91,3 +91,14 @@ $(".submitBtn").click(function(){
     }
     $(".submitbtn").trigger("click");
 })
+$(".searchBtn").click(function(){
+    if($("input[name=name]").val()==''){
+        alert("이름입력");
+        return false;
+    }
+    if($("input[name=phone]").val()==''){
+        alert("전화번호입력");
+        return false;
+    }
+    $(".gosubmit").click();
+})

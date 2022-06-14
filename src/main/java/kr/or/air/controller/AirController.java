@@ -254,11 +254,6 @@ public class AirController {
 		model.addAttribute("airReserve",airReserve);
 		return "air/airSelectGrade";
 	}
-	@RequestMapping(value="/test.kt")
-	public String test(HttpSession session) {
-		
-		return "air/airReserveComplete";
-	}
 	@ResponseBody
 	@RequestMapping(value="/findSeat.kt", produces = "application/json;charset=utf-8")
 	public String findSeat(HttpSession session, String StartNumberST, String date) {
@@ -269,5 +264,54 @@ public class AirController {
 		System.out.println(list);
 		return new Gson().toJson(list);
 	}
-	
+	@RequestMapping(value="/airCheck.kt")
+	public String airCheck(HttpSession session, Model model, String name, String phone) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("name", name);
+		map.put("phone", phone);
+		ArrayList<AirPayment> list = service.airCheck(map);
+		System.out.println(list);
+		model.addAttribute("list",list);
+		return "air/airCheck";
+	}
+	@RequestMapping(value="/myAirPage.kt")
+	public String myAirPage(HttpSession session, Model model, String airNumber) {
+		
+		AirPayment AP = service.airPayReserve(airNumber);
+		ArrayList<AirReserveComplete>  AClist = service.airCompleteReserve(airNumber);
+		AirReserveComplete ac1 = new AirReserveComplete();
+		AirReserveComplete ac2 = new AirReserveComplete();
+		ArrayList<String> SeatListST = new ArrayList<String>();
+		ArrayList<String> SeatListED = new ArrayList<String>();
+		
+		if(AClist.size()==2) {
+			ac1 = AClist.get(0);
+			ac2 = AClist.get(1);
+			HashMap<String, String> map = new HashMap<String, String>();
+			map.put("NumberST", ac1.getAir_name());
+			map.put("date", ac1.getAir_date());
+			SeatListST = service.findSeat(map);
+			HashMap<String, String> map2 = new HashMap<String, String>();
+			map2.put("NumberST", AClist.get(1).getAir_name());
+			map2.put("date", AClist.get(1).getAir_date());
+			SeatListED = service.findSeat(map2);
+		}else if(AClist.size()==1){
+			ac1 = AClist.get(0);
+			HashMap<String, String> map = new HashMap<String, String>();
+			map.put("NumberST", ac1.getAir_name());
+			map.put("date", ac1.getAir_date());
+			SeatListST = service.findSeat(map);
+		}else {
+			System.out.println("없음");
+		}
+		System.out.println(SeatListST);
+		System.out.println(SeatListED);
+		model.addAttribute("AP",AP);
+		model.addAttribute("ac1",ac1);
+		model.addAttribute("ac2",ac2);
+		model.addAttribute("SeatListST",SeatListST);
+		model.addAttribute("SeatListED",SeatListED);
+		
+		return "air/myAirPage";
+	}
 }

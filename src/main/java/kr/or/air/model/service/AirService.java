@@ -40,5 +40,20 @@ public class AirService {
 		return dao.findSeat(map);
 	}
 
+	public ArrayList<AirPayment> airCheck(HashMap<String, String> map) {
+		// TODO Auto-generated method stub
+		return dao.airCheck(map);
+	}
+
+	public AirPayment airPayReserve(String airNumber) {
+		// TODO Auto-generated method stub
+		return dao.airPayReserve(airNumber);
+	}
+
+	public ArrayList<AirReserveComplete> airCompleteReserve(String airNumber) {
+		// TODO Auto-generated method stub
+		return dao.airCompleteReserve(airNumber);
+	}
+
 	
 }

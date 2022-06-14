@@ -8,6 +8,12 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<style>
+.table{
+	font-size: 15px;
+	text-align: center;
+}
+</style>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 	<hr>

@@ -16,4 +16,7 @@ public class AirPayment {
 	private String memberName;
 	private String phone;
 	private String reserveState;
+	private String airStart;
+	private String airEnd;
+	
 }
