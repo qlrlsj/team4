@@ -43,18 +43,18 @@ let alarmWs;
 //접속회원 아이디용 변수
 let senderNo;
 $(function(){
-	senderNo = '${sessionScope.m.memberNo}';
-	$.ajax({
-		url : "/alarmCount.kt",
-		type: "post",
-		data : {"memberNo":senderNo},
-		success : function(data) {
-			$("#alarmCount").empty();
-			$("#alarmCount").append(data);
-		}
-	});
+// 	senderNo = '${sessionScope.m.memberNo}';
+// 	$.ajax({
+// 		url : "/alarmCount.kt",
+// 		type: "post",
+// 		data : {"memberNo":senderNo},
+// 		success : function(data) {
+// 			$("#alarmCount").empty();
+// 			$("#alarmCount").append(data);
+// 		}
+// 	});
 	//로그인 했는지 체크
-	var loginCheck = ${login};
+	var loginCheck = $("#loginCheck").val();
 	if(loginCheck == true){
 		connenctAlarm();
 	}
@@ -75,6 +75,7 @@ $(".bell").on("click",function(){
 </head>
 <body>
 	<header class="p-3 border-bottom">
+	<input type="hidden" value="${login }" id="loginCheck">
 	<div class="alarm">
 		<span id="senderNo">senderNo</span><hr>
 		<span id="sendContent">안녕하세요</span>
@@ -101,7 +102,7 @@ $(".bell").on("click",function(){
 										<h5 class="modal-title" id="exampleModalLabel">로그인</h5>
 										<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 									</div>
-									<form action="/login.kt" method="post">
+									<form action="/login.kt" method="post" onsubmit="return blackCheck();">
 										<div class="modal-body">
 											<fieldset>
 												<legend>로그인</legend>
@@ -202,6 +203,27 @@ $(".bell").on("click",function(){
 			</div>
 		</div>
 	</nav>
+	<script>
+	function blackCheck(){
+		alert("ee");
+		const memberId = $("[name=memberId]").val();
+		console.log(memberId);
+		$.ajax({
+			url : "/blackCheck.kt",
+			type : post,
+			data : {"memberId":memberId},
+			success : function(data) {
+				console.log(data);
+				if(data == "yes"){
+					return true;
+				}else{
+					alert("블랙리스트에 올라가셨습니다.");
+					return false;
+				}
+			}
+		});
+	}
+	</script>
 	
 </body>
 </html>

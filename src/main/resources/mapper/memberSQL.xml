@@ -82,7 +82,7 @@
 <!-- 	</update> -->
 		<select id="selectReserveListH" parameterType="m" resultType="rd">
 		select
-			TO_CHAR(hr.reservation_date, 'YYYY/MM/DD')as reserveDate,
+			hr.reservation_date as reserveDate,
 			ho.hostel_code as productNo,
 			hr.reservation_no as reserveNo,
 			h.hostel_name as reserveName,
@@ -92,8 +92,8 @@
 			ho.option_no as optionNo,
 			ho.room_option as option1,
 			hr.reserve_num as option2,
-			hr.hostel_indate as option3,
-			hr.hostel_outdate as option4,
+			TO_CHAR(hr.hostel_indate, 'YYYY/MM/DD') as option3,
+			TO_CHAR(hr.hostel_outdate, 'YYYY/MM/DD') as option4,
 			ho.hostel_price as reservePrice,
 			pay.pay_no as payNo
 		from hostel_option ho
@@ -145,10 +145,10 @@
 	</select>
 	<select id="selectBlack" resultType="rp">
 	select
-		r.reporter as reporter
-		m1.member_id as reporterId
-		r.reported as reported
-		m2.member_id as reportedId
+		r.reporter as reporter,
+		m1.member_id as reporterId,
+		r.reported as reported,
+		m2.member_id as reportedId,
 		r.report_content as reportContent
 	from report r
 	join member m1 on (r.reporter = m1.member_no)
