@@ -179,8 +179,8 @@
 									<form action="/login.kt" method="post">
 										<div class="modal-body">
 											<fieldset>
-												ID:<input type="text" name="memberId" class="form-control"><br> Password:<input
-													type="password" name="memberPw" class="form-control"><br>
+												ID:<input type="text" name="memberId" class="form-control" required><br> Password:<input
+													type="password" name="memberPw" class="form-control" required><br>
 											</fieldset>
 										</div>
 										<div class="modal-footer">

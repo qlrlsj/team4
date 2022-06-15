@@ -37,7 +37,7 @@
 		font-weight: bold;
 		width: 150px;
 		height: 50px;
- 		display: none;
+	  	display: none;
 	}
 	.form-control{
 		width: 200px;
@@ -175,6 +175,7 @@
 				console.log("결제 금액 : "+rsp.paid_amount);
 				console.log("카드승인번호 : "+rsp.apply_num);
 			    $("#paymentButton").trigger('click');//여기요
+			    
 			}else{
 				alert("에러내용 : "+rsp.err_msg);
 			}
