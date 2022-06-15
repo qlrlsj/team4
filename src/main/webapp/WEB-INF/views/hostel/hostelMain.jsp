@@ -73,6 +73,8 @@ height: 400px;
 .list-title>a{
 	text-decoration: none;
 	color: rgb(82, 82, 94);
+	font-weight: bold;
+	font-size: larger;
 }
 .best-list{
 	margin-bottom: 30px;
@@ -84,10 +86,14 @@ height: 400px;
 	width: 100px;
 	margin: 0 auto;
 	font-size: 25px;
+
 }
 .reserveInfo>a{
 	color: black;
 	
+}
+.Hostel-List div h4{
+	font-weight: bold;
 }
 </style>
 </head>
