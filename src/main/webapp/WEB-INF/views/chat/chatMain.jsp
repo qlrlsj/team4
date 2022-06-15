@@ -109,7 +109,8 @@ $(function(){
 	roomNo = ${room.roomNo};
 	memberId = $("#hiddenId").val();
 	//웹소켓 연결 시도
-	ws = new WebSocket("ws://192.168.35.249/chat.kt");
+
+	ws = new WebSocket("ws://khdsa1.iptime.org:18084/chat.kt");
 	// 주소 바꿔줘야함
 	//웹소켓 연결이 성공하면 실행할 함수 지정
 	ws.onopen = startChat;
