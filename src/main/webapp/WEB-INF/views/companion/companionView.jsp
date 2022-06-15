@@ -22,6 +22,7 @@
 		  document.f1.submit();
 		}
 	</script>
+	<br><br><br>
 	<form name="f1" action="/chatOpen.kt" method="post" target="chat">
 	  <c:choose>
 	  	<c:when test="${sessionScope.m.memberNo gt com.memberNo}">
@@ -37,7 +38,6 @@
 	  </c:choose>
 	</form>
 	
-	<h2>동행자 모집</h2>
 	<div class="div-content">
 	<table class="table table-striped table-hover">
 		<tr>

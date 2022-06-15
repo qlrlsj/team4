@@ -174,8 +174,6 @@ function chatInsert(msg){
 </script>
 </head>
 <body>
-	<h1>채팅</h1>
-	<h2>${room.roomName }</h2>
 	<input type="hidden" id="hiddenId" value="${sessionScope.m.memberId }">	
 	<div class="chatting">
 		<div class="messageArea">

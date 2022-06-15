@@ -95,7 +95,6 @@ select option[value=""][disabled] {
 	</script>
 	<form method="post" action="/companionInsert.kt"  onsubmit="return checkForm()">	
 		<div class="div-content center">
-			<h2>동행자 모집 글 작성</h2>
 		  <div class="div-content mb-3">
 		    <label for="companionTitle" class="form-label">글 제목</label>
 		    <input type="text" class="form-control" name="companionTitle" id="companionTitle" >
